@@ -1,6 +1,8 @@
 # R Client for Dataverse 4 Repositories #
 
-The **dataverse** package provides access to Dataverse 4 APIs, enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. **dataverse** is the next-generation iteration of the **dvn** package, which works with Dataverse 3 ("Dataverse Network") applications. **dataverse** includes numerous improvements for data search, retrieval, and deposit, including use of the **sword** package for data deposit and the **UNF** package for data fingerprinting.
+[![Dataverse Project logo](src/main/webapp/resources/images/dataverseproject_logo.jpg?raw=true "Dataverse Project")](http://dataverse.org)
+
+The **dataverse** package provides access to Dataverse 4 APIs, enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. **dataverse** is the next-generation iteration of the **dvn** package, which works with Dataverse 3 ("Dataverse Network") applications. **dataverse** includes numerous improvements for data search, retrieval, and deposit, including use of the (currently in development) **sword** package for data deposit and the **UNF** package for data fingerprinting.
 
 **dataverse** defaults to providing access to the [Harvard Dataverse](https://dataverse.harvard.edu/), but this can be changed in each function call or globally using `options(dataverse = 'https://dataverse.harvard.edu/')` for [any valid Dataverse 4.0 repository](http://dataverse.org/).
 
@@ -25,9 +27,15 @@ library("dataverse")
 
 ## Code Examples ##
 
-Some features of the Dataverse 4 API are public and require no authentication. This means in many cases you can search for and retrieve data without a Dataverse account for that a specific Dataverse installation. But, other features require a Dataverse account for the specific server installation of the Dataverse software, and an API key linked to that account. Instructions for obtaining an account and setting up an API key are available in the [Dataverse User Guide](http://guides.dataverse.org/en/latest/user/account.html). (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called `DATAVERSE_KEY`. It can be set within R using: `Sys.setenv("DATAVERSE_KEY" = "examplekey12345")`.
+Some features of the Dataverse 4 API are public and require no authentication. This means in many cases you can search for and retrieve data without a Dataverse account for that a specific Dataverse installation. But, other features require a Dataverse account for the specific server installation of the Dataverse software, and an API key linked to that account. Instructions for obtaining an account and setting up an API key are available in the [Dataverse User Guide](http://guides.dataverse.org/en/latest/user/account.html). (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called `DATAVERSE_KEY`. It can be set within R using: 
 
-Because [there are many Dataverse installations](http://dataverse.org/), all functions in the R client require specifying what server installation you are interacting with. This can be set by default with an environment variable, `DATAVERSE`. This should be the Dataverse server, without the "https" prefix" or the "/api" URL path, etc. For example, the Harvard Dataverse can be used by setting: `Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")`. (The package attempts to compensate for any malformed values, though.)
+`Sys.setenv("DATAVERSE_KEY" = "examplekey12345")`.
+
+Because [there are many Dataverse installations](http://dataverse.org/), all functions in the R client require specifying what server installation you are interacting with. This can be set by default with an environment variable, `DATAVERSE_SERVER`. This should be the Dataverse server, without the "https" prefix or the "/api" URL path, etc. For example, the Harvard Dataverse can be used by setting: 
+
+`Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")`. 
+
+Note: The package attempts to compensate for any malformed values, though.
 
 ### Data Discovery ###
 
@@ -45,3 +53,6 @@ Coming soon...
 
 Coming soon...
 
+---
+
+[![](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
