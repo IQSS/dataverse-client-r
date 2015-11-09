@@ -29,11 +29,11 @@ library("dataverse")
 
 Some features of the Dataverse 4 API are public and require no authentication. This means in many cases you can search for and retrieve data without a Dataverse account for that a specific Dataverse installation. But, other features require a Dataverse account for the specific server installation of the Dataverse software, and an API key linked to that account. Instructions for obtaining an account and setting up an API key are available in the [Dataverse User Guide](http://guides.dataverse.org/en/latest/user/account.html). (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called `DATAVERSE_KEY`. It can be set within R using: 
 
-`Sys.setenv("DATAVERSE_KEY" = "examplekey12345")`.
+`Sys.setenv("DATAVERSE_KEY" = "examplekey12345")`
 
 Because [there are many Dataverse installations](http://dataverse.org/), all functions in the R client require specifying what server installation you are interacting with. This can be set by default with an environment variable, `DATAVERSE_SERVER`. This should be the Dataverse server, without the "https" prefix or the "/api" URL path, etc. For example, the Harvard Dataverse can be used by setting: 
 
-`Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")`. 
+`Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")`
 
 Note: The package attempts to compensate for any malformed values, though.
 
