@@ -1,6 +1,19 @@
+#' @title Download File(s)
+#' @description Download Dataverse File(s)
+#' @details This function provides access to data files from a Dataverse entry.
+#' @param file
+#' @param doi If a DOI is supplied, then \code{file} can simply be the filename rather than Dataverse file ID number.
+#' @param format
+#' @param vars
+#' @template envvars
+#' @param ... Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}.
+#' @return A list.
+#' @examples
+#' \dontrun{}
 #' @export
-download_file <- 
+dataverse_file <- 
 function(file, 
+         doi = NULL,
          format = c("original", "RData", "prep", "bundle"),
          # thumb = TRUE,
          vars = NULL,
@@ -9,6 +22,21 @@ function(file,
          ...) {
     
     server <- urltools::url_parse(server)$domain
+    format <- match.arg(format)
+    
+    # from doi, get SWORD dataset statement, then get file ID
+    if (!is.null(doi)) {
+        file <- (function(doi, filename, ...) {
+            ds <- dataset_statement(doi)
+            filelist <- ds[names(ds) == "entry"]
+            furl <- sapply(filelist, function(x) {x[["id"]][[1]]})
+            furl2 <- sapply(strsplit(urltools::url_parse(furl)$path, "edit-media/file/"), `[`, 2)
+            furl3 <- strsplit(furl2, "/")
+            filelist2 <- setNames(sapply(furl3, `[`, 1), sapply(furl3, function(x) x[length(x)]))
+            fileid <- filelist2[names(filelist2) == filename]
+            fileid
+        })(doi, file)
+    }
     
     if (length(file) > 1) {
         file <- paste0(file, collapse = ",")
