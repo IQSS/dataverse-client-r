@@ -5,6 +5,7 @@ r_github_packages:
 after_success:
 - Rscript -e 'library(covr);codecov()'
 env:
-- DATAVERSE_SERVER=demo.dataverse.org
   global:
     secure: FKQWbFLMa/H0H6ynsLk+ioXRuw+EXoEv7t8xWKZXtBBPUICEJ1UdmdC7fgOQ3NSZGlG+rDl34xJsjbfgqJFmIIg/XLmplTxJPdyjr+joZ523f9OyVm8serGgX50npiE+mnIRbJ6Zvr1CpQUb6ytt2JBnKA0ZEkUN2/n/A+7tnG+XKB4oHsPP21XbsKelOe2rdN0mSRGwMOfhn1ZShWMeXuGbHIMY7zWQsA4NzIW+woHmwmKLYA56IAeSTs3xRh1UJn0iLDkXFsqTowOlb+zaBZvQyRgbBQ29ycJAnFEESu/3UB1vnhJmNtEyTyu1MpFicwMmvrHF8XEAzQfie3OF9ff5YuB4lzzh8spafekRgG03VU7W5Mt+jmbs6MzG+JEtiObcEX/6VcFFstR9IRKQ+PUOjdGFHXTW07l1/OTOE5QCgt0ipf8E4aMHO38nhrQwrQ7fCQ+TpIlc3q5H1i9CAcU7m3aY88wuFOdj46JsgghpBLz+17dgRiEfQy5ub2zZK6Q5hYKOJA3MOIxjOkWazxSf38QYHa+mC3HY/l590iGn1cUf0ZVxvdmoScziofJZnrWzkxaGkujqVHcCpDf80NIOVYEjlLJe1Df1rejtHllS7nCwNeTc5k/z2YN9YEvxec2Fx8CFGNYB8Gp6IR2/07JKSyDnWpQ6EyVMnSG2c78=
+  matrix:
+    - DATAVERSE_SERVER=demo.dataverse.org
