@@ -10,7 +10,7 @@ Users interested in downloading metadata from archives other than Dataverse may 
 
 [![CRAN Version](http://www.r-pkg.org/badges/version/dataverse)](http://cran.r-project.org/package=dataverse)
 ![Downloads](http://cranlogs.r-pkg.org/badges/dataverse)
-[![Travis-CI Build Status](https://travis-ci.org/iqss/dataverse-client-r.png?branch=master)](https://travis-ci.org/iqss/dataverse-client-r)
+[![Travis-CI Build Status](https://travis-ci.org/IQSS/dataverse-client-r.png?branch=master)](https://travis-ci.org/IQSS/dataverse-client-r)
 
 You can (eventually) find a stable release on [CRAN](http://cran.r-project.org/web/packages/dataverse/index.html), or install the latest development version from GitHub using [Hadley's](http://had.co.nz/) [devtools](http://cran.r-project.org/web/packages/devtools/index.html) package:
 

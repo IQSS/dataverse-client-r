@@ -1,11 +1,11 @@
 Package: dataverse
-Version: 0.1.2
-Date: 2015-11-09
+Version: 0.1.3
+Date: 2015-11-10
 Title: Client for Dataverse 4 Repositories
 Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
                     email = "thosjleeper@gmail.com"))
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
-Imports: httr, XML, jsonlite, urltools
+Imports: httr, xml2, jsonlite, urltools
 Suggests: testthat, UNF, rio
 Description: Provides access to Dataverse version 4 APIs, enabling data search, retrieval, and deposit. For Dataverse versions <= 4.0, please use the 'dvn' package <http://cran.r-project.org/package=dvn>.
 License: GPL-2
