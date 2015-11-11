@@ -1,4 +1,4 @@
-#' @title
+#' @title Create dataset
 #' @description
 #' @details
 #' @template dv
@@ -17,7 +17,7 @@ create_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), s
     httr::content(r)
 }
 
-#' @title
+#' @title Update dataset
 #' @description
 #' @details
 #' @template ds
@@ -29,14 +29,14 @@ create_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), s
 #' @export
 update_dataset <- function(dataset, body, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
-    dataverse <- dataverse_id(dataverse)
+    dataset <- dataset_id(dataset)
     u <- paste0("https://", server,"/api/datasets/", dataset, "/versions/:draft")
     r <- httr::PUT(u, httr::add_headers("X-Dataverse-key" = key), body = body, encode = "json", ...)
     httr::stop_for_status(r)
     httr::content(r)
 }
 
-#' @title
+#' @title Publish dataset
 #' @description
 #' @details
 #' @template ds
@@ -48,13 +48,14 @@ update_dataset <- function(dataset, body, key = Sys.getenv("DATAVERSE_KEY"), ser
 #' @export
 publish_dataset <- function(dataset, minor = TRUE, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
+    dataset <- dataset_id(dataset)
     u <- paste0("https://", server,"/api/datasets/", dataset, "/actions/:publish?type=", if (minor) "minor" else "major")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r)
 }
 
-#' @title
+#' @title Get dataset
 #' @description
 #' @details
 #' @template ds
@@ -66,6 +67,7 @@ publish_dataset <- function(dataset, minor = TRUE, key = Sys.getenv("DATAVERSE_K
 #' @export
 get_dataset <- function(dataset, version = NULL, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
+    dataset <- dataset_id(dataset)
     if (!is.null(version)) {
         u <- paste0("https://", server,"/api/datasets/", dataset, "/versions/", version)
     } else {
@@ -77,19 +79,7 @@ get_dataset <- function(dataset, version = NULL, key = Sys.getenv("DATAVERSE_KEY
     structure(out$data, class = "dataverse_dataset")
 }
 
-print.dataverse_dataset <- function(x, ...) {
-    cat("Dataset (", x$id, "): ", x$persistentUrl, "\n", sep = "")
-    cat("Version: ", x$latestVersion$versionNumber, ".", x$latestVersion$versionNumber, "\n", sep = "")
-    cat("Version State: ", x$latestVersion$versionState, "\n", sep = "")
-    cat("Release Date: ", x$latestVersion$releaseTime, "\n", sep = "")
-    n <- nrow(x$latestVersion$files)
-    cat(n, ngettext(n, " File:", " Files:"), "\n", sep = "")
-    print(x$latestVersion$files)
-    cat("\n")
-    invisible(x)    
-}
-
-#' @title
+#' @title Delete draft dataset
 #' @description
 #' @details
 #' @template ds
@@ -101,13 +91,14 @@ print.dataverse_dataset <- function(x, ...) {
 delete_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     # can only delete a "draft" dataset
     server <- urltools::url_parse(server)$domain
+    dataset <- dataset_id(dataset)
     u <- paste0("https://", server,"/api/datasets/", dataset, "/versions/:draft")
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r)
 }
 
-#' @title
+#' @title Dataset versions
 #' @description
 #' @details
 #' @template ds
@@ -118,13 +109,14 @@ delete_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = 
 #' @export
 list_versions <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
+    dataset <- dataset_id(dataset)
     u <- paste0("https://", server,"/api/datasets/", dataset, "/versions")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r)
 }
 
-#' @title
+#' @title Dataset metadata
 #' @description
 #' @details
 #' @template ds
@@ -136,13 +128,14 @@ list_versions <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = S
 #' @export
 dataset_metadata <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
+    dataset <- dataset_id(dataset)
     u <- paste0("https://", server,"/api/datasets/", dataset, "/versions/", version)
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r)
 }
 
-#' @title
+#' @title Dataset files
 #' @description
 #' @details
 #' @template ds
@@ -154,6 +147,7 @@ dataset_metadata <- function(dataset, version = ":latest", key = Sys.getenv("DAT
 #' @export
 list_files <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
+    dataset <- dataset_id(dataset)
     u <- paste0("https://", server,"/api/datasets/", dataset, "/versions/", version, "/files")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
@@ -161,14 +155,7 @@ list_files <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE
     structure(lapply(out, `class<-`, "dataverse_file"))
 }
 
-print.dataverse_file <- function(x, ...) {
-    cat("File (", x$dataFile$id, "): ", x$dataFile$filename, "\n", sep = "")
-    cat("MD5: ", x$dataFile$md5, "\n", sep = "")
-    cat("Description: ", x$dataFile$description, "\n\n", sep = "")
-    invisible(x)
-}
-
-#' @title
+#' @title Dataset metadata block
 #' @description
 #' @details
 #' @template ds
@@ -181,6 +168,7 @@ print.dataverse_file <- function(x, ...) {
 #' @export
 get_metadata_block <- function(dataset, version, block, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
+    dataset <- dataset_id(dataset)
     if (!is.null(block)) {
         u <- paste0("https://", server,"/api/datasets/", dataset, "/versions/", version, "/metadata/", block)
     } else {

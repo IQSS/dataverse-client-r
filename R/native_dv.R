@@ -1,4 +1,4 @@
-#' @title
+#' @title Get Dataverse
 #' @description
 #' @details
 #' @template dv
@@ -17,17 +17,7 @@ get_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
     structure(out$data, class = "dataverse")
 }
 
-print.dataverse <- function(x, ...) {
-    cat("Dataverse:   ", x$alias, "\n", sep = "")
-    cat("ID:          ", x$id, "\n", sep = "")
-    cat("Name:        ", x$name, "\n", sep = "")
-    cat("Description: ", x$description, "\n", sep = "")
-    cat("Created:     ", x$creationDate, "\n", sep = "")
-    cat("Creator:     ", x$creator$identifier, "\n", sep = "")
-    invisible(x)
-}
-
-#' @title
+#' @title Create Dataverse
 #' @description
 #' @details
 #' @template dv
@@ -45,7 +35,7 @@ create_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
     httr::content(r)
 }
 
-#' @title
+#' @title Delete Dataverse
 #' @description
 #' @details
 #' @template dv
@@ -63,7 +53,7 @@ delete_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
     httr::content(r)
 }
 
-#' @title
+#' @title List Dataverse contents
 #' @description
 #' @details
 #' @template dv
@@ -84,7 +74,7 @@ list_contents <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
     }), class = "dataverse_contents")
 }
 
-#' @title
+#' @title Get Dataverse roles
 #' @description
 #' @details
 #' @template dv
@@ -103,7 +93,7 @@ get_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys
     structure(lapply(out, `class<-`, "dataverse_role"))
 }
 
-#' @title
+#' @title Create Dataverse role
 #' @description
 #' @details
 #' @template dv
@@ -122,7 +112,7 @@ create_role <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), serv
     httr::content(r)
 }
 
-#' @title
+#' @title Get Dataverse facets
 #' @description
 #' @details
 #' @template dv
@@ -140,7 +130,7 @@ get_facets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
     httr::content(r)
 }
 
-#' @title
+#' @title Get Dataverse role assignments
 #' @description
 #' @details
 #' @template dv
@@ -149,7 +139,7 @@ get_facets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 #' @examples
 #' \dontrun{}
 #' @export
-get_role_assignments <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
+get_assignments <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
     u <- paste0("https://", server,"/api/dataverses/", dataverse, "/assignments")
@@ -159,7 +149,7 @@ get_role_assignments <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), s
     structure(lapply(out, `class<-`, "dataverse_role_assignment"))
 }
 
-#' @title
+#' @title Assign Dataverse role
 #' @description
 #' @details
 #' @template dv
@@ -180,7 +170,7 @@ assign_role <- function(dataverse, assignee, role, key = Sys.getenv("DATAVERSE_K
     httr::content(r)
 }
 
-#' @title
+#' @title Delete Dataverse role assignment
 #' @description
 #' @details
 #' @template dv
@@ -199,7 +189,7 @@ delete_assignment <- function(dataverse, assignment, key = Sys.getenv("DATAVERSE
     httr::content(r)
 }
 
-#' @title
+#' @title Get Dataverse metadata
 #' @description
 #' @details
 #' @template dv
@@ -217,7 +207,7 @@ get_metadata <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = 
     httr::content(r)
 }
 
-#' @title
+#' @title Set Dataverse metadata
 #' @description
 #' @details
 #' @template dv
@@ -236,7 +226,7 @@ set_metadata <- function(dataverse, root = TRUE, key = Sys.getenv("DATAVERSE_KEY
     httr::content(r)
 }
 
-#' @title
+#' @title Publish Dataverse
 #' @description
 #' @details
 #' @template dv
