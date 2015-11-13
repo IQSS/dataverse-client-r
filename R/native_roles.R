@@ -1,4 +1,4 @@
-#' @title
+#' @title Create role
 #' @description
 #' @details
 #' @template role
@@ -16,7 +16,7 @@ create_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.ge
     j
 }
 
-#' @title
+#' @title Get role
 #' @description
 #' @details
 #' @template role
@@ -34,7 +34,7 @@ get_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.geten
     j
 }
 
-#' @title
+#' @title Delete role
 #' @description
 #' @details
 #' @template role
@@ -52,7 +52,7 @@ delete_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.ge
     j
 }
 
-#' @title
+#' @title Create role group
 #' @description
 #' @details
 #' @template dv
@@ -77,7 +77,7 @@ create_group <- function(dataverse, alias, name, description, key = Sys.getenv("
     j
 }
 
-#' @title
+#' @title Update role group
 #' @description
 #' @details
 #' @template dv
@@ -102,7 +102,7 @@ update_group <- function(dataverse, alias, name, description, key = Sys.getenv("
     j
 }
 
-#' @title
+#' @title List role groups
 #' @description
 #' @details
 #' @template dv
@@ -121,7 +121,7 @@ list_groups <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = S
     j
 }
 
-#' @title
+#' @title Get role group
 #' @description
 #' @details
 #' @template dv
@@ -141,7 +141,7 @@ get_group <- function(dataverse, alias, key = Sys.getenv("DATAVERSE_KEY"), serve
     j
 }
 
-#' @title
+#' @title Delete role group
 #' @description
 #' @details
 #' @template dv
@@ -160,7 +160,7 @@ delete_group <- function(dataverse, alias, key = Sys.getenv("DATAVERSE_KEY"), se
     r
 }
 
-#' @title
+#' @title Add roles to group
 #' @description
 #' @details
 #' @template dv
@@ -187,7 +187,7 @@ add_roles_to_group <- function(dataverse, alias, role, key = Sys.getenv("DATAVER
     j
 }
 
-#' @title
+#' @title Remove role
 #' @description
 #' @details
 #' @template dv

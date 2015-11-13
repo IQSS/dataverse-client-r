@@ -1,10 +1,10 @@
 #' @title Create dataset
-#' @description
+#' @description Create dataset within a Dataverse
 #' @details
 #' @template dv
-#' @param body
+#' @param body A list describing the dataset.
 #' @template envars
-#' @return
+#' @return An object of class \dQuote{dataverse_dataset}.
 #' @examples
 #' \dontrun{}
 #' @export
@@ -21,7 +21,7 @@ create_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), s
 #' @description
 #' @details
 #' @template ds
-#' @param body
+#' @param body A list describing the dataset.
 #' @template envars
 #' @return
 #' @examples

@@ -1,1 +1,1 @@
-#' @param dataset
+#' @param dataset A character string specifying a dataset name or an object of class \dQuote{dataverse_dataset}.

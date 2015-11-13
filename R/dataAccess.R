@@ -1,10 +1,10 @@
 #' @title Download File(s)
 #' @description Download Dataverse File(s)
 #' @details This function provides access to data files from a Dataverse entry.
-#' @param file
-#' @param doi If a DOI is supplied, then \code{file} can simply be the filename rather than Dataverse file ID number.
-#' @param format
-#' @param vars
+#' @param file An integer specifying a file identifier or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset.
+#' @param doi If a DOI (or handle) is supplied, then \code{file} can simply be the filename rather than Dataverse file ID number.
+#' @param format A character string specifying a file format. By default, this is \dQuote{original} (the original file format). If \dQuote{RData} or \dQuote{prep} is used, an alternative is returned. If \dQuote{bundle}, a compressed directory containing a bundle of file formats is returned.
+#' @param vars A character vector specifying one or more variable names, used to extract a subset of the data.
 #' @template envvars
 #' @param ... Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}.
 #' @return A list.

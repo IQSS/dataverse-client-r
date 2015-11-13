@@ -1,16 +1,16 @@
-#' @title
-#' @description
-#' @details
+#' @title Search Dataverse server
+#' @description Search for Dataverses and datasets
+#' @details This function provides an interface for searching for Dataverses, datasets, and/or files within a Dataverse server.
 #' @template dv
-#' @param ...
-#' @param type
+#' @param ... A character string specifying a search query or a named list of search argument.
+#' @param type A character vector specifying one or more of \dQuote{dataverse}, \dQuote{dataset}, and \dQuote{file}, which is used to restrict the search results. By default, all three types of objects are searched for.
 #' @param subtree
-#' @param sort
-#' @param order
-#' @param per_page
-#' @param start
-#' @param show_relevance
-#' @param show_facets
+#' @param sort A character vector specifying whether to sort results by \dQuote{name} or \dQuote{date}.
+#' @param order A character vector specifying either \dQuote{asc} or \dQuote{desc} results order.
+#' @param per_page An integer specifying the page size of results.
+#' @param start An integer specifying used for pagination.
+#' @param show_relevance A logical.
+#' @param show_facets A logical.
 #' @param fq
 #' @template envars
 #' @param verbose A logical indicating whether to display information about the search query (default is \code{TRUE}).

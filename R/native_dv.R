@@ -1,9 +1,9 @@
 #' @title Get Dataverse
-#' @description
-#' @details
-#' @template dv
+#' @description Retrieve details of a Dataverse
+#' @details 
+#' @template dv 
 #' @template envars
-#' @return
+#' @return A list of class \dQuote{dataverse}.
 #' @examples
 #' \dontrun{}
 #' @export
@@ -18,17 +18,16 @@ get_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
 }
 
 #' @title Create Dataverse
-#' @description
+#' @description Create a new Dataverse
 #' @details
-#' @template dv
+#' @param dv A character string specifying a Dataverse name.
 #' @template envars
-#' @return
+#' @return A list.
 #' @examples
 #' \dontrun{}
 #' @export
 create_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
-    dataverse <- dataverse_id(dataverse)
     u <- paste0("https://", server,"/api/dataverses/", dataverse)
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
@@ -36,11 +35,11 @@ create_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
 }
 
 #' @title Delete Dataverse
-#' @description
+#' @description Delete a dataverse
 #' @details
 #' @template dv
 #' @template envars
-#' @return
+#' @return A logical.
 #' @examples
 #' \dontrun{}
 #' @export
@@ -53,12 +52,12 @@ delete_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
     httr::content(r)
 }
 
-#' @title List Dataverse contents
-#' @description
+#' @title List contents
+#' @description List the contents of a Dataverse
 #' @details
 #' @template dv
 #' @template envars
-#' @return
+#' @return A list of class \dQuote{dataverse_contents}
 #' @examples
 #' \dontrun{}
 #' @export
