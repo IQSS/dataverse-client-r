@@ -11,8 +11,7 @@ dataverse_id.dataverse <- function(x, ...) {
 }
 
 print.dataverse <- function(x, ...) {
-    cat("Dataverse:   ", x$alias, "\n", sep = "")
-    cat("ID:          ", x$id, "\n", sep = "")
+    cat("Dataverse (", x$id, "): ", x$alias, "\n", sep = "")
     cat("Name:        ", x$name, "\n", sep = "")
     cat("Description: ", x$description, "\n", sep = "")
     cat("Created:     ", x$creationDate, "\n", sep = "")
