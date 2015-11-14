@@ -1,25 +1,3 @@
-#' @title Create role
-#' @description Create a role
-#' @details In Dataverse, a role enables complex administration of user access to Dataverse. This can allow you to provide read, write, and administrative access to different users for specific parts of a Dataverse. \code{create_role} creates a new role with the name given by a character string in the \code{role} argument.
-#' @template role
-#' @template envvars
-#' @template dots
-#' @return A list.
-#' @seealso \code{\link{get_role}}, \code{\link{delete_role}}
-#' @examples
-#' \dontrun{}
-#' @export
-create_role <- function(dataverse, alias, name, description, permissions, 
-                        key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
-    b <- list(alias = alias, name = name, description = description, permissions = permissions)
-    u <- paste0("https://", server,"/api/roles?dvo=", dataverse)
-    r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
-    httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
-    j
-}
-
 #' @title Get role
 #' @description Retrieve a Dataverse role
 #' @details Once created using \code{\link{create_role}}, this function can be used to retrieve roles for a Dataverse. \code{\link{delete_role}} can delete a role.
@@ -260,7 +238,7 @@ get_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys
 #' @examples
 #' \dontrun{}
 #' @export
-create_role2 <- function(dataverse, alias, name, description, permissions, 
+create_role <- function(dataverse, alias, name, description, permissions, 
                          key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
     b <- list(alias = alias, name = name, description = description, permissions = permissions)
