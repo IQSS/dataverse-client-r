@@ -1,11 +1,14 @@
 #' @title Create user
 #' @description Create a Dataverse user
-#' @details
+#' @details Create a new Dataverse user.
 #' @param password A character vector specifying the password for the new user.
 #' @template envars
 #' @return A list.
+#' @seealso \code{\link{get_user_key}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' create_user("password")
+#' }
 #' @export
 create_user <- function(password, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
@@ -22,8 +25,11 @@ create_user <- function(password, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 #' @param password A character vector specifying the password for this user.
 #' @param server A character string specifying a Dataverse server. There are multiple Dataverse installations, but the defaults is to use the Harvard Dataverse. This can be modified atomically or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.
 #' @return A list.
+#' @seealso \code{\link{create_user}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' get_user_key("username", "password")
+#' }
 #' @export
 get_user_key <- function(user, password, server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain

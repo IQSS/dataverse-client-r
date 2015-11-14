@@ -30,29 +30,56 @@ dataset_id <- function(x, ...) {
 dataset_id.default <- function(x, ...) {
     x
 }
+#dataset_id.character <- function(x, ...) {
+    # parse DOI to dataset ID using SWORD API, possibly
+#}
 dataset_id.dataverse_dataset <- function(x, ...) {
     x$id
 }
 
 print.dataverse_dataset <- function(x, ...) {
     cat("Dataset (", x$id, "): ", x$persistentUrl, "\n", sep = "")
-    cat("Version: ", x$latestVersion$versionNumber, ".", x$latestVersion$versionNumber, "\n", sep = "")
-    cat("Version State: ", x$latestVersion$versionState, "\n", sep = "")
-    cat("Release Date: ", x$latestVersion$releaseTime, "\n", sep = "")
-    n <- nrow(x$latestVersion$files)
-    cat(n, ngettext(n, " File:", " Files:"), "\n", sep = "")
-    print(x$latestVersion$files)
-    cat("\n")
+    if ("latestVersion" %in% names(x)) {
+        print(x$latestVersion)
+    } else {
+        cat("Version (", x$id, ")", sep = "")
+        if ("versionNumber" %in% names(x)) {
+            cat(": ", x$versionNumber, ".", x$versionMinorNumber, ", ", x$versionState, "\n", sep = "")
+        } else {
+            cat("\n")
+        }
+        if ("releaseTime" %in% names(x)) {
+            cat("Release Date: ", x$releaseTime, "\n", sep = "")
+        }
+        if ("files" %in% names(x)) {
+            n <- length(x$files)
+            cat(n, ngettext(n, " File:", " Files:"), "\n", sep = "")
+            print(x$files)
+        }
+    }
     invisible(x)    
 }
 
+# dataverse_dataset_version class
+
+print.dataverse_dataset_version <- function(x, ...) {
+    cat("Version (", x$id, "): ", x$versionNumber, ".", x$versionMinorNumber, ", ", x$versionState, "\n", sep = "")
+    cat("Release Date: ", x$releaseTime, "\n", sep = "")
+    n <- length(x$files)
+    cat(n, ngettext(n, " File:", " Files:"), "\n", sep = "")
+    print(x$files)
+    invisible(x)    
+}
 
 # dataverse_file class
 
 print.dataverse_file <- function(x, ...) {
-    cat("File (", x$dataFile$id, "): ", x$dataFile$filename, "\n", sep = "")
-    cat("MD5: ", x$dataFile$md5, "\n", sep = "")
-    cat("Description: ", x$dataFile$description, "\n\n", sep = "")
+    cat("File (", x$datafile$id, "): ", x$datafile$filename, "\n", sep = "")
+    cat("Dataset version: ", x$datasetVersionId, "\n", sep = "")
+    if ("md5" %in% names(x$datafile)) {
+        cat("MD5: ", x$datafile$md5, "\n", sep = "")
+    }
+    cat("Description: ", x$datafile$description, "\n", sep = "")
     invisible(x)
 }
 

@@ -15,11 +15,12 @@
 #' @template envars
 #' @param verbose A logical indicating whether to display information about the search query (default is \code{TRUE}).
 #' @param http_opts Currently ignored.
-#' @return
+#' @return A list.
+#' @seealso \code{\link{dataverse_file}}, \code{\link{get_dataverse}}, \code{\link{get_dataset}}, \code{\link{dataverse_contents}}
 #' @examples
 #' \dontrun{}
 #' @export
-dv_search <- 
+dataverse_search <- 
 function(..., 
          type = c("dataverse", "dataset", "file"),
          subtree = NULL,

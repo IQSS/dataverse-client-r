@@ -1,10 +1,11 @@
 #' @title Create dataset
 #' @description Create dataset within a Dataverse
-#' @details
+#' @details This function creates a Dataverse dataset. In Dataverse, a \dQuote{dataset} is the lowest-level structure in which to organize files. For example, a Dataverse dataset might contain the files used to reproduce a published article, including data, analysis code, and related materials. Datasets can be organized into \dQuote{Dataverse} objects, which can be further nested within other Dataverses. For someone creating an archive, this would be the first step to producing said archive (after creating a Dataverse, if one does not already exist). Once files and metadata have been added, the dataset can be publised (i.e., made public) using \code{\link{publish_dataset}}.
 #' @template dv
 #' @param body A list describing the dataset.
 #' @template envars
 #' @return An object of class \dQuote{dataverse_dataset}.
+#' @seealso \code{\link{get_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}
 #' @examples
 #' \dontrun{}
 #' @export
@@ -18,12 +19,13 @@ create_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), s
 }
 
 #' @title Update dataset
-#' @description
-#' @details
+#' @description Update a Dataverse dataset
+#' @details This function updates a Dataverse dataset that has already been created using \code{\link{create_dataset}}. This creates a draft version of the dataset or modifies the current draft if one is already in-progress. It does not assign a new version number to the dataset nor does it make it publicly visible (which can be done with \code{\link{publish_dataset}}).
 #' @template ds
 #' @param body A list describing the dataset.
 #' @template envars
-#' @return
+#' @return A list.
+#' @seealso \code{\link{get_dataset}}, \code{\link{create_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}
 #' @examples
 #' \dontrun{}
 #' @export
@@ -37,12 +39,15 @@ update_dataset <- function(dataset, body, key = Sys.getenv("DATAVERSE_KEY"), ser
 }
 
 #' @title Publish dataset
-#' @description
-#' @details
+#' @description Publish/release Dataverse dataset
+#' @details Use this function to \dQuote{publish} (i.e., publicly release) a draft Dataverse dataset. This creates a publicly visible listing of the dataset, accessible by its DOI, with a numbered version. This action cannot be undone.
 #' @template ds
-#' @param minor
+#' @param minor A logical specifying whether the new release of the dataset is a \dQuote{minor} release (\code{TRUE}, by default), resulting in a minor version increase (e.g., from 1.1 to 1.2). If \code{FALSE}, the dataset is given a \dQuote{major} release (e.g., from 1.1 to 2.0).
+#'
+#' There are no requirements for what constitutes a major or minor release, but a minor release might be used to update metadata (e.g., a new linked publication) or the addition of supplemental files. A major release is best used to reflect a substantial change to the dataset, such as would require a published erratum or a substantial change to data or code.
 #' @template envars
-#' @return
+#' @return A list.
+#' @seealso \code{\link{get_dataset}}, \code{\link{publish_dataverse}}
 #' @examples
 #' \dontrun{}
 #' @export
@@ -56,16 +61,17 @@ publish_dataset <- function(dataset, minor = TRUE, key = Sys.getenv("DATAVERSE_K
 }
 
 #' @title Get dataset
-#' @description
-#' @details
+#' @description Retrieve Dataverse dataset
+#' @details This function retrieves details about a Dataverse dataset.
 #' @template ds
-#' @param version
+#' @template version 
 #' @template envars
-#' @return
+#' @return A list of class \dQuote{dataverse_dataset}.
+#' @seealso \code{\link{create_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}, \code{\link{dataset_files}}, \code{\link{dataset_metadata}}
 #' @examples
 #' \dontrun{}
 #' @export
-get_dataset <- function(dataset, version = NULL, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
+get_dataset <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
     dataset <- dataset_id(dataset)
     if (!is.null(version)) {
@@ -75,16 +81,23 @@ get_dataset <- function(dataset, version = NULL, key = Sys.getenv("DATAVERSE_KEY
     }
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    out <- jsonlite::fromJSON(httr::content(r, "text"))
-    structure(out$data, class = "dataverse_dataset")
+    out <- jsonlite::fromJSON(httr::content(r, "text"))$data
+    if ("latestVersion" %in% names(out)) {
+        class(out$latestVersion) <- "dataverse_dataset_version"
+    }
+    if ("metadataBlocks" %in% names(out) && "citation" %in% out$metadata) {
+        class(out$metadata$citation) <- "dataverse_dataset_citation"
+    }
+    structure(out, class = "dataverse_dataset")
 }
 
 #' @title Delete draft dataset
-#' @description
-#' @details
+#' @description Delete a dataset draft
+#' @details This function can be used to delete a draft (unpublished) Dataverse dataset. Once published, a dataset cannot be deleted. An existing draft can instead be modified using \code{\link{update_dataset}}.
 #' @template ds
 #' @template envars
-#' @return
+#' @return A logical.
+#' @seealso \code{\link{get_dataset}}, \code{\link{create_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}
 #' @examples
 #' \dontrun{}
 #' @export
@@ -99,53 +112,41 @@ delete_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = 
 }
 
 #' @title Dataset versions
-#' @description
-#' @details
+#' @description View versions of a dataset
+#' @details This returns a list of objects of all versions of a dataset, including metadata. This can be used as a first step for retrieving older versions of files or datasets.
 #' @template ds
 #' @template envars
-#' @return
+#' @return A list of class \dQuote{dataverse_dataset_version}.
+#' @seealso \code{\link{get_dataset}}, \code{\link{dataset_files}}, \code{\link{publish_dataset}}
 #' @examples
 #' \dontrun{}
 #' @export
-list_versions <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
+dataset_versions <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
     dataset <- dataset_id(dataset)
     u <- paste0("https://", server,"/api/datasets/", dataset, "/versions")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    httr::content(r)
-}
-
-#' @title Dataset metadata
-#' @description
-#' @details
-#' @template ds
-#' @param version
-#' @template envars
-#' @return
-#' @examples
-#' \dontrun{}
-#' @export
-dataset_metadata <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
-    dataset <- dataset_id(dataset)
-    u <- paste0("https://", server,"/api/datasets/", dataset, "/versions/", version)
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
-    httr::content(r)
+    out <- httr::content(r)$data
+    lapply(out, function(x) {
+        x <- `class<-`(x, "dataverse_dataset_version")
+        x$files <- lapply(x$files, `class<-`, "dataverse_file")
+        x
+    })
 }
 
 #' @title Dataset files
-#' @description
-#' @details
+#' @description List files in a dataset
+#' @details This function returns a list of files in a dataset, similar to \code{\link{get_dataset}}. The difference is that this returns only a list of \dQuote{dataverse_dataset} objects, whereas \code{\link{get_dataset}} returns metadata and a data.frame of files (rather than a list of file objects).
 #' @template ds
-#' @param version
+#' @template version 
 #' @template envars
-#' @return
+#' @return A list of objects of class \dQuote{dataverse_file}.
+#' @seealso \code{\link{get_dataset}}
 #' @examples
 #' \dontrun{}
 #' @export
-list_files <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
+dataset_files <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
     dataset <- dataset_id(dataset)
     u <- paste0("https://", server,"/api/datasets/", dataset, "/versions/", version, "/files")
@@ -155,18 +156,19 @@ list_files <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE
     structure(lapply(out, `class<-`, "dataverse_file"))
 }
 
-#' @title Dataset metadata block
-#' @description
-#' @details
+#' @title Metadata block
+#' @description Get a named metadata block for a dataset
+#' @details This function returns a named metadata block for a dataset. This is already returned by \code{\link{get_dataset}}, but this function allows you to retrieve just a specific block of metadata, such as citation information.
 #' @template ds
-#' @param version
-#' @param block
+#' @template version 
+#' @param block A character string specifying a metadata block to retrieve. By default this is \dQuote{citation}. Other values may be available, depending on the dataset, such as \dQuote{geospatial} or \dQuote{socialscience}.
 #' @template envars
-#' @return
+#' @return A list of form dependent on the specific metadata block retrieved.
+#' @seealso \code{\link{get_dataset}}
 #' @examples
 #' \dontrun{}
 #' @export
-get_metadata_block <- function(dataset, version, block, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
+dataset_metadata <- function(dataset, version = ":latest", block = "citation", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     server <- urltools::url_parse(server)$domain
     dataset <- dataset_id(dataset)
     if (!is.null(block)) {
