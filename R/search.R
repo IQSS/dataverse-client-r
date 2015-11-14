@@ -12,7 +12,7 @@
 #' @param show_relevance A logical.
 #' @param show_facets A logical.
 #' @param fq
-#' @template envars
+#' @template envvars
 #' @param verbose A logical indicating whether to display information about the search query (default is \code{TRUE}).
 #' @param http_opts Currently ignored.
 #' @return A list.

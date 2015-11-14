@@ -12,6 +12,8 @@ create_dataverse(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
 
 \item{server}{A character string specifying a Dataverse server. There are multiple Dataverse installations, but the defaults is to use the Harvard Dataverse. This can be modified atomically or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 
+\item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
+
 \item{dv}{A character string specifying a Dataverse name.}
 }
 \value{
@@ -29,6 +31,6 @@ For example, if one were involved in an ongoing project that generated monthly d
 \dontrun{}
 }
 \seealso{
-\code{\link{get_dataverse}}, \code{\link{update_dataverse}}, \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{create_dataset}}
+\code{\link{get_dataverse}},  \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{create_dataset}}
 }
 

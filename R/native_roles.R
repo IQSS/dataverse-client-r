@@ -2,7 +2,8 @@
 #' @description Create a role
 #' @details In Dataverse, a role enables complex administration of user access to Dataverse. This can allow you to provide read, write, and administrative access to different users for specific parts of a Dataverse. \code{create_role} creates a new role with the name given by a character string in the \code{role} argument.
 #' @template role
-#' @template envars
+#' @template envvars
+#' @template dots
 #' @return A list.
 #' @seealso \code{\link{get_role}}, \code{\link{delete_role}}
 #' @examples
@@ -13,7 +14,7 @@ create_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.ge
     u <- paste0("https://", server,"/api/roles?dvo=", role)
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))
+    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
     j
 }
 
@@ -21,7 +22,8 @@ create_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.ge
 #' @description Retrieve a Dataverse role
 #' @details Once created using \code{\link{create_role}}, this function can be used to retrieve roles for a Dataverse. \code{\link{delete_role}} can delete a role.
 #' @template role
-#' @template envars
+#' @template envvars
+#' @template dots
 #' @return A list.
 #' @seealso \code{\link{create_role}}, \code{\link{delete_role}}
 #' @examples
@@ -32,7 +34,7 @@ get_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.geten
     u <- paste0("https://", server,"/api/roles/", role)
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))
+    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
     j
 }
 
@@ -40,7 +42,8 @@ get_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.geten
 #' @description Delete a Dataverse role
 #' @details This function deletes a Dataverse role.
 #' @template role
-#' @template envars
+#' @template envvars
+#' @template dots
 #' @return A list.
 #' @seealso \code{\link{create_role}}, \code{\link{get_role}}
 #' @examples
@@ -51,19 +54,20 @@ delete_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.ge
     u <- paste0("https://", server,"/api/roles/", role)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))
+    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
     j
 }
 
 #' @title Create role group
-#' @description
-#' @details
+#' @description \dots
+#' @details \dots
 #' @template dv
-#' @param alias
-#' @param name
-#' @param description
-#' @template envars
-#' @return
+#' @param alias A character string specifying an alias for the role group.
+#' @param name A character string specifying the name of the role group.
+#' @param description A character string specifying a description of the role group.
+#' @template envvars
+#' @template dots
+#' @return A list.
 #' @examples
 #' \dontrun{}
 #' @export
@@ -76,19 +80,20 @@ create_group <- function(dataverse, alias, name, description, key = Sys.getenv("
     u <- paste0("https://", server, "/api/dataverse/", dataverse, "/groups")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
     httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))
+    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
     j
 }
 
 #' @title Update role group
-#' @description
-#' @details
+#' @description \dots
+#' @details \dots
 #' @template dv
-#' @param alias
-#' @param name
-#' @param description
-#' @template envars
-#' @return
+#' @param alias A character string specifying an alias for the role group.
+#' @param name A character string specifying the name of the role group.
+#' @param description A character string specifying a description of the role group.
+#' @template envvars
+#' @template dots
+#' @return A list
 #' @examples
 #' \dontrun{}
 #' @export
@@ -101,16 +106,17 @@ update_group <- function(dataverse, alias, name, description, key = Sys.getenv("
     u <- paste0("https://", server, "/api/dataverse/", dataverse, "/groups/", alias)
     r <- httr::PUT(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
     httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))
+    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
     j
 }
 
 #' @title List role groups
-#' @description
-#' @details
+#' @description \dots
+#' @details \dots
 #' @template dv
-#' @template envars
-#' @return
+#' @template envvars
+#' @template dots
+#' @return A list
 #' @examples
 #' \dontrun{}
 #' @export
@@ -120,17 +126,18 @@ list_groups <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = S
     u <- paste0("https://", server, "/api/dataverse/", dataverse, "/groups")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))
+    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
     j
 }
 
 #' @title Get role group
-#' @description
-#' @details
+#' @description \dots
+#' @details \dots
 #' @template dv
 #' @param alias
-#' @template envars
-#' @return
+#' @template envvars
+#' @template dots
+#' @return A list.
 #' @examples
 #' \dontrun{}
 #' @export
@@ -140,17 +147,18 @@ get_group <- function(dataverse, alias, key = Sys.getenv("DATAVERSE_KEY"), serve
     u <- paste0("https://", server, "/api/dataverse/", dataverse, "/groups/", alias)
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))
+    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
     j
 }
 
 #' @title Delete role group
-#' @description
-#' @details
+#' @description \dots
+#' @details \dots
 #' @template dv
 #' @param alias
-#' @template envars
-#' @return
+#' @template envvars
+#' @template dots
+#' @return A list.
 #' @examples
 #' \dontrun{}
 #' @export
@@ -160,17 +168,18 @@ delete_group <- function(dataverse, alias, key = Sys.getenv("DATAVERSE_KEY"), se
     u <- paste0("https://", server, "/api/dataverse/", dataverse, "/groups/", alias)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    r
+    httr::content(r, "text")
 }
 
 #' @title Add roles to group
-#' @description
-#' @details
+#' @description \dots
+#' @details \dots
 #' @template dv
 #' @param alias
 #' @template role
-#' @template envars
-#' @return
+#' @template envvars
+#' @template dots
+#' @return A list.
 #' @examples
 #' \dontrun{}
 #' @export
@@ -186,18 +195,19 @@ add_roles_to_group <- function(dataverse, alias, role, key = Sys.getenv("DATAVER
     u <- paste0("https://", server, "/api/dataverse/", dataverse, "/groups/", alias, "/roleAssignees/", role)
     r <- httr::PUT(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))
+    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
     j
 }
 
 #' @title Remove role
-#' @description
-#' @details
+#' @description \dots
+#' @details \dots
 #' @template dv
 #' @param alias
 #' @template role
-#' @template envars
-#' @return
+#' @template envvars
+#' @template dots
+#' @return A list.
 #' @examples
 #' \dontrun{}
 #' @export
@@ -207,16 +217,16 @@ remove_role_from_group <- function(dataverse, alias, role, key = Sys.getenv("DAT
     u <- paste0("https://", server, "/api/dataverse/", dataverse, "/groups/", alias, "/roleAssignees/", role)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))
-    j
+    httr::content(r, "text")
 }
 
 #' @title Get Dataverse roles
-#' @description
-#' @details
+#' @description \dots
+#' @details \dots
 #' @template dv
-#' @template envars
-#' @return
+#' @template envvars
+#' @template dots
+#' @return A list.
 #' @seealso \code{\link{create_role}}
 #' @examples
 #' \dontrun{}
@@ -232,12 +242,13 @@ get_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys
 }
 
 #' @title Create Dataverse role
-#' @description
-#' @details
+#' @description \dots
+#' @details \dots
 #' @template dv
-#' @param body
-#' @template envars
-#' @return
+#' @param body A list.
+#' @template envvars
+#' @template dots
+#' @return A list.
 #' @examples
 #' \dontrun{}
 #' @export
@@ -247,15 +258,17 @@ create_role <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), serv
     u <- paste0("https://", server,"/api/dataverses/", dataverse, "/roles")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = body, encode = "json", ...)
     httr::stop_for_status(r)
-    httr::content(r)
+    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
+    j
 }
 
 #' @title Get Dataverse role assignments
-#' @description
-#' @details
+#' @description \dots
+#' @details \dots
 #' @template dv
-#' @template envars
-#' @return
+#' @template envvars
+#' @template dots
+#' @return A list.
 #' @examples
 #' \dontrun{}
 #' @export
@@ -270,13 +283,14 @@ get_assignments <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server
 }
 
 #' @title Assign Dataverse role
-#' @description
-#' @details
+#' @description \dots
+#' @details \dots
 #' @template dv
-#' @assignee
-#' @role
-#' @template envars
-#' @return
+#' @param assignee \dots
+#' @param role \dots
+#' @template envvars
+#' @template dots
+#' @return A list.
 #' @examples
 #' \dontrun{}
 #' @export
@@ -287,16 +301,18 @@ assign_role <- function(dataverse, assignee, role, key = Sys.getenv("DATAVERSE_K
     b <- list(assignee = assignee, role = role)
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
     httr::stop_for_status(r)
-    httr::content(r)
+    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
+    j
 }
 
 #' @title Delete Dataverse role assignment
-#' @description
-#' @details
+#' @description \dots
+#' @details \dots
 #' @template dv
-#' @assignment
-#' @template envars
-#' @return
+#' @param assignment \dots
+#' @template envvars
+#' @template dots
+#' @return A list
 #' @examples
 #' \dontrun{}
 #' @export
@@ -308,4 +324,3 @@ delete_assignment <- function(dataverse, assignment, key = Sys.getenv("DATAVERSE
     httr::stop_for_status(r)
     httr::content(r)
 }
-
