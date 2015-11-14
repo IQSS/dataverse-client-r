@@ -23,6 +23,15 @@ print.dataverse <- function(x, ...) {
 
 # dataverse_dataset class
 
+prepend_doi <- function(dataset) {
+    if (!grepl("^doi:", dataset)) {
+        dataset <- paste0("doi:", dataset)
+    } else if (grepl("^DOI:", dataset)) {
+        dataset <- paste0("doi:", strsplit(dataset, "DOI:", fixed = TRUE)[[1]][2])
+    }
+    dataset
+}
+
 dataset_id <- function(x, ...) {
     UseMethod('dataset_id', x)
 }
