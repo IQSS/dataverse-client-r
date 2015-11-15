@@ -29,6 +29,8 @@ prepend_doi <- function(dataset) {
     } else if (grepl("^DOI:", dataset)) {
         dataset <- paste0("doi:", strsplit(dataset, "DOI:", fixed = TRUE)[[1]][2])
     }
+    # check if it is a complete doi URL
+    # check if it is a handle, and issue warning
     dataset
 }
 
