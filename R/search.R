@@ -2,23 +2,30 @@
 #' @description Search for Dataverses and datasets
 #' @details This function provides an interface for searching for Dataverses, datasets, and/or files within a Dataverse server.
 #' @template dv
-#' @param ... A character string specifying a search query or a named list of search argument.
+#' @param ... A length-one character vector specifying a search query, a named character vector of search arguments, or a sequence of named character arguments. The specific fields available may vary by server installation.
 #' @param type A character vector specifying one or more of \dQuote{dataverse}, \dQuote{dataset}, and \dQuote{file}, which is used to restrict the search results. By default, all three types of objects are searched for.
-#' @param subtree
+#' @param subtree Currently ignored.
 #' @param sort A character vector specifying whether to sort results by \dQuote{name} or \dQuote{date}.
 #' @param order A character vector specifying either \dQuote{asc} or \dQuote{desc} results order.
 #' @param per_page An integer specifying the page size of results.
 #' @param start An integer specifying used for pagination.
 #' @param show_relevance A logical.
 #' @param show_facets A logical.
-#' @param fq
+#' @param fq Currently ignored.
 #' @template envvars
 #' @param verbose A logical indicating whether to display information about the search query (default is \code{TRUE}).
 #' @param http_opts Currently ignored.
 #' @return A list.
 #' @seealso \code{\link{dataverse_file}}, \code{\link{get_dataverse}}, \code{\link{get_dataset}}, \code{\link{dataverse_contents}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' # simple string search
+#' dataverse_search("Gary King")
+#'
+#' # search using named arguments
+#' dataverse_search(c(author = "Gary King", title = "Ecological Inference"))
+#' dataverse_search(author = "Gary King", title = "Ecological Inference")
+#' }
 #' @export
 dataverse_search <- 
 function(..., 
@@ -37,18 +44,20 @@ function(...,
          http_opts = NULL) {
     
     # parse `...` search query argument(s)
-    ## missing, fine
-    ## a length-1 character vector; passed directly as `q`
-    ## a named character vector; converted to single character string
-    ## a named list of character strings; converted to a single character string
     a <- list(...)
     if (length(a)) {
-        if ((length(a) == 1) & (is.null(names(a)))) {
+        if ((length(a) == 1) & length(a[[1]]) > 1) {
+            a <- as.list(a[[1]])
+        }
+        if (!is.list(a[[1]]) & (is.null(names(a)))) {
+            ## a length-1 character vector; passed directly as `q`
             query <- list(q = a)
         } else {
-            query <- list(q = paste0(names(a), ":", unname(a), collapse = ","))
+            ## a named list of character strings; converted to a single character string
+            query <- list(q = paste0(names(a), ":", unname(unlist(a)), collapse = ","))
         }
     } else {
+        ## missing, fine
         query <- NULL
     }
     
