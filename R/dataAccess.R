@@ -9,7 +9,9 @@
 #' @template dots
 #' @return A list.
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 dataverse_file <- 
 function(file, 

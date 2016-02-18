@@ -8,7 +8,9 @@
 #' @return An object of class \dQuote{dataverse_dataset}.
 #' @seealso \code{\link{get_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 create_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataverse <- dataverse_id(dataverse)
@@ -28,7 +30,9 @@ create_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), s
 #' @return A list.
 #' @seealso \code{\link{get_dataset}}, \code{\link{create_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 update_dataset <- function(dataset, body, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataset <- dataset_id(dataset)
@@ -50,7 +54,9 @@ update_dataset <- function(dataset, body, key = Sys.getenv("DATAVERSE_KEY"), ser
 #' @return A list.
 #' @seealso \code{\link{get_dataset}}, \code{\link{publish_dataverse}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 publish_dataset <- function(dataset, minor = TRUE, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataset <- dataset_id(dataset)
@@ -70,7 +76,9 @@ publish_dataset <- function(dataset, minor = TRUE, key = Sys.getenv("DATAVERSE_K
 #' @return A list of class \dQuote{dataverse_dataset}.
 #' @seealso \code{\link{create_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}, \code{\link{dataset_files}}, \code{\link{dataset_metadata}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 get_dataset <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataset <- dataset_id(dataset)
@@ -100,7 +108,9 @@ get_dataset <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERS
 #' @return A logical.
 #' @seealso \code{\link{get_dataset}}, \code{\link{create_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 delete_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     # can only delete a "draft" dataset
@@ -120,7 +130,9 @@ delete_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = 
 #' @return A list of class \dQuote{dataverse_dataset_version}.
 #' @seealso \code{\link{get_dataset}}, \code{\link{dataset_files}}, \code{\link{publish_dataset}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 dataset_versions <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataset <- dataset_id(dataset)
@@ -145,7 +157,9 @@ dataset_versions <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server 
 #' @return A list of objects of class \dQuote{dataverse_file}.
 #' @seealso \code{\link{get_dataset}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 dataset_files <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataset <- dataset_id(dataset)
@@ -167,7 +181,9 @@ dataset_files <- function(dataset, version = ":latest", key = Sys.getenv("DATAVE
 #' @return A list of form dependent on the specific metadata block retrieved.
 #' @seealso \code{\link{get_dataset}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 dataset_metadata <- function(dataset, version = ":latest", block = "citation", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataset <- dataset_id(dataset)

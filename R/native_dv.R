@@ -5,9 +5,11 @@
 #' @template envvars
 #' @template dots
 #' @return A list of class \dQuote{dataverse}.
-#' @seealso To manage Dataverses: \code{\link{create_dataverse}},  \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{dataverse_contents}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
+#' @seealso To manage Dataverses: \code{\link{create_dataverse}}, \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{dataverse_contents}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 get_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataverse <- dataverse_id(dataverse)
@@ -28,9 +30,11 @@ get_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
 #' @template envvars
 #' @template dots
 #' @return A list.
-#' @seealso \code{\link{get_dataverse}},  \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{create_dataset}}
+#' @seealso To manage Dataverses: \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{dataverse_contents}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 create_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     u <- paste0(api_url(server), "dataverses/", dataverse)
@@ -46,9 +50,11 @@ create_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
 #' @template envvars
 #' @template dots
 #' @return A logical.
-#' @seealso \code{\link{create_dataverse}},  \code{\link{get_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{delete_dataset}}
+#' @seealso To manage Dataverses: \code{\link{create_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{dataverse_contents}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 delete_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataverse <- dataverse_id(dataverse)
@@ -65,9 +71,11 @@ delete_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
 #' @template envvars
 #' @template dots
 #' @return A list of class \dQuote{dataverse_contents}
-#' @seealso \code{\link{create_dataverse}},  \code{\link{get_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{dataverse_search}}, \code{\link{get_dataset}}, \code{\link{delete_dataset}}
+#' @seealso To manage Dataverses: \code{\link{create_dataverse}}, \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 dataverse_contents <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataverse <- dataverse_id(dataverse)
@@ -87,8 +95,11 @@ dataverse_contents <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), ser
 #' @template envvars
 #' @template dots
 #' @return A list.
+#' @seealso To manage Dataverses: \code{\link{create_dataverse}},  \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{dataverse_contents}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 get_facets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataverse <- dataverse_id(dataverse)
@@ -107,7 +118,9 @@ get_facets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 #' @return A list
 #' @seealso \code{\link{set_dataverse_metadata}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 dataverse_metadata <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataverse <- dataverse_id(dataverse)
@@ -128,7 +141,9 @@ dataverse_metadata <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), ser
 #' @return A list
 #' @seealso \code{\link{dataverse_metadata}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 set_dataverse_metadata <- function(dataverse, body, root = TRUE, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataverse <- dataverse_id(dataverse)
@@ -145,9 +160,11 @@ set_dataverse_metadata <- function(dataverse, body, root = TRUE, key = Sys.geten
 #' @template envvars
 #' @template dots
 #' @return A list.
-#' @seealso To manage Dataverses: \code{\link{create_dataverse}},  \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{dataverse_contents}}
+#' @seealso To manage Dataverses: \code{\link{create_dataverse}},  \code{\link{delete_dataverse}}, \code{\link{dataverse_contents}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
 #' @examples
-#' \dontrun{}
+#' \dontrun{
+#' 
+#' }
 #' @export
 publish_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataverse <- dataverse_id(dataverse)

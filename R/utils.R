@@ -24,6 +24,9 @@ print.dataverse <- function(x, ...) {
 # dataverse_dataset class
 
 prepend_doi <- function(dataset) {
+    if (grepl("^hdl", dataset)) {
+        return(dataset)
+    }
     if (!grepl("^doi:", dataset)) {
         dataset <- paste0("doi:", dataset)
     } else if (grepl("^DOI:", dataset)) {
@@ -96,6 +99,9 @@ print.dataverse_file <- function(x, ...) {
 # other functions
 
 api_url <- function(server, prefix="api/") {
+    if (is.null(server) || server == "") {
+        stop("'server' is missing with no default set in DATAVERSE_SERVER environment variable.")
+    }
     server <- urltools::url_parse(server)
     if(server$port == "") {
         domain <- server$domain
