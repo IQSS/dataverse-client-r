@@ -10,9 +10,8 @@
 #' \dontrun{}
 #' @export
 get_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server,"/api/dataverses/", dataverse)
+    u <- paste0(api_url(server), "dataverses/", dataverse)
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     out <- jsonlite::fromJSON(httr::content(r, "text"))
@@ -34,8 +33,7 @@ get_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
 #' \dontrun{}
 #' @export
 create_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
-    u <- paste0("https://", server,"/api/dataverses/", dataverse)
+    u <- paste0(api_url(server), "dataverses/", dataverse)
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r)
@@ -53,9 +51,8 @@ create_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
 #' \dontrun{}
 #' @export
 delete_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server,"/api/dataverses/", dataverse)
+    u <- paste0(api_url(server), "dataverses/", dataverse)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r)
@@ -73,9 +70,8 @@ delete_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
 #' \dontrun{}
 #' @export
 dataverse_contents <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server,"/api/dataverses/", dataverse, "/contents")
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/contents")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     out <- jsonlite::fromJSON(httr::content(r, "text"), simplifyDataFrame = FALSE)
@@ -95,9 +91,8 @@ dataverse_contents <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), ser
 #' \dontrun{}
 #' @export
 get_facets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server,"/api/dataverses/", dataverse, "/facets")
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/facets")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r)$data
@@ -115,9 +110,8 @@ get_facets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 #' \dontrun{}
 #' @export
 dataverse_metadata <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server,"/api/dataverses/", dataverse, "/metadatablocks")
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/metadatablocks")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r)$data
@@ -137,9 +131,8 @@ dataverse_metadata <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), ser
 #' \dontrun{}
 #' @export
 set_dataverse_metadata <- function(dataverse, body, root = TRUE, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server,"/api/dataverses/", dataverse, "/metadatablocks/", tolower(as.character(root)))
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/metadatablocks/", tolower(as.character(root)))
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r)$data
@@ -157,9 +150,8 @@ set_dataverse_metadata <- function(dataverse, body, root = TRUE, key = Sys.geten
 #' \dontrun{}
 #' @export
 publish_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server,"/api/dataverses/", dataverse, "/actions/:publish")
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/actions/:publish")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r)$data

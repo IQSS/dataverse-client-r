@@ -12,8 +12,7 @@
 #' }
 #' @export
 create_user <- function(password, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
-    u <- paste0("https://", server,"/api/builtin-users?password=", password)
+    u <- paste0(api_url(server), "builtin-users?password=", password)
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r)
@@ -34,8 +33,7 @@ create_user <- function(password, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 #' }
 #' @export
 get_user_key <- function(user, password, server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
-    u <- paste0("https://", server,"/api/builtin-users/", user, "/api-token?password=", password)
+    u <- paste0(api_url(server), "builtin-users/", user, "/api-token?password=", password)
     r <- httr::GET(u, ...)
     httr::stop_for_status(r)
     j <- jsonlite::fromJSON(httr::content(r, "text"))

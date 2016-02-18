@@ -11,9 +11,8 @@
 #' \dontrun{}
 #' @export
 create_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server,"/api/dataverses/", dataverse, "/datasets/")
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/datasets/")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = body, encode = "json", ...)
     httr::stop_for_status(r)
     httr::content(r)
@@ -32,9 +31,8 @@ create_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), s
 #' \dontrun{}
 #' @export
 update_dataset <- function(dataset, body, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataset <- dataset_id(dataset)
-    u <- paste0("https://", server,"/api/datasets/", dataset, "/versions/:draft")
+    u <- paste0(api_url(server), "datasets/", dataset, "/versions/:draft")
     r <- httr::PUT(u, httr::add_headers("X-Dataverse-key" = key), body = body, encode = "json", ...)
     httr::stop_for_status(r)
     httr::content(r)
@@ -55,9 +53,8 @@ update_dataset <- function(dataset, body, key = Sys.getenv("DATAVERSE_KEY"), ser
 #' \dontrun{}
 #' @export
 publish_dataset <- function(dataset, minor = TRUE, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataset <- dataset_id(dataset)
-    u <- paste0("https://", server,"/api/datasets/", dataset, "/actions/:publish?type=", if (minor) "minor" else "major")
+    u <- paste0(api_url(server), "datasets/", dataset, "/actions/:publish?type=", if (minor) "minor" else "major")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r)
@@ -76,12 +73,11 @@ publish_dataset <- function(dataset, minor = TRUE, key = Sys.getenv("DATAVERSE_K
 #' \dontrun{}
 #' @export
 get_dataset <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataset <- dataset_id(dataset)
     if (!is.null(version)) {
-        u <- paste0("https://", server,"/api/datasets/", dataset, "/versions/", version)
+        u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version)
     } else {
-        u <- paste0("https://", server,"/api/datasets/", dataset)
+        u <- paste0(api_url(server), "datasets/", dataset)
     }
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
@@ -108,9 +104,8 @@ get_dataset <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERS
 #' @export
 delete_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     # can only delete a "draft" dataset
-    server <- urltools::url_parse(server)$domain
     dataset <- dataset_id(dataset)
-    u <- paste0("https://", server,"/api/datasets/", dataset, "/versions/:draft")
+    u <- paste0(api_url(server), "datasets/", dataset, "/versions/:draft")
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r)
@@ -128,9 +123,8 @@ delete_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = 
 #' \dontrun{}
 #' @export
 dataset_versions <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataset <- dataset_id(dataset)
-    u <- paste0("https://", server,"/api/datasets/", dataset, "/versions")
+    u <- paste0(api_url(server), "datasets/", dataset, "/versions")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     out <- httr::content(r)$data
@@ -154,9 +148,8 @@ dataset_versions <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server 
 #' \dontrun{}
 #' @export
 dataset_files <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataset <- dataset_id(dataset)
-    u <- paste0("https://", server,"/api/datasets/", dataset, "/versions/", version, "/files")
+    u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/files")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     out <- jsonlite::fromJSON(httr::content(r, "text"), simplifyDataFrame = FALSE)$data
@@ -177,12 +170,11 @@ dataset_files <- function(dataset, version = ":latest", key = Sys.getenv("DATAVE
 #' \dontrun{}
 #' @export
 dataset_metadata <- function(dataset, version = ":latest", block = "citation", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataset <- dataset_id(dataset)
     if (!is.null(block)) {
-        u <- paste0("https://", server,"/api/datasets/", dataset, "/versions/", version, "/metadata/", block)
+        u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/metadata/", block)
     } else {
-        u <- paste0("https://", server,"/api/datasets/", dataset, "/versions/", version, "/metadata")
+        u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/metadata")
     }
     
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)

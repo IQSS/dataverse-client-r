@@ -60,9 +60,8 @@ function(...,
     stopifnot(per_page >0 && per_page <= 1000)
     sort <- match.arg(sort)
     order <- match.arg(order)
-    server <- urltools::url_parse(server)$domain
     
-    u <- paste0("https://", server, "/api/search")
+    u <- paste0(api_url(server), "search")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query)
     httr::stop_for_status(r)
     out <- jsonlite::fromJSON(httr::content(r, "text"))

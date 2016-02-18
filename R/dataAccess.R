@@ -21,7 +21,6 @@ function(file,
          server = Sys.getenv("DATAVERSE_SERVER"), 
          ...) {
     
-    server <- urltools::url_parse(server)$domain
     format <- match.arg(format)
     
     # from doi, get SWORD dataset statement, then get file ID
@@ -40,16 +39,16 @@ function(file,
     
     if (length(file) > 1) {
         file <- paste0(file, collapse = ",")
-        u <- paste0("https://", server, "/api/access/datafiles/", file)
+        u <- paste0(api_url(server), "access/datafiles/", file)
         r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
         httr::stop_for_status(r)
         r
     } else {
         if (format == "bundle") {
-            u <- paste0("https://", server, "/api/access/datafile/bundle/", file)
+            u <- paste0(api_url(server), "access/datafile/bundle/", file)
             r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
         } else {
-            u <- paste0("https://", server, "/api/access/datafile/", file)
+            u <- paste0(api_url(server), "access/datafile/", file)
             query <- list()
             if (!is.null(vars)) {
                 query$vars <- paste0(vars, collapse = ",")
@@ -79,7 +78,7 @@ function(file,
          server = Sys.getenv("DATAVERSE_SERVER"), 
          ...) {
     format <- match.arg(format)
-    u <- paste0("https://", server, "/api/access/datafile/", file, "/metadata/", format)
+    u <- paste0(api_url(server), "access/datafile/", file, "/metadata/", format)
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     r

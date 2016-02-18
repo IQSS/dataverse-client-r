@@ -93,3 +93,15 @@ print.dataverse_file <- function(x, ...) {
     invisible(x)
 }
 
+# other functions
+
+api_url <- function(server, prefix="api/") {
+    server <- urltools::url_parse(server)
+    if(server$port == "") {
+        domain <- server$domain
+    } else {
+        domain <- paste0(server$domain, ":", server$port)
+    }
+    url <- paste0("https://", domain, "/", prefix)
+    return(url)
+}

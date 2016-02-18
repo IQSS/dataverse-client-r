@@ -10,8 +10,7 @@
 #' \dontrun{}
 #' @export
 get_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
-    u <- paste0("https://", server,"/api/roles/", role)
+    u <- paste0(api_url(server), "roles/", role)
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     j <- jsonlite::fromJSON(httr::content(r, "text"))$data
@@ -30,8 +29,7 @@ get_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.geten
 #' \dontrun{}
 #' @export
 delete_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
-    u <- paste0("https://", server,"/api/roles/", role)
+    u <- paste0(api_url(server), "roles/", role)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     j <- jsonlite::fromJSON(httr::content(r, "text"))$data
@@ -55,9 +53,8 @@ create_group <- function(dataverse, alias, name, description, key = Sys.getenv("
     b <- list(description = description,
               displayName = name,
               aliasToOwner = alias)
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server, "/api/dataverses/", dataverse, "/groups")
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/groups")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
     httr::stop_for_status(r)
     j <- jsonlite::fromJSON(httr::content(r, "text"))$data
@@ -81,9 +78,8 @@ update_group <- function(dataverse, alias, name, description, key = Sys.getenv("
     b <- list(description = description,
               displayName = name,
               alias = alias)
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server, "/api/dataverses/", dataverse, "/groups/", alias)
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", alias)
     r <- httr::PUT(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
     httr::stop_for_status(r)
     j <- jsonlite::fromJSON(httr::content(r, "text"))$data
@@ -101,9 +97,8 @@ update_group <- function(dataverse, alias, name, description, key = Sys.getenv("
 #' \dontrun{}
 #' @export
 list_groups <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server, "/api/dataverses/", dataverse, "/groups")
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/groups")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     j <- jsonlite::fromJSON(httr::content(r, "text"))$data
@@ -122,9 +117,8 @@ list_groups <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = S
 #' \dontrun{}
 #' @export
 get_group <- function(dataverse, alias, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server, "/api/dataverses/", dataverse, "/groups/", alias)
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", alias)
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     j <- jsonlite::fromJSON(httr::content(r, "text"))$data
@@ -143,9 +137,8 @@ get_group <- function(dataverse, alias, key = Sys.getenv("DATAVERSE_KEY"), serve
 #' \dontrun{}
 #' @export
 delete_group <- function(dataverse, alias, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server, "/api/dataverses/", dataverse, "/groups/", alias)
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", alias)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r, "text")
@@ -170,9 +163,8 @@ add_roles_to_group <- function(dataverse, alias, role, key = Sys.getenv("DATAVER
     if(is.null(server) || server == "") {
         stop("'server' is missing, but required")
     }
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server, "/api/dataverses/", dataverse, "/groups/", alias, "/roleAssignees/", role)
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", alias, "/roleAssignees/", role)
     r <- httr::PUT(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     j <- jsonlite::fromJSON(httr::content(r, "text"))$data
@@ -192,9 +184,8 @@ add_roles_to_group <- function(dataverse, alias, role, key = Sys.getenv("DATAVER
 #' \dontrun{}
 #' @export
 remove_role_from_group <- function(dataverse, alias, role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server, "/api/dataverses/", dataverse, "/groups/", alias, "/roleAssignees/", role)
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", alias, "/roleAssignees/", role)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r, "text")
@@ -212,16 +203,15 @@ remove_role_from_group <- function(dataverse, alias, role, key = Sys.getenv("DAT
 #' \dontrun{}
 #' @export
 get_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     if (!missing(dataverse)) {
         dataverse <- dataverse_id(dataverse)
-        u <- paste0("https://", server,"/api/dataverses/", dataverse, "/roles")
+        u <- paste0(api_url(server), "dataverses/", dataverse, "/roles")
         r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
         httr::stop_for_status(r)
         out <- jsonlite::fromJSON(httr::content(r, "text"))$data
         structure(lapply(out, `class<-`, "dataverse_role"))
     } else {
-        u <- paste0("https://", server,"/api/admin/roles")
+        u <- paste0(api_url(server), "admin/roles")
         r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
         httr::stop_for_status(r)
     }
@@ -240,10 +230,9 @@ get_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys
 #' @export
 create_role <- function(dataverse, alias, name, description, permissions, 
                          key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     b <- list(alias = alias, name = name, description = description, permissions = permissions)
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server,"/api/dataverses/", dataverse, "/roles")
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/roles")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
     httr::stop_for_status(r)
     j <- jsonlite::fromJSON(httr::content(r, "text"))$data
@@ -261,9 +250,8 @@ create_role <- function(dataverse, alias, name, description, permissions,
 #' \dontrun{}
 #' @export
 get_assignments <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server,"/api/dataverses/", dataverse, "/assignments")
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/assignments")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     out <- jsonlite::fromJSON(httr::content(r, "text"))$data
@@ -283,9 +271,8 @@ get_assignments <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server
 #' \dontrun{}
 #' @export
 assign_role <- function(dataverse, assignee, role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server,"/api/dataverses/", dataverse, "/assignments")
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/assignments")
     b <- list(assignee = assignee, role = role)
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
     httr::stop_for_status(r)
@@ -305,9 +292,8 @@ assign_role <- function(dataverse, assignee, role, key = Sys.getenv("DATAVERSE_K
 #' \dontrun{}
 #' @export
 delete_assignment <- function(dataverse, assignment, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataverse <- dataverse_id(dataverse)
-    u <- paste0("https://", server,"/api/dataverses/", dataverse, "/assignments/", assignment)
+    u <- paste0(api_url(server), "dataverses/", dataverse, "/assignments/", assignment)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     httr::content(r)

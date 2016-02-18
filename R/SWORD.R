@@ -17,8 +17,7 @@ parse_atom <- function(xml){
 # print.dataverse_sword_collection <- function(x, ...) {}
 # print.dataverse_sword_service_document <- function(x, ...) {}
 service_document <- function(key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
-    u <- paste0("https://", server,"/dvn/api/data-deposit/v1.1/swordv2/service-document")
+    u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/service-document")
     r <- httr::GET(u, httr::authenticate(key, ""), ...)
     httr::stop_for_status(r)
     x <- xml2::as_list(xml2::read_xml(httr::content(r, "text")))
@@ -79,14 +78,13 @@ service_document <- function(key = Sys.getenv("DATAVERSE_KEY"), server = Sys.get
 
 # note that there are two ways to create dataset: native API (`create_dataset`) and SWORD API (`initiate_dataset`)
 initiate_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     if (inherits(dataverse, "sword_collection")) {
         u <- dataverse$url
     } else {
         if (inherits(dataverse, "dataverse")) {
             dataverse <- x$alias
         }
-        u <- paste0("https://", server,"/dvn/api/data-deposit/v1.1/swordv2/collection/dataverse/", dataverse)
+        u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/collection/dataverse/", dataverse)
     }
     if (is.character(body) && file.exists(body)) {
         b <- httr::upload_file(body)
@@ -101,14 +99,13 @@ initiate_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"),
 }
 
 list_datasets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     if (inherits(dataverse, "sword_collection")) {
         u <- dataverse$url
     } else {
         if (inherits(dataverse, "dataverse")) {
             dataverse <- x$alias
         }
-        u <- paste0("https://", server,"/dvn/api/data-deposit/v1.1/swordv2/collection/dataverse/", dataverse)
+        u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/collection/dataverse/", dataverse)
     }
     r <- httr::GET(u, httr::authenticate(key, ""), ...)
     httr::stop_for_status(r)
@@ -118,14 +115,13 @@ list_datasets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
 }
 
 publish_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     if (inherits(dataverse, "sword_collection")) {
         u <- sub("/collection/", "/edit/", dataverse$url, fixed = TRUE)
     } else {
         if (inherits(dataverse, "dataverse")) {
             dataverse <- x$alias
         }
-        u <- paste0("https://", server,"/dvn/api/data-deposit/v1.1/swordv2/edit/dataverse/", dataverse)
+        u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit/dataverse/", dataverse)
     }
     r <- httr::POST(u, httr::authenticate(key, ""), httr::add_headers("In-Progress" = "false"), ...)
     httr::stop_for_status(r)
@@ -166,9 +162,8 @@ create_zip.list <- function(x, ...) {
 }
 
 add_file <- function(dataset, file, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataset <- prepend_doi(dataset)
-    u <- paste0("https://", server,"/dvn/api/data-deposit/v1.1/swordv2/edit-media/study/", dataset)
+    u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit-media/study/", dataset)
     
     # file can be: a character vector of file names, a data.frame, or a list of R objects
     file <- create_zip(file)
@@ -182,27 +177,24 @@ add_file <- function(dataset, file, key = Sys.getenv("DATAVERSE_KEY"), server = 
 }
 
 delete_file <- function(dataset, id, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataset <- prepend_doi(dataset)
-    u <- paste0("https://", server,"/dvn/api/data-deposit/v1.1/swordv2/edit-media/file/", id)
+    u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit-media/file/", id)
     r <- httr::DELETE(u, httr::authenticate(key, ""), h, ...)
     httr::stop_for_status(r)
     httr::content(r, "text")
 }
 
 delete_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataset <- prepend_doi(dataset)
-    u <- paste0("https://", server,"/dvn/api/data-deposit/v1.1/swordv2/edit/study/", dataset)
+    u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit/study/", dataset)
     r <- httr::DELETE(u, httr::authenticate(key, ""), ...)
     httr::stop_for_status(r)
     httr::content(r, "text")
 }
 
 publish_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataset <- prepend_doi(dataset)
-    u <- paste0("https://", server,"/dvn/api/data-deposit/v1.1/swordv2/edit/study/", dataset)
+    u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit/study/", dataset)
     r <- httr::POST(u, httr::authenticate(key, ""), httr::add_headers("In-Progress" = "false"), ...)
     httr::stop_for_status(r)
     out <- xml2::as_list(xml2::read_xml(httr::content(r, "text")))
@@ -210,9 +202,8 @@ publish_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server =
 }
 
 dataset_atom <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataset <- prepend_doi(dataset)
-    u <- paste0("https://", server,"/dvn/api/data-deposit/v1.1/swordv2/edit/study/", dataset)
+    u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit/study/", dataset)
     r <- httr::GET(u, httr::authenticate(key, ""), ...)
     httr::stop_for_status(r)
     out <- parse_atom(httr::content(r, "text"))
@@ -220,9 +211,8 @@ dataset_atom <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 }
 
 dataset_statement <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    server <- urltools::url_parse(server)$domain
     dataset <- prepend_doi(dataset)
-    u <- paste0("https://", server,"/dvn/api/data-deposit/v1.1/swordv2/statement/study/", dataset)
+    u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/statement/study/", dataset)
     r <- httr::GET(u, httr::authenticate(key, ""), ...)
     httr::stop_for_status(r)
     out <- xml2::as_list(xml2::read_xml(httr::content(r, "text")))
