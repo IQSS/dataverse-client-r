@@ -42,7 +42,7 @@ You can (eventually) find a stable release on [CRAN](http://cran.r-project.org/w
 
 ```R
 if(!require("ghit")) {
-    install.packages("devtools")
+    install.packages("ghit")
 }
 ghit::install_github("iqss/dataverse-client-r")
 library("dataverse")
