@@ -153,23 +153,3 @@ set_dataverse_metadata <- function(dataverse, body, root = TRUE, key = Sys.geten
     httr::content(r)$data
 }
 
-#' @title Publish Dataverse
-#' @description Publish/release a draft Dataverse
-#' @details This function makes a Dataverse publicly visible. This cannot be undone.
-#' @template dv
-#' @template envvars
-#' @template dots
-#' @return A list.
-#' @seealso To manage Dataverses: \code{\link{create_dataverse}},  \code{\link{delete_dataverse}}, \code{\link{dataverse_contents}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
-#' @examples
-#' \dontrun{
-#' 
-#' }
-#' @export
-publish_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataverse <- dataverse_id(dataverse)
-    u <- paste0(api_url(server), "dataverses/", dataverse, "/actions/:publish")
-    r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
-    httr::content(r)$data
-}
