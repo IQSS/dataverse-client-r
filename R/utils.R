@@ -11,11 +11,25 @@ dataverse_id.dataverse <- function(x, ...) {
 }
 
 print.dataverse <- function(x, ...) {
-    cat("Dataverse (", x$id, "): ", x$alias, "\n", sep = "")
-    cat("Name:        ", x$name, "\n", sep = "")
-    cat("Description: ", x$description, "\n", sep = "")
-    cat("Created:     ", x$creationDate, "\n", sep = "")
-    cat("Creator:     ", x$creator$identifier, "\n", sep = "")
+    if ("id" %in% names(x)) {
+        cat("Dataverse (", x$id, "): ", x$alias, "\n", sep = "")
+        cat("Name:        ", x$name, "\n", sep = "")
+    } else {
+        cat("Dataverse: ", x$alias, "\n", sep = "")
+        cat("Name:      ", x$name, "\n", sep = "")
+    }
+    if ("description" %in% names(x)) {
+        cat("Description: ", x$description, "\n", sep = "")
+    }
+    if ("creationDate" %in% names(x)) {
+        cat("Created:     ", x$creationDate, "\n", sep = "")
+    }
+    if ("creator" %in% names(x)) {
+        cat("Creator:     ", x$creator$identifier, "\n", sep = "")
+    }
+    if (("terms_apply" %in% names(x)) && (x$terms_apply == "true")) {
+        cat("Terms of Use:   ", x$terms_of_use, "\n", sep = "")
+    }
     invisible(x)
 }
 
@@ -31,9 +45,10 @@ prepend_doi <- function(dataset) {
         dataset <- paste0("doi:", dataset)
     } else if (grepl("^DOI:", dataset)) {
         dataset <- paste0("doi:", strsplit(dataset, "DOI:", fixed = TRUE)[[1]][2])
+    } else if (grepl("dx\\.doi\\.org", dataset)) {
+        dataset <- paste0("doi:", httr::parse_url(dataset)$path)
     }
-    # check if it is a complete doi URL
-    # check if it is a handle, and issue warning
+    # need to check if it is a handle, and issue warning
     dataset
 }
 

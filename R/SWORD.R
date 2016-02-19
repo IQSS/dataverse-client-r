@@ -31,34 +31,28 @@ service_document <- function(key = Sys.getenv("DATAVERSE_KEY"), server = Sys.get
                             terms_apply = w[[i]][[3]][[1]],
                             package = w[[i]][[4]][[1]],
                             url = attributes(w[[i]])$href),
-                       class = "sword_collection")
+                       class = "dataverse")
+        s$alias <- strsplit(s$url, "/collection/dataverse/")[[1]][2]
         out[[length(out) + 1]] <- s
     }
-    out <- setNames(out, `[<-`(names(out), n, "sword_collection"))
+    out <- setNames(out, `[<-`(names(out), n, "dataverse"))
     structure(out, class = "sword_service_document")
 }
 
 print.sword_service_document <- function(x, ...) {
     cat("Title: ", x$title, "\n")
-    for (i in which(names(x) == "sword_collection")) {
+    for (i in which(names(x) == "dataverse")) {
+        cat("[[", i, "]]\n", sep = "")
         print(x[[i]])
+        cat("\n")
     }
-    invisible(x)
-}
-
-print.sword_collection <- function(x, ...) {
-    cat("Dataverse name: ", x$name, "\n", sep = "")
-    if (x$terms_apply == "true") {
-        cat("Terms of Use:   ", x$terms_of_use, "\n", sep = "")
-    }
-    cat("SWORD URL:      ", x$url, "\n\n", sep = "")
     invisible(x)
 }
 
 #' @title List datasets (SWORD)
 #' @description List datasets in a SWORD (possibly unpublished) Dataverse
 #' @details This function is used to list datasets in a given Dataverse. It is part of the SWORD API, which is used to upload data to a Dataverse server. This means this can be used to view unpublished Dataverses and Datasets.
-#' @param dataverse An object of class \dQuote{sword_collection}, as returned by \code{\link{service_document}}.
+#' @param dataverse A Dataverse alias or ID number, or an object of class \dQuote{dataverse}, perhaps as returned by \code{\link{service_document}}.
 #' @template envvars
 #' @template dots
 #' @return A list.
@@ -73,20 +67,18 @@ print.sword_collection <- function(x, ...) {
 #' }
 #' @export
 list_datasets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    if (inherits(dataverse, "sword_collection")) {
-        u <- dataverse$url
-    } else {
-        if (inherits(dataverse, "dataverse")) {
-            dataverse <- x$alias
-        }
-        u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/collection/dataverse/", dataverse)
+    if (inherits(dataverse, "dataverse")) {
+        dataverse <- x$alias
+    } else if (is.numeric(dataverse)) {
+        dataverse <- get_dataverse(dataverse)$alias
     }
+    u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/collection/dataverse/", dataverse)
     r <- httr::GET(u, httr::authenticate(key, ""), ...)
     httr::stop_for_status(r)
     out <- xml2::as_list(xml2::read_xml(r$content))
     # clean up response structure
-    #for (i in which(names(out) == "entry")) {
-        #class(out[[i]]) <- "dataverse_dataset"
-    #}    
+    for (i in which(names(out) == "entry")) {
+        class(out[[i]]) <- "dataverse_dataset"
+    }    
     structure(out, class = "dataverse_dataset_list")
 }

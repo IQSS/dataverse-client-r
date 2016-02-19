@@ -4,13 +4,11 @@
 \alias{delete_file}
 \title{Delete file (SWORD)}
 \usage{
-delete_file(dataset, id, key = Sys.getenv("DATAVERSE_KEY"),
+delete_file(id, key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 }
 \arguments{
-\item{dataset}{A dataset DOI (or other persistent identifier).}
-
-\item{id}{A file ID, possibly returned by \code{\link{add_file}}.}
+\item{id}{A file ID, possibly returned by \code{\link{add_file}}, or a complete \dQuote{edit-media/file} URL.}
 
 \item{key}{A character string specifying a Dataverse server API key. If one is not specified, functions calling authenticated API endpoints will fail. Keys can be specified atomically or globally using \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 
@@ -19,7 +17,7 @@ delete_file(dataset, id, key = Sys.getenv("DATAVERSE_KEY"),
 \item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
 }
 \value{
-A list.
+If successful, a logical \code{TRUE}, else possibly some information.
 }
 \description{
 Delete a file from a SWORD (possibly unpublished) dataset
@@ -32,11 +30,25 @@ This function is used to delete a file from a dataset by its file ID. It is part
 # retrieve your service document
 d <- service_document()
 
-# view contents of a dataset
-s <- dataset_statement(d[[2]])
+# create a list of metadata
+metadat <- list(title = "My Study",
+                creator = "Doe, John",
+                description = "An example study")
+
+# create the dataset
+dat <- initiate_dataset("mydataverse", body = metadat)
+
+# add files to dataset
+tmp <- tempfile()
+write.csv(iris, file = tmp)
+f <- add_file(dat, file = tmp)
 
 # delete a file
+ds <- dataset_statement(dat)
+delete_file(ds$files[[1]]$id
 
+# delete a dataset
+delete_dataset(dat)
 }
 }
 \seealso{

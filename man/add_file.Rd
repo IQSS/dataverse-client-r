@@ -8,7 +8,7 @@ add_file(dataset, file, key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 }
 \arguments{
-\item{dataset}{A dataset DOI (or other persistent identifier).}
+\item{dataset}{A dataset DOI (or other persistent identifier), an object of class \dQuote{dataset_atom} or \dQuote{dataset_statement}, or an appropriate and complete SWORD URL.}
 
 \item{key}{A character string specifying a Dataverse server API key. If one is not specified, functions calling authenticated API endpoints will fail. Keys can be specified atomically or globally using \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 
@@ -17,7 +17,7 @@ add_file(dataset, file, key = Sys.getenv("DATAVERSE_KEY"),
 \item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
 }
 \value{
-A list.
+An object of class \dQuote{dataset_atom}.
 }
 \description{
 Add one or more files to a SWORD (possibly unpublished) dataset
@@ -33,24 +33,21 @@ d <- service_document()
 # create a list of metadata
 metadat <- list(title = "My Study",
                 creator = "Doe, John",
-                creator = "Doe, Jane",
-                publisher = "My University",
-                date = "2013-09-22",
-                description = "An example study",
-                subject = "Study",
-                subject = "Dataverse",
-                subject = "Other",
-                coverage = "United States")
+                description = "An example study")
+
 # create the dataset
 dat <- initiate_dataset("mydataverse", body = metadat)
 
 # add files to dataset
 tmp <- tempfile()
 write.csv(iris, file = tmp)
-add_file(dat, file = tmp)
+f <- add_file(dat, file = tmp)
 
 # publish dataset
 publish_dataset(dat)
+
+# delete a dataset
+delete_dataset(dat)
 }
 }
 \seealso{

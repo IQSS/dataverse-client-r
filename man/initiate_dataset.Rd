@@ -8,9 +8,12 @@ initiate_dataset(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 }
 \arguments{
-\item{dataverse}{An object of class \dQuote{sword_collection}, as returned by \code{\link{service_document}}.}
+\item{dataverse}{A Dataverse alias or ID number, or an object of class \dQuote{dataverse}, perhaps as returned by \code{\link{service_document}}.}
 
-\item{body}{A list containing one or more metadata fields. Field names must be valid Dublin Core Terms labels (see details, below). The \samp{title} field is required.}
+\item{body}{A list containing one or more metadata fields. Field names must be valid Dublin Core Terms labels (see details, below). The \samp{title}, \samp{description}, and \samp{creator} fields are required.}
+}
+\value{
+An object of class \dQuote{dataset_atom}.
 }
 \description{
 Initiate a SWORD (possibly unpublished) dataset
@@ -39,25 +42,19 @@ There are two ways to create dataset: native API (\code{\link{create_dataset}}) 
 }
 \examples{
 \dontrun{
-# retrieve your service document
+# retrieve your service document (dataverse list)
 d <- service_document()
 
 # create a list of metadata
 metadat <- list(title = "My Study",
                 creator = "Doe, John",
-                creator = "Doe, Jane",
-                publisher = "My University",
-                date = "2013-09-22",
-                description = "An example study",
-                subject = "Study",
-                subject = "Dataverse",
-                subject = "Other",
-                coverage = "United States")
-# create the dataset
-dat <- initiate_dataset("mydataverse", body = metadat)
+                description = "An example study")
+
+# create the dataset in first dataverse
+dat <- initiate_dataset(d[[2]], body = metadat)
 
 # add files to dataset
-tmp <- tempfile()
+tmp <- tempfile(fileext = ".csv")
 write.csv(iris, file = tmp)
 add_file(dat, file = tmp)
 

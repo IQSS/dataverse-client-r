@@ -31,10 +31,10 @@ create_zip.list <- function(x, ...) {
 #' @title Add file (SWORD)
 #' @description Add one or more files to a SWORD (possibly unpublished) dataset
 #' @details This function is used to add files to a dataset. It is part of the SWORD API, which is used to upload data to a Dataverse server. This means this can be used to view unpublished Dataverses and Datasets.
-#' @param dataset A dataset DOI (or other persistent identifier).
+#' @param dataset A dataset DOI (or other persistent identifier), an object of class \dQuote{dataset_atom} or \dQuote{dataset_statement}, or an appropriate and complete SWORD URL.
 #' @template envvars
 #' @template dots
-#' @return A list.
+#' @return An object of class \dQuote{dataset_atom}.
 #' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
 #' @examples
 #' \dontrun{
@@ -44,66 +44,97 @@ create_zip.list <- function(x, ...) {
 #' # create a list of metadata
 #' metadat <- list(title = "My Study",
 #'                 creator = "Doe, John",
-#'                 creator = "Doe, Jane",
-#'                 publisher = "My University",
-#'                 date = "2013-09-22",
-#'                 description = "An example study",
-#'                 subject = "Study",
-#'                 subject = "Dataverse",
-#'                 subject = "Other",
-#'                 coverage = "United States")
+#'                 description = "An example study")
+#' 
 #' # create the dataset
 #' dat <- initiate_dataset("mydataverse", body = metadat)
 #'
 #' # add files to dataset
 #' tmp <- tempfile()
 #' write.csv(iris, file = tmp)
-#' add_file(dat, file = tmp)
+#' f <- add_file(dat, file = tmp)
 #'
 #' # publish dataset
 #' publish_dataset(dat)
+#' 
+#' # delete a dataset
+#' delete_dataset(dat)
 #' }
 #' @export
 add_file <- function(dataset, file, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataset <- prepend_doi(dataset)
-    u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit-media/study/", dataset)
-    
+    if (inherits(dataset, "dataset_atom")) {
+        u <- dataset$links[["edit-media"]]
+    } else if (inherits(dataset, "dataset_statement")) {
+        dataset <- prepend_doi(dataset$id)
+        u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit-media/study/", dataset)
+    } else if (is.character(dataset) && grepl("^http", dataset)) {
+        if (grepl("edit-media/study/", dataset)) {
+            u <- dataset
+        } else {
+            stop("'dataset' not recognized.")
+        }
+    } else {
+        dataset <- prepend_doi(dataset)
+        u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit/study/", dataset)
+    }
+
     # file can be: a character vector of file names, a data.frame, or a list of R objects
     file <- create_zip(file)
     
     h <- httr::add_headers("Content-Disposition" = paste0("filename=", file), 
                            "Content-Type" = "application/zip",
                            "Packaging" = "http://purl.org/net/sword/package/SimpleZip")
-    r <- httr::POST(u, httr::authenticate(key, ""), h, ...)
+    r <- httr::POST(u, httr::authenticate(key, ""), h, body = upload_file(file), ...)
     httr::stop_for_status(r)
-    httr::content(r, "text")
+    parse_atom(content(r, "text"))
 }
 
 #' @title Delete file (SWORD)
 #' @description Delete a file from a SWORD (possibly unpublished) dataset
 #' @details This function is used to delete a file from a dataset by its file ID. It is part of the SWORD API, which is used to upload data to a Dataverse server.
-#' @param dataset A dataset DOI (or other persistent identifier).
-#' @param id A file ID, possibly returned by \code{\link{add_file}}.
+#' @param id A file ID, possibly returned by \code{\link{add_file}}, or a complete \dQuote{edit-media/file} URL.
 #' @template envvars
 #' @template dots
-#' @return A list.
+#' @return If successful, a logical \code{TRUE}, else possibly some information.
 #' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
 #' @examples
 #' \dontrun{
 #' # retrieve your service document
 #' d <- service_document()
 #' 
-#' # view contents of a dataset
-#' s <- dataset_statement(d[[2]])
+#' # create a list of metadata
+#' metadat <- list(title = "My Study",
+#'                 creator = "Doe, John",
+#'                 description = "An example study")
+#' 
+#' # create the dataset
+#' dat <- initiate_dataset("mydataverse", body = metadat)
+#'
+#' # add files to dataset
+#' tmp <- tempfile()
+#' write.csv(iris, file = tmp)
+#' f <- add_file(dat, file = tmp)
 #' 
 #' # delete a file
+#' ds <- dataset_statement(dat)
+#' delete_file(ds$files[[1]]$id
 #' 
+#' # delete a dataset
+#' delete_dataset(dat)
 #' }
 #' @export
-delete_file <- function(dataset, id, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataset <- prepend_doi(dataset)
-    u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit-media/file/", id)
-    r <- httr::DELETE(u, httr::authenticate(key, ""), h, ...)
+delete_file <- function(id, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
+    if (grepl("^http", id)) {
+        u <- id
+    } else {
+        u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit-media/file/", id)
+    }
+    r <- httr::DELETE(u, httr::authenticate(key, ""), ...)
     httr::stop_for_status(r)
-    httr::content(r, "text")
+    cont <- httr::content(r, "text")
+    if (cont == "") {
+        return(TRUE)
+    } else {
+        return(cont)
+    }
 }

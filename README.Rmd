@@ -16,7 +16,26 @@ Note: The package attempts to compensate for any malformed values, though.
 
 ### Data Discovery ###
 
-Coming soon...
+Dataverse supplies a pretty robust search API to discover Dataverses, datasets, and files. The simplest searches simply consist of a query string:
+
+```R
+dataverse_search("Gary King")
+```
+
+More complicated searches might specify metadata fields:
+
+```R
+dataverse_search(author = "Gary King", title = "Ecological Inference")
+```
+
+And searches can be restricted to specific types of objects (Dataverse, dataset, or file):
+
+```R
+dataverse_search(author = "Gary King", type = "dataset")
+```
+
+The results are paginated using `per_page` argument. To retrieve subsequent pages, specify `start`.
+
 
 ### Data and Metadata Retrieval ###
 
@@ -24,7 +43,33 @@ Coming soon...
 
 ### Data Deposit ###
 
-Coming soon...
+The data deposit workflow is build on [SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a new dataset listing, you will have first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:
+
+```R
+# retrieve your service document
+d <- service_document()
+
+# create a list of metadata
+metadat <- list(title = "My Study",
+                creator = "Doe, John",
+                description = "An example study")
+
+# create the dataset
+dat <- initiate_dataset("mydataverse", body = metadat)
+
+# add files to dataset
+tmp <- tempfile()
+write.csv(iris, file = tmp)
+f <- add_file(dat, file = tmp)
+
+# publish new dataset
+publish_dataset(dat)
+
+# dataset will now be published
+list_datasets(dat)
+```
+
+Dataverse actually implements two ways to release datasets: the SWORD API and the "native" API. Documentation of the latter is forthcoming.
 
 ### Native API Features ###
 

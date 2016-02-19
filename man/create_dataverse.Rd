@@ -8,7 +8,7 @@ create_dataverse(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 }
 \arguments{
-\item{dataverse}{A character string specifying a Dataverse name or an object of class \dQuote{dataverse}.}
+\item{dataverse}{A character string specifying a Dataverse name or an object of class \dQuote{dataverse}. If missing, a top-level Dataverse is created.}
 
 \item{key}{A character string specifying a Dataverse server API key. If one is not specified, functions calling authenticated API endpoints will fail. Keys can be specified atomically or globally using \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 

@@ -8,7 +8,7 @@ list_datasets(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 }
 \arguments{
-\item{dataverse}{An object of class \dQuote{sword_collection}, as returned by \code{\link{service_document}}.}
+\item{dataverse}{A Dataverse alias or ID number, or an object of class \dQuote{dataverse}, perhaps as returned by \code{\link{service_document}}.}
 
 \item{key}{A character string specifying a Dataverse server API key. If one is not specified, functions calling authenticated API endpoints will fail. Keys can be specified atomically or globally using \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 

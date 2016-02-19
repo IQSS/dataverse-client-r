@@ -8,13 +8,18 @@
 #' @seealso To manage Dataverses: \code{\link{create_dataverse}}, \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{dataverse_contents}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
 #' @examples
 #' \dontrun{
+#' # view the root dataverse for a server
+#' get_dataverse(":root")
+#' dataverse_contents(":root")
+#' 
 #' # download file from: 
 #' # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
 #' monogan <- get_dataverse("monogan")
-#' monogan_data <- dataverse_contents(monogan)
+#' (monogan_data <- dataverse_contents(monogan))
+#'
+#' # get a dataset from the dataverse
 #' d1 <- get_dataset(monogan_data[[1]])
 #' f <- dataverse_file(d1$files$datafile$id[3])
-#' 
 #' }
 #' @export
 get_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
@@ -36,13 +41,18 @@ get_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
 #' @seealso To manage Dataverses: \code{\link{create_dataverse}}, \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
 #' @examples
 #' \dontrun{
+#' # view the root dataverse for a server
+#' get_dataverse(":root")
+#' dataverse_contents(":root")
+#' 
 #' # download file from: 
 #' # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
 #' monogan <- get_dataverse("monogan")
-#' monogan_data <- dataverse_contents(monogan)
+#' (monogan_data <- dataverse_contents(monogan))
+#'
+#' # get a dataset from the dataverse
 #' d1 <- get_dataset(monogan_data[[1]])
 #' f <- dataverse_file(d1$files$datafile$id[3])
-#' 
 #' }
 #' @export
 dataverse_contents <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
@@ -66,7 +76,13 @@ dataverse_contents <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), ser
 #' @seealso To manage Dataverses: \code{\link{create_dataverse}},  \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{dataverse_contents}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
 #' @examples
 #' \dontrun{
-#' 
+#' # download file from: 
+#' # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
+#' monogan <- get_dataverse("monogan")
+#' (monogan_data <- dataverse_contents(monogan))
+#'
+#' # get facets
+#' get_facets(monogan)
 #' }
 #' @export
 get_facets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
@@ -93,8 +109,8 @@ get_facets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 #' monogan_data <- dataverse_contents(monogan)
 #' dataverse_metadata(monogan)
 #' 
-#' d1 <- get_dataset(monogan_data[[1]])
-#' f <- dataverse_file(d1$files$datafile$id[3])
+#' # get metadata
+#' dataverse_metadata(monogan)
 #' 
 #' }
 #' @export

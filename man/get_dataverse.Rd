@@ -27,13 +27,18 @@ This function retrieves a Dataverse from a Dataverse server. To see the contents
 }
 \examples{
 \dontrun{
+# view the root dataverse for a server
+get_dataverse(":root")
+dataverse_contents(":root")
+
 # download file from: 
 # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
 monogan <- get_dataverse("monogan")
-monogan_data <- dataverse_contents(monogan)
+(monogan_data <- dataverse_contents(monogan))
+
+# get a dataset from the dataverse
 d1 <- get_dataset(monogan_data[[1]])
 f <- dataverse_file(d1$files$datafile$id[3])
-
 }
 }
 \seealso{

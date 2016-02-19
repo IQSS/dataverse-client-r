@@ -28,7 +28,7 @@ delete_dataset(dataset, key = Sys.getenv("DATAVERSE_KEY"),
 \item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
 }
 \value{
-A list.
+If successful, a logical \code{TRUE}, else possibly some information.
 
 A logical.
 }
@@ -46,6 +46,17 @@ This function can be used to delete a draft (unpublished) Dataverse dataset. Onc
 \dontrun{
 # retrieve your service document
 d <- service_document()
+
+# create a list of metadata
+metadat <- list(title = "My Study",
+                creator = "Doe, John",
+                description = "An example study")
+
+# create the dataset in first dataverse
+dat <- initiate_dataset(d[[2]], body = metadat)
+
+# delete a dataset
+delete_dataset(dat)
 }
 \dontrun{
 

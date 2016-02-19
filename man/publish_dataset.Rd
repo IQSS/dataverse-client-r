@@ -11,7 +11,7 @@ publish_dataset(dataset, minor = TRUE, key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 }
 \arguments{
-\item{dataset}{A dataset DOI (or other persistent identifier).}
+\item{dataset}{A dataset DOI (or other persistent identifier), an object of class \dQuote{dataset_atom} or \dQuote{dataset_statement}, or an appropriate and complete SWORD URL.}
 
 \item{minor}{A logical specifying whether the new release of the dataset is a \dQuote{minor} release (\code{TRUE}, by default), resulting in a minor version increase (e.g., from 1.1 to 1.2). If \code{FALSE}, the dataset is given a \dQuote{major} release (e.g., from 1.1 to 2.0).
 
@@ -50,6 +50,20 @@ Use this function to \dQuote{publish} (i.e., publicly release) a draft Dataverse
 \dontrun{
 # retrieve your service document
 d <- service_document()
+
+# create a list of metadata
+metadat <- list(title = "My Study",
+                creator = "Doe, John",
+                description = "An example study")
+
+# create the dataset in first dataverse
+dat <- initiate_dataset(d[[2]], body = metadat)
+
+# publish dataset
+publish_dataset(dat)
+
+# delete a dataset
+delete_dataset(dat)
 }
 \dontrun{
 

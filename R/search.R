@@ -25,6 +25,9 @@
 #' # search using named arguments
 #' dataverse_search(c(author = "Gary King", title = "Ecological Inference"))
 #' dataverse_search(author = "Gary King", title = "Ecological Inference")
+#'
+#' # search only for datasets
+#' dataverse_search(author = "Gary King", type = "dataset")
 #' }
 #' @export
 dataverse_search <- 
