@@ -5,7 +5,7 @@
 #' @template envvars
 #' @template dots
 #' @return A list.
-#' @seealso \code{\link{create_role}}, \code{\link{delete_role}}
+#' @seealso \code{\link{create_role}}, \code{\link{delete_role}}, \code{\link{assign_role}}, \code{\link{list_roles}}
 #' @examples
 #' \dontrun{
 #' 
@@ -13,7 +13,7 @@
 #' @export
 get_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     u <- paste0(api_url(server), "roles/", role)
-    r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
+    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     j <- jsonlite::fromJSON(httr::content(r, "text"))$data
     j
@@ -26,7 +26,7 @@ get_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.geten
 #' @template envvars
 #' @template dots
 #' @return A list.
-#' @seealso \code{\link{create_role}}, \code{\link{get_role}}
+#' @seealso \code{\link{create_role}}, \code{\link{get_role}}, \code{\link{assign_role}}, \code{\link{list_roles}}
 #' @examples
 #' \dontrun{
 #' 
@@ -187,7 +187,7 @@ add_roles_to_group <- function(dataverse, alias, role, key = Sys.getenv("DATAVER
     j
 }
 
-#' @title Remove role
+#' @title Remove role from group
 #' @description \dots
 #' @details \dots
 #' @template dv
@@ -209,20 +209,20 @@ remove_role_from_group <- function(dataverse, alias, role, key = Sys.getenv("DAT
     httr::content(r, "text")
 }
 
-#' @title Get Dataverse roles
+#' @title List Dataverse roles
 #' @description \dots
 #' @details \dots
 #' @template dv
 #' @template envvars
 #' @template dots
 #' @return A list.
-#' @seealso \code{\link{create_role}}
+#' @seealso \code{\link{create_role}}, \code{\link{delete_role}}, \code{\link{assign_role}}, \code{\link{get_role}}
 #' @examples
 #' \dontrun{
 #' 
 #' }
 #' @export
-get_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
+list_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (!missing(dataverse)) {
         dataverse <- dataverse_id(dataverse)
         u <- paste0(api_url(server), "dataverses/", dataverse, "/roles")
@@ -245,6 +245,7 @@ get_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys
 #' @template envvars
 #' @template dots
 #' @return A list.
+#' @seealso \code{\link{list_roles}}, \code{\link{delete_role}}, \code{\link{assign_role}}, \code{\link{get_role}}
 #' @examples
 #' \dontrun{
 #' 
@@ -270,7 +271,8 @@ create_role <- function(dataverse, alias, name, description, permissions,
 #' @return A list.
 #' @examples
 #' \dontrun{
-#' 
+#' # get role assignments
+#' get_assignments("my_dataverse")
 #' }
 #' @export
 get_assignments <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
@@ -291,6 +293,7 @@ get_assignments <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server
 #' @template envvars
 #' @template dots
 #' @return A list.
+#' @seealso \code{\link{create_role}}, \code{\link{delete_role}}, \code{\link{list_roles}}, \code{\link{get_role}}, \code{\link{get_assignments}}
 #' @examples
 #' \dontrun{
 #' 
@@ -314,6 +317,7 @@ assign_role <- function(dataverse, assignee, role, key = Sys.getenv("DATAVERSE_K
 #' @template envvars
 #' @template dots
 #' @return A list
+#' @seealso \code{\link{get_role}}, \code{\link{get_assignments}}, \code{\link{assign_role}}
 #' @examples
 #' \dontrun{
 #' 
