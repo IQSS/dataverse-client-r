@@ -34,7 +34,24 @@ This function provides access to data files from a Dataverse entry.
 }
 \examples{
 \dontrun{
+# download file from: 
+# https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
+monogan <- get_dataverse("monogan")
+monogan_data <- dataverse_contents(monogan)
+d1 <- get_dataset(monogan_data[[1]])
+f <- dataverse_file(d1$files$datafile$id[3])
 
+# read file as data.frame
+if (require("rio")) {
+  tmp <- tempfile(fileext = ".dta")
+  writeBin(f, tmp)
+  str(dat <- rio::import(tmp, haven = FALSE))
+
+  # check UNF match
+  #if (require("UNF")) {
+  #  unf(dat) \%unf\% d1$files$datafile$UNF[3]
+  #}
+}
 }
 }
 

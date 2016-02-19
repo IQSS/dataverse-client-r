@@ -32,7 +32,14 @@ This function returns a named metadata block for a dataset. This is already retu
 }
 \examples{
 \dontrun{
+monogan <- get_dataverse("monogan")
+monogan_data <- dataverse_contents(monogan)
+d1 <- get_dataset(monogan_data[[1]])
+dataset_versions(d1)
+dataset_files(d1)
 
+# get metadata
+str(dataset_metadata(d1), 4)
 }
 }
 \seealso{

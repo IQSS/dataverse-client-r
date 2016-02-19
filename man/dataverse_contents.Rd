@@ -27,6 +27,12 @@ This function lists the contents of a Dataverse. Contents might include one or m
 }
 \examples{
 \dontrun{
+# download file from: 
+# https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
+monogan <- get_dataverse("monogan")
+monogan_data <- dataverse_contents(monogan)
+d1 <- get_dataset(monogan_data[[1]])
+f <- dataverse_file(d1$files$datafile$id[3])
 
 }
 }

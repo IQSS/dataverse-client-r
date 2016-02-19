@@ -10,7 +10,24 @@
 #' @return A list.
 #' @examples
 #' \dontrun{
-#' 
+#' # download file from: 
+#' # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
+#' monogan <- get_dataverse("monogan")
+#' monogan_data <- dataverse_contents(monogan)
+#' d1 <- get_dataset(monogan_data[[1]])
+#' f <- dataverse_file(d1$files$datafile$id[3])
+#'
+#' # read file as data.frame
+#' if (require("rio")) {
+#'   tmp <- tempfile(fileext = ".dta")
+#'   writeBin(f, tmp)
+#'   str(dat <- rio::import(tmp, haven = FALSE))
+#'
+#'   # check UNF match
+#'   #if (require("UNF")) {
+#'   #  unf(dat) %unf% d1$files$datafile$UNF[3]
+#'   #}
+#' }
 #' }
 #' @export
 dataverse_file <- 
@@ -28,7 +45,10 @@ function(file,
     # from doi, get SWORD dataset statement, then get file ID
     if (!is.null(doi)) {
         file <- (function(doi, filename, ...) {
-            ds <- dataset_statement(doi)
+            ds <- try(dataset_statement(doi), silent = TRUE)
+            if (inherits(ds, "try-error")) {
+                stop("File not accessible via DOI.")
+            }
             filelist <- ds[names(ds) == "entry"]
             furl <- sapply(filelist, function(x) {x[["id"]][[1]]})
             furl2 <- sapply(strsplit(urltools::url_parse(furl)$path, "edit-media/file/"), `[`, 2)
@@ -68,7 +88,7 @@ function(file,
         }
         
         httr::stop_for_status(r)
-        r
+        content(r, as = "raw")
     }
 }
 
