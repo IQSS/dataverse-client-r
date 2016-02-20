@@ -40,175 +40,6 @@ delete_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.ge
     j
 }
 
-#' @title Create role group
-#' @description \dots
-#' @details \dots
-#' @template dv
-#' @param alias A character string specifying an alias for the role group.
-#' @param name A character string specifying the name of the role group.
-#' @param description A character string specifying a description of the role group.
-#' @template envvars
-#' @template dots
-#' @return A list.
-#' @examples
-#' \dontrun{
-#' 
-#' }
-#' @export
-create_group <- function(dataverse, alias, name, description, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    b <- list(description = description,
-              displayName = name,
-              aliasToOwner = alias)
-    dataverse <- dataverse_id(dataverse)
-    u <- paste0(api_url(server), "dataverses/", dataverse, "/groups")
-    r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
-    httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
-    j
-}
-
-#' @title Update role group
-#' @description \dots
-#' @details \dots
-#' @template dv
-#' @param alias A character string specifying an alias for the role group.
-#' @param name A character string specifying the name of the role group.
-#' @param description A character string specifying a description of the role group.
-#' @template envvars
-#' @template dots
-#' @return A list
-#' @examples
-#' \dontrun{
-#' 
-#' }
-#' @export
-update_group <- function(dataverse, alias, name, description, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    b <- list(description = description,
-              displayName = name,
-              alias = alias)
-    dataverse <- dataverse_id(dataverse)
-    u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", alias)
-    r <- httr::PUT(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
-    httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
-    j
-}
-
-#' @title List role groups
-#' @description \dots
-#' @details \dots
-#' @template dv
-#' @template envvars
-#' @template dots
-#' @return A list
-#' @examples
-#' \dontrun{
-#' 
-#' }
-#' @export
-list_groups <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataverse <- dataverse_id(dataverse)
-    u <- paste0(api_url(server), "dataverses/", dataverse, "/groups")
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
-    j
-}
-
-#' @title Get role group
-#' @description \dots
-#' @details \dots
-#' @template dv
-#' @param alias
-#' @template envvars
-#' @template dots
-#' @return A list.
-#' @examples
-#' \dontrun{
-#' 
-#' }
-#' @export
-get_group <- function(dataverse, alias, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataverse <- dataverse_id(dataverse)
-    u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", alias)
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
-    j
-}
-
-#' @title Delete role group
-#' @description \dots
-#' @details \dots
-#' @template dv
-#' @param alias
-#' @template envvars
-#' @template dots
-#' @return A list.
-#' @examples
-#' \dontrun{
-#' 
-#' }
-#' @export
-delete_group <- function(dataverse, alias, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataverse <- dataverse_id(dataverse)
-    u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", alias)
-    r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
-    httr::content(r, "text")
-}
-
-#' @title Add roles to group
-#' @description \dots
-#' @details \dots
-#' @template dv
-#' @param alias
-#' @template role
-#' @template envvars
-#' @template dots
-#' @return A list.
-#' @examples
-#' \dontrun{
-#' 
-#' }
-#' @export
-add_roles_to_group <- function(dataverse, alias, role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-
-    # need support for bulk add
-    
-    if(is.null(server) || server == "") {
-        stop("'server' is missing, but required")
-    }
-    dataverse <- dataverse_id(dataverse)
-    u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", alias, "/roleAssignees/", role)
-    r <- httr::PUT(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
-    j
-}
-
-#' @title Remove role from group
-#' @description \dots
-#' @details \dots
-#' @template dv
-#' @param alias
-#' @template role
-#' @template envvars
-#' @template dots
-#' @return A list.
-#' @examples
-#' \dontrun{
-#' 
-#' }
-#' @export
-remove_role_from_group <- function(dataverse, alias, role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataverse <- dataverse_id(dataverse)
-    u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", alias, "/roleAssignees/", role)
-    r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
-    httr::content(r, "text")
-}
-
 #' @title List Dataverse roles
 #' @description \dots
 #' @details \dots
@@ -234,41 +65,51 @@ list_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
         u <- paste0(api_url(server), "admin/roles")
         r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
         httr::stop_for_status(r)
+        out <- jsonlite::fromJSON(httr::content(r, "text"))$data
+        structure(lapply(out, `class<-`, "dataverse_role"))
     }
 }
 
 #' @title Create Dataverse role
 #' @description \dots
-#' @details \dots
+#' @details In Dataverse, roles provide one or more users with permissions. Rather than granting several permissions to each user, you can create a role that carries specific permissions and then freely change the roles to which each user is assigned. See \href{http://guides.dataverse.org/en/latest/user/dataverse-management.html#dataverse-permissions}{the Dataverse User Guide} for more details.
 #' @template dv
-#' @param body A list.
+#' @param alias
+#' @param name
+#' @param description
+#' @param permissions
 #' @template envvars
 #' @template dots
 #' @return A list.
 #' @seealso \code{\link{list_roles}}, \code{\link{delete_role}}, \code{\link{assign_role}}, \code{\link{get_role}}
 #' @examples
 #' \dontrun{
-#' 
+#' # create a new role
+#' r <- create_role("mydataverse", "exampleRole", "role name", "description here")
 #' }
 #' @export
 create_role <- function(dataverse, alias, name, description, permissions, 
-                         key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    b <- list(alias = alias, name = name, description = description, permissions = permissions)
+                        key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
+    
     dataverse <- dataverse_id(dataverse)
+    b <- list(alias = alias, name = name, description = description)
+    if (!missing(permissions)) {
+        permissions <- permissions
+    }
     u <- paste0(api_url(server), "dataverses/", dataverse, "/roles")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
     httr::stop_for_status(r)
     j <- jsonlite::fromJSON(httr::content(r, "text"))$data
-    j
+    structure(j, class = "dataverse_role")
 }
 
-#' @title Get Dataverse role assignments
-#' @description \dots
+#' @title Get role assignments
+#' @description Get list of role assignments for a Dataverse
 #' @details \dots
 #' @template dv
 #' @template envvars
 #' @template dots
-#' @return A list.
+#' @return A list of objects of class \dQuote{dataverse_role_assignment}.
 #' @examples
 #' \dontrun{
 #' # get role assignments
@@ -280,8 +121,12 @@ get_assignments <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server
     u <- paste0(api_url(server), "dataverses/", dataverse, "/assignments")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    out <- jsonlite::fromJSON(httr::content(r, "text"))$data
-    out
+    out <- jsonlite::fromJSON(httr::content(r, "text"), simplifyDataFrame = FALSE)$data
+    lapply(out, function(x) {
+        x$dataverse <- dataverse
+        class(x) <- "dataverse_role_assignment"
+        x
+    })
 }
 
 #' @title Assign Dataverse role

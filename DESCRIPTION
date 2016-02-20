@@ -1,6 +1,6 @@
 Package: dataverse
-Version: 0.1.11
-Date: 2016-02-19
+Version: 0.1.12
+Date: 2016-02-20
 Title: Client for Dataverse 4 Repositories
 Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
                     email = "thosjleeper@gmail.com"),

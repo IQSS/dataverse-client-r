@@ -31,6 +31,6 @@ Once created using \code{\link{create_role}}, this function can be used to retri
 }
 }
 \seealso{
-\code{\link{create_role}}, \code{\link{delete_role}}
+\code{\link{create_role}}, \code{\link{delete_role}}, \code{\link{assign_role}}, \code{\link{list_roles}}
 }
 

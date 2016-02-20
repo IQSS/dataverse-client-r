@@ -32,4 +32,7 @@ A list
 
 }
 }
+\seealso{
+\code{\link{get_role}}, \code{\link{get_assignments}}, \code{\link{assign_role}}
+}
 

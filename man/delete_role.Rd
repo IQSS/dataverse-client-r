@@ -31,6 +31,6 @@ This function deletes a Dataverse role.
 }
 }
 \seealso{
-\code{\link{create_role}}, \code{\link{get_role}}
+\code{\link{create_role}}, \code{\link{get_role}}, \code{\link{assign_role}}, \code{\link{list_roles}}
 }
 

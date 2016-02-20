@@ -16,8 +16,6 @@ create_role(dataverse, alias, name, description, permissions,
 \item{server}{A character string specifying a Dataverse server. There are multiple Dataverse installations, but the defaults is to use the Harvard Dataverse. This can be modified atomically or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 
 \item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
-
-\item{body}{A list.}
 }
 \value{
 A list.
@@ -26,11 +24,15 @@ A list.
 \dots
 }
 \details{
-\dots
+In Dataverse, roles provide one or more users with permissions. Rather than granting several permissions to each user, you can create a role that carries specific permissions and then freely change the roles to which each user is assigned. See \href{http://guides.dataverse.org/en/latest/user/dataverse-management.html#dataverse-permissions}{the Dataverse User Guide} for more details.
 }
 \examples{
 \dontrun{
-
+# create a new role
+r <- create_role("mydataverse", "exampleRole", "role name", "description here")
 }
+}
+\seealso{
+\code{\link{list_roles}}, \code{\link{delete_role}}, \code{\link{assign_role}}, \code{\link{get_role}}
 }
 

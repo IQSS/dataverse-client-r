@@ -1,0 +1,1 @@
+#' @param group An object of class \dQuote{dataverse_group}, or a character string containing the \dQuote{alias} for a group. If a character string, \code{dataverse} must also be specified as the alias is local to a given Dataverse.

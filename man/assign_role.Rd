@@ -34,4 +34,7 @@ A list.
 
 }
 }
+\seealso{
+\code{\link{create_role}}, \code{\link{delete_role}}, \code{\link{list_roles}}, \code{\link{get_role}}, \code{\link{get_assignments}}
+}
 

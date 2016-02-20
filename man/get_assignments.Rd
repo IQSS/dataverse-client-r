@@ -2,7 +2,7 @@
 % Please edit documentation in R/native_roles.R
 \name{get_assignments}
 \alias{get_assignments}
-\title{Get Dataverse role assignments}
+\title{Get role assignments}
 \usage{
 get_assignments(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
@@ -17,17 +17,18 @@ get_assignments(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
 \item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
 }
 \value{
-A list.
+A list of objects of class \dQuote{dataverse_role_assignment}.
 }
 \description{
-\dots
+Get list of role assignments for a Dataverse
 }
 \details{
 \dots
 }
 \examples{
 \dontrun{
-
+# get role assignments
+get_assignments("my_dataverse")
 }
 }
 

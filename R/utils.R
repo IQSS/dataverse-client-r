@@ -1,5 +1,4 @@
-# dataverse class
-
+# dataverse_id method
 dataverse_id <- function(x, ...) {
     UseMethod('dataverse_id', x)
 }
@@ -10,33 +9,21 @@ dataverse_id.dataverse <- function(x, ...) {
     x$id
 }
 
-print.dataverse <- function(x, ...) {
-    if ("id" %in% names(x)) {
-        cat("Dataverse (", x$id, "): ", x$alias, "\n", sep = "")
-        cat("Name:        ", x$name, "\n", sep = "")
-    } else {
-        cat("Dataverse: ", x$alias, "\n", sep = "")
-        cat("Name:      ", x$name, "\n", sep = "")
-    }
-    if ("description" %in% names(x)) {
-        cat("Description: ", x$description, "\n", sep = "")
-    }
-    if ("creationDate" %in% names(x)) {
-        cat("Created:     ", x$creationDate, "\n", sep = "")
-    }
-    if ("creator" %in% names(x)) {
-        cat("Creator:     ", x$creator$identifier, "\n", sep = "")
-    }
-    if (("terms_apply" %in% names(x)) && (x$terms_apply == "true")) {
-        cat("Terms of Use:   ", x$terms_of_use, "\n", sep = "")
-    }
-    invisible(x)
+# dataset_id method
+dataset_id <- function(x, ...) {
+    UseMethod('dataset_id', x)
+}
+dataset_id.default <- function(x, ...) {
+    x
+}
+#dataset_id.character <- function(x, ...) {
+    # parse DOI to dataset ID using SWORD API, possibly
+#}
+dataset_id.dataverse_dataset <- function(x, ...) {
+    x$id
 }
 
-
-
-# dataverse_dataset class
-
+# other functions
 prepend_doi <- function(dataset) {
     if (grepl("^hdl", dataset)) {
         return(dataset)
@@ -51,67 +38,6 @@ prepend_doi <- function(dataset) {
     # need to check if it is a handle, and issue warning
     dataset
 }
-
-dataset_id <- function(x, ...) {
-    UseMethod('dataset_id', x)
-}
-dataset_id.default <- function(x, ...) {
-    x
-}
-#dataset_id.character <- function(x, ...) {
-    # parse DOI to dataset ID using SWORD API, possibly
-#}
-dataset_id.dataverse_dataset <- function(x, ...) {
-    x$id
-}
-
-print.dataverse_dataset <- function(x, ...) {
-    cat("Dataset (", x$id, "): ", x$persistentUrl, "\n", sep = "")
-    if ("latestVersion" %in% names(x)) {
-        print(x$latestVersion)
-    } else {
-        cat("Version (", x$id, ")", sep = "")
-        if ("versionNumber" %in% names(x)) {
-            cat(": ", x$versionNumber, ".", x$versionMinorNumber, ", ", x$versionState, "\n", sep = "")
-        } else {
-            cat("\n")
-        }
-        if ("releaseTime" %in% names(x)) {
-            cat("Release Date: ", x$releaseTime, "\n", sep = "")
-        }
-        if ("files" %in% names(x)) {
-            n <- length(x$files)
-            cat(n, ngettext(n, " File:", " Files:"), "\n", sep = "")
-            print(x$files)
-        }
-    }
-    invisible(x)    
-}
-
-# dataverse_dataset_version class
-
-print.dataverse_dataset_version <- function(x, ...) {
-    cat("Version (", x$id, "): ", x$versionNumber, ".", x$versionMinorNumber, ", ", x$versionState, "\n", sep = "")
-    cat("Release Date: ", x$releaseTime, "\n", sep = "")
-    n <- length(x$files)
-    cat(n, ngettext(n, " File:", " Files:"), "\n", sep = "")
-    print(x$files)
-    invisible(x)    
-}
-
-# dataverse_file class
-
-print.dataverse_file <- function(x, ...) {
-    cat("File (", x$datafile$id, "): ", x$datafile$filename, "\n", sep = "")
-    cat("Dataset version: ", x$datasetVersionId, "\n", sep = "")
-    if ("md5" %in% names(x$datafile)) {
-        cat("MD5: ", x$datafile$md5, "\n", sep = "")
-    }
-    cat("Description: ", x$datafile$description, "\n", sep = "")
-    invisible(x)
-}
-
-# other functions
 
 api_url <- function(server, prefix="api/") {
     if (is.null(server) || server == "") {
