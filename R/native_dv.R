@@ -37,7 +37,7 @@ get_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
 #' @template dv
 #' @template envvars
 #' @template dots
-#' @return A list of class \dQuote{dataverse_contents}
+#' @return A list of contents of the dataverse, either objects of class \dQuote{dataverse} or \dQuote{dataverse_dataset}.
 #' @seealso To manage Dataverses: \code{\link{create_dataverse}}, \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
 #' @examples
 #' \dontrun{
@@ -63,7 +63,7 @@ dataverse_contents <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), ser
     out <- jsonlite::fromJSON(httr::content(r, "text"), simplifyDataFrame = FALSE)
     structure(lapply(out$data, function(x) {
         `class<-`(x, if (x$type == "dataset") "dataverse_dataset" else "dataverse")
-    }), class = "dataverse_contents")
+    }), class = "list")
 }
 
 #' @title Get Dataverse facets
