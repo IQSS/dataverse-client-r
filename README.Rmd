@@ -83,7 +83,7 @@ Coming soon...
 [![Travis-CI Build Status](https://travis-ci.org/IQSS/dataverse-client-r.png?branch=master)](https://travis-ci.org/IQSS/dataverse-client-r)
 [![codecov.io](http://codecov.io/github/IQSS/dataverse-client-r/coverage.svg?branch=master)](http://codecov.io/github/IQSS/dataverse-client-r?branch=master)
 
-You can (eventually) find a stable release on [CRAN](http://cran.r-project.org/web/packages/dataverse/index.html), or install the latest development version from GitHub using [Hadley's](http://had.co.nz/) [devtools](http://cran.r-project.org/web/packages/devtools/index.html) package:
+You can (eventually) find a stable release on [CRAN](http://cran.r-project.org/web/packages/dataverse/index.html), or install the latest development version from GitHub:
 
 ```R
 if(!require("ghit")) {
