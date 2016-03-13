@@ -22,7 +22,7 @@
 #' @return An object of class \dQuote{dataset_atom}.
 #' @note There are two ways to create dataset: native API (\code{\link{create_dataset}}) and SWORD API (\code{initiate_dataset}).
 #' @references \href{http://dublincore.org/documents/dcmi-terms/}{Dublin Core Metadata Terms}
-#' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
+#' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{delete_sword_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
 #' @examples
 #' \dontrun{
 #' # retrieve your service document (dataverse list)
@@ -46,7 +46,7 @@
 #' }
 initiate_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(dataverse, "dataverse")) {
-        dataverse <- x$alias
+        dataverse <- dataverse$alias
     } else if (is.numeric(dataverse)) {
         dataverse <- get_dataverse(dataverse)$alias
     }
@@ -78,7 +78,7 @@ print.dataverse_dataset_list <- function(x, ...) {
 #' @template envvars
 #' @template dots
 #' @return If successful, a logical \code{TRUE}, else possibly some information.
-#' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
+#' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
 #' @examples
 #' \dontrun{
 #' # retrieve your service document
@@ -96,7 +96,7 @@ print.dataverse_dataset_list <- function(x, ...) {
 #' delete_dataset(dat)
 #' }
 #' @export
-delete_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
+delete_sword_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(dataset, "dataset_atom")) {
         u <- dataset$links[["edit"]]
     } else if (inherits(dataset, "dataset_statement")) {
@@ -130,7 +130,7 @@ delete_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = 
 #' @template envvars
 #' @template dots
 #' @return A list.
-#' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
+#' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{delete_sword_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
 #' @examples
 #' \dontrun{
 #' # retrieve your service document
@@ -182,7 +182,7 @@ publish_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server =
 #' @template envvars
 #' @template dots
 #' @return A list. For \code{dataset_atom}, an object of class \dQuote{dataset_atom}.
-#' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
+#' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{delete_sword_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
 #' @examples
 #' \dontrun{
 #' # retrieve your service document

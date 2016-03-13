@@ -11,7 +11,7 @@ publish_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serv
     if (inherits(dataverse, "sword_collection")) {
         u <- sub("/collection/", "/edit/", dataverse$url, fixed = TRUE)
     } else if (inherits(dataverse, "dataverse")) {
-        dataverse <- x$alias
+        dataverse <- dataverse$alias
         u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit/dataverse/", dataverse)
     } else {
         # publish via native API

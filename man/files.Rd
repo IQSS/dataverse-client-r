@@ -2,10 +2,15 @@
 % Please edit documentation in R/dataAccess.R
 \name{dataverse_file}
 \alias{dataverse_file}
+\alias{get_metadata}
 \title{Download File(s)}
 \usage{
 dataverse_file(file, doi = NULL, format = c("original", "RData", "prep",
   "bundle"), vars = NULL, key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+
+get_metadata(file, format = c("ddi", "preprocessed"),
+  key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 }
 \arguments{

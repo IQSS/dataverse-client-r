@@ -17,7 +17,7 @@ dataverse_contents(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
 \item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
 }
 \value{
-A list of class \dQuote{dataverse_contents}
+A list of contents of the dataverse, either objects of class \dQuote{dataverse} or \dQuote{dataverse_dataset}.
 }
 \description{
 List the contents of a Dataverse

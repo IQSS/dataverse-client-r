@@ -32,6 +32,7 @@ create_zip.list <- function(x, ...) {
 #' @description Add one or more files to a SWORD (possibly unpublished) dataset
 #' @details This function is used to add files to a dataset. It is part of the SWORD API, which is used to upload data to a Dataverse server. This means this can be used to view unpublished Dataverses and Datasets.
 #' @param dataset A dataset DOI (or other persistent identifier), an object of class \dQuote{dataset_atom} or \dQuote{dataset_statement}, or an appropriate and complete SWORD URL.
+#' @param file A character vector of file names, a data.frame, or a list of R objects.
 #' @template envvars
 #' @template dots
 #' @return An object of class \dQuote{dataset_atom}.
@@ -84,9 +85,9 @@ add_file <- function(dataset, file, key = Sys.getenv("DATAVERSE_KEY"), server = 
     h <- httr::add_headers("Content-Disposition" = paste0("filename=", file), 
                            "Content-Type" = "application/zip",
                            "Packaging" = "http://purl.org/net/sword/package/SimpleZip")
-    r <- httr::POST(u, httr::authenticate(key, ""), h, body = upload_file(file), ...)
+    r <- httr::POST(u, httr::authenticate(key, ""), h, body = httr::upload_file(file), ...)
     httr::stop_for_status(r)
-    parse_atom(content(r, "text"))
+    parse_atom(httr::content(r, "text"))
 }
 
 #' @title Delete file (SWORD)

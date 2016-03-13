@@ -1,6 +1,6 @@
 Package: dataverse
-Version: 0.1.12
-Date: 2016-02-20
+Version: 0.1.13
+Date: 2016-03-13
 Title: Client for Dataverse 4 Repositories
 Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
                     email = "thosjleeper@gmail.com"),
@@ -21,4 +21,4 @@ Description: Provides access to Dataverse version 4 APIs, enabling data search,
 License: GPL-2
 URL: https://github.com/iqss/dataverse-client-r
 BugReports: https://github.com/iqss/dataverse-client-r/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 5.0.1.9000

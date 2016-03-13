@@ -4,7 +4,7 @@ print.dataset_atom <- function(x, ...) {
     cat("Treatment: ", x$treatment, "\n", sep = "")
     cat("Links:\n")
     for (i in seq_along(x$links)) {
-        cat(" ", formatC(names(dat2$links))[i], ": ", unname(x$links[[i]]), "\n", sep = "")
+        cat(" ", formatC(names(x$links))[i], ": ", unname(x$links[[i]]), "\n", sep = "")
     }
     cat("Citation: ", x$bibliographicCitation, "\n\n")
     invisible(x)

@@ -41,7 +41,7 @@ delete_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.ge
 }
 
 #' @title List Dataverse roles
-#' @description \dots
+#' @description List roles associated with a Dataverse
 #' @details \dots
 #' @template dv
 #' @template envvars
@@ -71,13 +71,13 @@ list_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 }
 
 #' @title Create Dataverse role
-#' @description \dots
+#' @description Create a Dataverse role
 #' @details In Dataverse, roles provide one or more users with permissions. Rather than granting several permissions to each user, you can create a role that carries specific permissions and then freely change the roles to which each user is assigned. See \href{http://guides.dataverse.org/en/latest/user/dataverse-management.html#dataverse-permissions}{the Dataverse User Guide} for more details.
 #' @template dv
-#' @param alias
-#' @param name
-#' @param description
-#' @param permissions
+#' @param alias \dots
+#' @param name \dots
+#' @param description \dots
+#' @param permissions \dots
 #' @template envvars
 #' @template dots
 #' @return A list.
@@ -130,7 +130,7 @@ get_assignments <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server
 }
 
 #' @title Assign Dataverse role
-#' @description \dots
+#' @description Assign a Dataverse role to a user
 #' @details \dots
 #' @template dv
 #' @param assignee \dots
@@ -155,7 +155,7 @@ assign_role <- function(dataverse, assignee, role, key = Sys.getenv("DATAVERSE_K
 }
 
 #' @title Delete Dataverse role assignment
-#' @description \dots
+#' @description Deletes a Dataverse role assignment
 #' @details \dots
 #' @template dv
 #' @param assignment \dots

@@ -1,3 +1,4 @@
+#' @rdname files
 #' @title Download File(s)
 #' @description Download Dataverse File(s)
 #' @details This function provides access to data files from a Dataverse entry.
@@ -88,10 +89,11 @@ function(file,
         }
         
         httr::stop_for_status(r)
-        content(r, as = "raw")
+        httr::content(r, as = "raw")
     }
 }
 
+#' @rdname files
 #' @export
 get_metadata <- 
 function(file, 

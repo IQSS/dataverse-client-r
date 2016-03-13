@@ -20,7 +20,7 @@ list_roles(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
 A list.
 }
 \description{
-\dots
+List roles associated with a Dataverse
 }
 \details{
 \dots

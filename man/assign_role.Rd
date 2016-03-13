@@ -24,7 +24,7 @@ assign_role(dataverse, assignee, role, key = Sys.getenv("DATAVERSE_KEY"),
 A list.
 }
 \description{
-\dots
+Assign a Dataverse role to a user
 }
 \details{
 \dots

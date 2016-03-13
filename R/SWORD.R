@@ -68,7 +68,7 @@ print.sword_service_document <- function(x, ...) {
 #' @export
 list_datasets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(dataverse, "dataverse")) {
-        dataverse <- x$alias
+        dataverse <- dataverse$alias
     } else if (is.numeric(dataverse)) {
         dataverse <- get_dataverse(dataverse)$alias
     }

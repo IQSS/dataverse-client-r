@@ -22,7 +22,7 @@ delete_assignment(dataverse, assignment, key = Sys.getenv("DATAVERSE_KEY"),
 A list
 }
 \description{
-\dots
+Deletes a Dataverse role assignment
 }
 \details{
 \dots
