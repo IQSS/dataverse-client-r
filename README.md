@@ -39,7 +39,35 @@ The results are paginated using `per_page` argument. To retrieve subsequent page
 
 ### Data and Metadata Retrieval ###
 
-Coming soon...
+The easiest way to access data from Dataverse is to use a persistent identifier (typically a DOI). You can retrieve the contents of a Dataverse dataset:
+
+```R
+get_dataset("doi:10.7910/DVN/ARKOTI")
+```
+
+retrieve metadata:
+
+```R
+dataset_metadata("doi:10.7910/DVN/ARKOTI")
+```
+
+and even access files directly in R using the DOI and a filename:
+
+```R
+f <- dataverse_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
+
+# load it into memory
+tmp <- tempfile(fileext = ".dta")
+writeBin(f, tmp)
+dat <- rio::import(tmp, haven = FALSE)
+```
+
+If you don't konw the file name in advance, you can parse the available files returned by `get_dataset()`:
+
+```R
+d1 <- get_dataset("doi:10.7910/DVN/ARKOTI")
+f <- dataverse_file(d1$files$datafile$id[3])
+```
 
 ### Data Deposit ###
 
