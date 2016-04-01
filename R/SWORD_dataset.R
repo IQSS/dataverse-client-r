@@ -2,6 +2,8 @@
 #' @description Initiate a SWORD (possibly unpublished) dataset
 #' @param dataverse A Dataverse alias or ID number, or an object of class \dQuote{dataverse}, perhaps as returned by \code{\link{service_document}}.
 #' @param body A list containing one or more metadata fields. Field names must be valid Dublin Core Terms labels (see details, below). The \samp{title}, \samp{description}, and \samp{creator} fields are required.
+#' @template envvars
+#' @template dots
 #' @details This function is used to initiate a dataset in a (SWORD) Dataverse by supplying relevant metadata. The function is part of the SWORD API (see \href{http://swordapp.github.io/SWORDv2-Profile/SWORDProfile.html\#protocoloperations_creatingresource_entry}{Atom entry specification}), which is used to upload data to a Dataverse server.
 #' Allowed fields are:
 #' \dQuote{abstract}, \dQuote{accessRights}, \dQuote{accrualMethod},
@@ -58,7 +60,7 @@ initiate_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"),
     }
     r <- httr::POST(u, httr::authenticate(key, ""), httr::add_headers("Content-Type" = "application/atom+xml"), body = b, ...)
     httr::stop_for_status(r)
-    structure(parse_atom(httr::content(r, "text")))
+    structure(parse_atom(httr::content(r, as = "text", encoding = "UTF-8")))
 }
 
 print.dataverse_dataset_list <- function(x, ...) {
@@ -115,7 +117,7 @@ delete_sword_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), ser
 
     r <- httr::DELETE(u, httr::authenticate(key, ""), ...)
     httr::stop_for_status(r)
-    cont <- httr::content(r, "text")
+    cont <- httr::content(r, as = "text", encoding = "UTF-8")
     if (cont == "") {
         return(TRUE)
     } else {
@@ -145,13 +147,13 @@ delete_sword_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), ser
 #' dat <- initiate_dataset(d[[2]], body = metadat)
 #' 
 #' # publish dataset
-#' publish_dataset(dat)
+#' publish_sword_dataset(dat)
 #' 
 #' # delete a dataset
 #' delete_dataset(dat)
 #' }
 #' @export
-publish_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
+publish_sword_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(dataset, "dataset_atom")) {
         u <- dataset$links[["edit"]]
     } else if (inherits(dataset, "dataset_statement")) {
@@ -170,7 +172,7 @@ publish_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server =
 
     r <- httr::POST(u, httr::authenticate(key, ""), httr::add_headers("In-Progress" = "false"), ...)
     httr::stop_for_status(r)
-    out <- xml2::as_list(xml2::read_xml(httr::content(r, "text")))
+    out <- xml2::as_list(xml2::read_xml(httr::content(r, as = "text", encoding = "UTF-8")))
     out
 }
 

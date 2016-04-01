@@ -22,7 +22,7 @@ create_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
     }
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    httr::content(r)
+    httr::content(r, as = "text", encoding = "UTF-8")
 }
 
 #' @title Delete Dataverse
@@ -43,7 +43,7 @@ delete_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
     u <- paste0(api_url(server), "dataverses/", dataverse)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    httr::content(r)
+    httr::content(r, as = "text", encoding = "UTF-8")
 }
 
 #' @title Set Dataverse metadata
@@ -66,5 +66,5 @@ set_dataverse_metadata <- function(dataverse, body, root = TRUE, key = Sys.geten
     u <- paste0(api_url(server), "dataverses/", dataverse, "/metadatablocks/", tolower(as.character(root)))
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    httr::content(r)$data
+    httr::content(r, as = "text", encoding = "UTF-8")$data
 }

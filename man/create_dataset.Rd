@@ -29,7 +29,9 @@ This function creates a Dataverse dataset. In Dataverse, a \dQuote{dataset} is t
 }
 \examples{
 \dontrun{
+meta <- list()
 
+d <- create_dataset("mydataverse", body = list())
 }
 }
 \seealso{

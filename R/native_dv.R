@@ -27,7 +27,7 @@ get_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
     u <- paste0(api_url(server), "dataverses/", dataverse)
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    out <- jsonlite::fromJSON(httr::content(r, "text"))
+    out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))
     structure(out$data, class = "dataverse")
 }
 
@@ -60,7 +60,7 @@ dataverse_contents <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), ser
     u <- paste0(api_url(server), "dataverses/", dataverse, "/contents")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    out <- jsonlite::fromJSON(httr::content(r, "text"), simplifyDataFrame = FALSE)
+    out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"), simplifyDataFrame = FALSE)
     structure(lapply(out$data, function(x) {
         `class<-`(x, if (x$type == "dataset") "dataverse_dataset" else "dataverse")
     }), class = "list")
@@ -90,7 +90,7 @@ get_facets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
     u <- paste0(api_url(server), "dataverses/", dataverse, "/facets")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    httr::content(r)$data
+    httr::content(r, as = "text", encoding = "UTF-8")$data
 }
 
 #' @title Dataverse metadata
@@ -119,5 +119,5 @@ dataverse_metadata <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), ser
     u <- paste0(api_url(server), "dataverses/", dataverse, "/metadatablocks")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    httr::content(r)$data
+    httr::content(r, as = "text", encoding = "UTF-8")$data
 }

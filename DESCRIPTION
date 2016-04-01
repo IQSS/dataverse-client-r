@@ -1,6 +1,6 @@
 Package: dataverse
-Version: 0.1.13
-Date: 2016-03-13
+Version: 0.1.14
+Date: 2016-04-01
 Title: Client for Dataverse 4 Repositories
 Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
                     email = "thosjleeper@gmail.com"),
@@ -8,6 +8,7 @@ Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
 Imports:
     httr,
+    XML,
     xml2,
     jsonlite,
     urltools

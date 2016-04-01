@@ -87,7 +87,7 @@ add_file <- function(dataset, file, key = Sys.getenv("DATAVERSE_KEY"), server = 
                            "Packaging" = "http://purl.org/net/sword/package/SimpleZip")
     r <- httr::POST(u, httr::authenticate(key, ""), h, body = httr::upload_file(file), ...)
     httr::stop_for_status(r)
-    parse_atom(httr::content(r, "text"))
+    parse_atom(httr::content(r, as = "text", encoding = "UTF-8"))
 }
 
 #' @title Delete file (SWORD)
@@ -132,7 +132,7 @@ delete_file <- function(id, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.gete
     }
     r <- httr::DELETE(u, httr::authenticate(key, ""), ...)
     httr::stop_for_status(r)
-    cont <- httr::content(r, "text")
+    cont <- httr::content(r, as = "text", encoding = "UTF-8")
     if (cont == "") {
         return(TRUE)
     } else {

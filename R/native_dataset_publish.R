@@ -9,7 +9,9 @@
 #' @seealso \code{\link{get_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}
 #' @examples
 #' \dontrun{
+#' meta <- list()
 #' 
+#' d <- create_dataset("mydataverse", body = list())
 #' }
 #' @export
 create_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
@@ -39,7 +41,7 @@ update_dataset <- function(dataset, body, key = Sys.getenv("DATAVERSE_KEY"), ser
     u <- paste0(api_url(server), "datasets/", dataset, "/versions/:draft")
     r <- httr::PUT(u, httr::add_headers("X-Dataverse-key" = key), body = body, encode = "json", ...)
     httr::stop_for_status(r)
-    httr::content(r)
+    httr::content(r, as = "text", encoding = "UTF-8")
 }
 
 #' @title Publish dataset
@@ -63,7 +65,7 @@ publish_dataset <- function(dataset, minor = TRUE, key = Sys.getenv("DATAVERSE_K
     u <- paste0(api_url(server), "datasets/", dataset, "/actions/:publish?type=", if (minor) "minor" else "major")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    httr::content(r)
+    httr::content(r, as = "text", encoding = "UTF-8")
 }
 
 #' @title Delete draft dataset
@@ -85,6 +87,6 @@ delete_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = 
     u <- paste0(api_url(server), "datasets/", dataset, "/versions/:draft")
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    httr::content(r)
+    httr::content(r, as = "text", encoding = "UTF-8")
 }
 

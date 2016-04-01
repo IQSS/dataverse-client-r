@@ -35,7 +35,7 @@ create_group <- function(dataverse, alias, name, description, key = Sys.getenv("
     u <- paste0(api_url(server), "dataverses/", dataverse, "/groups")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
     httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
+    j <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))$data
     j$dataverse <- dataverse
     structure(j, class = "dataverse_group")
 }
@@ -94,7 +94,7 @@ update_group <- function(group, name, description, dataverse, key = Sys.getenv("
     }
     r <- httr::PUT(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
     httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
+    j <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))$data
     j$dataverse <- dataverse
     structure(j, class = "dataverse_group")
 }
@@ -130,7 +130,7 @@ list_groups <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = S
     u <- paste0(api_url(server), "dataverses/", dataverse, "/groups")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"), simplifyDataFrame = FALSE)$data
+    j <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"), simplifyDataFrame = FALSE)$data
     lapply(j, function(x) {
         x$dataverse <- dataverse
         class(x) <- "dataverse_group"
@@ -175,7 +175,7 @@ get_group <- function(group, dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
     }
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
+    j <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))$data
     j$dataverse <- dataverse
     structure(j, class = "dataverse_group")
 }
@@ -216,7 +216,7 @@ delete_group <- function(group, dataverse, key = Sys.getenv("DATAVERSE_KEY"), se
     u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", group)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    out <- jsonlite::fromJSON(httr::content(r, "text"))
+    out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))
     if (out$status == "OK") {
         return(TRUE)
     } else {
@@ -255,7 +255,7 @@ add_roles_to_group <- function(group, role, dataverse, key = Sys.getenv("DATAVER
     u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", group, "/roleAssignees/", role)
     r <- httr::PUT(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    j <- jsonlite::fromJSON(httr::content(r, "text"))$data
+    j <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))$data
     j
 }
 
@@ -283,5 +283,5 @@ remove_role_from_group <- function(group, role, dataverse, key = Sys.getenv("DAT
     u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", group, "/roleAssignees/", role)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    httr::content(r, "text")
+    httr::content(r, as = "text", encoding = "UTF-8")
 }
