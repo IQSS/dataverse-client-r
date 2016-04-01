@@ -3,7 +3,7 @@
 #' @description Download Dataverse File(s)
 #' @details This function provides access to data files from a Dataverse entry.
 #' @param file An integer specifying a file identifier or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset.
-#' @param doi If a DOI (or handle) is supplied, then \code{file} can simply be the filename rather than Dataverse file ID number.
+#' @template ds
 #' @param format A character string specifying a file format. By default, this is \dQuote{original} (the original file format). If \dQuote{RData} or \dQuote{prep} is used, an alternative is returned. If \dQuote{bundle}, a compressed directory containing a bundle of file formats is returned.
 #' @param vars A character vector specifying one or more variable names, used to extract a subset of the data.
 #' @template envvars
@@ -15,9 +15,13 @@
 #' # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
 #' monogan <- get_dataverse("monogan")
 #' monogan_data <- dataverse_contents(monogan)
-#' d1 <- get_dataset(monogan_data[[1]])
+#' d1 <- get_dataset("doi:10.7910/DVN/ARKOTI")
 #' f <- dataverse_file(d1$files$datafile$id[3])
 #'
+#' # retrieve file based on DOI and filename
+#' f2 <- dataverse_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
+#' f2 <- dataverse_file(2692202, "doi:10.7910/DVN/ARKOTI")
+#' 
 #' # read file as data.frame
 #' if (require("rio")) {
 #'   tmp <- tempfile(fileext = ".dta")
@@ -33,7 +37,7 @@
 #' @export
 dataverse_file <- 
 function(file, 
-         doi = NULL,
+         ds = NULL,
          format = c("original", "RData", "prep", "bundle"),
          # thumb = TRUE,
          vars = NULL,
@@ -43,21 +47,28 @@ function(file,
     
     format <- match.arg(format)
     
-    # from doi, get SWORD dataset statement, then get file ID
-    if (!is.null(doi)) {
+    # from doi get file ID
+    if (!is.null(ds) && !is.numeric(file)) {
         file <- (function(doi, filename, ...) {
-            ds <- try(dataset_statement(doi), silent = TRUE)
-            if (inherits(ds, "try-error")) {
-                stop("File not accessible via DOI.")
+            files <- dataset_files(prepend_doi(doi))
+            ids <- unlist(lapply(files, function(x) x[["datafile"]][["id"]]))
+            if (is.numeric(file)) {
+                w <- which(ids %in% file)
+                if (!length(w)) {
+                    stop("File not found")
+                }
+                id <- ids[w]
+            } else {
+                ns <- unlist(lapply(files, `[[`, "label"))
+                w <- which(ns %in% file)
+                if (!length(w)) {
+                    stop("File not found")
+                }
+                id <- ids[w]
             }
-            filelist <- ds[names(ds) == "entry"]
-            furl <- sapply(filelist, function(x) {x[["id"]][[1]]})
-            furl2 <- sapply(strsplit(urltools::url_parse(furl)$path, "edit-media/file/"), `[`, 2)
-            furl3 <- strsplit(furl2, "/")
-            filelist2 <- setNames(sapply(furl3, `[`, 1), sapply(furl3, function(x) x[length(x)]))
-            fileid <- filelist2[names(filelist2) == filename]
-            fileid
-        })(doi, file)
+            id
+        })(ds, file)
+        
     }
     
     if (length(file) > 1) {
@@ -105,7 +116,7 @@ function(file,
     u <- paste0(api_url(server), "access/datafile/", file, "/metadata/", format)
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    r
+    content(r, as = "text", encoding = "UTF-8")
 }
 
 
