@@ -26,7 +26,7 @@ get_dataset <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERS
     }
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    out <- jsonlite::fromJSON(httr::content(r, "text"))$data
+    out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))$data
     if ("latestVersion" %in% names(out)) {
         class(out$latestVersion) <- "dataverse_dataset_version"
     }
@@ -60,7 +60,7 @@ dataset_versions <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server 
     u <- paste0(api_url(server), "datasets/", dataset, "/versions")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    out <- httr::content(r)$data
+    out <- httr::content(r, as = "text", encoding = "UTF-8")$data
     lapply(out, function(x) {
         x <- `class<-`(x, "dataverse_dataset_version")
         x$files <- lapply(x$files, `class<-`, "dataverse_file")
@@ -93,7 +93,7 @@ dataset_files <- function(dataset, version = ":latest", key = Sys.getenv("DATAVE
     u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/files")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    out <- jsonlite::fromJSON(httr::content(r, "text"), simplifyDataFrame = FALSE)$data
+    out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"), simplifyDataFrame = FALSE)$data
     structure(lapply(out, `class<-`, "dataverse_file"))
 }
 
@@ -129,5 +129,6 @@ dataset_metadata <- function(dataset, version = ":latest", block = "citation", k
     
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    httr::content(r)
+    out <- httr::content(r, as = "text", encoding = "UTF-8")
+    jsonlite::fromJSON(out)[["data"]]
 }

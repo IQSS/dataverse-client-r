@@ -16,9 +16,15 @@ dataset_id <- function(x, ...) {
 dataset_id.default <- function(x, ...) {
     x
 }
-#dataset_id.character <- function(x, ...) {
-    # parse DOI to dataset ID using SWORD API, possibly
-#}
+dataset_id.character <- function(x, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
+    x <- prepend_doi(x)
+    u <- paste0(api_url(server), "datasets/:persistentId?persistentId=", x)
+    r <- tryCatch(httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...),
+                  error = function(e) {
+                    stop("Could not retrieve Dataset ID from persistent identifier!")
+                  })
+    jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))[["data"]][["id"]]
+}
 dataset_id.dataverse_dataset <- function(x, ...) {
     x$id
 }
