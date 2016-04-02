@@ -27,7 +27,9 @@ This function can be used to delete a draft (unpublished) Dataverse dataset. Onc
 }
 \examples{
 \dontrun{
-
+meta <- list()
+ds <- create_dataset("mydataverse", body = meta)
+delete_dataset(ds)
 }
 }
 \seealso{

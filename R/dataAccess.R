@@ -37,7 +37,7 @@
 #' @export
 dataverse_file <- 
 function(file, 
-         ds = NULL,
+         dataset = NULL,
          format = c("original", "RData", "prep", "bundle"),
          # thumb = TRUE,
          vars = NULL,
@@ -48,7 +48,7 @@ function(file,
     format <- match.arg(format)
     
     # from doi get file ID
-    if (!is.null(ds) && !is.numeric(file)) {
+    if (!is.null(dataset) && !is.numeric(file)) {
         file <- (function(doi, filename, ...) {
             files <- dataset_files(prepend_doi(doi))
             ids <- unlist(lapply(files, function(x) x[["datafile"]][["id"]]))
@@ -67,7 +67,7 @@ function(file,
                 id <- ids[w]
             }
             id
-        })(ds, file)
+        })(dataset, file)
         
     }
     
@@ -116,7 +116,7 @@ function(file,
     u <- paste0(api_url(server), "access/datafile/", file, "/metadata/", format)
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    content(r, as = "text", encoding = "UTF-8")
+    httr::content(r, as = "text", encoding = "UTF-8")
 }
 
 

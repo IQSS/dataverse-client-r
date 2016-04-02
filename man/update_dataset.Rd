@@ -29,7 +29,14 @@ This function updates a Dataverse dataset that has already been created using \c
 }
 \examples{
 \dontrun{
+meta1 <- list()
+ds <- create_dataset("mydataverse", body = meta1)
 
+meta2 <- list()
+update_dataset(ds, body = meta2)
+
+# cleanup
+delete_dataset(ds)
 }
 }
 \seealso{

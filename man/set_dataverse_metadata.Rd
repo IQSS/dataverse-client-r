@@ -30,11 +30,6 @@ Set Dataverse metadata
 \details{
 This function sets the value of metadata fields for a Dataverse. Use \code{\link{update_dataset}} to set the metadata fields for a dataset instead.
 }
-\examples{
-\dontrun{
-
-}
-}
 \seealso{
 \code{\link{dataverse_metadata}}
 }

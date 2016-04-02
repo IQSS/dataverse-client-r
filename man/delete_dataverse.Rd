@@ -27,7 +27,8 @@ This function deletes a Dataverse.
 }
 \examples{
 \dontrun{
-
+dv <- create_dataverse("mydataverse")
+delete_dataverse(dv)
 }
 }
 \seealso{

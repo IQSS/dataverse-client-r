@@ -11,7 +11,10 @@
 #' @seealso To manage Dataverses: \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{dataverse_contents}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
 #' @examples
 #' \dontrun{
+#' (dv <- create_dataverse("mydataverse"))
 #' 
+#' # cleanup
+#' delete_dataverse("mydataverse")
 #' }
 #' @export
 create_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
@@ -35,7 +38,8 @@ create_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
 #' @seealso To manage Dataverses: \code{\link{create_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{dataverse_contents}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
 #' @examples
 #' \dontrun{
-#' 
+#' dv <- create_dataverse("mydataverse")
+#' delete_dataverse(dv)
 #' }
 #' @export
 delete_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
@@ -56,10 +60,6 @@ delete_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
 #' @template dots
 #' @return A list
 #' @seealso \code{\link{dataverse_metadata}}
-#' @examples
-#' \dontrun{
-#' 
-#' }
 #' @export
 set_dataverse_metadata <- function(dataverse, body, root = TRUE, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataverse <- dataverse_id(dataverse)

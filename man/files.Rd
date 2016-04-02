@@ -5,7 +5,7 @@
 \alias{get_metadata}
 \title{Download File(s)}
 \usage{
-dataverse_file(file, ds = NULL, format = c("original", "RData", "prep",
+dataverse_file(file, dataset = NULL, format = c("original", "RData", "prep",
   "bundle"), vars = NULL, key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 
@@ -16,6 +16,8 @@ get_metadata(file, format = c("ddi", "preprocessed"),
 \arguments{
 \item{file}{An integer specifying a file identifier or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset.}
 
+\item{dataset}{An integer specifying a dataset identification number or an object of class \dQuote{dataverse_dataset}. The identification number is the dataset's persistent identification number (not the integer specifying a specific version of the dataset, such as returned by \code{\link{dataset_versions}}).}
+
 \item{format}{A character string specifying a file format. By default, this is \dQuote{original} (the original file format). If \dQuote{RData} or \dQuote{prep} is used, an alternative is returned. If \dQuote{bundle}, a compressed directory containing a bundle of file formats is returned.}
 
 \item{vars}{A character vector specifying one or more variable names, used to extract a subset of the data.}
@@ -25,8 +27,6 @@ get_metadata(file, format = c("ddi", "preprocessed"),
 \item{server}{A character string specifying a Dataverse server. There are multiple Dataverse installations, but the defaults is to use the Harvard Dataverse. This can be modified atomically or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 
 \item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
-
-\item{dataset}{An integer specifying a dataset identification number or an object of class \dQuote{dataverse_dataset}. The identification number is the dataset's persistent identification number (not the integer specifying a specific version of the dataset, such as returned by \code{\link{dataset_versions}}).}
 }
 \value{
 A list.

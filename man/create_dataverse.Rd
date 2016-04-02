@@ -29,7 +29,10 @@ For example, if one were involved in an ongoing project that generated monthly d
 }
 \examples{
 \dontrun{
+(dv <- create_dataverse("mydataverse"))
 
+# cleanup
+delete_dataverse("mydataverse")
 }
 }
 \seealso{

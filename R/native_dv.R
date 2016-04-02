@@ -108,10 +108,6 @@ get_facets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 #' monogan <- get_dataverse("monogan")
 #' monogan_data <- dataverse_contents(monogan)
 #' dataverse_metadata(monogan)
-#' 
-#' # get metadata
-#' dataverse_metadata(monogan)
-#' 
 #' }
 #' @export
 dataverse_metadata <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {

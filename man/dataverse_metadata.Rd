@@ -32,10 +32,6 @@ This function returns a list of metadata for a named Dataverse. Use \code{\link{
 monogan <- get_dataverse("monogan")
 monogan_data <- dataverse_contents(monogan)
 dataverse_metadata(monogan)
-
-# get metadata
-dataverse_metadata(monogan)
-
 }
 }
 \seealso{

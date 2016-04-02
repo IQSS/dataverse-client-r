@@ -1,14 +1,16 @@
-#' @title Create role group
-#' @description Create a role group
+#' @rdname role_groups
+#' @title Role groups
+#' @description Create, update, and delete role groups
 #' @details Role groups can be used to organize roles for a Dataverse.
 #' @template dv
+#' @template group
 #' @param alias A character string specifying an alias for the role group.
 #' @param name A character string specifying the name of the role group.
 #' @param description A character string specifying a description of the role group.
 #' @template envvars
 #' @template dots
 #' @return A list of class \dQuote{dataverse_group}.
-#' @seealso \code{\link{list_groups}}, \code{\link{update_group}}, \code{\link{get_group}}, \code{\link{add_roles_to_group}}, \code{\link{delete_group}}
+#' @seealso \code{\link{add_roles_to_group}}
 #' @examples
 #' \dontrun{
 #' # create a group
@@ -40,34 +42,7 @@ create_group <- function(dataverse, alias, name, description, key = Sys.getenv("
     structure(j, class = "dataverse_group")
 }
 
-#' @title Update role group
-#' @description \dots
-#' @details \dots
-#' @template group
-#' @param name A character string specifying the name of the role group.
-#' @param description A character string specifying a description of the role group.
-#' @param dataverse A character string specifying a Dataverse name or an object of class \dQuote{dataverse}. Can be missing if \code{role} is an object of class \dQuote{dataverse_group}.
-#' @template envvars
-#' @template dots
-#' @return A list of class \dQuote{dataverse_group}.
-#' @seealso \code{\link{create_group}}, \code{\link{list_groups}}, \code{\link{get_group}}, \code{\link{add_roles_to_group}}, \code{\link{delete_group}}
-#' @examples
-#' \dontrun{
-#' # create a group
-#' g <- create_group("my_dataverse", "testgroup", "aGroupName", "this is a test group")
-#' 
-#' # update group details
-#' update_group(g, description = "this needs a new description")
-#'
-#' # get group details
-#' get_group(g)
-#'
-#' # list all groups
-#' list_groups("my_dataverse")
-#'
-#' # delete group
-#' delete_group(g)
-#' }
+#' @rdname role_groups
 #' @export
 update_group <- function(group, name, description, dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     b <- list()
@@ -99,31 +74,7 @@ update_group <- function(group, name, description, dataverse, key = Sys.getenv("
     structure(j, class = "dataverse_group")
 }
 
-#' @title List role groups
-#' @description Returns a list of role groups for a given dataverse
-#' @details Role groups can be used to organize roles for a dataverse.
-#' @template dv
-#' @template envvars
-#' @template dots
-#' @return A list of objects of class \dQuote{dataverse_group}.
-#' @seealso \code{\link{create_group}}, \code{\link{update_group}}, \code{\link{get_group}}, \code{\link{add_roles_to_group}}, \code{\link{delete_group}}
-#' @examples
-#' \dontrun{
-#' # create a group
-#' g <- create_group("my_dataverse", "testgroup", "aGroupName", "this is a test group")
-#' 
-#' # update group details
-#' update_group(g, description = "this needs a new description")
-#'
-#' # get group details
-#' get_group(g)
-#'
-#' # list all groups
-#' list_groups("my_dataverse")
-#'
-#' # delete group
-#' delete_group(g)
-#' }
+#' @rdname role_groups
 #' @export
 list_groups <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataverse <- dataverse_id(dataverse)
@@ -138,32 +89,7 @@ list_groups <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = S
     })
 }
 
-#' @title Get role group
-#' @description \dots
-#' @details \dots
-#' @template group
-#' @param dataverse A character string specifying a Dataverse name or an object of class \dQuote{dataverse}. Can be missing if \code{role} is an object of class \dQuote{dataverse_group}.
-#' @template envvars
-#' @template dots
-#' @return A list of class \dQuote{dataverse_group}.
-#' @seealso \code{\link{list_groups}}, \code{\link{create_group}}, \code{\link{update_group}}, \code{\link{add_roles_to_group}}, \code{\link{delete_group}}
-#' @examples
-#' \dontrun{
-#' # create a group
-#' g <- create_group("my_dataverse", "testgroup", "aGroupName", "this is a test group")
-#' 
-#' # update group details
-#' update_group(g, description = "this needs a new description")
-#'
-#' # get group details
-#' get_group(g)
-#'
-#' # list all groups
-#' list_groups("my_dataverse")
-#'
-#' # delete group
-#' delete_group(g)
-#' }
+#' @rdname role_groups
 #' @export
 get_group <- function(group, dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(group, "dataverse_group")) {
@@ -180,31 +106,7 @@ get_group <- function(group, dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
     structure(j, class = "dataverse_group")
 }
 
-#' @title Delete role group
-#' @description \dots
-#' @details \dots
-#' @template group
-#' @param dataverse A character string specifying a Dataverse name or an object of class \dQuote{dataverse}. Can be missing if \code{role} is an object of class \dQuote{dataverse_group}.
-#' @template envvars
-#' @template dots
-#' @return A list.
-#' @examples
-#' \dontrun{
-#' # create a group
-#' g <- create_group("my_dataverse", "testgroup", "aGroupName", "this is a test group")
-#' 
-#' # update group details
-#' update_group(g, description = "this needs a new description")
-#'
-#' # get group details
-#' get_group(g)
-#'
-#' # list all groups
-#' list_groups("my_dataverse")
-#'
-#' # delete group
-#' delete_group(g)
-#' }
+#' @rdname role_groups
 #' @export
 delete_group <- function(group, dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(group, "dataverse_group")) {
@@ -224,19 +126,16 @@ delete_group <- function(group, dataverse, key = Sys.getenv("DATAVERSE_KEY"), se
     }
 }
 
-#' @title Add roles to group
-#' @description \dots
-#' @details \dots
+#' @rdname add_roles
+#' @title Add/Remove role to/from group
+#' @description Add/remove role from group
+#' @details Role groups can be used to organize roles for a Dataverse. These functions add or remove roles from a group
 #' @template group
 #' @template role
 #' @param dataverse A character string specifying a Dataverse name or an object of class \dQuote{dataverse}. Can be missing if \code{role} is an object of class \dQuote{dataverse_group}.
 #' @template envvars
 #' @template dots
 #' @return A list.
-#' @examples
-#' \dontrun{
-#' 
-#' }
 #' @export
 add_roles_to_group <- function(group, role, dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     
@@ -259,19 +158,7 @@ add_roles_to_group <- function(group, role, dataverse, key = Sys.getenv("DATAVER
     j
 }
 
-#' @title Remove role from group
-#' @description \dots
-#' @details \dots
-#' @template group
-#' @template role
-#' @param dataverse A character string specifying a Dataverse name or an object of class \dQuote{dataverse}. Can be missing if \code{role} is an object of class \dQuote{dataverse_group}.
-#' @template envvars
-#' @template dots
-#' @return A list.
-#' @examples
-#' \dontrun{
-#' 
-#' }
+#' @rdname add_roles
 #' @export
 remove_role_from_group <- function(group, role, dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(group, "dataverse_group")) {

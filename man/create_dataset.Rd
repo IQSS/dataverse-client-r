@@ -30,8 +30,10 @@ This function creates a Dataverse dataset. In Dataverse, a \dQuote{dataset} is t
 \examples{
 \dontrun{
 meta <- list()
+ds <- create_dataset("mydataverse", body = meta)
 
-d <- create_dataset("mydataverse", body = list())
+# cleanup
+delete_dataset(ds)
 }
 }
 \seealso{
