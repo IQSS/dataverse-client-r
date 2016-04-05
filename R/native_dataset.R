@@ -14,7 +14,7 @@
 #' monogan <- get_dataverse("monogan")
 #' monogan_data <- dataverse_contents(monogan)
 #' d1 <- get_dataset(monogan_data[[1]])
-#' f <- dataverse_file(d1$files$datafile$id[3])
+#' f <- get_file(d1$files$datafile$id[3])
 #' }
 #' @export
 get_dataset <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {

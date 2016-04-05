@@ -29,6 +29,55 @@ dataset_id.dataverse_dataset <- function(x, ...) {
     x$id
 }
 
+# get fileid from a dataset DOI or dataset ID
+get_fileid <- function(x, ...) {
+    UseMethod('get_fileid', x)
+}
+
+get_fileid.numeric <- function(x, file, key, server, ...) {
+    files <- dataset_files(x, key = key, server = server, ...)
+    ids <- unlist(lapply(files, function(x) x[["datafile"]][["id"]]))
+    if (is.numeric(file)) {
+        w <- which(ids %in% file)
+        if (!length(w)) {
+            stop("File not found")
+        }
+        id <- ids[w]
+    } else {
+        ns <- unlist(lapply(files, `[[`, "label"))
+        w <- which(ns %in% file)
+        if (!length(w)) {
+            stop("File not found")
+        }
+        id <- ids[w]
+    }
+    id
+}
+
+get_fileid.character <- function(x, file, key, server, ...) {
+    files <- dataset_files(prepend_doi(x), key = key, server = server, ...)
+    ids <- unlist(lapply(files, function(x) x[["datafile"]][["id"]]))
+    if (is.numeric(file)) {
+        w <- which(ids %in% file)
+        if (!length(w)) {
+            stop("File not found")
+        }
+        id <- ids[w]
+    } else {
+        ns <- unlist(lapply(files, `[[`, "label"))
+        w <- which(ns %in% file)
+        if (!length(w)) {
+            stop("File not found")
+        }
+        id <- ids[w]
+    }
+    id
+}
+
+get_fileid.dataverse_file <- function(x, file, key, server, ...) {
+    x[["datafile"]][["id"]]
+}
+
 # other functions
 prepend_doi <- function(dataset) {
     if (grepl("^hdl", dataset)) {
@@ -58,3 +107,4 @@ api_url <- function(server, prefix="api/") {
     url <- paste0("https://", domain, "/", prefix)
     return(url)
 }
+

@@ -56,8 +56,8 @@ print.dataverse_dataset_version <- function(x, ...) {
     invisible(x)    
 }
 
-# dataverse_file class
-print.dataverse_file <- function(x, ...) {
+# get_file class
+print.get_file <- function(x, ...) {
     cat("File (", x$datafile$id, "): ", x$datafile$filename, "\n", sep = "")
     cat("Dataset version: ", x$datasetVersionId, "\n", sep = "")
     if ("md5" %in% names(x$datafile)) {

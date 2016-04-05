@@ -2,13 +2,13 @@
 #' @title Download File(s)
 #' @description Download Dataverse File(s)
 #' @details This function provides access to data files from a Dataverse entry.
-#' @param file An integer specifying a file identifier or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset.
+#' @param file An integer specifying a file identifier; or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset; or an object of class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
 #' @template ds
-#' @param format A character string specifying a file format. By default, this is \dQuote{original} (the original file format). If \dQuote{RData} or \dQuote{prep} is used, an alternative is returned. If \dQuote{bundle}, a compressed directory containing a bundle of file formats is returned.
+#' @param format A character string specifying a file format. For \code{get_file}: by default, this is \dQuote{original} (the original file format). If \dQuote{RData} or \dQuote{prep} is used, an alternative is returned. If \dQuote{bundle}, a compressed directory containing a bundle of file formats is returned. For \code{get_metadata}, this is \dQuote{ddi}.
 #' @param vars A character vector specifying one or more variable names, used to extract a subset of the data.
 #' @template envvars
 #' @template dots
-#' @return A list.
+#' @return \code{get_metadata} returns a character vector containing a DDI metadata file. \code{get_file} returns a raw vector.
 #' @examples
 #' \dontrun{
 #' # download file from: 
@@ -16,11 +16,19 @@
 #' monogan <- get_dataverse("monogan")
 #' monogan_data <- dataverse_contents(monogan)
 #' d1 <- get_dataset("doi:10.7910/DVN/ARKOTI")
-#' f <- dataverse_file(d1$files$datafile$id[3])
+#' f <- get_file(d1$files$datafile$id[3])
+#'
+#' # check file metadata
+#' m1 <- get_metadata("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
+#' m2 <- get_metadata(2437257)
 #'
 #' # retrieve file based on DOI and filename
-#' f2 <- dataverse_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
-#' f2 <- dataverse_file(2692202, "doi:10.7910/DVN/ARKOTI")
+#' f2 <- get_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
+#' f2 <- get_file(2692202)
+#' 
+#' # retrieve file based on "dataverse_file" object
+#' flist <- dataset_files(2692151)
+#' get_file(flist[[2]])
 #' 
 #' # read file as data.frame
 #' if (require("rio")) {
@@ -35,7 +43,7 @@
 #' }
 #' }
 #' @export
-dataverse_file <- 
+get_file <- 
 function(file, 
          dataset = NULL,
          format = c("original", "RData", "prep", "bundle"),
@@ -47,28 +55,15 @@ function(file,
     
     format <- match.arg(format)
     
-    # from doi get file ID
-    if (!is.null(dataset) && !is.numeric(file)) {
-        file <- (function(doi, filename, ...) {
-            files <- dataset_files(prepend_doi(doi))
-            ids <- unlist(lapply(files, function(x) x[["datafile"]][["id"]]))
-            if (is.numeric(file)) {
-                w <- which(ids %in% file)
-                if (!length(w)) {
-                    stop("File not found")
-                }
-                id <- ids[w]
-            } else {
-                ns <- unlist(lapply(files, `[[`, "label"))
-                w <- which(ns %in% file)
-                if (!length(w)) {
-                    stop("File not found")
-                }
-                id <- ids[w]
-            }
-            id
-        })(dataset, file)
-        
+    # get file ID from doi
+    if (!is.numeric(file)) {
+        if (inherits(file, "dataverse_file")) {
+            file <- get_fileid(file)
+        } else if(is.null(dataset)) {
+            stop("When 'file' is a character string, dataset must be specified. Or, use a global fileid instead.")
+        } else {
+            file <- get_fileid(dataset, file, key = key, server = server, ...)
+        }
     }
     
     if (length(file) > 1) {
@@ -98,26 +93,42 @@ function(file,
                 r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
             }
         }
-        
         httr::stop_for_status(r)
-        httr::content(r, as = "raw")
+        out <- httr::content(r, as = "raw")
     }
+    structure(out, filename = get_file_name_from_header(r))
+}
+
+get_file_name_from_header <- function(x) {
+    gsub("\"", "", strsplit(httr::headers(x)[["content-type"]], "name=")[[1]][2])
 }
 
 #' @rdname files
+#' @importFrom xml2 read_xml
 #' @export
 get_metadata <- 
 function(file, 
+         dataset = NULL,
          format = c("ddi", "preprocessed"),
          key = Sys.getenv("DATAVERSE_KEY"), 
          server = Sys.getenv("DATAVERSE_SERVER"), 
          ...) {
+    # get file ID from doi
+    if (!is.numeric(file)) {
+        if (inherits(file, "dataverse_file")) {
+            file <- get_fileid(file)
+        } else if(is.null(dataset)) {
+            stop("When 'file' is a character string, dataset must be specified. Or, use a global fileid instead.")
+        } else {
+            file <- get_fileid(dataset, file, key = key, server = server, ...)
+        }
+    }
     format <- match.arg(format)
     u <- paste0(api_url(server), "access/datafile/", file, "/metadata/", format)
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    httr::content(r, as = "text", encoding = "UTF-8")
+    out <- httr::content(r, as = "text", encoding = "UTF-8")
+    return(out)
 }
-
 
 # UNF functions to validate dataset against Dataverse metadata

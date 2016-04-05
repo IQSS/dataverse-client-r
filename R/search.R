@@ -16,7 +16,7 @@
 #' @param verbose A logical indicating whether to display information about the search query (default is \code{TRUE}).
 #' @param http_opts Currently ignored.
 #' @return A list.
-#' @seealso \code{\link{dataverse_file}}, \code{\link{get_dataverse}}, \code{\link{get_dataset}}, \code{\link{dataverse_contents}}
+#' @seealso \code{\link{get_file}}, \code{\link{get_dataverse}}, \code{\link{get_dataset}}, \code{\link{dataverse_contents}}
 #' @examples
 #' \dontrun{
 #' # simple string search

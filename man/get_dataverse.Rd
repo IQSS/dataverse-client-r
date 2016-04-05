@@ -38,7 +38,7 @@ monogan <- get_dataverse("monogan")
 
 # get a dataset from the dataverse
 d1 <- get_dataset(monogan_data[[1]])
-f <- dataverse_file(d1$files$datafile$id[3])
+f <- get_file(d1$files$datafile$id[3])
 }
 }
 \seealso{
