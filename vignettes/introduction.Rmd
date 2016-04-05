@@ -1,0 +1,124 @@
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{1. Introduction}
+-->
+
+
+# Introduction to Dataverse #
+
+The **dataverse** package is the official R client for [Dataverse 4](http://dataverse.org/) data repositories. The package enables data search, retrieval, and deposit with any Dataverse installation, thus allowing R users to integrate public data sharing into the reproducible research workflow.
+
+In addition to this introduction, the package contains three additional vignettes covering:
+
+  * Data Search
+  * Data retrieval
+  * Data archiving
+
+They can be accessed from [CRAN](http://cran.r-project.org/web/packages/dataverse/index.html) or from within R using `vignettes(package = "dataverse")`.
+
+The dataverse client package can be installed from [CRAN](http://cran.r-project.org/web/packages/dataverse/index.html), and you can find the latest development version and report any issues on GitHub:
+
+```R
+if(!require("ghit")) {
+    install.packages("ghit")
+}
+ghit::install_github("iqss/dataverse-client-r")
+library("dataverse")
+```
+
+(Note: **dataverse** is the next-generation iteration of [the **dvn** package](http://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. See the appendix for a cross-walk of functionality between **dvn** and **dataverse**.)
+
+## Quick Start ##
+
+Dataverse has some terminology that is worth quickly reviewing before showing how to work with Dataverse in R. Dataverse is an application that can be installed in many places. As a result, **dataverse** can work with any instllation but you need to specify which installation you want to work with. This can be set by default with an environment variable, `DATAVERSE_SERVER`:
+
+```{r}
+library("dataverse")
+Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
+```
+
+This should be the Dataverse server, without the "https" prefix or the "/api" URL path, etc. The package attempts to compensate for any malformed values, though. 
+
+
+Within a given Dataverse installation, organizations or individuals can create objects that are also called "Dataverses". These Dataverses can then contain other *dataverses*, which can contain other *dataverses*, and so on. They can also contain *datasets* which in turn contain files. You can think of Harvard's Dataverse as a top-level installation, where an institution might have a *dataverse* that contains a subsidiary *dataverse* for each researcher at the organization, who in turn publishes all files relevant to a given study as a *dataset*.
+
+You can search for and retrieve data without a Dataverse account for that a specific Dataverse installation. For example, to search for data files or datasets that mention "ecological inference", we can just do:
+
+```{r}
+dataverse_search("ecological inference")
+```
+
+If we want to restrict this to material authored by Harvard political scientist Gary King with a title that contains "ecological inference" we can more narrowly request:
+
+```{r}
+dataverse_search(author = "Gary King", title = "Ecological Inference")
+```
+
+And if we only want to search datasets, we can specify a `type`:
+
+```{r}
+dataverse_search(author = "Gary King", title = "Ecological Inference", type = "dataset")
+```
+
+To achieve retrieve a data file, we need to investigate the dataset being returned and look at what files it contains:
+
+
+```R
+get_dataset()
+dataset_files()
+get_metadata()
+get_file()
+```
+
+For "native" Dataverse features (such as user account controls) or to create and publish a dataset, you will need an API key linked to a Dataverse installation account. Instructions for obtaining an account and setting up an API key are available in the [Dataverse User Guide](http://guides.dataverse.org/en/latest/user/account.html). (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called `DATAVERSE_KEY`. It can be set within R using: 
+
+```R
+Sys.setenv("DATAVERSE_KEY" = "examplekey12345")
+```
+
+With that set, you can easily create a new dataverse, create a dataset within that dataverse, push files to the dataset, and release it:
+
+```R
+# create a dataverse
+dat <- create_daverse("mydataverse")
+
+# create a list of metadata
+metadat <- list(title = "My Study",
+                creator = "Doe, John",
+                description = "An example study")
+
+# create the dataset
+dat <- initiate_dataset("mydataverse", body = metadat)
+
+# add files to dataset
+tmp <- tempfile()
+write.csv(iris, file = tmp)
+f <- add_file(dat, file = tmp)
+
+# publish new dataset
+publish_dataset(dat)
+```
+
+Your data are now publicly accessible.
+
+
+## Appendix: dvn to dataverse Crosswalk ##
+
+The original [dvn](https://cran.r-project.org/?package=dvn) package provided functionality for searching, retrieving, and depositing data. Here is a cross-walk of functionality in case you were already familiar with the dvn package:
+
+| API Category | **dataverse** functions | **dvn** functions |
+| ------------ | ----------------------- | ----------------- |
+| Data Search | `dataverse_search()` | `dvSearch()` |
+| Data Retrieval | `get_metadata()` | `dvMetadata()` |
+|| `get_file()` |  |
+| Data Deposit | `create_dataverse()` |  |
+|| `initiate_dataset()` | `dvCreateStudy()` |
+|| `update_dataset()` | `dvEditStudy()` |
+|| `add_file()` | `addFile()` |
+|| `delete_file()` | `dvDeleteFile()` |
+|| `publish_sword_dataset()` | `dvReleaseStudy()` |
+|| `delete_sword_dataset()` |  |
+|| `service_document()` | `dvServiceDoc()` |
+|| `dataset_statement()` | `dvStudyStatement()` |
+|| `list_datasets()` | `dvUserStudies()` |
+

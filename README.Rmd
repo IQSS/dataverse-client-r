@@ -54,7 +54,7 @@ dataset_metadata("doi:10.7910/DVN/ARKOTI")
 and even access files directly in R using the DOI and a filename:
 
 ```R
-f <- dataverse_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
+f <- get_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
 
 # load it into memory
 tmp <- tempfile(fileext = ".dta")
@@ -66,7 +66,7 @@ If you don't konw the file name in advance, you can parse the available files re
 
 ```R
 d1 <- get_dataset("doi:10.7910/DVN/ARKOTI")
-f <- dataverse_file(d1$files$datafile$id[3])
+f <- get_file(d1$files$datafile$id[3])
 ```
 
 ### Data Deposit ###

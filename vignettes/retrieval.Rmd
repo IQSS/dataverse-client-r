@@ -1,0 +1,38 @@
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{3. Data Reuse and Reproducibility}
+-->
+
+# Data Reuse #
+
+This vignette shows some simple examples of how find and use data from Dataverse in a reproducible research workflow. We'll start by loading some packages:
+
+```{r}
+library("UNF")
+library("dataverse")
+```
+
+## Retrieving Data from Dataverse ##
+
+For the purposes of this section, we'll focus on one of the most-used data archives in Harvard University's [IQSS Dataverse Network](https://dataverse.harvard.edu/):
+
+> John Y. Campbell; Yeung L. Chan; and Luis Viceira, 2007, "Replication data for: A Multivariate Model of Strategic Asset Allocation", http://hdl.handle.net/1902.1/QBXRSFLBQJ UNF:3:ZnYhHkZe2veTJAWaBDpPKA== The Harvard Dataverse Network [Distributor] V2 [Version]
+
+This study is persistently retrievable by a "[Handle](http://en.wikipedia.org/wiki/Handle_System)": http://hdl.handle.net/1902.1/QBXRSFLBQJ. But in addition to the handle, the citation contains a study-level UNF signature: `UNF:3:ZnYhHkZe2veTJAWaBDpPKA==`, which provides a versioned, multi-file hash for the entire study, which contains three data files:
+
+ * dataANN (`UNF:3:RVjeeV5JOY6jb8hJtk2T/A==`)
+ * dataMTH_update (`UNF:3:TMiZOYj0Wdtq58sDBJjveQ==`)
+ * dataQTR (`UNF:3:cTsOMQHb3efFo7i7pq6FfQ==`)
+
+Note: All of these UNFs indicate that the file- and study-level UNF signatures were generated using UNFv3 (an early version of the UNF algorithm).
+
+We will download these files and examine them directly in R using the **dataverse** package. To begin, we need
+
+
+To retrieve all metadata associated with the study we simply do the following:
+
+```{r}
+dataset <- get_dataset("hdl:1902.1/QBXRSFLBQJ")
+```
+
+This retrieves metadata and file lists for files stored in the dataset.
