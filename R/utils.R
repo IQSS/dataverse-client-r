@@ -94,17 +94,16 @@ prepend_doi <- function(dataset) {
     dataset
 }
 
-api_url <- function(server, prefix="api/") {
+api_url <- function(server = Sys.getenv("DATAVERSE_SERVER"), prefix = "api/") {
     if (is.null(server) || server == "") {
         stop("'server' is missing with no default set in DATAVERSE_SERVER environment variable.")
     }
     server <- urltools::url_parse(server)
-    if(server$port == "") {
-        domain <- server$domain
+    if (is.na(server[["port"]]) || server[["port"]] == "") {
+        domain <- server[["domain"]]
     } else {
-        domain <- paste0(server$domain, ":", server$port)
+        domain <- paste0(server[["domain"]], ":", server[["port"]])
     }
     url <- paste0("https://", domain, "/", prefix)
     return(url)
 }
-
