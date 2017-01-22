@@ -1,6 +1,6 @@
 Package: dataverse
-Version: 0.1.18
-Date: 2016-12-17
+Version: 0.1.19
+Date: 2017-01-22
 Title: Client for Dataverse 4 Repositories
 Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
                     email = "thosjleeper@gmail.com"),
@@ -18,7 +18,7 @@ Suggests:
     rio
 Description: Provides access to Dataverse version 4 APIs, enabling data search,
     retrieval, and deposit. For Dataverse versions <= 4.0, please use the 'dvn'
-    package <http://cran.r-project.org/package=dvn>.
+    package <https://cran.r-project.org/package=dvn>.
 License: GPL-2
 URL: https://github.com/iqss/dataverse-client-r
 BugReports: https://github.com/iqss/dataverse-client-r/issues

@@ -34,7 +34,7 @@ get_fileid <- function(x, ...) {
     UseMethod('get_fileid', x)
 }
 
-get_fileid.numeric <- function(x, file, key, server, ...) {
+get_fileid.numeric <- function(x, file, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     files <- dataset_files(x, key = key, server = server, ...)
     ids <- unlist(lapply(files, function(x) x[["datafile"]][["id"]]))
     if (is.numeric(file)) {
@@ -54,9 +54,9 @@ get_fileid.numeric <- function(x, file, key, server, ...) {
     id
 }
 
-get_fileid.character <- function(x, file, key, server, ...) {
+get_fileid.character <- function(x, file, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     files <- dataset_files(prepend_doi(x), key = key, server = server, ...)
-    ids <- unlist(lapply(files, function(x) x[["datafile"]][["id"]]))
+    ids <- unlist(lapply(files, function(x) x[["dataFile"]][["id"]]))
     if (is.numeric(file)) {
         w <- which(ids %in% file)
         if (!length(w)) {
@@ -74,8 +74,8 @@ get_fileid.character <- function(x, file, key, server, ...) {
     id
 }
 
-get_fileid.dataverse_file <- function(x, file, key, server, ...) {
-    x[["datafile"]][["id"]]
+get_fileid.dataverse_file <- function(x, file, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
+    x[["dataFile"]][["id"]]
 }
 
 # other functions

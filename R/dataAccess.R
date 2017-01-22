@@ -58,8 +58,8 @@ function(file,
     # get file ID from doi
     if (!is.numeric(file)) {
         if (inherits(file, "dataverse_file")) {
-            file <- get_fileid(file)
-        } else if(is.null(dataset)) {
+            file <- get_fileid(file, key = key, server = server)
+        } else if (is.null(dataset)) {
             stop("When 'file' is a character string, dataset must be specified. Or, use a global fileid instead.")
         } else {
             file <- get_fileid(dataset, file, key = key, server = server, ...)
