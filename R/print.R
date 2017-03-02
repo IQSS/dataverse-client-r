@@ -67,6 +67,17 @@ print.get_file <- function(x, ...) {
     invisible(x)
 }
 
+# get_file class
+print.dataverse_file <- function(x, ...) {
+    cat("File (", x$dataFile$id, "): ", x$dataFile$filename, "\n", sep = "")
+    cat("Dataset version: ", x$datasetVersionId, "\n", sep = "")
+    if ("md5" %in% names(x$dataFile)) {
+        cat("MD5: ", x$dataFile$md5, "\n", sep = "")
+    }
+    cat("Description: ", x$dataFile$description, "\n", sep = "")
+    invisible(x)
+}
+
 # dataverse_group class
 print.dataverse_group <- function(x, ...) {
     cat("Group:      ", x$displayName, "\n", sep = "")

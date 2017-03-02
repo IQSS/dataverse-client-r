@@ -1,6 +1,7 @@
 # CHANGES TO dataverse 0.1.20
 
 * Update roxygen.
+* Add `print.dataverse_file()` method. (#12)
 * Added a `dataverse_id.character()` method. (#12)
 
 # CHANGES TO dataverse 0.1.18
