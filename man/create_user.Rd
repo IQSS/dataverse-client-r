@@ -33,4 +33,3 @@ create_user("password")
 \seealso{
 \code{\link{get_user_key}}
 }
-

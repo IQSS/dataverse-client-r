@@ -2,10 +2,10 @@
 % Please edit documentation in R/native_role_groups.R
 \name{create_group}
 \alias{create_group}
-\alias{delete_group}
-\alias{get_group}
-\alias{list_groups}
 \alias{update_group}
+\alias{list_groups}
+\alias{get_group}
+\alias{delete_group}
 \title{Role groups}
 \usage{
 create_group(dataverse, alias, name, description,
@@ -72,4 +72,3 @@ delete_group(g)
 \seealso{
 \code{\link{add_roles_to_group}}
 }
-

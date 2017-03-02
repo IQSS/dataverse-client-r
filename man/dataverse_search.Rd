@@ -67,4 +67,3 @@ dataverse_search(author = "Gary King", type = "dataset")
 \seealso{
 \code{\link{get_file}}, \code{\link{get_dataverse}}, \code{\link{get_dataset}}, \code{\link{dataverse_contents}}
 }
-

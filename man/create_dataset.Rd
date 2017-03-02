@@ -39,4 +39,3 @@ delete_dataset(ds)
 \seealso{
 \code{\link{get_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}
 }
-

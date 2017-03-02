@@ -44,4 +44,3 @@ f <- get_file(d1$files$datafile$id[3])
 \seealso{
 To manage Dataverses: \code{\link{create_dataverse}}, \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
 }
-

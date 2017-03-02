@@ -34,4 +34,3 @@ Add/remove role from group
 \details{
 Role groups can be used to organize roles for a Dataverse. These functions add or remove roles from a group
 }
-

@@ -42,4 +42,3 @@ dataset_files(d1)
 \seealso{
 \code{\link{get_dataset}}
 }
-

@@ -45,4 +45,3 @@ str(dataset_metadata(d1), 4)
 \seealso{
 \code{\link{get_dataset}}
 }
-

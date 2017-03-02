@@ -39,4 +39,3 @@ dataset_files(d1)
 \seealso{
 \code{\link{get_dataset}}, \code{\link{dataset_files}}, \code{\link{publish_dataset}}
 }
-

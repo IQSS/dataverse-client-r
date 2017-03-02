@@ -37,4 +37,3 @@ dataverse_metadata(monogan)
 \seealso{
 \code{\link{set_dataverse_metadata}}
 }
-

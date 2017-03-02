@@ -40,4 +40,3 @@ f <- get_file(d1$files$datafile$id[3])
 \seealso{
 \code{\link{create_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}, \code{\link{dataset_files}}, \code{\link{dataset_metadata}}
 }
-

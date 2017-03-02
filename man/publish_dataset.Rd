@@ -38,4 +38,3 @@ publish_dataset(ds)
 \seealso{
 \code{\link{get_dataset}}, \code{\link{publish_dataverse}}
 }
-

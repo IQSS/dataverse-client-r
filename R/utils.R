@@ -5,6 +5,9 @@ dataverse_id <- function(x, ...) {
 dataverse_id.default <- function(x, ...) {
     x
 }
+dataverse_id.character <- function(x, ...) {
+    get_dataverse(x, check = FALSE)$id
+}
 dataverse_id.dataverse <- function(x, ...) {
     x$id
 }
@@ -81,16 +84,19 @@ get_fileid.dataverse_file <- function(x, file, key = Sys.getenv("DATAVERSE_KEY")
 # other functions
 prepend_doi <- function(dataset) {
     if (grepl("^hdl", dataset)) {
-        return(dataset)
-    }
-    if (!grepl("^doi:", dataset)) {
-        dataset <- paste0("doi:", dataset)
+        dataset <- dataset
+    } else if (grepl("^doi:", dataset)) {
+        dataset <- dataset
     } else if (grepl("^DOI:", dataset)) {
         dataset <- paste0("doi:", strsplit(dataset, "DOI:", fixed = TRUE)[[1]][2])
-    } else if (grepl("dx\\.doi\\.org", dataset)) {
-        dataset <- paste0("doi:", httr::parse_url(dataset)$path)
+    } else if (!grepl("^doi:", dataset)) {
+        if (grepl("dx\\.doi\\.org", dataset) | grepl("^http", dataset)) {
+            dataset <- httr::parse_url(dataset)$path
+        }
+        dataset <- paste0("doi:", dataset)
+    } else {
+        dataset <- dataset
     }
-    # need to check if it is a handle, and issue warning
     dataset
 }
 

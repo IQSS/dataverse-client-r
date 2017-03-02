@@ -33,4 +33,3 @@ This function sets the value of metadata fields for a Dataverse. Use \code{\link
 \seealso{
 \code{\link{dataverse_metadata}}
 }
-
