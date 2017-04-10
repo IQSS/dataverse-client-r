@@ -121,7 +121,7 @@ ghit::install_github("iqss/dataverse-client-r")
 library("dataverse")
 ```
 
-Users interested in downloading metadata from archives other than Dataverse may be interested in Kurt Hornik's [OAIHarvester](http://cran.r-project.org/web/packages/OAIHarvester/index.html) and Scott Chamberlain's [oai](https://cran.fhcrc.org/web/packages/oai/index.html), which offer metadata download from any web repository that is compliant with the [Open Archives Initiative](http://www.openarchives.org/) standards. Additionally, [rdryad](http://cran.fhcrc.org/web/packages/rdryad/index.html) uses OAIHarvester to interface with [Dryad](http://datadryad.org/). The [rfigshare](http://cran.r-project.org/web/packages/rfigshare/) package works in a similar spirit to **dataverse** with [http://figshare.com/](http://figshare.com/).
+Users interested in downloading metadata from archives other than Dataverse may be interested in Kurt Hornik's [OAIHarvester](http://cran.r-project.org/web/packages/OAIHarvester/index.html) and Scott Chamberlain's [oai](http://cran.fhcrc.org/web/packages/oai/index.html), which offer metadata download from any web repository that is compliant with the [Open Archives Initiative](http://www.openarchives.org/) standards. Additionally, [rdryad](http://cran.fhcrc.org/web/packages/rdryad/index.html) uses OAIHarvester to interface with [Dryad](http://datadryad.org/). The [rfigshare](http://cran.r-project.org/web/packages/rfigshare/) package works in a similar spirit to **dataverse** with [http://figshare.com/](http://figshare.com/).
 
 ---
 
