@@ -1,3 +1,4 @@
+#' @export
 print.dataset_statement <- function(x, ...) {
     cat("Dataset:            ", x$title, "\n")
     cat("id:                 ", x$id, "\n")

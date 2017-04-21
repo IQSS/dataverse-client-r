@@ -1,3 +1,4 @@
+#' @export
 print.dataset_atom <- function(x, ...) {
     cat("ID: ", x$id, "\n", sep = "")
     cat("Generator: ", paste0(x$generator, collapse = " "), "\n", sep = "")

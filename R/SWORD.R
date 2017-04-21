@@ -39,6 +39,7 @@ service_document <- function(key = Sys.getenv("DATAVERSE_KEY"), server = Sys.get
     structure(out, class = "sword_service_document")
 }
 
+#' @export
 print.sword_service_document <- function(x, ...) {
     cat("Title: ", x$title, "\n")
     for (i in which(names(x) == "dataverse")) {
@@ -75,10 +76,18 @@ list_datasets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
     u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/collection/dataverse/", dataverse)
     r <- httr::GET(u, httr::authenticate(key, ""), ...)
     httr::stop_for_status(r)
-    out <- xml2::as_list(xml2::read_xml(r$content))
+    
     # clean up response structure
-    for (i in which(names(out) == "entry")) {
-        class(out[[i]]) <- "dataverse_dataset"
-    }    
+    x <- xml2::as_list(xml2::read_xml(r$content))
+    out <- list(title = x[["title"]][[1L]],
+                generator = x[["generator"]],
+                dataverseHasBeenReleased = x[["dataverseHasBeenReleased"]][[1L]])
+    out[["datasets"]] <- do.call("rbind.data.frame", 
+        lapply(x[which(names(x) == "entry")], function(ds) {
+            list(title = ds[["title"]][[1L]],
+                 id = ds[["id"]][[1L]])
+        })
+    )
+    rownames(out[["datasets"]]) <- seq_len(nrow(out[["datasets"]]))
     structure(out, class = "dataverse_dataset_list")
 }

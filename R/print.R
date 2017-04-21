@@ -1,4 +1,14 @@
+# sword dataset list
+#' @export
+print.dataverse_dataset_list <- function(x, ...) {
+    cat("Dataverse name: ", x$title[[1]], "\n", sep = "")
+    cat("Released?       ", if (x$dataverseHasBeenReleased[[1]] == "true") "Yes" else "No", "\n", sep = "")
+    print(x$datasets)
+    invisible(x)
+}
+
 # dataverse class
+#' @export
 print.dataverse <- function(x, ...) {
     if ("id" %in% names(x)) {
         cat("Dataverse (", x$id, "): ", x$alias, "\n", sep = "")
@@ -23,6 +33,7 @@ print.dataverse <- function(x, ...) {
 }
 
 # dataverse_dataset class
+#' @export
 print.dataverse_dataset <- function(x, ...) {
     cat("Dataset (", x$id, "): ", x$persistentUrl, "\n", sep = "")
     if ("latestVersion" %in% names(x)) {
@@ -37,16 +48,20 @@ print.dataverse_dataset <- function(x, ...) {
         if ("releaseTime" %in% names(x)) {
             cat("Release Date: ", x$releaseTime, "\n", sep = "")
         }
+        if ("license" %in% names(x)) {
+            cat("License: ", x$license, "\n", sep = "")
+        }
         if ("files" %in% names(x)) {
             n <- length(x$files)
             cat(n, ngettext(n, " File:", " Files:"), "\n", sep = "")
-            print(x$files)
+            str(x$files, 1)
         }
     }
     invisible(x)    
 }
 
 # dataverse_dataset_version class
+#' @export
 print.dataverse_dataset_version <- function(x, ...) {
     cat("Version (", x$id, "): ", x$versionNumber, ".", x$versionMinorNumber, ", ", x$versionState, "\n", sep = "")
     cat("Release Date: ", x$releaseTime, "\n", sep = "")
@@ -57,6 +72,7 @@ print.dataverse_dataset_version <- function(x, ...) {
 }
 
 # get_file class
+#' @export
 print.get_file <- function(x, ...) {
     cat("File (", x$datafile$id, "): ", x$datafile$filename, "\n", sep = "")
     cat("Dataset version: ", x$datasetVersionId, "\n", sep = "")
@@ -68,6 +84,7 @@ print.get_file <- function(x, ...) {
 }
 
 # get_file class
+#' @export
 print.dataverse_file <- function(x, ...) {
     cat("File (", x$dataFile$id, "): ", x$dataFile$filename, "\n", sep = "")
     cat("Dataset version: ", x$datasetVersionId, "\n", sep = "")
@@ -79,6 +96,7 @@ print.dataverse_file <- function(x, ...) {
 }
 
 # dataverse_group class
+#' @export
 print.dataverse_group <- function(x, ...) {
     cat("Group:      ", x$displayName, "\n", sep = "")
     cat("Alias:      ", x$groupAliasInOwner, "\n", sep = "")
@@ -92,6 +110,7 @@ print.dataverse_group <- function(x, ...) {
 # dataverse_role class
 
 # dataverse_role_assignment class
+#' @export
 print.dataverse_role_assignment <- function(x, ...) {
     cat("ID:        ", x$id, "\n", sep = "")
     cat("Assignee:  ", x$assignee, "\n", sep = "")

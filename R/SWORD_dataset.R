@@ -63,16 +63,6 @@ initiate_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"),
     structure(parse_atom(httr::content(r, as = "text", encoding = "UTF-8")))
 }
 
-print.dataverse_dataset_list <- function(x, ...) {
-    cat("Dataverse name: ", x$title[[1]], "\n", sep = "")
-    cat("Released?       ", if (x$dataverseHasBeenReleased[[1]] == "true") "Yes" else "No", "\n", sep = "")
-    for (i in which(names(x) == "entry")) {
-        cat("Dataset:        ", x[[i]][[2]][[1]], "\n")
-        cat("Dataset URL:    ", x[[i]][[1]][[1]], "\n\n")
-    }    
-    invisible(x)
-}
-
 #' @title Delete dataset (SWORD)
 #' @description Delete a SWORD (possibly unpublished) dataset
 #' @details This function is used to delete a dataset by its persistent identifier. It is part of the SWORD API, which is used to upload data to a Dataverse server.
