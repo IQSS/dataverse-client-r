@@ -4,7 +4,7 @@
 -->
 
 
-# Introduction to Dataverse #
+# Introduction to Dataverse
 
 The **dataverse** package is the official R client for [Dataverse 4](http://dataverse.org/) data repositories. The package enables data search, retrieval, and deposit with any Dataverse installation, thus allowing R users to integrate public data sharing into the reproducible research workflow.
 
@@ -19,16 +19,16 @@ They can be accessed from [CRAN](http://cran.r-project.org/web/packages/datavers
 The dataverse client package can be installed from [CRAN](http://cran.r-project.org/web/packages/dataverse/index.html), and you can find the latest development version and report any issues on GitHub:
 
 ```R
-if(!require("ghit")) {
+if (!require("ghit")) {
     install.packages("ghit")
 }
 ghit::install_github("iqss/dataverse-client-r")
 library("dataverse")
 ```
 
-(Note: **dataverse** is the next-generation iteration of [the **dvn** package](http://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. See the appendix for a cross-walk of functionality between **dvn** and **dataverse**.)
+(Note: **dataverse** is the next-generation iteration of [the **dvn** package](http://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. See the appendix of this vignette for a cross-walk of functionality between **dvn** and **dataverse**.)
 
-## Quick Start ##
+## Quick Start
 
 Dataverse has some terminology that is worth quickly reviewing before showing how to work with Dataverse in R. Dataverse is an application that can be installed in many places. As a result, **dataverse** can work with any instllation but you need to specify which installation you want to work with. This can be set by default with an environment variable, `DATAVERSE_SERVER`:
 
@@ -39,7 +39,6 @@ Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 
 This should be the Dataverse server, without the "https" prefix or the "/api" URL path, etc. The package attempts to compensate for any malformed values, though. 
 
-
 Within a given Dataverse installation, organizations or individuals can create objects that are also called "Dataverses". These Dataverses can then contain other *dataverses*, which can contain other *dataverses*, and so on. They can also contain *datasets* which in turn contain files. You can think of Harvard's Dataverse as a top-level installation, where an institution might have a *dataverse* that contains a subsidiary *dataverse* for each researcher at the organization, who in turn publishes all files relevant to a given study as a *dataset*.
 
 You can search for and retrieve data without a Dataverse account for that a specific Dataverse installation. For example, to search for data files or datasets that mention "ecological inference", we can just do:
@@ -48,20 +47,7 @@ You can search for and retrieve data without a Dataverse account for that a spec
 dataverse_search("ecological inference")
 ```
 
-If we want to restrict this to material authored by Harvard political scientist Gary King with a title that contains "ecological inference" we can more narrowly request:
-
-```{r}
-dataverse_search(author = "Gary King", title = "Ecological Inference")
-```
-
-And if we only want to search datasets, we can specify a `type`:
-
-```{r}
-dataverse_search(author = "Gary King", title = "Ecological Inference", type = "dataset")
-```
-
-To achieve retrieve a data file, we need to investigate the dataset being returned and look at what files it contains:
-
+The [search vignette](search.html) describes this functionality in more detail. To retrieve a data file, we need to investigate the dataset being returned and look at what files it contains using a variety of functions, the last of which - `get_file()` - can retrieve the files as raw vectors:
 
 ```R
 get_dataset()
@@ -102,7 +88,7 @@ publish_dataset(dat)
 Your data are now publicly accessible.
 
 
-## Appendix: dvn to dataverse Crosswalk ##
+## Appendix: dvn to dataverse Crosswalk
 
 The original [dvn](https://cran.r-project.org/?package=dvn) package provided functionality for searching, retrieving, and depositing data. Here is a cross-walk of functionality in case you were already familiar with the dvn package:
 
