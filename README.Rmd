@@ -64,14 +64,14 @@ f <- get_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
 # load it into memory
 tmp <- tempfile(fileext = ".dta")
 writeBin(as.vector(f), tmp)
-dat <- rio::import(tmp, haven = FALSE)
+dat <- foreign::read.dta(tmp)
 ```
 
 If you don't konw the file name in advance, you can parse the available files returned by `get_dataset()`:
 
 ```{r}
 d1 <- get_dataset("doi:10.7910/DVN/ARKOTI")
-f <- get_file(d1$files$dataFile$id[3])
+f <- get_file(d1$files$id[3])
 ```
 
 ### Data Deposit

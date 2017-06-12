@@ -10,13 +10,13 @@ The **dataverse** package is the official R client for [Dataverse 4](http://data
 
 In addition to this introduction, the package contains three additional vignettes covering:
 
-  * Data Search
-  * Data retrieval
-  * Data archiving
+  * [Data Search](search.html)
+  * [Data retrieval](retrieval.html)
+  * [Data archiving](archiving.html)
 
-They can be accessed from [CRAN](http://cran.r-project.org/web/packages/dataverse/index.html) or from within R using `vignettes(package = "dataverse")`.
+They can be accessed from [CRAN](https://cran.r-project.org/package=dataverse/index.html) or from within R using `vignettes(package = "dataverse")`.
 
-The dataverse client package can be installed from [CRAN](http://cran.r-project.org/web/packages/dataverse/index.html), and you can find the latest development version and report any issues on GitHub:
+The dataverse client package can be installed from [CRAN](https://cran.r-project.org/package=dataverse), and you can find the latest development version and report any issues on GitHub:
 
 ```R
 if (!require("ghit")) {
@@ -26,7 +26,7 @@ ghit::install_github("iqss/dataverse-client-r")
 library("dataverse")
 ```
 
-(Note: **dataverse** is the next-generation iteration of [the **dvn** package](http://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. See the appendix of this vignette for a cross-walk of functionality between **dvn** and **dataverse**.)
+(Note: **dataverse** is the next-generation iteration of [the **dvn** package](https://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. See the appendix of this vignette for a cross-walk of functionality between **dvn** and **dataverse**.)
 
 ## Quick Start
 

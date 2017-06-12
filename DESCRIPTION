@@ -16,7 +16,7 @@ Imports:
 Suggests:
     testthat,
     UNF,
-    rio
+    foreign
 Description: Provides access to Dataverse version 4 APIs, enabling data search,
     retrieval, and deposit. For Dataverse versions <= 4.0, please use the 'dvn'
     package <https://cran.r-project.org/package=dvn>.
