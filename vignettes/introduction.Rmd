@@ -43,8 +43,8 @@ Within a given Dataverse installation, organizations or individuals can create o
 
 You can search for and retrieve data without a Dataverse account for that a specific Dataverse installation. For example, to search for data files or datasets that mention "ecological inference", we can just do:
 
-```{r}
-dataverse_search("ecological inference")
+```R
+dataverse_search("ecological inference")[c("name", "type", "description")]
 ```
 
 The [search vignette](search.html) describes this functionality in more detail. To retrieve a data file, we need to investigate the dataset being returned and look at what files it contains using a variety of functions, the last of which - `get_file()` - can retrieve the files as raw vectors:
@@ -90,7 +90,7 @@ Your data are now publicly accessible.
 
 ## Appendix: dvn to dataverse Crosswalk
 
-The original [dvn](https://cran.r-project.org/?package=dvn) package provided functionality for searching, retrieving, and depositing data. Here is a cross-walk of functionality in case you were already familiar with the dvn package:
+The original [dvn](https://cran.r-project.org/?package=dvn) package, which worked with Dataverse versions <= 3, provided functionality for searching, retrieving, and depositing data. Here is a cross-walk of functionality in case you were already familiar with the dvn package:
 
 | API Category | **dataverse** functions | **dvn** functions |
 | ------------ | ----------------------- | ----------------- |
