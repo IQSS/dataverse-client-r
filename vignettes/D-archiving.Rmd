@@ -1,0 +1,24 @@
+---
+title: "Data Archiving"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    fig_caption: false
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{4. Data Archiving}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Coming soon...
+
+```{r}
+library("dataverse")
+Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
+```
+

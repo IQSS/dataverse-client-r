@@ -1,17 +1,29 @@
-<!--
-%\VignetteEngine{knitr}
-%\VignetteIndexEntry{3. Data Retrieval and Reuse}
--->
+---
+title: "Data Retrieval and Reuse"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    fig_caption: false
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{3. Data Retrieval and Reuse}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
-# Data Retrieval and Reuse
-
-This vignette shows how to download data from Dataverse using the dataverse package. For the purposes of this vignette, we'll focus on the Dataverse that contains supplemental files for Jamie Monogan's book *Political Analysis Using R*, which is stored at Harvard University's [IQSS Dataverse Network](https://dataverse.harvard.edu/):
+This vignette shows how to download data from Dataverse using the dataverse package. We'll focus on a Dataverse repository that contains supplemental files for [Jamie Monogan](http://spia.uga.edu/faculty-member/jamie-monogan/)'s book [*Political Analysis Using R*](http://www.springer.com/gb/book/9783319234458), which is stored at Harvard University's [IQSS Dataverse Network](https://dataverse.harvard.edu/):
 
 > Monogan, Jamie, 2015, "Political Analysis Using R: Example Code and Data, Plus Data for Practice Problems", [doi:10.7910/DVN/ARKOTI](https://doi.org/10.7910/DVN/ARKOTI), Harvard Dataverse, V1, UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==
 
 This study is persistently retrievable by a "[Digital Object Identifier (DOI)](https://www.doi.org/)": https://doi.org/10.7910/DVN/ARKOTI and the citation above (taken from the Dataverse page) includes a "[Universal Numeric Fingerprint (UNF)](http://guides.dataverse.org/en/latest/developers/unf/index.html)": `UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==`, which provides a versioned, multi-file hash for the entire study, which contains 32 files.
 
-Note: All of these UNFs indicate that the file- and study-level UNF signatures were generated using UNFv6.
+If you don't already know what datasets and files you want to use from Dataverse, see the ["Data Search" vignette](B-search.html) for guidance on data search and discovery.
+
+## Retrieving Dataset and File Metadata
 
 We will download these files and examine them directly in R using the **dataverse** package. To begin, we need to loading the package and using the `get_dataset()` function to retrieve some basic metadata about the dataset:
 
@@ -27,7 +39,20 @@ The output prints some basic metadata and then the `str()` of the `files` data f
 dataset$files[c("filename", "contentType")]
 ```
 
-This shows that there are indeed 32 files, a mix of .R code files and tab- and comma-separated data files. We'll focus here on the code file for Chapter 2 from the book. Let's start by grabbing the code using `get_file()` (note that this always returns a raw vector):
+This shows that there are indeed 32 files, a mix of .R code files and tab- and comma-separated data files. 
+
+
+You can also retrieve more extensive metadata using `dataset_metadata()`:
+
+```{r}
+str(dataset_metadata("doi:10.7910/DVN/ARKOTI"), 1)
+```
+
+We'll focus here on the code and data files for Chapter 2 from the book.
+
+## Retrieving Files
+
+Let's start by grabbing the code using `get_file()` (note that this always returns a raw vector):
 
 ```{r}
 code3 <- get_file("chapter03.R", "doi:10.7910/DVN/ARKOTI")
@@ -61,6 +86,8 @@ unf(PESenergy)
 dataset$files[c("label", "UNF")]
 ```
 
+## Reusing Files and Reproducing Analysis
+
 To reproduce the analysis, we can simply run the code file either as a `system()` call or directly in R using `source()` (note this particular file begins with an `rm()` call so you may want to run it in a clean R session):
 
 ```R
@@ -69,3 +96,5 @@ source("chapter03.R")
 ```
 
 Any well-produced set of analysis reproduction files, like this one, will easily run without error once the data and code are in-hand.
+
+To archive your own reproducible analyses using Dataverse, see the ["Archiving Data" vignette](D-archiving.html).

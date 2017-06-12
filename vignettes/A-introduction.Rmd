@@ -1,18 +1,27 @@
-<!--
-%\VignetteEngine{knitr}
-%\VignetteIndexEntry{1. Introduction}
--->
-
-
-# Introduction to Dataverse
+---
+title: "Introduction to Dataverse"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    fig_caption: false
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{1. Introduction to Dataverse}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
 The **dataverse** package is the official R client for [Dataverse 4](http://dataverse.org/) data repositories. The package enables data search, retrieval, and deposit with any Dataverse installation, thus allowing R users to integrate public data sharing into the reproducible research workflow.
 
 In addition to this introduction, the package contains three additional vignettes covering:
 
-  * [Data Search](search.html)
-  * [Data retrieval](retrieval.html)
-  * [Data archiving](archiving.html)
+  * ["Data Search and Discovery"](B-search.html)
+  * ["Data Retrieval and Reuse"](C-retrieval.html)
+  * ["Data Archiving"](D-archiving.html)
 
 They can be accessed from [CRAN](https://cran.r-project.org/package=dataverse/index.html) or from within R using `vignettes(package = "dataverse")`.
 
@@ -107,4 +116,3 @@ The original [dvn](https://cran.r-project.org/?package=dvn) package, which worke
 || `service_document()` | `dvServiceDoc()` |
 || `dataset_statement()` | `dvStudyStatement()` |
 || `list_datasets()` | `dvUserStudies()` |
-

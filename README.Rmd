@@ -50,13 +50,7 @@ The easiest way to access data from Dataverse is to use a persistent identifier 
 get_dataset("doi:10.7910/DVN/ARKOTI")
 ```
 
-retrieve metadata:
-
-```{r}
-str(dataset_metadata("doi:10.7910/DVN/ARKOTI"), 1)
-```
-
-and even access files directly in R using the DOI and a filename:
+Knowing a file name, you can also access that file (e.g., a Stata dataset) directly in R:
 
 ```{r}
 f <- get_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
@@ -67,16 +61,12 @@ writeBin(as.vector(f), tmp)
 dat <- foreign::read.dta(tmp)
 ```
 
-If you don't konw the file name in advance, you can parse the available files returned by `get_dataset()`:
+If you don't know the file name in advance, you can parse the available files returned by `get_dataset()` and retrieve the file using its Dataverse "id" number.
 
-```{r}
-d1 <- get_dataset("doi:10.7910/DVN/ARKOTI")
-f <- get_file(d1$files$id[3])
-```
 
-### Data Deposit
+### Data Archiving
 
-The data deposit workflow is build on [SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a new dataset listing, you will have first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:
+The data archiving (or "deposit") workflow is built on [SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a new dataset listing, you will have first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:
 
 ```R
 # retrieve your service document

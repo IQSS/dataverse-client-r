@@ -1,9 +1,19 @@
-<!--
-%\VignetteEngine{knitr}
-%\VignetteIndexEntry{2. Data Search}
--->
-
-# Data Search
+---
+title: "Data Search and Discovery"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    fig_caption: false
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{2. Data Search and Discovery}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
 Searching for data within Dataverse is quite easy using the `dataverse_search()` function. The simplest searches simply consist of a query string:
 
@@ -28,3 +38,5 @@ names(ei)
 # names of datasets
 ei$name
 ```
+
+Once datasets and files are identified, it is easy to download and use them directly in R. See the ["Data Retrieval" vignette](C-retrieval.html) for details.
