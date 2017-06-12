@@ -8,7 +8,7 @@
 #' @param vars A character vector specifying one or more variable names, used to extract a subset of the data.
 #' @template envvars
 #' @template dots
-#' @return \code{get_metadata} returns a character vector containing a DDI metadata file. \code{get_file} returns a raw vector.
+#' @return \code{get_metadata} returns a character vector containing a DDI metadata file. \code{get_file} returns a raw vector (or list of raw vectors, if \code{length(file) > 1}).
 #' @examples
 #' \dontrun{
 #' # download file from: 
@@ -42,6 +42,7 @@
 #'   #}
 #' }
 #' }
+#' @importFrom utils unzip
 #' @export
 get_file <- 
 function(file, 
@@ -71,7 +72,18 @@ function(file,
         u <- paste0(api_url(server), "access/datafiles/", file)
         r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
         httr::stop_for_status(r)
-        r
+        tempf <- tempfile(fileext = ".zip")
+        tempd <- tempfile()
+        dir.create(tempd)
+        on.exit(unlink(tempf), add = TRUE)
+        on.exit(unlink(tempd), add = TRUE)
+        writeBin(httr::content(r, as = "raw"), tempf)
+        to_extract <- utils::unzip(tempf, list = TRUE)
+        out <- lapply(to_extract$Name[to_extract$Name != "MANIFEST.TXT"], function(zipf) {
+            utils::unzip(zipfile = tempf, files = zipf, exdir = tempd)
+            readBin(file.path(tempd, zipf), "raw", n = 1e8)
+        })
+        return(out)
     } else {
         if (format == "bundle") {
             u <- paste0(api_url(server), "access/datafile/bundle/", file)
@@ -94,9 +106,8 @@ function(file,
             }
         }
         httr::stop_for_status(r)
-        out <- httr::content(r, as = "raw")
+        return(httr::content(r, as = "raw"))
     }
-    structure(out, filename = get_file_name_from_header(r))
 }
 
 get_file_name_from_header <- function(x) {

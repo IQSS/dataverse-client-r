@@ -1,6 +1,8 @@
 # CHANGES TO dataverse 0.1.21
 
-* Fix some bugs in `dataverse_search()`
+* Fixed some bugs in `dataverse_search()`
+* `get_file()` now unzips its results when multiple files are requested and returns them as a raw vector.
+* Finished the "Data Retrieval" vignette. (#1)
 * Document `dataverse_search()` in a vignette. (#1)
 
 # CHANGES TO dataverse 0.1.21

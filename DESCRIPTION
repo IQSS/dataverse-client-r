@@ -7,6 +7,7 @@ Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
              person("Jan", "Kanis", role = "ctb"))
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
 Imports:
+    utils,
     httr,
     XML,
     xml2,

@@ -1,38 +1,70 @@
 <!--
 %\VignetteEngine{knitr}
-%\VignetteIndexEntry{3. Data Reuse and Reproducibility}
+%\VignetteIndexEntry{3. Data Retrieval and Reuse}
 -->
 
-# Data Reuse #
+# Data Retrieval and Reuse
 
-This vignette shows some simple examples of how find and use data from Dataverse in a reproducible research workflow. We'll start by loading some packages:
+This vignette shows how to download data from Dataverse using the dataverse package. For the purposes of this vignette, we'll focus on the Dataverse that contains supplemental files for Jamie Monogan's book *Political Analysis Using R*, which is stored at Harvard University's [IQSS Dataverse Network](https://dataverse.harvard.edu/):
+
+> Monogan, Jamie, 2015, "Political Analysis Using R: Example Code and Data, Plus Data for Practice Problems", [doi:10.7910/DVN/ARKOTI](https://doi.org/10.7910/DVN/ARKOTI), Harvard Dataverse, V1, UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==
+
+This study is persistently retrievable by a "[Digital Object Identifier (DOI)](https://www.doi.org/)": https://doi.org/10.7910/DVN/ARKOTI and the citation above (taken from the Dataverse page) includes a "[Universal Numeric Fingerprint (UNF)](http://guides.dataverse.org/en/latest/developers/unf/index.html)": `UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==`, which provides a versioned, multi-file hash for the entire study, which contains 32 files.
+
+Note: All of these UNFs indicate that the file- and study-level UNF signatures were generated using UNFv6.
+
+We will download these files and examine them directly in R using the **dataverse** package. To begin, we need to loading the package and using the `get_dataset()` function to retrieve some basic metadata about the dataset:
+
+```{r}
+library("dataverse")
+(dataset <- get_dataset("doi:10.7910/DVN/ARKOTI"))
+```
+
+The output prints some basic metadata and then the `str()` of the `files` data frame returned by the call. This lists all of the files in the dataset along with a considerable amount of metadata about each. We can see a quick glance at these files using:
+
+```
+dataset$files[c("filename", "contentType")]
+```
+
+This shows that there are indeed 32 files, a mix of .R code files and tab- and comma-separated data files. We'll focus here on the code file for Chapter 2 from the book. Let's start by grabbing the code using `get_file()` (note that this always returns a raw vector):
+
+```{r}
+code3 <- get_file("chapter03.R", "doi:10.7910/DVN/ARKOTI")
+writeBin(code3, "chapter03.R")
+```
+
+Now we'll get the corresponding data and save it locally. For this code we need two data files:
+
+```{r}
+writeBin(get_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI"), 
+         "constructionData.dta")
+writeBin(get_file("PESenergy.csv", "doi:10.7910/DVN/ARKOTI"), 
+         "PESenergy.csv")
+```
+
+To confirm that the data look the way we want, we can also (perhaps alternatively) load it directly into R:
+
+```{r}
+constructionData <- foreign::read.dta("constructionData.dta")
+str(constructionData)
+PESenergy <- utils::read.table("PESenergy.csv")
+str(PESenergy)
+```
+
+In addition to visual inspection, we can compare the UNF signatures for each dataset against what is reported by Dataverse to confirm that we received the correct files:
 
 ```{r}
 library("UNF")
-library("dataverse")
+unf(constructionData)
+unf(PESenergy)
+dataset$files[c("label", "UNF")]
 ```
 
-## Retrieving Data from Dataverse ##
+To reproduce the analysis, we can simply run the code file either as a `system()` call or directly in R using `source()` (note this particular file begins with an `rm()` call so you may want to run it in a clean R session):
 
-For the purposes of this section, we'll focus on one of the most-used data archives in Harvard University's [IQSS Dataverse Network](https://dataverse.harvard.edu/):
-
-> John Y. Campbell; Yeung L. Chan; and Luis Viceira, 2007, "Replication data for: A Multivariate Model of Strategic Asset Allocation", http://hdl.handle.net/1902.1/QBXRSFLBQJ UNF:3:ZnYhHkZe2veTJAWaBDpPKA== The Harvard Dataverse Network [Distributor] V2 [Version]
-
-This study is persistently retrievable by a "[Handle](http://en.wikipedia.org/wiki/Handle_System)": http://hdl.handle.net/1902.1/QBXRSFLBQJ. But in addition to the handle, the citation contains a study-level UNF signature: `UNF:3:ZnYhHkZe2veTJAWaBDpPKA==`, which provides a versioned, multi-file hash for the entire study, which contains three data files:
-
- * dataANN (`UNF:3:RVjeeV5JOY6jb8hJtk2T/A==`)
- * dataMTH_update (`UNF:3:TMiZOYj0Wdtq58sDBJjveQ==`)
- * dataQTR (`UNF:3:cTsOMQHb3efFo7i7pq6FfQ==`)
-
-Note: All of these UNFs indicate that the file- and study-level UNF signatures were generated using UNFv3 (an early version of the UNF algorithm).
-
-We will download these files and examine them directly in R using the **dataverse** package. To begin, we need
-
-
-To retrieve all metadata associated with the study we simply do the following:
-
-```{r}
-dataset <- get_dataset("hdl:1902.1/QBXRSFLBQJ")
+```R
+system("Rscript chapter03.R")
+source("chapter03.R")
 ```
 
-This retrieves metadata and file lists for files stored in the dataset.
+Any well-produced set of analysis reproduction files, like this one, will easily run without error once the data and code are in-hand.

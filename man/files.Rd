@@ -29,7 +29,7 @@ get_metadata(file, dataset = NULL, format = c("ddi", "preprocessed"),
 \item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
 }
 \value{
-\code{get_metadata} returns a character vector containing a DDI metadata file. \code{get_file} returns a raw vector.
+\code{get_metadata} returns a character vector containing a DDI metadata file. \code{get_file} returns a raw vector (or list of raw vectors, if \code{length(file) > 1}).
 }
 \description{
 Download Dataverse File(s)
