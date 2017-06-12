@@ -3,12 +3,13 @@
 %\VignetteIndexEntry{4. Data Archiving}
 -->
 
-# Data Archiving #
+# Data Archiving
 
 Coming soon...
 
 ```{r}
 library("UNF")
 library("dataverse")
+Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 ```
 

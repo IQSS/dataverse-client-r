@@ -9,6 +9,7 @@ Searching for data within Dataverse is quite easy using the `dataverse_search()`
 
 ```{r}
 library("dataverse")
+Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 dataverse_search("Gary King")[c("name")]
 ```
 
