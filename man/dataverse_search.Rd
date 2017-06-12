@@ -26,11 +26,11 @@ dataverse_search(..., type = c("dataverse", "dataset", "file"),
 
 \item{start}{An integer specifying used for pagination.}
 
-\item{show_relevance}{A logical.}
+\item{show_relevance}{A logical indicating whether or not to show details of which fields were matched by the query}
 
-\item{show_facets}{A logical.}
+\item{show_facets}{A logical indicating whether or not to show facets that can be operated on by the “fq” parameter}
 
-\item{fq}{Currently ignored.}
+\item{fq}{See API documentation.}
 
 \item{key}{A character string specifying a Dataverse server API key. If one is not specified, functions calling authenticated API endpoints will fail. Keys can be specified atomically or globally using \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 

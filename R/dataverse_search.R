@@ -9,9 +9,9 @@
 #' @param order A character vector specifying either \dQuote{asc} or \dQuote{desc} results order.
 #' @param per_page An integer specifying the page size of results.
 #' @param start An integer specifying used for pagination.
-#' @param show_relevance A logical.
-#' @param show_facets A logical.
-#' @param fq Currently ignored.
+#' @param show_relevance A logical indicating whether or not to show details of which fields were matched by the query
+#' @param show_facets A logical indicating whether or not to show facets that can be operated on by the “fq” parameter
+#' @param fq See API documentation.
 #' @template envvars
 #' @param verbose A logical indicating whether to display information about the search query (default is \code{TRUE}).
 #' @param http_opts Currently ignored.
@@ -54,30 +54,58 @@ function(...,
         }
         if (!is.list(a[[1]]) & (is.null(names(a)))) {
             ## a length-1 character vector; passed directly as `q`
-            query <- list(q = a)
+            query <- list(q = a[[1]])
         } else {
             ## a named list of character strings; converted to a single character string
             query <- list(q = paste0(names(a), ":", unname(unlist(a)), collapse = ","))
         }
     } else {
         ## missing, fine
-        query <- NULL
+        query <- list()
     }
-    
-    # check arguments
-    if(!is.null(type)) {
-        stopifnot(all(type %in% c("dataverse", "dataset", "file")))
-        type <- paste(type, sep = ":")
+    # add query arguments from top-level arguments
+    ## type
+    if (!is.null(type)) {
+        type <- match.arg(type, several.ok = TRUE)
+        for (i in seq_along(type)) {
+            query <- c(query, list(type = type[i]))
+        }
     }
+    ## subtree
+    if (!is.null(subtree)) {
+        query[["subtree"]] <- subtree
+    }
+    ## sort
+    query[["sort"]] <- match.arg(sort)
+    ## order
+    query[["order"]] <- match.arg(order)
+    ## per_page
     stopifnot(per_page >0 && per_page <= 1000)
-    sort <- match.arg(sort)
-    order <- match.arg(order)
+    query[["per_page"]] <- per_page
+    ## start
+    if (!is.null(start)) {
+        if (!is.numeric(start)) {
+            stop("'start' must be numeric")
+        }
+        query[["start"]] <- start
+    }
+    ## show_relevance
+    query[["show_relevance"]] <- show_relevance
+    ## show_facets
+    query[["show_facets"]] <- show_facets
+    ## fq
+    if (!is.null(start)) {
+        query[["fq"]] <- match.arg(fq)
+    }
     
+    # setup URL
     u <- paste0(api_url(server), "search")
+    
+    # execute request
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query)
     httr::stop_for_status(r)
     out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))
-    if(verbose) {
+    if (isTRUE(verbose)) {
         n_total <- ngettext(out$data$total_count, "result", "results")
         message(sprintf(paste0("%s of %s ", n_total, " retrieved"), out$data$count_in_response, out$data$total_count))
     }

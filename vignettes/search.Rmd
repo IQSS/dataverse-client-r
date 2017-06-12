@@ -3,11 +3,27 @@
 %\VignetteIndexEntry{2. Data Search}
 -->
 
-# Data Search #
+# Data Search
 
-Coming soon...
+Searching for data within Dataverse is quite easy using the `dataverse_search()` function. The simplest searches simply consist of a query string:
 
 ```{r}
-library("UNF")
 library("dataverse")
+dataverse_search("Gary King")[c("name")]
+```
+
+The results are paginated, so users can rely upon the `per_page` and `start` argument to requested subsequent pages of results. We'll start at 6 and to show that we retrieve the last five results from the previous query plus 15 more (due to `per_page = 20`):
+
+```{r}
+dataverse_search("Gary King", start = 6, per_page = 20)[c("name")]
+```
+
+More complicated searches can specify metadata fields like `title` and restrict results to a specific `type` of Dataverse object (a "dataverse", "dataset", or "file"):
+
+```{r}
+ei <- dataverse_search(author = "Gary King", title = "Ecological Inference", type = "dataset", per_page = 20)
+# fields returned
+names(ei)
+# names of datasets
+ei$name
 ```

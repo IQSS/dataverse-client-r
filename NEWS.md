@@ -1,5 +1,10 @@
 # CHANGES TO dataverse 0.1.21
 
+* Fix some bugs in `dataverse_search()`
+* Document `dataverse_search()` in a vignette. (#1)
+
+# CHANGES TO dataverse 0.1.21
+
 * Update README.
 
 # CHANGES TO dataverse 0.1.20
