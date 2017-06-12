@@ -28,6 +28,7 @@ matrix:
 
 r_packages:
 - covr
+- knitr
 
 after_success:
   - if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov()'; fi

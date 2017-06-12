@@ -28,7 +28,7 @@ dataverse_search(..., type = c("dataverse", "dataset", "file"),
 
 \item{show_relevance}{A logical indicating whether or not to show details of which fields were matched by the query}
 
-\item{show_facets}{A logical indicating whether or not to show facets that can be operated on by the “fq” parameter}
+\item{show_facets}{A logical indicating whether or not to show facets that can be operated on by the \code{fq} parameter}
 
 \item{fq}{See API documentation.}
 

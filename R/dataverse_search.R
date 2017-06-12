@@ -10,7 +10,7 @@
 #' @param per_page An integer specifying the page size of results.
 #' @param start An integer specifying used for pagination.
 #' @param show_relevance A logical indicating whether or not to show details of which fields were matched by the query
-#' @param show_facets A logical indicating whether or not to show facets that can be operated on by the “fq” parameter
+#' @param show_facets A logical indicating whether or not to show facets that can be operated on by the \code{fq} parameter
 #' @param fq See API documentation.
 #' @template envvars
 #' @param verbose A logical indicating whether to display information about the search query (default is \code{TRUE}).

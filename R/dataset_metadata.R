@@ -19,6 +19,7 @@
 #' # get metadata
 #' str(dataset_metadata(d1), 4)
 #' }
+#' @importFrom utils str
 #' @export
 dataset_metadata <- function(dataset, version = ":latest", block = "citation", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataset <- dataset_id(dataset)

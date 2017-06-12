@@ -14,7 +14,7 @@ print.dataset_atom <- function(x, ...) {
 parse_atom <- function(xml){
     xmllist <- XML::xmlToList(xml)
     links <- lapply(xmllist[names(xmllist) == "link"], function(x) as.vector(x[1]))
-    links <- setNames(links, sapply(xmllist[names(xmllist) == "link"], `[`, 2))
+    links <- stats::setNames(links, sapply(xmllist[names(xmllist) == "link"], `[`, 2))
     names(links)[grep("statement$", names(links))] <- "statement"
     names(links)[grep("add$", names(links))] <- "add"
     xmlout <- list(id = xmllist$id,

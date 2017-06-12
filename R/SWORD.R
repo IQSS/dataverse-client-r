@@ -13,6 +13,7 @@
 #' # list available datasets in first dataverse
 #' list_datasets(d[[2]])
 #' }
+#' @importFrom stats setNames
 #' @export
 service_document <- function(key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/service-document")
@@ -35,7 +36,7 @@ service_document <- function(key = Sys.getenv("DATAVERSE_KEY"), server = Sys.get
         s$alias <- strsplit(s$url, "/collection/dataverse/")[[1]][2]
         out[[length(out) + 1]] <- s
     }
-    out <- setNames(out, `[<-`(names(out), n, "dataverse"))
+    out <- stats::setNames(out, `[<-`(names(out), n, "dataverse"))
     structure(out, class = "sword_service_document")
 }
 
