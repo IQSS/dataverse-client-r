@@ -36,7 +36,7 @@ metadat <- list(title = "My Study",
                 description = "An example study")
 
 # create the dataset in first dataverse
-dat <- initiate_dataset(d[[2]], body = metadat)
+dat <- initiate_sword_dataset(d[[2]], body = metadat)
 
 # publish dataset
 publish_sword_dataset(dat)

@@ -2,10 +2,14 @@
 % Please edit documentation in R/get_dataverse.R
 \name{get_dataverse}
 \alias{get_dataverse}
+\alias{dataverse_contents}
 \title{Get Dataverse}
 \usage{
 get_dataverse(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), check = TRUE, ...)
+
+dataverse_contents(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"), ...)
 }
 \arguments{
 \item{dataverse}{A character string specifying a Dataverse name or an object of class \dQuote{dataverse}.}
@@ -25,7 +29,7 @@ A list of class \dQuote{dataverse}.
 Retrieve details of a Dataverse
 }
 \details{
-This function retrieves a Dataverse from a Dataverse server. To see the contents of the Dataverse, use \code{\link{dataverse_contents}} instead.
+\code{get_dataverse} function retrieves basic information about a Dataverse from a Dataverse server. To see the contents of the Dataverse, use \code{\link{dataverse_contents}} instead. Contents might include one or more \dQuote{datasets} and/or further Dataverses that themselves contain Dataverses and/or datasets. To view the file contents of a single Dataset, use \code{\link{get_dataset}}.
 }
 \examples{
 \dontrun{

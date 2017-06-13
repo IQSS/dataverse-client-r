@@ -22,7 +22,7 @@
 #' \dQuote{spatial}, \dQuote{subject}, \dQuote{tableOfContents}, \dQuote{temporal},
 #' \dQuote{title}, \dQuote{type}, and \dQuote{valid}.
 #' @return An object of class \dQuote{dataset_atom}.
-#' @note There are two ways to create dataset: native API (\code{\link{create_dataset}}) and SWORD API (\code{initiate_dataset}).
+#' @note There are two ways to create dataset: native API (\code{\link{create_dataset}}) and SWORD API (\code{initiate_sword_dataset}).
 #' @references \href{http://dublincore.org/documents/dcmi-terms/}{Dublin Core Metadata Terms}
 #' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{delete_sword_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
 #' @examples
@@ -36,7 +36,7 @@
 #'                 description = "An example study")
 #'
 #' # create the dataset in first dataverse
-#' dat <- initiate_dataset(d[[2]], body = metadat)
+#' dat <- initiate_sword_dataset(d[[2]], body = metadat)
 #'
 #' # add files to dataset
 #' tmp <- tempfile(fileext = ".csv")
@@ -46,7 +46,7 @@
 #' # publish dataset
 #' publish_dataset(dat)
 #' }
-initiate_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
+initiate_sword_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(dataverse, "dataverse")) {
         dataverse <- dataverse$alias
     } else if (is.numeric(dataverse)) {
@@ -82,7 +82,7 @@ initiate_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"),
 #'                 description = "An example study")
 #'
 #' # create the dataset in first dataverse
-#' dat <- initiate_dataset(d[[2]], body = metadat)
+#' dat <- initiate_sword_dataset(d[[2]], body = metadat)
 #' 
 #' # delete a dataset
 #' delete_dataset(dat)
@@ -134,7 +134,7 @@ delete_sword_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), ser
 #'                 description = "An example study")
 #'
 #' # create the dataset in first dataverse
-#' dat <- initiate_dataset(d[[2]], body = metadat)
+#' dat <- initiate_sword_dataset(d[[2]], body = metadat)
 #' 
 #' # publish dataset
 #' publish_sword_dataset(dat)

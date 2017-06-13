@@ -28,6 +28,7 @@ matrix:
 
 r_packages:
 - covr
+- rmarkdown
 - knitr
 
 after_success:

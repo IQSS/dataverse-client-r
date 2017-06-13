@@ -4,7 +4,6 @@
 #' @template envvars
 #' @template dots
 #' @return A list of class \dQuote{sword_service_document}, possibly with one or more \dQuote{sword_collection} entries. The latter are SWORD representations of a Dataverse. These can be passed to other SWORD API functions, e.g., for creating a new dataset.
-#' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
 #' @examples
 #' \dontrun{
 #' # retrieve your service document
@@ -13,6 +12,7 @@
 #' # list available datasets in first dataverse
 #' list_datasets(d[[2]])
 #' }
+#' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
 #' @importFrom stats setNames
 #' @export
 service_document <- function(key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
@@ -58,7 +58,6 @@ print.sword_service_document <- function(x, ...) {
 #' @template envvars
 #' @template dots
 #' @return A list.
-#' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
 #' @examples
 #' \dontrun{
 #' # retrieve your service document
@@ -67,6 +66,7 @@ print.sword_service_document <- function(x, ...) {
 #' # list available datasets in first dataverse
 #' list_datasets(d[[2]])
 #' }
+#' @seealso Managing a Dataverse: \code{\link{publish_dataverse}}; Managing a dataset: \code{\link{dataset_atom}}, \code{\link{list_datasets}}, \code{\link{create_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}; Managing files within a dataset: \code{\link{add_file}}, \code{\link{delete_file}}
 #' @export
 list_datasets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(dataverse, "dataverse")) {

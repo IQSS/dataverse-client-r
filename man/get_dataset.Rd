@@ -2,9 +2,19 @@
 % Please edit documentation in R/get_dataset.R
 \name{get_dataset}
 \alias{get_dataset}
+\alias{dataset_metadata}
+\alias{dataset_files}
 \title{Get dataset}
 \usage{
 get_dataset(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+
+dataset_metadata(dataset, version = ":latest", block = "citation",
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+
+dataset_files(dataset, version = ":latest",
+  key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 }
 \arguments{
@@ -17,15 +27,17 @@ get_dataset(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"),
 \item{server}{A character string specifying a Dataverse server. There are multiple Dataverse installations, but the defaults is to use the Harvard Dataverse. This can be modified atomically or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 
 \item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
+
+\item{block}{A character string specifying a metadata block to retrieve. By default this is \dQuote{citation}. Other values may be available, depending on the dataset, such as \dQuote{geospatial} or \dQuote{socialscience}.}
 }
 \value{
-A list of class \dQuote{dataverse_dataset}.
+A list of class \dQuote{dataverse_dataset} or a list of a form dependent on the specific metadata block retrieved. \code{dataset_files} returns a list of objects of class \dQuote{dataverse_file}.
 }
 \description{
-Retrieve Dataverse dataset
+Retrieve a Dataverse dataset or its metadata
 }
 \details{
-This function retrieves details about a Dataverse dataset.
+\code{get_dataset} retrieves details about a Dataverse dataset. \code{dataset_metadata} returns a named metadata block for a dataset. This is already returned by \code{\link{get_dataset}}, but this function allows you to retrieve just a specific block of metadata, such as citation information. \code{dataset_files} returns a list of files in a dataset, similar to \code{\link{get_dataset}}. The difference is that this returns only a list of \dQuote{dataverse_dataset} objects, whereas \code{\link{get_dataset}} returns metadata and a data.frame of files (rather than a list of file objects).
 }
 \examples{
 \dontrun{
@@ -34,6 +46,7 @@ This function retrieves details about a Dataverse dataset.
 monogan <- get_dataverse("monogan")
 monogan_data <- dataverse_contents(monogan)
 d1 <- get_dataset(monogan_data[[1]])
+dataset_files(monogan_data[[1]])
 f <- get_file(d1$files$datafile$id[3])
 }
 }

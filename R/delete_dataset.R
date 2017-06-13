@@ -5,13 +5,13 @@
 #' @template envvars
 #' @template dots
 #' @return A logical.
-#' @seealso \code{\link{get_dataset}}, \code{\link{create_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}
 #' @examples
 #' \dontrun{
 #' meta <- list()
 #' ds <- create_dataset("mydataverse", body = meta)
 #' delete_dataset(ds)
 #' }
+#' @seealso \code{\link{get_dataset}}, \code{\link{create_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}
 #' @export
 delete_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     # can only delete a "draft" dataset

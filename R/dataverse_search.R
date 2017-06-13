@@ -2,7 +2,7 @@
 #' @description Search for Dataverses and datasets
 #' @details This function provides an interface for searching for Dataverses, datasets, and/or files within a Dataverse server.
 #' @template dv
-#' @param ... A length-one character vector specifying a search query, a named character vector of search arguments, or a sequence of named character arguments. The specific fields available may vary by server installation.
+#' @param \dots A length-one character vector specifying a search query, a named character vector of search arguments, or a sequence of named character arguments. The specific fields available may vary by server installation.
 #' @param type A character vector specifying one or more of \dQuote{dataverse}, \dQuote{dataset}, and \dQuote{file}, which is used to restrict the search results. By default, all three types of objects are searched for.
 #' @param subtree Currently ignored.
 #' @param sort A character vector specifying whether to sort results by \dQuote{name} or \dQuote{date}.
@@ -16,7 +16,6 @@
 #' @param verbose A logical indicating whether to display information about the search query (default is \code{TRUE}).
 #' @param http_opts Currently ignored.
 #' @return A list.
-#' @seealso \code{\link{get_file}}, \code{\link{get_dataverse}}, \code{\link{get_dataset}}, \code{\link{dataverse_contents}}
 #' @examples
 #' \dontrun{
 #' # simple string search
@@ -29,6 +28,7 @@
 #' # search only for datasets
 #' dataverse_search(author = "Gary King", type = "dataset")
 #' }
+#' @seealso \code{\link{get_file}}, \code{\link{get_dataverse}}, \code{\link{get_dataset}}, \code{\link{dataverse_contents}}
 #' @export
 dataverse_search <- 
 function(..., 

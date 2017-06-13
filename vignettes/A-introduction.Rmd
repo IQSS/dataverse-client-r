@@ -61,7 +61,7 @@ The [search vignette](search.html) describes this functionality in more detail. 
 ```R
 get_dataset()
 dataset_files()
-get_metadata()
+get_file_metadata()
 get_file()
 ```
 
@@ -104,7 +104,7 @@ The original [dvn](https://cran.r-project.org/?package=dvn) package, which worke
 | API Category | **dataverse** functions | **dvn** functions |
 | ------------ | ----------------------- | ----------------- |
 | Data Search | `dataverse_search()` | `dvSearch()` |
-| Data Retrieval | `get_metadata()` | `dvMetadata()` |
+| Data Retrieval | `get_file_metadata()` | `dvMetadata()` |
 || `get_file()` |  |
 | Data Deposit | `create_dataverse()` |  |
 || `initiate_dataset()` | `dvCreateStudy()` |

@@ -12,7 +12,7 @@ dataverse_search(..., type = c("dataverse", "dataset", "file"),
   http_opts = NULL)
 }
 \arguments{
-\item{...}{A length-one character vector specifying a search query, a named character vector of search arguments, or a sequence of named character arguments. The specific fields available may vary by server installation.}
+\item{\dots}{A length-one character vector specifying a search query, a named character vector of search arguments, or a sequence of named character arguments. The specific fields available may vary by server installation.}
 
 \item{type}{A character vector specifying one or more of \dQuote{dataverse}, \dQuote{dataset}, and \dQuote{file}, which is used to restrict the search results. By default, all three types of objects are searched for.}
 

@@ -36,7 +36,7 @@ metadat <- list(title = "My Study",
                 description = "An example study")
 
 # create the dataset
-dat <- initiate_dataset("mydataverse", body = metadat)
+dat <- initiate_sword_dataset("mydataverse", body = metadat)
 
 # add files to dataset
 tmp <- tempfile()
