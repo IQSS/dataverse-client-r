@@ -115,7 +115,7 @@ get_file_name_from_header <- function(x) {
 }
 
 #' @rdname files
-#' @importFrom xml2 read_xml
+#' @import xml2
 #' @export
 get_file_metadata <- 
 function(file, 

@@ -56,7 +56,7 @@ initiate_sword_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_
     if (is.character(body) && file.exists(body)) {
         b <- httr::upload_file(body)
     } else {
-        b <- do.call("build_metadata", c(body, metadata_format = "dcterms", validate = FALSE))
+        b <- do.call("build_metadata", c(body, metadata_format = "dcterms"))
     }
     r <- httr::POST(u, httr::authenticate(key, ""), httr::add_headers("Content-Type" = "application/atom+xml"), body = b, ...)
     httr::stop_for_status(r)
@@ -211,6 +211,7 @@ dataset_atom <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 }
 
 #' @rdname dataset_atom
+#' @import xml2
 #' @export
 dataset_statement <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(dataset, "dataset_atom")) {

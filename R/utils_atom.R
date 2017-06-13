@@ -12,15 +12,15 @@ print.dataset_atom <- function(x, ...) {
 }
 
 parse_atom <- function(xml){
-    xmllist <- XML::xmlToList(xml)
-    links <- lapply(xmllist[names(xmllist) == "link"], function(x) as.vector(x[1]))
-    links <- stats::setNames(links, sapply(xmllist[names(xmllist) == "link"], `[`, 2))
+    xmllist <- xml2::as_list(xml2::read_xml(xml))
+    links <- lapply(xmllist[names(xmllist) == "link"], attr, "href")
+    names(links) <- unlist(lapply(xmllist[names(xmllist) == "link"], attr, "rel"))
     names(links)[grep("statement$", names(links))] <- "statement"
     names(links)[grep("add$", names(links))] <- "add"
-    xmlout <- list(id = xmllist$id,
+    xmlout <- list(id = xmllist$id[[1L]],
                    links = links,
-                   bibliographicCitation = xmllist$bibliographicCitation,
-                   generator = xmllist$generator,
+                   bibliographicCitation = xmllist$bibliographicCitation[[1L]],
+                   generator = attributes(xmllist$generator),
                    treatment = xmllist$treatment[[1]])
     xmlout$xml <- xml
     structure(xmlout, class = "dataset_atom")

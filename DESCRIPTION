@@ -10,7 +10,6 @@ Imports:
     stats,
     utils,
     httr,
-    XML,
     xml2,
     jsonlite,
     urltools (>= 1.3.3)
