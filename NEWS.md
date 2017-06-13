@@ -1,5 +1,11 @@
 # CHANGES TO dataverse 0.1.21
 
+* Removed **XML** dependency, updating all code to **xml2** instead.
+* Removed **urltools** dependency.
+* Finished the "Data Archiving" vignette. (#1)
+
+# CHANGES TO dataverse 0.1.21
+
 * Fixed some bugs in `dataverse_search()`
 * `get_file()` now unzips its results when multiple files are requested and returns them as a raw vector.
 * Finished the "Data Retrieval" vignette. (#1)

@@ -100,17 +100,19 @@ prepend_doi <- function(dataset) {
     dataset
 }
 
-#' @importFrom urltools url_parse
+#' @import httr
 api_url <- function(server = Sys.getenv("DATAVERSE_SERVER"), prefix = "api/") {
     if (is.null(server) || server == "") {
         stop("'server' is missing with no default set in DATAVERSE_SERVER environment variable.")
     }
-    server <- urltools::url_parse(server)
-    if (is.na(server[["port"]]) || server[["port"]] == "") {
-        domain <- server[["domain"]]
-    } else {
-        domain <- paste0(server[["domain"]], ":", server[["port"]])
+    server_parsed <- httr::parse_url(server)
+    if (is.null(server_parsed[["hostname"]]) || server_parsed[["hostname"]] == "") {
+        server_parsed[["hostname"]] <- server
     }
-    url <- paste0("https://", domain, "/", prefix)
-    return(url)
+    if (is.null(server_parsed[["port"]]) || server_parsed[["port"]] == "") {
+        domain <- server_parsed[["hostname"]]
+    } else {
+        domain <- paste0(server_parsed[["hostname"]], ":", server_parsed[["port"]])
+    }
+    return(paste0("https://", domain, "/", prefix))
 }
