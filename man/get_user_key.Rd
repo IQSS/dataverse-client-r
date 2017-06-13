@@ -29,6 +29,3 @@ Use a Dataverse server's username and password login to obtain an API key for th
 get_user_key("username", "password")
 }
 }
-\seealso{
-\code{\link{create_user}}
-}

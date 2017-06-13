@@ -26,7 +26,6 @@ create_user <- function(password, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 #' @param server A character string specifying a Dataverse server. There are multiple Dataverse installations, but the defaults is to use the Harvard Dataverse. This can be modified atomically or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.
 #' @template dots
 #' @return A list.
-#' @seealso \code{\link{create_user}}
 #' @examples
 #' \dontrun{
 #' get_user_key("username", "password")
