@@ -1,5 +1,6 @@
 # CHANGES TO dataverse 0.1.21
 
+* Change vignette workflow so that vignettes are pre-built. (#1)
 * Removed **XML** dependency, updating all code to **xml2** instead.
 * Removed **urltools** dependency.
 * Finished the "Data Archiving" vignette. (#1)

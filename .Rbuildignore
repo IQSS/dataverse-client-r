@@ -1,4 +1,10 @@
-.travis.yml
+^\.travis\.yml$
+^appveyor\.yml$
 man-roxygen/*
-README.Rmd
-README.html
+^Makefile$
+^README\.Rmd$
+^README\.html$
+^CONTRIBUTING\.md$
+^vignettes/figure$
+^vignettes/figure/.+$
+\.Rmd2$
