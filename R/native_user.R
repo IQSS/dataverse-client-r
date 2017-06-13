@@ -1,15 +1,15 @@
-#' @title Create user
-#' @description Create a Dataverse user
-#' @details Create a new Dataverse user.
-#' @param password A character vector specifying the password for the new user.
-#' @template envvars
-#' @template dots
-#' @return A list.
-#' @seealso \code{\link{get_user_key}}
-#' @examples
-#' \dontrun{
-#' create_user("password")
-#' }
+# @title Create user
+# @description Create a Dataverse user
+# @details Create a new Dataverse user.
+# @param password A character vector specifying the password for the new user.
+# @template envvars
+# @template dots
+# @return A list.
+# @seealso \code{\link{get_user_key}}
+# @examples
+# \dontrun{
+# create_user("password")
+# }
 # @export
 create_user <- function(password, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     u <- paste0(api_url(server), "builtin-users?password=", password)
@@ -31,7 +31,7 @@ create_user <- function(password, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 #' \dontrun{
 #' get_user_key("username", "password")
 #' }
-# @export
+#' @export
 get_user_key <- function(user, password, server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     u <- paste0(api_url(server), "builtin-users/", user, "/api-token?password=", password)
     r <- httr::GET(u, ...)
