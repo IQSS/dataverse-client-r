@@ -2,9 +2,13 @@
 % Please edit documentation in R/create_dataset.R
 \name{create_dataset}
 \alias{create_dataset}
-\title{Create dataset}
+\alias{update_dataset}
+\title{Create or update a dataset}
 \usage{
 create_dataset(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+
+update_dataset(dataset, body, key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 }
 \arguments{
@@ -22,20 +26,25 @@ create_dataset(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"),
 An object of class \dQuote{dataverse_dataset}.
 }
 \description{
-Create dataset within a Dataverse
+Create or update dataset within a Dataverse
 }
 \details{
-This function creates a Dataverse dataset. In Dataverse, a \dQuote{dataset} is the lowest-level structure in which to organize files. For example, a Dataverse dataset might contain the files used to reproduce a published article, including data, analysis code, and related materials. Datasets can be organized into \dQuote{Dataverse} objects, which can be further nested within other Dataverses. For someone creating an archive, this would be the first step to producing said archive (after creating a Dataverse, if one does not already exist). Once files and metadata have been added, the dataset can be publised (i.e., made public) using \code{\link{publish_dataset}}.
+\code{create_dataset} creates a Dataverse dataset. In Dataverse, a \dQuote{dataset} is the lowest-level structure in which to organize files. For example, a Dataverse dataset might contain the files used to reproduce a published article, including data, analysis code, and related materials. Datasets can be organized into \dQuote{Dataverse} objects, which can be further nested within other Dataverses. For someone creating an archive, this would be the first step to producing said archive (after creating a Dataverse, if one does not already exist). Once files and metadata have been added, the dataset can be publised (i.e., made public) using \code{\link{publish_dataset}}.
+
+\code{update_dataset} updates a Dataverse dataset that has already been created using \code{\link{create_dataset}}. This creates a draft version of the dataset or modifies the current draft if one is already in-progress. It does not assign a new version number to the dataset nor does it make it publicly visible (which can be done with \code{\link{publish_dataset}}).
 }
 \examples{
 \dontrun{
 meta <- list()
 ds <- create_dataset("mydataverse", body = meta)
 
+meta2 <- list()
+update_dataset(ds, body = meta2)
+
 # cleanup
 delete_dataset(ds)
 }
 }
 \seealso{
-\code{\link{get_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}
+\code{\link{get_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}
 }
