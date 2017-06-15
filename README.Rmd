@@ -68,7 +68,7 @@ If you don't know the file name in advance, you can parse the available files re
 
 ### Data Archiving
 
-The data archiving (or "deposit") workflow is built on [SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a new dataset listing, you will have first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:
+Dataverse provides two - basically unrelated - workflows for managing (adding, documenting, and publishing) datasets. The first is built on [SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a new dataset listing, you will have first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:
 
 ```R
 # retrieve your service document
@@ -80,21 +80,37 @@ metadat <- list(title = "My Study",
                 description = "An example study")
 
 # create the dataset
-dat <- initiate_sword_dataset("mydataverse", body = metadat)
+ds <- initiate_sword_dataset("mydataverse", body = metadat)
 
 # add files to dataset
 tmp <- tempfile()
 write.csv(iris, file = tmp)
-f <- add_file(dat, file = tmp)
+f <- add_file(ds, file = tmp)
 
 # publish new dataset
-publish_dataset(dat)
+publish_sword_dataset(ds)
 
 # dataset will now be published
-list_datasets(dat)
+list_datasets("mydataverse")
 ```
 
-Dataverse actually implements two ways to release datasets: the SWORD API and the "native" API. Documentation of the latter is forthcoming.
+The second workflow is called the "native" API and is similar but uses slightly different functions:
+
+```R
+# create the dataset
+ds <- create_dataset("mydataverse")
+
+# add files
+tmp <- tempfile()
+write.csv(iris, file = tmp)
+f <- add_dataset_file(file = tmp, dataset = ds)
+
+# publish dataset
+publish_dataset(ds)
+
+# dataset will now be published
+get_dataverse("mydataverse")
+```
 
 ## Installation
 
