@@ -23,7 +23,7 @@ In addition to this introduction, the package contains three additional vignette
   * ["Data Retrieval and Reuse"](C-retrieval.html)
   * ["Data Archiving"](D-archiving.html)
 
-They can be accessed from [CRAN](https://cran.r-project.org/package=dataverse/index.html) or from within R using `vignettes(package = "dataverse")`.
+They can be accessed from [CRAN](https://cran.r-project.org/package=dataverse) or from within R using `vignettes(package = "dataverse")`.
 
 The dataverse client package can be installed from [CRAN](https://cran.r-project.org/package=dataverse), and you can find the latest development version and report any issues on GitHub:
 
