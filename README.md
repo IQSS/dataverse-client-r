@@ -18,6 +18,8 @@ Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 
 Note: The package attempts to compensate for any malformed values, though.
 
+Currently, the package wraps the data management features of the Dataverse API. Functions for other API features - related to user management and permissions - are not currently exported in the package (but are drafted in the [source code](https://github.com/IQSS/dataverse-client-r)).
+
 ### Data Discovery
 
 Dataverse supplies a pretty robust search API to discover Dataverses, datasets, and files. The simplest searches simply consist of a query string:
@@ -176,7 +178,7 @@ metadat <- list(title = "My Study",
                 description = "An example study")
 
 # create the dataset
-dat <- initiate_dataset("mydataverse", body = metadat)
+dat <- initiate_sword_dataset("mydataverse", body = metadat)
 
 # add files to dataset
 tmp <- tempfile()
