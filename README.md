@@ -1,5 +1,7 @@
 # R Client for Dataverse 4 Repositories
 
+
+
 [![Dataverse Project logo](http://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png "Dataverse Project")](http://dataverse.org)
 
 The **dataverse** package provides access to [Dataverse 4](http://dataverse.org/) APIs, enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. **dataverse** is the next-generation iteration of [the **dvn** package](https://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. **dataverse** includes numerous improvements for data search, retrieval, and deposit, including use of the (currently in development) **sword** package for data deposit and the **UNF** package for data fingerprinting.
@@ -125,28 +127,43 @@ get_dataset("doi:10.7910/DVN/ARKOTI")
 
 ```
 ## Dataset (75170): 
-## Version (75170): 1.0, RELEASED
+## Version: 1.0, RELEASED
 ## Release Date: 2015-07-07T02:57:02Z
 ## License: CC0
 ## 17 Files:
-## 'data.frame':	32 obs. of  17 variables:
-##  $ description        : chr  "Salta, Argentina field experiment on e-voting versus traditional voting. Citation: Alvarez, R. Michael, Ines Le"| __truncated__ "National Survey of High School Biology Teachers. Citation: Berkman, Michael and Eric Plutzer. 2010. Evolution, "| __truncated__ "Replication code for Chapter 1 (Obtaining R and Downloading Packages). No additional data required." "Replication code for Chapter 2 (Loading and Manipulating Data). Required data files: hmnrghts.txt, sen113kh.ord"| __truncated__ ...
-##  $ label              : chr  "alpl2013.tab" "BPchap7.tab" "chapter01.R" "chapter02.R" ...
-##  $ version            : int  2 2 2 2 2 2 2 2 2 2 ...
-##  $ datasetVersionId   : int  75170 75170 75170 75170 75170 75170 75170 75170 75170 75170 ...
-##  $ categories         :List of 32
-##  $ id                 : int  2692294 2692295 2692202 2692206 2692210 2692204 2692205 2692212 2692209 2692208 ...
-##  $ filename           : chr  "alpl2013.tab" "BPchap7.tab" "chapter01.R" "chapter02.R" ...
-##  $ contentType        : chr  "text/tab-separated-values" "text/tab-separated-values" "text/plain; charset=US-ASCII" "text/plain; charset=US-ASCII" ...
-##  $ filesize           : int  210991 61284 1293 5591 5766 1938 2327 4064 7228 6433 ...
-##  $ description        : chr  "Salta, Argentina field experiment on e-voting versus traditional voting. Citation: Alvarez, R. Michael, Ines Le"| __truncated__ "National Survey of High School Biology Teachers. Citation: Berkman, Michael and Eric Plutzer. 2010. Evolution, "| __truncated__ "Replication code for Chapter 1 (Obtaining R and Downloading Packages). No additional data required." "Replication code for Chapter 2 (Loading and Manipulating Data). Required data files: hmnrghts.txt, sen113kh.ord"| __truncated__ ...
-##  $ storageIdentifier  : chr  "14e664cd3c7-d64f88cca576" "14e664cd409-7a2dc0c380f9" "14e66326932-5c24bd6e6707" "14e663269e2-61fc90d7afec" ...
-##  $ originalFileFormat : chr  "application/x-stata" "application/x-stata" NA NA ...
-##  $ originalFormatLabel: chr  "Stata Binary" "Stata Binary" "UNKNOWN" "UNKNOWN" ...
-##  $ UNF                : chr  "UNF:6:d9ZNXvmiPfiunSAiXRpVfg==" "UNF:6:B3/HJbnzktaX5eEJA2ItiA==" NA NA ...
-##  $ rootDataFileId     : int  -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 ...
-##  $ md5                : chr  "2132170a713e5a213ab87dcaea287250" "e8c62465ef6a1a8451a21a43ce7b264e" "cfd66db2e50b3142bcda576cf78dc057" "e9c536034e029450a79ce830e47dd463" ...
-##  $ checksum           :'data.frame':	32 obs. of  2 variables:
+##                           label version      id                  contentType
+## 1                  alpl2013.tab       2 2692294    text/tab-separated-values
+## 2                   BPchap7.tab       2 2692295    text/tab-separated-values
+## 3                   chapter01.R       2 2692202 text/plain; charset=US-ASCII
+## 4                   chapter02.R       2 2692206 text/plain; charset=US-ASCII
+## 5                   chapter03.R       2 2692210 text/plain; charset=US-ASCII
+## 6                   chapter04.R       2 2692204 text/plain; charset=US-ASCII
+## 7                   chapter05.R       2 2692205 text/plain; charset=US-ASCII
+## 8                   chapter06.R       2 2692212 text/plain; charset=US-ASCII
+## 9                   chapter07.R       2 2692209 text/plain; charset=US-ASCII
+## 10                  chapter08.R       2 2692208 text/plain; charset=US-ASCII
+## 11                  chapter09.R       2 2692211 text/plain; charset=US-ASCII
+## 12                  chapter10.R       1 2692203 text/plain; charset=US-ASCII
+## 13                  chapter11.R       1 2692207 text/plain; charset=US-ASCII
+## 14 comprehensiveJapanEnergy.tab       2 2692296    text/tab-separated-values
+## 15         constructionData.tab       2 2692293    text/tab-separated-values
+## 16             drugCoverage.csv       1 2692233 text/plain; charset=US-ASCII
+## 17         hanmerKalkanANES.tab       2 2692290    text/tab-separated-values
+## 18                 hmnrghts.tab       2 2692298    text/tab-separated-values
+## 19                 hmnrghts.txt       1 2692238                   text/plain
+## 20                   levant.tab       2 2692289    text/tab-separated-values
+## 21                       LL.csv       1 2692228 text/plain; charset=US-ASCII
+## 22                 moneyDem.tab       2 2692292    text/tab-separated-values
+## 23            owsiakJOP2013.tab       2 2692297    text/tab-separated-values
+## 24                PESenergy.csv       1 2692230 text/plain; charset=US-ASCII
+## 25                  pts1994.csv       1 2692229 text/plain; charset=US-ASCII
+## 26                  pts1995.csv       1 2692231 text/plain; charset=US-ASCII
+## 27                 sen113kh.ord       1 2692239 text/plain; charset=US-ASCII
+## 28                SinghEJPR.tab       2 2692299    text/tab-separated-values
+## 29                 SinghJTP.tab       2 2692288    text/tab-separated-values
+## 30                 stdSingh.tab       2 2692291    text/tab-separated-values
+## 31                       UN.csv       1 2692232 text/plain; charset=US-ASCII
+## 32                  war1800.tab       2 2692300    text/tab-separated-values
 ```
 
 Knowing a file name, you can also access that file (e.g., a Stata dataset) directly in R:
@@ -166,7 +183,7 @@ If you don't know the file name in advance, you can parse the available files re
 
 ### Data Archiving
 
-The data archiving (or "deposit") workflow is built on [SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a new dataset listing, you will have first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:
+Dataverse provides two - basically unrelated - workflows for managing (adding, documenting, and publishing) datasets. The first is built on [SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a new dataset listing, you will have first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:
 
 ```R
 # retrieve your service document
@@ -178,21 +195,39 @@ metadat <- list(title = "My Study",
                 description = "An example study")
 
 # create the dataset
-dat <- initiate_sword_dataset("mydataverse", body = metadat)
+ds <- initiate_sword_dataset("mydataverse", body = metadat)
 
 # add files to dataset
 tmp <- tempfile()
 write.csv(iris, file = tmp)
-f <- add_file(dat, file = tmp)
+f <- add_file(ds, file = tmp)
 
 # publish new dataset
-publish_dataset(dat)
+publish_sword_dataset(ds)
 
 # dataset will now be published
-list_datasets(dat)
+list_datasets("mydataverse")
 ```
 
-Dataverse actually implements two ways to release datasets: the SWORD API and the "native" API. Documentation of the latter is forthcoming.
+The second workflow is called the "native" API and is similar but uses slightly different functions:
+
+```R
+# create the dataset
+ds <- create_dataset("mydataverse")
+
+# add files
+tmp <- tempfile()
+write.csv(iris, file = tmp)
+f <- add_dataset_file(file = tmp, dataset = ds)
+
+# publish dataset
+publish_dataset(ds)
+
+# dataset will now be published
+get_dataverse("mydataverse")
+```
+
+Through the native API it is possible to update a dataset by modifying its metadata with `update_dataset()` or file contents using `update_dataset_file()` and then republish a new version using `publish_dataset()`.
 
 ## Installation
 

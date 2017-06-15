@@ -1,4 +1,8 @@
-# CHANGES TO dataverse 0.1.22
+# CHANGES TO dataverse 0.1.24
+
+* Added an `update_dataset_file()` function and improved associated documentation. (#10)
+
+# CHANGES TO dataverse 0.1.23
 
 * Added a provisional `add_dataset_file()` function. (#10)
 * Reorganized some code.

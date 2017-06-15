@@ -1,5 +1,10 @@
 # R Client for Dataverse 4 Repositories
 
+```{r knitr_options, echo=FALSE, results="hide"}
+options(width = 120)
+knitr::opts_chunk$set(results = "hold")
+```
+
 [![Dataverse Project logo](http://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png "Dataverse Project")](http://dataverse.org)
 
 The **dataverse** package provides access to [Dataverse 4](http://dataverse.org/) APIs, enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. **dataverse** is the next-generation iteration of [the **dvn** package](https://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. **dataverse** includes numerous improvements for data search, retrieval, and deposit, including use of the (currently in development) **sword** package for data deposit and the **UNF** package for data fingerprinting.
@@ -24,20 +29,20 @@ Currently, the package wraps the data management features of the Dataverse API. 
 
 Dataverse supplies a pretty robust search API to discover Dataverses, datasets, and files. The simplest searches simply consist of a query string:
 
-```{r}
+```{r search1}
 library("dataverse")
 str(dataverse_search("Gary King"), 1)
 ```
 
 More complicated searches might specify metadata fields:
 
-```{r}
+```{r search2}
 str(dataverse_search(author = "Gary King", title = "Ecological Inference"), 1)
 ```
 
 And searches can be restricted to specific types of objects (Dataverse, dataset, or file):
 
-```{r}
+```{r search3}
 str(dataverse_search(author = "Gary King", type = "dataset"), 1)
 ```
 
@@ -48,13 +53,13 @@ The results are paginated using `per_page` argument. To retrieve subsequent page
 
 The easiest way to access data from Dataverse is to use a persistent identifier (typically a DOI). You can retrieve the contents of a Dataverse dataset:
 
-```{r}
+```{r get_dataset}
 get_dataset("doi:10.7910/DVN/ARKOTI")
 ```
 
 Knowing a file name, you can also access that file (e.g., a Stata dataset) directly in R:
 
-```{r}
+```{r get_file}
 f <- get_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
 
 # load it into memory
@@ -111,6 +116,8 @@ publish_dataset(ds)
 # dataset will now be published
 get_dataverse("mydataverse")
 ```
+
+Through the native API it is possible to update a dataset by modifying its metadata with `update_dataset()` or file contents using `update_dataset_file()` and then republish a new version using `publish_dataset()`.
 
 ## Installation
 
