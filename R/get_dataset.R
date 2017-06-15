@@ -28,18 +28,7 @@ get_dataset <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERS
     }
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))$data
-    if ("latestVersion" %in% names(out)) {
-        class(out$latestVersion) <- "dataverse_dataset_version"
-    }
-    if ("metadataBlocks" %in% names(out) && "citation" %in% out$metadata) {
-        class(out$metadata$citation) <- "dataverse_dataset_citation"
-    }
-    # cleanup response
-    f <- out$files$dataFile
-    out$files$dataFile <- NULL
-    out$files <- cbind(out$files, f)
-    structure(out, class = "dataverse_dataset")
+    parse_dataset(httr::content(r, as = "text", encoding = "UTF-8"))
 }
 
 #' @rdname get_dataset

@@ -26,6 +26,8 @@ Add one or more files to a SWORD (possibly unpublished) dataset
 }
 \details{
 This function is used to add files to a dataset. It is part of the SWORD API, which is used to upload data to a Dataverse server. This means this can be used to view unpublished Dataverses and Datasets.
+
+As of Dataverse v4.6.1, the \dQuote{native} API also provides endpoints to add and update files without going through the SWORD workflow. This functionality is provided by \code{\link{add_dataset_file}} and \code{\link{update_dataset_file}}.
 }
 \examples{
 \dontrun{

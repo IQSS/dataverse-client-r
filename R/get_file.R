@@ -56,7 +56,7 @@ function(file,
     
     format <- match.arg(format)
     
-    # get file ID from doi
+    # get file ID from 'dataset'
     if (!is.numeric(file)) {
         if (inherits(file, "dataverse_file")) {
             file <- get_fileid(file, key = key, server = server)

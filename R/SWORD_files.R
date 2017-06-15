@@ -31,6 +31,9 @@ create_zip.list <- function(x, ...) {
 #' @title Add file (SWORD)
 #' @description Add one or more files to a SWORD (possibly unpublished) dataset
 #' @details This function is used to add files to a dataset. It is part of the SWORD API, which is used to upload data to a Dataverse server. This means this can be used to view unpublished Dataverses and Datasets.
+#' 
+#' As of Dataverse v4.6.1, the \dQuote{native} API also provides endpoints to add and update files without going through the SWORD workflow. This functionality is provided by \code{\link{add_dataset_file}} and \code{\link{update_dataset_file}}.
+#' 
 #' @param dataset A dataset DOI (or other persistent identifier), an object of class \dQuote{dataset_atom} or \dQuote{dataset_statement}, or an appropriate and complete SWORD URL.
 #' @param file A character vector of file names, a data.frame, or a list of R objects.
 #' @template envvars
