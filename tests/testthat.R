@@ -1,3 +1,7 @@
 library("testthat")
 library("dataverse")
-test_check("dataverse")
+
+key <- Sys.getenv("DATAVERSE_KEY")
+if (!is.null(key) && key != "") {
+    test_check("dataverse")
+}
