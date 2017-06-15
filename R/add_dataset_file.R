@@ -1,14 +1,14 @@
 #' @rdname add_dataset_file
 #' @title Add or update a file in a dataset
 #' @description Add or update a file in a dataset
-#' @details From Dataverse v4.6.1, the \dQuote{native} API provides endpoints to add and update files without going through the SWORD workflow. To use SWORD instead, see \code{\link{add_file}}.
+#' @details From Dataverse v4.6.1, the \dQuote{native} API provides endpoints to add and update files without going through the SWORD workflow. To use SWORD instead, see \code{\link{add_file}}. \code{add_dataset_file} adds a new file to a specified dataset. \code{update_dataset_file} can be used to replace/update a published file.
 #' 
 #' @param file A character string
 #' @template ds
 #' @param id An integer specifying a file identifier; or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset; or an object of class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
 #' @template envvars
 #' @template dots
-#' @return An object of class \dQuote{dataverse_dataset}.
+#' @return \code{add_dataset_file} returns the new file ID.
 #' @seealso \code{\link{get_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}
 #' @examples
 #' \dontrun{
@@ -16,9 +16,18 @@
 #' ds <- create_dataset("mydataverse", body = meta)
 #'
 #' saveRDS(mtcars, tmp <- tempfile(fileext = ".rds"))
-#' add_dataset_file(ds, )
+#' f <- add_dataset_file(tmp, dataset = ds)
+#' 
+#' # publish dataset
+#' publish_dataset(ds)
 #'
+#' # update file and republish
+#' saveRDS(iris, tmp)
+#' update_dataset_file(tmp, dataset = ds, id = f)
+#' publish_dataset(ds)
+#' 
 #' # cleanup
+#' unlink(tmp)
 #' delete_dataset(ds)
 #' }
 #' @export
@@ -28,7 +37,8 @@ add_dataset_file <- function(file, dataset, key = Sys.getenv("DATAVERSE_KEY"), s
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ..., 
                     body = list(file = httr::upload_file(file)), encode = "multipart")
     httr::stop_for_status(r)
-    TRUE
+    out <- jsonlite::fromJSON(httr::content(r, "text", encoding = "UTF-8"))
+    out$data$files$dataFile$id[1L]
 }
 
 #' @rdname create_dataset
@@ -47,10 +57,10 @@ update_dataset_file <- function(file, dataset = NULL, id, body = NULL, key = Sys
         }
     }
     
-    u <- paste0(api_url(server), "api/files/", id, "/replace/")
+    u <- paste0(api_url(server), "files/", id, "/replace")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ..., 
                     body = list(file = httr::upload_file(file),
-                                jsonData = jsonlite::toJSON(list(forceReplace = TRUE))), 
+                                jsonData = list(forceReplace = TRUE)), 
                     encode = "multipart")
     httr::stop_for_status(r)
     httr::content(r, as = "text", encoding = "UTF-8")

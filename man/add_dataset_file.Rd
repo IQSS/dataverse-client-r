@@ -21,13 +21,13 @@ add_dataset_file(file, dataset, key = Sys.getenv("DATAVERSE_KEY"),
 \item{id}{An integer specifying a file identifier; or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset; or an object of class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
 }
 \value{
-An object of class \dQuote{dataverse_dataset}.
+\code{add_dataset_file} returns the new file ID.
 }
 \description{
 Add or update a file in a dataset
 }
 \details{
-From Dataverse v4.6.1, the \dQuote{native} API provides endpoints to add and update files without going through the SWORD workflow. To use SWORD instead, see \code{\link{add_file}}.
+From Dataverse v4.6.1, the \dQuote{native} API provides endpoints to add and update files without going through the SWORD workflow. To use SWORD instead, see \code{\link{add_file}}. \code{add_dataset_file} adds a new file to a specified dataset. \code{update_dataset_file} can be used to replace/update a published file.
 }
 \examples{
 \dontrun{
@@ -35,9 +35,18 @@ meta <- list()
 ds <- create_dataset("mydataverse", body = meta)
 
 saveRDS(mtcars, tmp <- tempfile(fileext = ".rds"))
-add_dataset_file(ds, )
+f <- add_dataset_file(tmp, dataset = ds)
+
+# publish dataset
+publish_dataset(ds)
+
+# update file and republish
+saveRDS(iris, tmp)
+update_dataset_file(tmp, dataset = ds, id = f)
+publish_dataset(ds)
 
 # cleanup
+unlink(tmp)
 delete_dataset(ds)
 }
 }
