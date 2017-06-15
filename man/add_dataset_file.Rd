@@ -2,10 +2,15 @@
 % Please edit documentation in R/add_dataset_file.R
 \name{add_dataset_file}
 \alias{add_dataset_file}
+\alias{update_dataset_file}
 \title{Add or update a file in a dataset}
 \usage{
 add_dataset_file(file, dataset, description = NULL,
   key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+
+update_dataset_file(file, dataset = NULL, id, description = NULL,
+  force = TRUE, key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 }
 \arguments{

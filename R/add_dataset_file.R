@@ -61,7 +61,7 @@ function(file,
     out$data$files$dataFile$id[1L]
 }
 
-#' @rdname create_dataset
+#' @rdname add_dataset_file
 #' @export
 update_dataset_file <- 
 function(file, 
