@@ -1,6 +1,6 @@
 ---
 title: "Data Archiving"
-date: "2017-06-13"
+date: "2017-06-15"
 output:
   html_document:
     fig_caption: false
@@ -61,4 +61,22 @@ And it will then show up in the list of published datasets returned by `list_dat
 
 ## Native API
 
-Dataverse also implements a second way to release datasets, called the "native" API. Documentation of the latter is forthcoming.
+Dataverse also implements a second way to release datasets, called the "native" API. It is similar to to the SWORD API:
+
+```R
+# create the dataset
+ds <- create_dataset("mydataverse")
+
+# add files
+tmp <- tempfile()
+write.csv(iris, file = tmp)
+f <- add_dataset_file(file = tmp, dataset = ds)
+
+# publish dataset
+publish_dataset(ds)
+
+# dataset will now be published
+get_dataverse("mydataverse")
+```
+
+

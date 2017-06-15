@@ -1,6 +1,6 @@
 ---
 title: "Data Search and Discovery"
-date: "2017-06-13"
+date: "2017-06-15"
 output:
   html_document:
     fig_caption: false
@@ -14,6 +14,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+
 
 Searching for data within Dataverse is quite easy using the `dataverse_search()` function. The simplest searches simply consist of a query string:
 
@@ -91,20 +93,13 @@ ei <- dataverse_search(author = "Gary King", title = "Ecological Inference", typ
 ```r
 # fields returned
 names(ei)
-```
-
-```
-## [1] "name"         "type"         "url"          "global_id"   
-## [5] "description"  "published_at" "citationHtml" "citation"    
-## [9] "authors"
-```
-
-```r
 # names of datasets
 ei$name
 ```
 
 ```
+## [1] "name"         "type"         "url"          "global_id"    "description"  "published_at" "citationHtml"
+## [8] "citation"     "authors"     
 ##  [1] "10 Million International Dyadic Events"                                                           
 ##  [2] "3D Dust map from Green et al. (2015)"                                                             
 ##  [3] "[KRISNA02]³ New Religious Movements : Case of ISKCON"                                             
