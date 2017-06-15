@@ -37,12 +37,17 @@ print.dataverse <- function(x, ...) {
 #' @export
 print.dataverse_dataset <- function(x, ...) {
     cat("Dataset (", x$id, "): ", x$persistentUrl, "\n", sep = "")
+    if ("publisher" %in% names(x)) {
+        cat("Publisher: ", x$publisher, "\n", sep = "")
+    }
+    if ("publicationDate" %in% names(x)) {
+        cat("publicationDate: ", x$publicationDate, "\n", sep = "")
+    }
     if ("latestVersion" %in% names(x)) {
         print(x$latestVersion)
     } else {
-        cat("Version (", x$id, ")", sep = "")
         if ("versionNumber" %in% names(x)) {
-            cat(": ", x$versionNumber, ".", x$versionMinorNumber, ", ", x$versionState, "\n", sep = "")
+            cat("Version: ", x$versionNumber, ".", x$versionMinorNumber, ", ", x$versionState, "\n", sep = "")
         } else {
             cat("\n")
         }
@@ -55,7 +60,7 @@ print.dataverse_dataset <- function(x, ...) {
         if ("files" %in% names(x)) {
             n <- length(x$files)
             cat(n, ngettext(n, " File:", " Files:"), "\n", sep = "")
-            str(x$files, 1)
+            print(x$files[c("label", "version", "id", "contentType")])
         }
     }
     invisible(x)    

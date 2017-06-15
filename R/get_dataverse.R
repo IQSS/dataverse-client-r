@@ -45,5 +45,5 @@ dataverse_contents <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), ser
     out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"), simplifyDataFrame = FALSE)
     structure(lapply(out$data, function(x) {
         `class<-`(x, if (x$type == "dataset") "dataverse_dataset" else "dataverse")
-    }), class = "list")
+    }))
 }
