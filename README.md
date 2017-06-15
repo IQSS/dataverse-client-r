@@ -250,5 +250,5 @@ Users interested in downloading metadata from archives other than Dataverse may 
 
 ---
 
-[![](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![](https://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
 
