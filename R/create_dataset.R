@@ -6,6 +6,7 @@
 #' \code{update_dataset} updates a Dataverse dataset that has already been created using \code{\link{create_dataset}}. This creates a draft version of the dataset or modifies the current draft if one is already in-progress. It does not assign a new version number to the dataset nor does it make it publicly visible (which can be done with \code{\link{publish_dataset}}).
 #' 
 #' @template dv
+#' @template ds
 #' @param body A list describing the dataset.
 #' @template envvars
 #' @template dots
