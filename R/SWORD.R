@@ -72,7 +72,7 @@ list_datasets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
     if (inherits(dataverse, "dataverse")) {
         dataverse <- dataverse$alias
     } else if (is.numeric(dataverse)) {
-        dataverse <- get_dataverse(dataverse)$alias
+        dataverse <- get_dataverse(dataverse, key = key, server = server, ...)$alias
     }
     u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/collection/dataverse/", dataverse)
     r <- httr::GET(u, httr::authenticate(key, ""), ...)

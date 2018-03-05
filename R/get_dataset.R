@@ -20,7 +20,7 @@
 #' @seealso \code{\link{create_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}, \code{\link{dataset_files}}, \code{\link{dataset_metadata}}
 #' @export
 get_dataset <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataset <- dataset_id(dataset)
+    dataset <- dataset_id(dataset, key = key, server = server, ...)
     if (!is.null(version)) {
         u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version)
     } else {
@@ -36,7 +36,7 @@ get_dataset <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERS
 #' @importFrom utils str
 #' @export
 dataset_metadata <- function(dataset, version = ":latest", block = "citation", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataset <- dataset_id(dataset)
+    dataset <- dataset_id(dataset, key = key, server = server, ...)
     if (!is.null(block)) {
         u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/metadata/", block)
     } else {
@@ -52,7 +52,7 @@ dataset_metadata <- function(dataset, version = ":latest", block = "citation", k
 #' @rdname get_dataset
 #' @export
 dataset_files <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataset <- dataset_id(dataset)
+    dataset <- dataset_id(dataset, key = key, server = server, ...)
     u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/files")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)

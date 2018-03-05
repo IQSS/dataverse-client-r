@@ -17,7 +17,7 @@
 # @seealso \code{\link{create_role}}
 # @export
 get_assignments <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataverse <- dataverse_id(dataverse)
+    dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     u <- paste0(api_url(server), "dataverses/", dataverse, "/assignments")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
@@ -32,7 +32,7 @@ get_assignments <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server
 # @rdname role_assignments
 # @export
 assign_role <- function(dataverse, assignee, role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataverse <- dataverse_id(dataverse)
+    dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     u <- paste0(api_url(server), "dataverses/", dataverse, "/assignments")
     b <- list(assignee = assignee, role = role)
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
@@ -44,7 +44,7 @@ assign_role <- function(dataverse, assignee, role, key = Sys.getenv("DATAVERSE_K
 # @rdname role_assignments
 # @export
 delete_assignment <- function(dataverse, assignment, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataverse <- dataverse_id(dataverse)
+    dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     u <- paste0(api_url(server), "dataverses/", dataverse, "/assignments/", assignment)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)

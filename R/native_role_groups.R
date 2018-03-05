@@ -33,7 +33,7 @@ create_group <- function(dataverse, alias, name, description, key = Sys.getenv("
     b <- list(description = description,
               displayName = name,
               aliasInOwner = alias)
-    dataverse <- dataverse_id(dataverse)
+    dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     u <- paste0(api_url(server), "dataverses/", dataverse, "/groups")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
     httr::stop_for_status(r)
@@ -54,7 +54,7 @@ update_group <- function(group, name, description, dataverse, key = Sys.getenv("
         if (missing(description)) {
             b$description <- group$description
         }
-        dataverse <- dataverse_id(group$dataverse)
+        dataverse <- dataverse_id(group$dataverse, key = key, server = server, ...)
         u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", group$groupAliasInOwner)
     } else {
         b$groupAliasInOwner <- group
@@ -64,7 +64,7 @@ update_group <- function(group, name, description, dataverse, key = Sys.getenv("
         if (!missing(description)) {
             b$description <- description
         }
-        dataverse <- dataverse_id(dataverse)
+        dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
         u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", group)
     }
     r <- httr::PUT(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
@@ -77,7 +77,7 @@ update_group <- function(group, name, description, dataverse, key = Sys.getenv("
 # @rdname role_groups
 # @export
 list_groups <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataverse <- dataverse_id(dataverse)
+    dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     u <- paste0(api_url(server), "dataverses/", dataverse, "/groups")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
@@ -93,10 +93,10 @@ list_groups <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = S
 # @export
 get_group <- function(group, dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(group, "dataverse_group")) {
-        dataverse <- dataverse_id(group$dataverse)
+        dataverse <- dataverse_id(group$dataverse, key = key, server = server, ...)
         u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", group$groupAliasInOwner)
     } else {
-        dataverse <- dataverse_id(dataverse)
+        dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
         u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", group)
     }
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
@@ -110,10 +110,10 @@ get_group <- function(group, dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
 # @export
 delete_group <- function(group, dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(group, "dataverse_group")) {
-        dataverse <- dataverse_id(group$dataverse)
+        dataverse <- dataverse_id(group$dataverse, key = key, server = server, ...)
         group <- group$groupAliasInOwner
     } else {
-        dataverse <- dataverse_id(dataverse)
+        dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     }
     u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", group)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
@@ -140,10 +140,10 @@ delete_group <- function(group, dataverse, key = Sys.getenv("DATAVERSE_KEY"), se
 add_roles_to_group <- function(group, role, dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     
     if (inherits(group, "dataverse_group")) {
-        dataverse <- dataverse_id(group$dataverse)
+        dataverse <- dataverse_id(group$dataverse, key = key, server = server, ...)
         group <- group$groupAliasInOwner
     } else {
-        dataverse <- dataverse_id(dataverse)
+        dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     }
     
     # need support for bulk add
@@ -162,10 +162,10 @@ add_roles_to_group <- function(group, role, dataverse, key = Sys.getenv("DATAVER
 # @export
 remove_role_from_group <- function(group, role, dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(group, "dataverse_group")) {
-        dataverse <- dataverse_id(group$dataverse)
+        dataverse <- dataverse_id(group$dataverse, key = key, server = server, ...)
         group <- group$groupAliasInOwner
     } else {
-        dataverse <- dataverse_id(dataverse)
+        dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     }
     u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", group, "/roleAssignees/", role)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)

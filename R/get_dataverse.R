@@ -26,7 +26,7 @@
 #' @export
 get_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), check = TRUE, ...) {
     if (isTRUE(check)) {
-        dataverse <- dataverse_id(dataverse)
+        dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     }
     u <- paste0(api_url(server), "dataverses/", dataverse)
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
@@ -38,7 +38,7 @@ get_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
 #' @rdname get_dataverse
 #' @export
 dataverse_contents <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataverse <- dataverse_id(dataverse)
+    dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     u <- paste0(api_url(server), "dataverses/", dataverse, "/contents")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)

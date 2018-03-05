@@ -1,6 +1,8 @@
 # CHANGES TO dataverse 0.2.1
 
 * Export `initiate_sword_dataset()`. (h/t Justin de Benedictis-Kessner)
+* Pass `key`, `server`, and `...` arguments to internal `get_dataverse()` and `get_dataset()` calls.
+* Tests now run with an explicit empty API key.
 
 # CHANGES TO dataverse 0.1.24
 

@@ -6,7 +6,7 @@ dataverse_id.default <- function(x, ...) {
     x
 }
 dataverse_id.character <- function(x, ...) {
-    get_dataverse(x, check = FALSE)$id
+    get_dataverse(x, ..., check = FALSE)$id
 }
 dataverse_id.dataverse <- function(x, ...) {
     x$id
@@ -77,7 +77,7 @@ get_fileid.character <- function(x, file, key = Sys.getenv("DATAVERSE_KEY"), ser
     id
 }
 
-get_fileid.dataverse_file <- function(x, file, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
+get_fileid.dataverse_file <- function(x, ...) {
     x[["dataFile"]][["id"]]
 }
 

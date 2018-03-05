@@ -43,7 +43,7 @@ function(file,
          key = Sys.getenv("DATAVERSE_KEY"), 
          server = Sys.getenv("DATAVERSE_SERVER"), 
          ...) {
-    dataset <- dataset_id(dataset)
+    dataset <- dataset_id(dataset, key = key, server = server, ...)
     
     bod2 <- list()
     if (!is.null(description)) {
@@ -72,7 +72,7 @@ function(file,
          key = Sys.getenv("DATAVERSE_KEY"), 
          server = Sys.getenv("DATAVERSE_SERVER"), 
          ...) {
-    dataset <- dataset_id(dataset)
+    dataset <- dataset_id(dataset, key = key, server = server, ...)
     
     # get file ID from 'dataset'
     if (!is.numeric(id)) {

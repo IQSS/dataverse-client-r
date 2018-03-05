@@ -15,7 +15,7 @@ publish_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serv
         u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit/dataverse/", dataverse)
     } else {
         # publish via native API
-        dataverse <- dataverse_id(dataverse)
+        dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
         u <- paste0(api_url(server), "dataverses/", dataverse, "/actions/:publish")
         r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
         httr::stop_for_status(r)

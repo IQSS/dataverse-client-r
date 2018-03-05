@@ -15,7 +15,7 @@
 #' @export
 delete_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     # can only delete a "draft" dataset
-    dataset <- dataset_id(dataset)
+    dataset <- dataset_id(dataset, key = key, server = server, ...)
     u <- paste0(api_url(server), "datasets/", dataset, "/versions/:draft")
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)

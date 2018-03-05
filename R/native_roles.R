@@ -41,7 +41,7 @@ delete_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.ge
 # @export
 list_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (!missing(dataverse)) {
-        dataverse <- dataverse_id(dataverse)
+        dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
         u <- paste0(api_url(server), "dataverses/", dataverse, "/roles")
         r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
         httr::stop_for_status(r)
@@ -61,7 +61,7 @@ list_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 create_role <- function(dataverse, alias, name, description, permissions, 
                         key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     
-    dataverse <- dataverse_id(dataverse)
+    dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     b <- list(alias = alias, name = name, description = description)
     if (!missing(permissions)) {
         permissions <- permissions

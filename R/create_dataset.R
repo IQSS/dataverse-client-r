@@ -25,7 +25,7 @@
 #' }
 #' @export
 create_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataverse <- dataverse_id(dataverse)
+    dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     u <- paste0(api_url(server), "dataverses/", dataverse, "/datasets/")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = body, encode = "json", ...)
     httr::stop_for_status(r)
@@ -35,7 +35,7 @@ create_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), s
 #' @rdname create_dataset
 #' @export
 update_dataset <- function(dataset, body, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataset <- dataset_id(dataset)
+    dataset <- dataset_id(dataset, key = key, server = server, ...)
     u <- paste0(api_url(server), "datasets/", dataset, "/versions/:draft")
     r <- httr::PUT(u, httr::add_headers("X-Dataverse-key" = key), body = body, encode = "json", ...)
     httr::stop_for_status(r)

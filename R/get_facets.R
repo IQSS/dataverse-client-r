@@ -18,7 +18,7 @@
 #' }
 #' @export
 get_facets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataverse <- dataverse_id(dataverse)
+    dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     u <- paste0(api_url(server), "dataverses/", dataverse, "/facets")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
