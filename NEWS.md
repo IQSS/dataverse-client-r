@@ -1,3 +1,7 @@
+# CHANGES TO dataverse 0.2.1
+
+* Export `initiate_sword_dataset()`. (h/t Justin de Benedictis-Kessner)
+
 # CHANGES TO dataverse 0.1.24
 
 * Added an `update_dataset_file()` function and improved associated documentation. (#10)

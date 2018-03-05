@@ -46,6 +46,7 @@
 #' # publish dataset
 #' publish_dataset(dat)
 #' }
+#' @export
 initiate_sword_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(dataverse, "dataverse")) {
         dataverse <- dataverse$alias
