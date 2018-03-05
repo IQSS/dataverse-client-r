@@ -3,6 +3,7 @@
 * Export `initiate_sword_dataset()`. (h/t Justin de Benedictis-Kessner)
 * Pass `key`, `server`, and `...` arguments to internal `get_dataverse()` and `get_dataset()` calls.
 * Tests now run with an explicit empty API key.
+* Fixed a bug in internal function `parse_dataset()`, related to capitalization. (#17)
 
 # CHANGES TO dataverse 0.1.24
 

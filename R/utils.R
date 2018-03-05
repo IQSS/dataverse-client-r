@@ -127,8 +127,13 @@ parse_dataset <- function(out) {
         class(out$metadata$citation) <- "dataverse_dataset_citation"
     }
     # cleanup response
-    f <- out$files$dataFile
-    out$files$dataFile <- NULL
-    out$files <- cbind(out$files, f)
+    file_df <- try(out$files$dataFile, silent = TRUE)
+    if (inherits(file_df, "try-error") || is.null(file_df)) {
+        file_df <- try(out$files$datafile, silent = TRUE)
+        out$files$datafile <- NULL
+    } else {
+        out$files$dataFile <- NULL
+    }
+    out$files <- cbind(out$files, file_df)
     structure(out, class = "dataverse_dataset")
 }
