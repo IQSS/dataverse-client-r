@@ -239,10 +239,10 @@ Through the native API it is possible to update a dataset by modifying its metad
 You can (eventually) find a stable release on [CRAN](https://cran.r-project.org/package=dataverse), or install the latest development version from GitHub:
 
 ```R
-if (!require("ghit")) {
-    install.packages("ghit")
+if (!require("remotes")) {
+    install.packages("remotes")
 }
-ghit::install_github("iqss/dataverse-client-r")
+remotes::install_github("iqss/dataverse-client-r")
 library("dataverse")
 ```
 
