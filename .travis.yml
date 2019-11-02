@@ -27,6 +27,8 @@ matrix:
       r_check_args: '--ignore-vignettes --no-examples'
 
 r_packages:
+- htmltools
+- digest
 - covr
 - rmarkdown
 - knitr
