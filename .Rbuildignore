@@ -10,3 +10,5 @@ man-roxygen/*
 \.Rmd2$
 .github/
 .github/*
+^doc$
+^Meta$

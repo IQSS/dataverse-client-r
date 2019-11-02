@@ -9,8 +9,8 @@ get_file(file, dataset = NULL, format = c("original", "RData", "prep",
   "bundle"), vars = NULL, key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 
-get_file_metadata(file, dataset = NULL, format = c("ddi", "preprocessed"),
-  key = Sys.getenv("DATAVERSE_KEY"),
+get_file_metadata(file, dataset = NULL, format = c("ddi",
+  "preprocessed"), key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 }
 \arguments{

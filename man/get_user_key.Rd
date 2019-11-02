@@ -4,7 +4,8 @@
 \alias{get_user_key}
 \title{Get API Key}
 \usage{
-get_user_key(user, password, server = Sys.getenv("DATAVERSE_SERVER"), ...)
+get_user_key(user, password, server = Sys.getenv("DATAVERSE_SERVER"),
+  ...)
 }
 \arguments{
 \item{user}{A character vector specifying a Dataverse server username.}

@@ -4,7 +4,8 @@
 \alias{publish_dataset}
 \title{Publish dataset}
 \usage{
-publish_dataset(dataset, minor = TRUE, key = Sys.getenv("DATAVERSE_KEY"),
+publish_dataset(dataset, minor = TRUE,
+  key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 }
 \arguments{

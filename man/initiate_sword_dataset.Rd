@@ -4,7 +4,8 @@
 \alias{initiate_sword_dataset}
 \title{Initiate dataset (SWORD)}
 \usage{
-initiate_sword_dataset(dataverse, body, key = Sys.getenv("DATAVERSE_KEY"),
+initiate_sword_dataset(dataverse, body,
+  key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 }
 \arguments{
