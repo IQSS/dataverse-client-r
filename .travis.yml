@@ -27,12 +27,12 @@ matrix:
       r_check_args: '--ignore-vignettes --no-examples'
 
 r_packages:
-- covr
-- rmarkdown
-- knitr
+- r-lib/covr
+- rstudio/rmarkdown
+- yihui/knitr
 
 after_success:
-  - if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov()'; fi
+  - Rscript -e 'covr::coveralls()'
 
 notifications:
   email:
