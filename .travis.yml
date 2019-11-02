@@ -27,9 +27,9 @@ matrix:
       r_check_args: '--ignore-vignettes --no-examples'
 
 r_packages:
-- r-lib/covr
-- rstudio/rmarkdown
-- yihui/knitr
+- covr
+- rmarkdown
+- knitr
 
 after_success:
   - Rscript -e 'covr::coveralls()'
