@@ -28,10 +28,10 @@ They can be accessed from [CRAN](https://cran.r-project.org/package=dataverse) o
 The dataverse client package can be installed from [CRAN](https://cran.r-project.org/package=dataverse), and you can find the latest development version and report any issues on GitHub:
 
 ```R
-if (!require("ghit")) {
-    install.packages("ghit")
+if (!require("remotes")) {
+    install.packages("remotes")
 }
-ghit::install_github("iqss/dataverse-client-r")
+remotes::install_github("iqss/dataverse-client-r")
 library("dataverse")
 ```
 
