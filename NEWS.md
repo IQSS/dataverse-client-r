@@ -4,6 +4,7 @@
 * Pass `key`, `server`, and `...` arguments to internal `get_dataverse()` and `get_dataset()` calls.
 * Tests now run with an explicit empty API key.
 * Fixed a bug in internal function `parse_dataset()`, related to capitalization. (#17)
+* Updated config for Travis-CI, such as switch to xenial Ubuntu release and specify covr parameters. (@wibeasley #25)
 
 # CHANGES TO dataverse 0.1.24
 

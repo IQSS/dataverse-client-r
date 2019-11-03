@@ -10,3 +10,4 @@ man-roxygen/*
 \.Rmd2$
 .github/
 .github/*
+^codecov\.yml$
