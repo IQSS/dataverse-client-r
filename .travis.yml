@@ -7,8 +7,6 @@ warnings_are_errors: true
 matrix:
   include:
     - os: linux
-      dist: trusty
-      sudo: required
       env: R_CODECOV=true
     - os: osx
       osx_image: xcode8.2
