@@ -6,7 +6,8 @@
 \alias{dataset_files}
 \title{Get dataset}
 \usage{
-get_dataset(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"),
+get_dataset(dataset, version = ":latest",
+  key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"), ...)
 
 dataset_metadata(dataset, version = ":latest", block = "citation",

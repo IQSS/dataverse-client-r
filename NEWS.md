@@ -4,6 +4,8 @@
 * Pass `key`, `server`, and `...` arguments to internal `get_dataverse()` and `get_dataset()` calls.
 * Tests now run with an explicit empty API key.
 * Fixed a bug in internal function `parse_dataset()`, related to capitalization. (#17)
+* Vignette uses 'remotes' package in place of the archived 'ghit' package. (#24 @wibeasley)
+* Updated config for Travis-CI, such as switch to xenial Ubuntu release, specify repo's org, and specify covr parameters. (#25 @wibeasley)
 
 # CHANGES TO dataverse 0.1.24
 

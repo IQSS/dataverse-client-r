@@ -1,17 +1,16 @@
+# Travis's native R Image (http://docs.travis-ci.com/user/languages/r/)
 language: r
 sudo: false
 cache: packages
+warnings_are_errors: true
+
 matrix:
   include:
     - os: linux
-      dist: precise
-      sudo: false
-      r_build_args: '--no-build-vignettes'
-      r_check_args: '--ignore-vignettes --no-examples'
-    - os: linux
-      dist: trusty
-      sudo: required
+      dist: xenial
       env: R_CODECOV=true
+    - os: linux
+      dist: bionic
     - os: osx
       osx_image: xcode8.2
       before_install:
@@ -20,21 +19,10 @@ matrix:
       latex: false
       r_build_args: '--no-build-vignettes'
       r_check_args: '--ignore-vignettes --no-examples'
-    - os: osx
-      osx_image: xcode7.3
-      latex: false
-      r_build_args: '--no-build-vignettes'
-      r_check_args: '--ignore-vignettes --no-examples'
 
-r_packages:
-- covr
-- rmarkdown
-- knitr
+r_github_packages:
+  - r-lib/covr
 
 after_success:
-  - if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov()'; fi
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
+  - if [[ "${R_CODECOV}" ]]; then Rscript -e 'covr::codecov()'; fi
+  # - Rscript -e 'covr::coveralls()'
