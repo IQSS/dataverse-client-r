@@ -17,10 +17,6 @@ matrix:
       r_build_args: '--no-build-vignettes'
       r_check_args: '--ignore-vignettes --no-examples'
 
-r_packages:
-- rmarkdown
-- knitr
-
 r_github_packages:
   - r-lib/covr
 
