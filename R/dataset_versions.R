@@ -22,7 +22,8 @@ dataset_versions <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server 
     u <- paste0(api_url(server), "datasets/", dataset, "/versions")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
-    out <- httr::content(r, as = "text", encoding = "UTF-8")$data
+    out <- jsonlite::fromJSON(httr::content(r, as = "text", 
+        encoding = "UTF-8"), simplifyDataFrame = FALSE)$data
     lapply(out, function(x) {
         x <- `class<-`(x, "dataverse_dataset_version")
         x$files <- lapply(x$files, `class<-`, "dataverse_file")
