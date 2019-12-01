@@ -71,7 +71,7 @@ function(file,
         file <- paste0(file, collapse = ",")
         u <- paste0(api_url(server), "access/datafiles/", file)
         r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-        httr::stop_for_status(r)
+        httr::stop_for_status(r, task = httr::content(r)$message)
         tempf <- tempfile(fileext = ".zip")
         tempd <- tempfile()
         dir.create(tempd)
@@ -105,7 +105,7 @@ function(file,
                 r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
             }
         }
-        httr::stop_for_status(r)
+        httr::stop_for_status(r, task = httr::content(r)$message)
         return(httr::content(r, as = "raw"))
     }
 }
