@@ -99,11 +99,7 @@ function(file,
             }
             
             # request
-            if (length(query)) {
-                r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
-            } else {
-                r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-            }
+            r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
         }
         httr::stop_for_status(r)
         return(httr::content(r, as = "raw"))
