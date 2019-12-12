@@ -11,7 +11,7 @@
 #' @return \code{get_file_metadata} returns a character vector containing a DDI metadata file. \code{get_file} returns a raw vector (or list of raw vectors, if \code{length(file) > 1}).
 #' @examples
 #' \dontrun{
-#' # download file from: 
+#' # download file from:
 #' # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
 #' monogan <- get_dataverse("monogan")
 #' monogan_data <- dataverse_contents(monogan)
@@ -25,11 +25,11 @@
 #' # retrieve file based on DOI and filename
 #' f2 <- get_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
 #' f2 <- get_file(2692202)
-#' 
+#'
 #' # retrieve file based on "dataverse_file" object
 #' flist <- dataset_files(2692151)
 #' get_file(flist[[2]])
-#' 
+#'
 #' # read file as data.frame
 #' if (require("rio")) {
 #'   tmp <- tempfile(fileext = ".dta")
@@ -37,98 +37,97 @@
 #'   str(dat <- rio::import(tmp, haven = FALSE))
 #'
 #'   # check UNF match
-#'   #if (require("UNF")) {
+#'   # if (require("UNF")) {
 #'   #  unf(dat) %unf% d1$files$datafile$UNF[3]
-#'   #}
+#'   # }
 #' }
 #' }
 #' @importFrom utils unzip
 #' @export
-get_file <- 
-function(file, 
-         dataset = NULL,
-         format = c("original", "RData", "prep", "bundle"),
-         # thumb = TRUE,
-         vars = NULL,
-         key = Sys.getenv("DATAVERSE_KEY"), 
-         server = Sys.getenv("DATAVERSE_SERVER"), 
-         ...) {
-    
+get_file <-
+  function(file,
+           dataset = NULL,
+           format = c("original", "RData", "prep", "bundle"),
+           # thumb = TRUE,
+           vars = NULL,
+           key = Sys.getenv("DATAVERSE_KEY"),
+           server = Sys.getenv("DATAVERSE_SERVER"),
+           ...) {
     format <- match.arg(format)
-    
+
     # get file ID from 'dataset'
     if (!is.numeric(file)) {
-        if (inherits(file, "dataverse_file")) {
-            file <- get_fileid(file, key = key, server = server)
-        } else if (is.null(dataset)) {
-            stop("When 'file' is a character string, dataset must be specified. Or, use a global fileid instead.")
-        } else {
-            file <- get_fileid(dataset, file, key = key, server = server, ...)
-        }
+      if (inherits(file, "dataverse_file")) {
+        file <- get_fileid(file, key = key, server = server)
+      } else if (is.null(dataset)) {
+        stop("When 'file' is a character string, dataset must be specified. Or, use a global fileid instead.")
+      } else {
+        file <- get_fileid(dataset, file, key = key, server = server, ...)
+      }
     }
-    
+
     if (length(file) > 1) {
-        file <- paste0(file, collapse = ",")
-        u <- paste0(api_url(server), "access/datafiles/", file)
-        r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-        httr::stop_for_status(r)
-        tempf <- tempfile(fileext = ".zip")
-        tempd <- tempfile()
-        dir.create(tempd)
-        on.exit(unlink(tempf), add = TRUE)
-        on.exit(unlink(tempd), add = TRUE)
-        writeBin(httr::content(r, as = "raw"), tempf)
-        to_extract <- utils::unzip(tempf, list = TRUE)
-        out <- lapply(to_extract$Name[to_extract$Name != "MANIFEST.TXT"], function(zipf) {
-            utils::unzip(zipfile = tempf, files = zipf, exdir = tempd)
-            readBin(file.path(tempd, zipf), "raw", n = 1e8)
-        })
-        return(out)
+      file <- paste0(file, collapse = ",")
+      u <- paste0(api_url(server), "access/datafiles/", file)
+      r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
+      httr::stop_for_status(r)
+      tempf <- tempfile(fileext = ".zip")
+      tempd <- tempfile()
+      dir.create(tempd)
+      on.exit(unlink(tempf), add = TRUE)
+      on.exit(unlink(tempd), add = TRUE)
+      writeBin(httr::content(r, as = "raw"), tempf)
+      to_extract <- utils::unzip(tempf, list = TRUE)
+      out <- lapply(to_extract$Name[to_extract$Name != "MANIFEST.TXT"], function(zipf) {
+        utils::unzip(zipfile = tempf, files = zipf, exdir = tempd)
+        readBin(file.path(tempd, zipf), "raw", n = 1e8)
+      })
+      return(out)
     } else {
-        if (format == "bundle") {
-            u <- paste0(api_url(server), "access/datafile/bundle/", file)
-            r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-        } else {
-            u <- paste0(api_url(server), "access/datafile/", file)
-            query <- list()
-            if (!is.null(vars)) {
-                query$vars <- paste0(vars, collapse = ",")
-            } 
-            if (!is.null(format)) {
-                query$format <- match.arg(format)
-            }
-            
-            # request
-            r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
+      if (format == "bundle") {
+        u <- paste0(api_url(server), "access/datafile/bundle/", file)
+        r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
+      } else {
+        u <- paste0(api_url(server), "access/datafile/", file)
+        query <- list()
+        if (!is.null(vars)) {
+          query$vars <- paste0(vars, collapse = ",")
         }
-        httr::stop_for_status(r)
-        return(httr::content(r, as = "raw"))
+        if (!is.null(format)) {
+          query$format <- match.arg(format)
+        }
+
+        # request
+        r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
+      }
+      httr::stop_for_status(r)
+      return(httr::content(r, as = "raw"))
     }
-}
+  }
 
 get_file_name_from_header <- function(x) {
-    gsub("\"", "", strsplit(httr::headers(x)[["content-type"]], "name=")[[1]][2])
+  gsub("\"", "", strsplit(httr::headers(x)[["content-type"]], "name=")[[1]][2])
 }
 
 #' @rdname files
 #' @import xml2
 #' @export
-get_file_metadata <- 
-function(file, 
-         dataset = NULL,
-         format = c("ddi", "preprocessed"),
-         key = Sys.getenv("DATAVERSE_KEY"), 
-         server = Sys.getenv("DATAVERSE_SERVER"), 
-         ...) {
+get_file_metadata <-
+  function(file,
+           dataset = NULL,
+           format = c("ddi", "preprocessed"),
+           key = Sys.getenv("DATAVERSE_KEY"),
+           server = Sys.getenv("DATAVERSE_SERVER"),
+           ...) {
     # get file ID from doi
     if (!is.numeric(file)) {
-        if (inherits(file, "dataverse_file")) {
-            file <- get_fileid(file)
-        } else if(is.null(dataset)) {
-            stop("When 'file' is a character string, dataset must be specified. Or, use a global fileid instead.")
-        } else {
-            file <- get_fileid(dataset, file, key = key, server = server, ...)
-        }
+      if (inherits(file, "dataverse_file")) {
+        file <- get_fileid(file)
+      } else if (is.null(dataset)) {
+        stop("When 'file' is a character string, dataset must be specified. Or, use a global fileid instead.")
+      } else {
+        file <- get_fileid(dataset, file, key = key, server = server, ...)
+      }
     }
     format <- match.arg(format)
     u <- paste0(api_url(server), "access/datafile/", file, "/metadata/", format)
@@ -136,4 +135,4 @@ function(file,
     httr::stop_for_status(r)
     out <- httr::content(r, as = "text", encoding = "UTF-8")
     return(out)
-}
+  }
