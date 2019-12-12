@@ -57,43 +57,43 @@ get_file <-
 
     # get file ID from 'dataset'
     if (!is.numeric(file)) {
-      if (inherits(file, "dataverse_file")) {
-        file <- get_fileid(file, key = key, server = server)
-      } else if (is.null(dataset)) {
-        stop("When 'file' is a character string, dataset must be specified. Or, use a global fileid instead.")
-      } else {
-        file <- get_fileid(dataset, file, key = key, server = server, ...)
-      }
+        if (inherits(file, "dataverse_file")) {
+            fileid <- get_fileid(file, key = key, server = server)
+        } else if (is.null(dataset)) {
+            stop("When 'file' is a character string, dataset must be specified. Or, use a global fileid instead.")
+        } else {
+            fileid <- get_fileid(dataset, file, key = key, server = server, ...)
+        }
     }
 
     # request multiple files -----
-    if (length(file) > 1) {
-      file <- paste0(file, collapse = ",")
-      u <- paste0(api_url(server), "access/datafiles/", file)
-      r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-      httr::stop_for_status(r)
-      tempf <- tempfile(fileext = ".zip")
-      tempd <- tempfile()
-      dir.create(tempd)
-      on.exit(unlink(tempf), add = TRUE)
-      on.exit(unlink(tempd), add = TRUE)
-      writeBin(httr::content(r, as = "raw"), tempf)
-      to_extract <- utils::unzip(tempf, list = TRUE)
-      out <- lapply(to_extract$Name[to_extract$Name != "MANIFEST.TXT"], function(zipf) {
-        utils::unzip(zipfile = tempf, files = zipf, exdir = tempd)
-        readBin(file.path(tempd, zipf), "raw", n = 1e8)
+    if (length(fileid) > 1) {
+        fileid <- paste0(fileid, collapse = ",")
+        u <- paste0(api_url(server), "access/datafiles/", file)
+        r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
+        httr::stop_for_status(r)
+        tempf <- tempfile(fileext = ".zip")
+        tempd <- tempfile()
+        dir.create(tempd)
+        on.exit(unlink(tempf), add = TRUE)
+        on.exit(unlink(tempd), add = TRUE)
+        writeBin(httr::content(r, as = "raw"), tempf)
+        to_extract <- utils::unzip(tempf, list = TRUE)
+        out <- lapply(to_extract$Name[to_extract$Name != "MANIFEST.TXT"], function(zipf) {
+            utils::unzip(zipfile = tempf, files = zipf, exdir = tempd)
+            readBin(file.path(tempd, zipf), "raw", n = 1e8)
       })
       return(out)
     } 
     
     # request single file -----
-    if (length(file) == 1) {
+    if (length(fileid) == 1) {
         if (format == "bundle") {
-            u <- paste0(api_url(server), "access/datafile/bundle/", file)
+            u <- paste0(api_url(server), "access/datafile/bundle/", fileid)
             r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
         } 
         if (format != "bundle") {
-            u <- paste0(api_url(server), "access/datafile/", file)
+            u <- paste0(api_url(server), "access/datafile/", fileid)
             query <- list()
             if (!is.null(vars)) {
                 query$vars <- paste0(vars, collapse = ",")
@@ -103,7 +103,7 @@ get_file <-
             }
             
             # request single file in non-bundle format ----
-            # add query if ingesting a tab
+            # add query if ingesting a tab (detect from original file name)
             if (length(query) == 1 & grepl("\\.tab$", file)) {
                 r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
             } else {
