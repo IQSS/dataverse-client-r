@@ -98,7 +98,13 @@ get_file <-
         }
 
         # request
-        r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
+        # add query if ingesting a tab
+        if (length(query) == 1 & grepl("\\.tab$", file)) {
+            r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
+        } else {
+            # do not add query if not an ingestion file
+            r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
+        }
       }
       httr::stop_for_status(r)
       return(httr::content(r, as = "raw"))
