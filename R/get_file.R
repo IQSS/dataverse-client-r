@@ -34,7 +34,7 @@
 #' if (require("rio")) {
 #'   tmp <- tempfile(fileext = ".dta")
 #'   writeBin(f, tmp)
-#'   str(dat <- rio::import(tmp, haven = FALSE))
+#'   dat <- haven::read_dta(tmp)
 #'
 #'   # check UNF match
 #'   # if (require("UNF")) {

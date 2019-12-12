@@ -5,13 +5,24 @@
 \alias{get_file_metadata}
 \title{Download File(s)}
 \usage{
-get_file(file, dataset = NULL, format = c("original", "RData", "prep",
-  "bundle"), vars = NULL, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+get_file(
+  file,
+  dataset = NULL,
+  format = c("original", "RData", "prep", "bundle"),
+  vars = NULL,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 
-get_file_metadata(file, dataset = NULL, format = c("ddi",
-  "preprocessed"), key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+get_file_metadata(
+  file,
+  dataset = NULL,
+  format = c("ddi", "preprocessed"),
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{file}{An integer specifying a file identifier; or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset; or an object of class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
@@ -39,7 +50,7 @@ This function provides access to data files from a Dataverse entry.
 }
 \examples{
 \dontrun{
-# download file from: 
+# download file from:
 # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
 monogan <- get_dataverse("monogan")
 monogan_data <- dataverse_contents(monogan)
@@ -62,12 +73,12 @@ get_file(flist[[2]])
 if (require("rio")) {
   tmp <- tempfile(fileext = ".dta")
   writeBin(f, tmp)
-  str(dat <- rio::import(tmp, haven = FALSE))
+  dat <- haven::read_dta(tmp)
 
   # check UNF match
-  #if (require("UNF")) {
+  # if (require("UNF")) {
   #  unf(dat) \%unf\% d1$files$datafile$UNF[3]
-  #}
+  # }
 }
 }
 }
