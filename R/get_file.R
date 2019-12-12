@@ -66,6 +66,7 @@ get_file <-
       }
     }
 
+    # request multiple files -----
     if (length(file) > 1) {
       file <- paste0(file, collapse = ",")
       u <- paste0(api_url(server), "access/datafiles/", file)
@@ -83,31 +84,35 @@ get_file <-
         readBin(file.path(tempd, zipf), "raw", n = 1e8)
       })
       return(out)
-    } else {
-      if (format == "bundle") {
-        u <- paste0(api_url(server), "access/datafile/bundle/", file)
-        r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-      } else {
-        u <- paste0(api_url(server), "access/datafile/", file)
-        query <- list()
-        if (!is.null(vars)) {
-          query$vars <- paste0(vars, collapse = ",")
-        }
-        if (!is.null(format)) {
-          query$format <- match.arg(format)
-        }
-
-        # request
-        # add query if ingesting a tab
-        if (length(query) == 1 & grepl("\\.tab$", file)) {
-            r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
-        } else {
-            # do not add query if not an ingestion file
+    } 
+    
+    # request single file -----
+    if (length(file) == 1) {
+        if (format == "bundle") {
+            u <- paste0(api_url(server), "access/datafile/bundle/", file)
             r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
+        } 
+        if (format != "bundle") {
+            u <- paste0(api_url(server), "access/datafile/", file)
+            query <- list()
+            if (!is.null(vars)) {
+                query$vars <- paste0(vars, collapse = ",")
+            }
+            if (!is.null(format)) {
+                query$format <- match.arg(format)
+            }
+            
+            # request single file in non-bundle format ----
+            # add query if ingesting a tab
+            if (length(query) == 1 & grepl("\\.tab$", file)) {
+                r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
+            } else {
+                # do not add query if not an ingestion file
+                r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
+            }
         }
-      }
-      httr::stop_for_status(r)
-      return(httr::content(r, as = "raw"))
+        httr::stop_for_status(r)
+        return(httr::content(r, as = "raw"))
     }
   }
 
