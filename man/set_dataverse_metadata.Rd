@@ -4,9 +4,14 @@
 \alias{set_dataverse_metadata}
 \title{Set Dataverse metadata}
 \usage{
-set_dataverse_metadata(dataverse, body, root = TRUE,
+set_dataverse_metadata(
+  dataverse,
+  body,
+  root = TRUE,
   key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{dataverse}{A character string specifying a Dataverse name or an object of class \dQuote{dataverse}.}
