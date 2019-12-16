@@ -134,6 +134,12 @@ parse_dataset <- function(out) {
     } else {
         out$files$dataFile <- NULL
     }
+    
+    # remove duplicate column
+    if ("description" %in% colnames(file_df) & "description" %in% colnames(out$files)) {
+        out$files[["description"]] <- NULL
+    }
+    
     out$files <- cbind(out$files, file_df)
     structure(out, class = "dataverse_dataset")
 }
