@@ -93,9 +93,10 @@ function(...,
     query[["show_relevance"]] <- show_relevance
     ## show_facets
     query[["show_facets"]] <- show_facets
-    ## fq
-    if (!is.null(start)) {
-        query[["fq"]] <- match.arg(fq)
+    ## fq 
+    # we're passing the unencoded fq string on to the API using I() as the API doesn't handle encoded strings properly
+    if (!is.null(fq)) {
+      query[["fq"]] <- I(fq)
     }
     
     # setup URL
