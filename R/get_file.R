@@ -64,6 +64,8 @@ get_file <-
         } else {
             fileid <- get_fileid(dataset, file, key = key, server = server, ...)
         }
+    } else {
+      fileid <- file
     }
 
     # request multiple files -----
@@ -84,14 +86,14 @@ get_file <-
             readBin(file.path(tempd, zipf), "raw", n = 1e8)
       })
       return(out)
-    } 
-    
+    }
+
     # request single file -----
     if (length(fileid) == 1) {
         if (format == "bundle") {
             u <- paste0(api_url(server), "access/datafile/bundle/", fileid)
             r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-        } 
+        }
         if (format != "bundle") {
             u <- paste0(api_url(server), "access/datafile/", fileid)
             query <- list()
@@ -101,7 +103,7 @@ get_file <-
             if (!is.null(format)) {
                 query$format <- match.arg(format)
             }
-            
+
             # request single file in non-bundle format ----
             # add query if ingesting a tab (detect from original file name)
             if (length(query) == 1 & grepl("\\.tab$", file)) {
