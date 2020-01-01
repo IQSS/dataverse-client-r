@@ -13,3 +13,5 @@ man-roxygen/*
 ^doc$
 ^Meta$
 ^codecov\.yml$
+^.*\.Rproj$
+^\.Rproj\.user$
