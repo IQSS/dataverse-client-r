@@ -5,13 +5,25 @@
 \alias{update_dataset_file}
 \title{Add or update a file in a dataset}
 \usage{
-add_dataset_file(file, dataset, description = NULL,
+add_dataset_file(
+  file,
+  dataset,
+  description = NULL,
   key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 
-update_dataset_file(file, dataset = NULL, id, description = NULL,
-  force = TRUE, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+update_dataset_file(
+  file,
+  dataset = NULL,
+  id,
+  description = NULL,
+  force = TRUE,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{file}{A character string}

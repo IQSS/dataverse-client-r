@@ -4,8 +4,12 @@
 \alias{publish_dataverse}
 \title{Publish Dataverse (SWORD)}
 \usage{
-publish_dataverse(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+publish_dataverse(
+  dataverse,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{dataverse}{An object of class \dQuote{sword_collection}, as returned by \code{\link{service_document}}.}

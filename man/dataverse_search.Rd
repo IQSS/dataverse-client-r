@@ -4,12 +4,22 @@
 \alias{dataverse_search}
 \title{Search Dataverse server}
 \usage{
-dataverse_search(..., type = c("dataverse", "dataset", "file"),
-  subtree = NULL, sort = c("name", "date"), order = c("asc", "desc"),
-  per_page = 10, start = NULL, show_relevance = FALSE,
-  show_facets = FALSE, fq = NULL, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), verbose = TRUE,
-  http_opts = NULL)
+dataverse_search(
+  ...,
+  type = c("dataverse", "dataset", "file"),
+  subtree = NULL,
+  sort = c("name", "date"),
+  order = c("asc", "desc"),
+  per_page = 10,
+  start = NULL,
+  show_relevance = FALSE,
+  show_facets = FALSE,
+  fq = NULL,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  verbose = TRUE,
+  http_opts = NULL
+)
 }
 \arguments{
 \item{\dots}{A length-one character vector specifying a search query, a named character vector of search arguments, or a sequence of named character arguments. The specific fields available may vary by server installation.}

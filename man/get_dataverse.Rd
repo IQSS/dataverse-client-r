@@ -5,11 +5,20 @@
 \alias{dataverse_contents}
 \title{Get Dataverse}
 \usage{
-get_dataverse(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), check = TRUE, ...)
+get_dataverse(
+  dataverse,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  check = TRUE,
+  ...
+)
 
-dataverse_contents(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+dataverse_contents(
+  dataverse,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{dataverse}{A character string specifying a Dataverse name or an object of class \dQuote{dataverse}.}

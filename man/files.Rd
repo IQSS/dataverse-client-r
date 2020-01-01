@@ -5,13 +5,24 @@
 \alias{get_file_metadata}
 \title{Download File(s)}
 \usage{
-get_file(file, dataset = NULL, format = c("original", "RData", "prep",
-  "bundle"), vars = NULL, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+get_file(
+  file,
+  dataset = NULL,
+  format = c("original", "RData", "prep", "bundle"),
+  vars = NULL,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 
-get_file_metadata(file, dataset = NULL, format = c("ddi",
-  "preprocessed"), key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+get_file_metadata(
+  file,
+  dataset = NULL,
+  format = c("ddi", "preprocessed"),
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{file}{An integer specifying a file identifier; or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset; or an object of class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
