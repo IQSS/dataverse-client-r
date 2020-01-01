@@ -2,11 +2,28 @@ Package: dataverse
 Version: 0.2.1
 Date: 2018-03-05
 Title: Client for Dataverse 4 Repositories
-Authors@R: c(person("Thomas J.", "Leeper",
-                    role = c("aut", "cre"), 
-                    email = "thosjleeper@gmail.com",
-                    comment = c(ORCID = "0000-0003-4097-6326")),
-             person("Jan", "Kanis", role = "ctb"))
+Authors@R: c(
+  person(
+    "Will", "Beasley",
+    role=c("aut", "cre"),
+    email="wibeasley@hotmail.com", 
+    comment = c(ORCID = "0000-0002-5613-5006")
+  ),
+  person(
+    "Thomas J.", "Leeper",
+    role = c("aut"), 
+    email = "thosjleeper@gmail.com",
+    comment = c(ORCID = "0000-0003-4097-6326")
+  ),
+  person(
+    "Philip", "Durbin",
+    role = c("aut"), 
+    email = "philipdurbin@gmail.com",
+    comment = c(ORCID = "0000-0002-9528-9470")
+  ),
+  person(
+    "Jan", "Kanis", role = "ctb"
+  ))
 Imports:
     stats,
     utils,
