@@ -1,6 +1,7 @@
 # CHANGES TO dataverse 0.2.2 (upcoming)
 
 * Update maintainer to Will Beasley (wibeasley@hotmail.com) (#38)
+* More robust file retrieval (#39 @kuriwaki)
 
 # CHANGES TO dataverse 0.2.1
 
