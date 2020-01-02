@@ -57,6 +57,10 @@ get_file <-
            server = Sys.getenv("DATAVERSE_SERVER"),
            ...) {
     format <- match.arg(format)
+    
+    # single file ID
+    if (is.numeric(file))
+      fileid <- file
 
     # get file ID from 'dataset'
     if (!is.numeric(file)) {
@@ -70,6 +74,7 @@ get_file <-
     } else {
       fileid <- file
     }
+  
 
     # # request multiple files -----
     # if (length(fileid) > 1) {
