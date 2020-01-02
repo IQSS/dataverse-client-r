@@ -1,6 +1,7 @@
 context("Data Access API")
 
 test_that("get file metadata from DOI and filename", {
+    expect_true(FALSE)
     f1 <- get_file_metadata("constructionData.tab", "doi:10.7910/DVN/ARKOTI", key = "", server = "dataverse.harvard.edu")
     expect_true(is.character(f1))
 })
