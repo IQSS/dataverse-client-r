@@ -34,7 +34,8 @@ Suggests:
     testthat,
     UNF,
     foreign,
-    covr
+    covr,
+    yaml
 Description: Provides access to Dataverse version 4 APIs <https://dataverse.org/>, 
     enabling data search, retrieval, and deposit. For Dataverse versions <= 4.0, 
     use the deprecated 'dvn' package <https://cran.r-project.org/package=dvn>.
