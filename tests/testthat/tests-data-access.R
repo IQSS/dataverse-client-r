@@ -1,8 +1,5 @@
 context("Data Access API")
 
-test_that("temp --test should fail", {
-    expect_true(FALSE)
-})
 test_that("get file metadata from DOI and filename", {
     f1 <- get_file_metadata("constructionData.tab", "doi:10.7910/DVN/ARKOTI", key = "", server = "dataverse.harvard.edu")
     expect_true(is.character(f1))
