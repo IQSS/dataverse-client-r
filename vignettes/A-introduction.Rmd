@@ -76,7 +76,7 @@ With that set, you can easily create a new dataverse, create a dataset within th
 
 ```R
 # create a dataverse
-dat <- create_daverse("mydataverse")
+dat <- create_dataverse("mydataverse")
 
 # create a list of metadata
 metadat <- list(title = "My Study",
@@ -100,7 +100,7 @@ Your data are now publicly accessible.
 
 ## Appendix: dvn to dataverse Crosswalk
 
-The original [dvn](https://cran.r-project.org/?package=dvn) package, which worked with Dataverse versions <= 3, provided functionality for searching, retrieving, and depositing data. Here is a cross-walk of functionality in case you were already familiar with the dvn package:
+The original Dataverse client for R was called [dvn](https://cran.r-project.org/web/packages/dvn/index.html); it worked with Dataverse versions <= 3 and was removed from CRAN in favor of [dataverse](https://CRAN.R-project.org/package=dataverse) in 2018.  dvn provided functionality for searching, retrieving, and depositing data. Here is a cross-walk of functionality in case you were already familiar with the dvn package:
 
 | API Category | **dataverse** functions | **dvn** functions |
 | ------------ | ----------------------- | ----------------- |
