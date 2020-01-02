@@ -249,15 +249,20 @@ dataset$files[c("label", "UNF")]
 
 ## Reusing Files and Reproducing Analysis
 
-To reproduce the analysis, we can simply run the code file either as a `system()` call or directly in R using `source()` (note this particular file begins with an `rm()` call so you may want to run it in a clean R session):
+To reproduce the analysis, we can simply run the code file either as a `system()` call or directly in R using `source()` (note this particular file begins with an `rm()` call so you may want to run it in a [new enviroment](https://stat.ethz.ch/R-manual/R-devel/library/base/html/environment.html)):
 
 ```R
+# Option 1
 system("Rscript chapter03.R")
-source("chapter03.R")
+
+# Option 2
+source("chapter03.R", local=new.env())
 ```
 
-Any well-produced set of analysis reproduction files, like this one, will easily run without error once the data and code are in-hand.
+Any well-produced set of analysis reproduction files, like this one, should run without error once the data and code are in-hand.  Troubleshooting anlaysis files is beyond the scope of this vignette, but common sources are
 
-
+1. The working directory is not set the same as the author intended.  This could affect code files not finding the relative position of datasets or of other code files.
+1. Your local machine hasn't downloaded or installed all the necessary datasets and packages.
+1. The functions called in the code have changed since the script was developed.
 
 To archive your own reproducible analyses using Dataverse, see the ["Archiving Data" vignette](D-archiving.html).
