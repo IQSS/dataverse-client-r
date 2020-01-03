@@ -8,7 +8,7 @@
 #' \dontrun{
 #' # retrieve your service document
 #' d <- service_document()
-#' 
+#'
 #' # list available datasets in first dataverse
 #' list_datasets(d[[2]])
 #' }
@@ -62,7 +62,7 @@ print.sword_service_document <- function(x, ...) {
 #' \dontrun{
 #' # retrieve your service document
 #' d <- service_document()
-#' 
+#'
 #' # list available datasets in first dataverse
 #' list_datasets(d[[2]])
 #' }
@@ -77,13 +77,13 @@ list_datasets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
     u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/collection/dataverse/", dataverse)
     r <- httr::GET(u, httr::authenticate(key, ""), ...)
     httr::stop_for_status(r)
-    
+
     # clean up response structure
     x <- xml2::as_list(xml2::read_xml(r$content))
     out <- list(title = x[["title"]][[1L]],
                 generator = x[["generator"]],
                 dataverseHasBeenReleased = x[["dataverseHasBeenReleased"]][[1L]])
-    out[["datasets"]] <- do.call("rbind.data.frame", 
+    out[["datasets"]] <- do.call("rbind.data.frame",
         lapply(x[which(names(x) == "entry")], function(ds) {
             list(title = ds[["title"]][[1L]],
                  id = ds[["id"]][[1L]])

@@ -37,7 +37,7 @@ Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 ```
 
 ```
-## Dataset (75170): 
+## Dataset (75170):
 ## Version: 1.0, RELEASED
 ## Release Date: 2015-07-07T02:57:02Z
 ## License: CC0
@@ -83,7 +83,7 @@ The output prints some basic metadata and then the `str()` of the `files` data f
 dataset$files[c("filename", "contentType")]
 ```
 
-This shows that there are indeed 32 files, a mix of .R code files and tab- and comma-separated data files. 
+This shows that there are indeed 32 files, a mix of .R code files and tab- and comma-separated data files.
 
 
 You can also retrieve more extensive metadata using `dataset_metadata()`:
@@ -115,9 +115,9 @@ Now we'll get the corresponding data and save it locally. For this code we need 
 
 
 ```r
-writeBin(get_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI"), 
+writeBin(get_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI"),
          "constructionData.dta")
-writeBin(get_file("PESenergy.csv", "doi:10.7910/DVN/ARKOTI"), 
+writeBin(get_file("PESenergy.csv", "doi:10.7910/DVN/ARKOTI"),
          "PESenergy.csv")
 ```
 
@@ -210,8 +210,8 @@ dataset$files[c("label", "UNF")]
 ```
 
 ```
-## UNF6:+4pc5114xS0ryr1sSvdX6g== 
-## UNF6:TD7TEMZyrX4iGTlTsUKQDg== 
+## UNF6:+4pc5114xS0ryr1sSvdX6g==
+## UNF6:TD7TEMZyrX4iGTlTsUKQDg==
 ##                           label                            UNF
 ## 1                  alpl2013.tab UNF:6:d9ZNXvmiPfiunSAiXRpVfg==
 ## 2                   BPchap7.tab UNF:6:B3/HJbnzktaX5eEJA2ItiA==

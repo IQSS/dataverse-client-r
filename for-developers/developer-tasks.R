@@ -18,6 +18,7 @@ test_results_checked <- devtools::test()
 # test_results_not_checked <- testthat::test_dir("./tests/manual/")
 
 # lintr::lint_package()
+lintr::lint("R/add_dataset_file.R")
 # devtools::check(force_suggests = FALSE)
 devtools::check(cran=T)
 # devtools::check_rhub(email="wibeasley@hotmail.com")

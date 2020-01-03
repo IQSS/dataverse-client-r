@@ -31,9 +31,9 @@ create_zip.list <- function(x, ...) {
 #' @title Add file (SWORD)
 #' @description Add one or more files to a SWORD (possibly unpublished) dataset
 #' @details This function is used to add files to a dataset. It is part of the SWORD API, which is used to upload data to a Dataverse server. This means this can be used to view unpublished Dataverses and Datasets.
-#' 
+#'
 #' As of Dataverse v4.6.1, the \dQuote{native} API also provides endpoints to add and update files without going through the SWORD workflow. This functionality is provided by \code{\link{add_dataset_file}} and \code{\link{update_dataset_file}}.
-#' 
+#'
 #' @param dataset A dataset DOI (or other persistent identifier), an object of class \dQuote{dataset_atom} or \dQuote{dataset_statement}, or an appropriate and complete SWORD URL.
 #' @param file A character vector of file names, a data.frame, or a list of R objects.
 #' @template envvars
@@ -44,12 +44,12 @@ create_zip.list <- function(x, ...) {
 #' \dontrun{
 #' # retrieve your service document
 #' d <- service_document()
-#' 
+#'
 #' # create a list of metadata
 #' metadat <- list(title = "My Study",
 #'                 creator = "Doe, John",
 #'                 description = "An example study")
-#' 
+#'
 #' # create the dataset
 #' dat <- initiate_sword_dataset("mydataverse", body = metadat)
 #'
@@ -60,7 +60,7 @@ create_zip.list <- function(x, ...) {
 #'
 #' # publish dataset
 #' publish_dataset(dat)
-#' 
+#'
 #' # delete a dataset
 #' delete_dataset(dat)
 #' }
@@ -84,8 +84,8 @@ add_file <- function(dataset, file, key = Sys.getenv("DATAVERSE_KEY"), server = 
 
     # file can be: a character vector of file names, a data.frame, or a list of R objects
     file <- create_zip(file)
-    
-    h <- httr::add_headers("Content-Disposition" = paste0("filename=", file), 
+
+    h <- httr::add_headers("Content-Disposition" = paste0("filename=", file),
                            "Content-Type" = "application/zip",
                            "Packaging" = "http://purl.org/net/sword/package/SimpleZip")
     r <- httr::POST(u, httr::authenticate(key, ""), h, body = httr::upload_file(file), ...)
@@ -105,12 +105,12 @@ add_file <- function(dataset, file, key = Sys.getenv("DATAVERSE_KEY"), server = 
 #' \dontrun{
 #' # retrieve your service document
 #' d <- service_document()
-#' 
+#'
 #' # create a list of metadata
 #' metadat <- list(title = "My Study",
 #'                 creator = "Doe, John",
 #'                 description = "An example study")
-#' 
+#'
 #' # create the dataset
 #' dat <- initiate_sword_dataset("mydataverse", body = metadat)
 #'
@@ -118,11 +118,11 @@ add_file <- function(dataset, file, key = Sys.getenv("DATAVERSE_KEY"), server = 
 #' tmp <- tempfile()
 #' write.csv(iris, file = tmp)
 #' f <- add_file(dat, file = tmp)
-#' 
+#'
 #' # delete a file
 #' ds <- dataset_statement(dat)
 #' delete_file(ds$files[[1]]$id
-#' 
+#'
 #' # delete a dataset
 #' delete_dataset(dat)
 #' }
