@@ -30,6 +30,7 @@ Imports:
     utils,
     xml2
 Suggests:
+    checkmate,
     covr,
     foreign,
     knitr,

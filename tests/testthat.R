@@ -3,6 +3,8 @@ library("dataverse")
 
 if (!requireNamespace("yaml", quietly = TRUE)) {
   warning("The 'yaml' package must be present to test the dataverse package.")
+} else if (!requireNamespace("checkmate", quietly = TRUE)) {
+  warning("The 'checkmate' package must be present to test the dataverse package.")
 } else {
   server  <- Sys.getenv("DATAVERSE_SERVER")
   key     <- Sys.getenv("DATAVERSE_KEY")
