@@ -1,7 +1,9 @@
 library("testthat")
 library("dataverse")
 
-if (requireNamespace("yaml", quietly = TRUE)) {
+if (!requireNamespace("yaml", quietly = TRUE)) {
+  warning("The 'yaml' package must be present to test the dataverse package.")
+} else {
   server  <- Sys.getenv("DATAVERSE_SERVER")
   key     <- Sys.getenv("DATAVERSE_KEY")
 
@@ -27,7 +29,4 @@ if (requireNamespace("yaml", quietly = TRUE)) {
   message("Using Dataverse server `", Sys.getenv("DATAVERSE_SERVER"), "`.")
 
   test_check("dataverse")
-
-} else {
-  warning("The 'yaml' package must be present to test the dataverse package.")
 }
