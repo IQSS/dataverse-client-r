@@ -26,6 +26,8 @@ Authors@R: c(
 Imports:
     httr,
     jsonlite,
+    magrittr,
+    readr,
     stats,
     utils,
     xml2
