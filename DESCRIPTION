@@ -24,17 +24,17 @@ Authors@R: c(
     "Jan", "Kanis", role = "ctb"
   ))
 Imports:
+    httr,
+    jsonlite,
     stats,
     utils,
-    httr,
-    xml2,
-    jsonlite
+    xml2
 Suggests:
+    covr,
+    foreign,
     knitr,
     testthat,
     UNF,
-    foreign,
-    covr,
     yaml
 Description: Provides access to Dataverse version 4 APIs <https://dataverse.org/>, 
     enabling data search, retrieval, and deposit. For Dataverse versions <= 4.0, 
