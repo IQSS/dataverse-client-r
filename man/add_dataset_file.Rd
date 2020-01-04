@@ -66,7 +66,7 @@ publish_dataset(ds)
 
 # update file and republish
 saveRDS(iris, tmp)
-update_dataset_file(tmp, dataset = ds, id = f, 
+update_dataset_file(tmp, dataset = ds, id = f,
                     description = "Actually iris")
 publish_dataset(ds)
 

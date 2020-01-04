@@ -1,3 +1,9 @@
+# CHANGES TO dataverse 0.2.2 (upcoming)
+
+* Update maintainer to Will Beasley (wibeasley@hotmail.com) (#38)
+* More robust file retrieval (#39 @kuriwaki)
+* Tests use https://demo.dataverse.org/dataverse/dataverse-client-r/. (#40)
+
 # CHANGES TO dataverse 0.2.1
 
 * Export `initiate_sword_dataset()`. (h/t Justin de Benedictis-Kessner)

@@ -46,7 +46,7 @@ Retrieve details of a Dataverse
 get_dataverse(":root")
 dataverse_contents(":root")
 
-# download file from: 
+# download file from:
 # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
 monogan <- get_dataverse("monogan")
 (monogan_data <- dataverse_contents(monogan))

@@ -31,7 +31,7 @@ This returns a list of objects of all versions of a dataset, including metadata.
 }
 \examples{
 \dontrun{
-# download file from: 
+# download file from:
 # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
 monogan <- get_dataverse("monogan")
 monogan_data <- dataverse_contents(monogan)

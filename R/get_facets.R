@@ -8,7 +8,7 @@
 #' @seealso To manage Dataverses: \code{\link{create_dataverse}},  \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{dataverse_contents}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
 #' @examples
 #' \dontrun{
-#' # download file from: 
+#' # download file from:
 #' # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
 #' monogan <- get_dataverse("monogan")
 #' (monogan_data <- dataverse_contents(monogan))

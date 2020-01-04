@@ -3,13 +3,13 @@
 #' @description Retrieve a Dataverse dataset or its metadata
 #' @details \code{get_dataset} retrieves details about a Dataverse dataset. \code{dataset_metadata} returns a named metadata block for a dataset. This is already returned by \code{\link{get_dataset}}, but this function allows you to retrieve just a specific block of metadata, such as citation information. \code{dataset_files} returns a list of files in a dataset, similar to \code{\link{get_dataset}}. The difference is that this returns only a list of \dQuote{dataverse_dataset} objects, whereas \code{\link{get_dataset}} returns metadata and a data.frame of files (rather than a list of file objects).
 #' @template ds
-#' @template version 
+#' @template version
 #' @template envvars
 #' @template dots
 #' @return A list of class \dQuote{dataverse_dataset} or a list of a form dependent on the specific metadata block retrieved. \code{dataset_files} returns a list of objects of class \dQuote{dataverse_file}.
 #' @examples
 #' \dontrun{
-#' # download file from: 
+#' # download file from:
 #' # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
 #' monogan <- get_dataverse("monogan")
 #' monogan_data <- dataverse_contents(monogan)
@@ -42,7 +42,7 @@ dataset_metadata <- function(dataset, version = ":latest", block = "citation", k
     } else {
         u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/metadata")
     }
-    
+
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     out <- httr::content(r, as = "text", encoding = "UTF-8")

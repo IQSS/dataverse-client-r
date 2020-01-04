@@ -1,0 +1,4 @@
+server: "demo.dataverse.org"
+api_token: "c7208dd2-6ec5-469a-bec5-f57e164888d4"
+api_token_expiration: "2021-01-02"
+api_token_name: "wibeasley-testing"
