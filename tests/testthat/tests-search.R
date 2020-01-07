@@ -13,5 +13,9 @@ test_that("simple search w/type argument", {
 })
 
 test_that("date range search using fq", {
-    expect_true(is.data.frame(dataverse_search(author = "*", fq = "dateSort:[2018-01-01T00:00:00Z+TO+2019-01-01T00:00:00Z]", type = "dataset", key = "", server = "dataverse.harvard.edu")))
+    expect_true(is.data.frame(dataverse_search("*", fq = "dateSort:[2018-01-01T00:00:00Z+TO+2019-01-01T00:00:00Z]", type = "dataset", key = "", server = "dataverse.harvard.edu")))
+})
+
+test_that("empty fq search", {
+  expect_length(dataverse_search("*", fq = "dateSort:[2019-02-01T00:00:00Z+TO+2019-01-01T00:00:00Z]", type = "dataset", key = "", server = "dataverse.harvard.edu"), 0)
 })
