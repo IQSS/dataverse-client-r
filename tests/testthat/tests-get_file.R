@@ -19,3 +19,10 @@ test_that("download file from file id", {
   expect_true(is.raw(actual))
   expect_true(1000 < object.size(actual)) # Should be 1+ KB
 })
+
+test_that("download of zip of multiple files with file id", {
+  file_ids <- get_dataset("doi:10.70122/FK2/FAN622")[['files']]$id
+  actual <- get_file(file_ids, format="original")
+  expect_true(is.raw(actual))
+  expect_true(1000 < object.size(actual)) # Should be 1+ KB
+})

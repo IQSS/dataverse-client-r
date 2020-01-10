@@ -2,10 +2,11 @@
 #' @title Download File(s)
 #' @description Download Dataverse File(s)
 #' @details This function provides access to data files from a Dataverse entry.
-#' @param file An integer specifying a file identifier; or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset; or an object of class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
+#' @param file An integer specifying a file identifier; or a vector of integers specifying file identifiers; or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset; or an object of class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
 #' @template ds
 #' @param format A character string specifying a file format. For \code{get_file}: by default, this is \dQuote{original} (the original file format). If \dQuote{RData} or \dQuote{prep} is used, an alternative is returned. If \dQuote{bundle}, a compressed directory containing a bundle of file formats is returned. For \code{get_file_metadata}, this is \dQuote{ddi}.
 #' @param vars A character vector specifying one or more variable names, used to extract a subset of the data.
+#' @param unzip A Boolean operator. If TRUE, multiple files downloaded get unzipped. If false the .zip file is downloaded.
 #' @template envvars
 #' @template dots
 #' @return \code{get_file_metadata} returns a character vector containing a DDI metadata file. \code{get_file} returns a raw vector (or list of raw vectors, if \code{length(file) > 1}).
@@ -30,6 +31,9 @@
 #' flist <- dataset_files(2692151)
 #' get_file(flist[[2]])
 #'
+#' # retrieve all files in a dataset in their original format (will return a .zip file)
+#' file_ids <- get_dataset("doi:10.7910/DVN/CXOB4K")[['files']]$id
+#' f3 <- get_file(file_ids, format = "original", unzip = FALSE)
 #' # read file as data.frame
 #' if (require("rio")) {
 #'   tmp <- tempfile(fileext = ".dta")
@@ -49,6 +53,7 @@ get_file <-
            dataset = NULL,
            format = c("original", "RData", "prep", "bundle"),
            # thumb = TRUE,
+           unzip = TRUE,
            vars = NULL,
            key = Sys.getenv("DATAVERSE_KEY"),
            server = Sys.getenv("DATAVERSE_SERVER"),
@@ -71,21 +76,26 @@ get_file <-
     # request multiple files -----
     if (length(fileid) > 1) {
         fileid <- paste0(fileid, collapse = ",")
-        u <- paste0(api_url(server), "access/datafiles/", file)
+        u <- paste0(api_url(server), "access/datafiles/", fileid)
         r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
         httr::stop_for_status(r)
-        tempf <- tempfile(fileext = ".zip")
-        tempd <- tempfile()
-        dir.create(tempd)
-        on.exit(unlink(tempf), add = TRUE)
-        on.exit(unlink(tempd), add = TRUE)
-        writeBin(httr::content(r, as = "raw"), tempf)
-        to_extract <- utils::unzip(tempf, list = TRUE)
-        out <- lapply(to_extract$Name[to_extract$Name != "MANIFEST.TXT"], function(zipf) {
+        if (unzip) {
+          tempf <- tempfile(fileext = ".zip")
+          tempd <- tempfile()
+          dir.create(tempd)
+          on.exit(unlink(tempf), add = TRUE)
+          on.exit(unlink(tempd), add = TRUE)
+          writeBin(httr::content(r, as = "raw"), tempf)
+          to_extract <- utils::unzip(tempf, list = TRUE)
+          out <- lapply(to_extract$Name[to_extract$Name != "MANIFEST.TXT"], function(zipf) {
             utils::unzip(zipfile = tempf, files = zipf, exdir = tempd)
             readBin(file.path(tempd, zipf), "raw", n = 1e8)
-      })
-      return(out)
+          })
+          return(out)
+        }
+        else {
+          return(httr::content(r, as = "raw"))
+        }
     }
 
     # request single file -----
