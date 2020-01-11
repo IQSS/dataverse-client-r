@@ -20,9 +20,18 @@ test_that("download file from file id", {
   expect_true(1000 < object.size(actual)) # Should be 1+ KB
 })
 
-test_that("download of zip of multiple files with file id", {
-  file_ids <- get_dataset("doi:10.70122/FK2/FAN622")[['files']]$id
-  actual <- get_file(file_ids, format="original")
-  expect_true(is.raw(actual))
-  expect_true(1000 < object.size(actual)) # Should be 1+ KB
+test_that("download multiple files with file id - no folder", {
+  file_ids <- get_dataset("doi:10.70122/FK2/LZAJEQ", server = "demo.dataverse.org")[['files']]$id
+  actual <- get_file(file_ids, format="original", server = "demo.dataverse.org")
+  expect_true(length(actual) == 2) # two files in the dataset
+  expect_true(is.raw(actual[[2]]))
+  expect_true(300 < object.size(actual[[2]])) # Should be >300 B
+})
+
+test_that("download multiple files with file id - with folders", {
+  file_ids <- get_dataset("doi:10.70122/FK2/V54HGA", server = "demo.dataverse.org")[['files']]$id
+  actual <- get_file(file_ids, format="original", server = "demo.dataverse.org")
+  expect_true(length(actual) == 2) # two files in the dataset
+  expect_true(is.raw(actual[[2]]))
+  expect_true(300 < object.size(actual[[2]])) # Should be >300 B
 })

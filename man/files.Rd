@@ -9,7 +9,6 @@ get_file(
   file,
   dataset = NULL,
   format = c("original", "RData", "prep", "bundle"),
-  unzip = TRUE,
   vars = NULL,
   key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"),
@@ -31,8 +30,6 @@ get_file_metadata(
 \item{dataset}{An integer specifying a dataset identification number or an object of class \dQuote{dataverse_dataset}. The identification number is the dataset's persistent identification number (not the integer specifying a specific version of the dataset, such as returned by \code{\link{dataset_versions}}).}
 
 \item{format}{A character string specifying a file format. For \code{get_file}: by default, this is \dQuote{original} (the original file format). If \dQuote{RData} or \dQuote{prep} is used, an alternative is returned. If \dQuote{bundle}, a compressed directory containing a bundle of file formats is returned. For \code{get_file_metadata}, this is \dQuote{ddi}.}
-
-\item{unzip}{A Boolean operator. If TRUE, multiple files downloaded get unzipped. If false the .zip file is downloaded.}
 
 \item{vars}{A character vector specifying one or more variable names, used to extract a subset of the data.}
 
@@ -72,7 +69,7 @@ f2 <- get_file(2692202)
 flist <- dataset_files(2692151)
 get_file(flist[[2]])
 
-# retrieve all files in a dataset in their original format (will return a .zip file)
+# retrieve all files in a dataset in their original format (returns a list of raw vectors)
 file_ids <- get_dataset("doi:10.7910/DVN/CXOB4K")[['files']]$id
 f3 <- get_file(file_ids, format = "original")
 # read file as data.frame
