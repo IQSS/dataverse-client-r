@@ -3,6 +3,7 @@
 * Update maintainer to Will Beasley (wibeasley@hotmail.com) (#38)
 * More robust file retrieval (#39 @kuriwaki)
 * Tests use https://demo.dataverse.org/dataverse/dataverse-client-r/. (#40)
+* More verbose error messages returned on httr failure. (#31 @EdJeeOnGithub)
 
 # CHANGES TO dataverse 0.2.1
 
