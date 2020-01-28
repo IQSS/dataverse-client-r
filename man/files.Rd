@@ -25,7 +25,7 @@ get_file_metadata(
 )
 }
 \arguments{
-\item{file}{An integer specifying a file identifier; or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset; or an object of class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
+\item{file}{An integer specifying a file identifier; or a vector of integers specifying file identifiers; or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset; or an object of class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
 
 \item{dataset}{An integer specifying a dataset identification number or an object of class \dQuote{dataverse_dataset}. The identification number is the dataset's persistent identification number (not the integer specifying a specific version of the dataset, such as returned by \code{\link{dataset_versions}}).}
 
@@ -69,6 +69,9 @@ f2 <- get_file(2692202)
 flist <- dataset_files(2692151)
 get_file(flist[[2]])
 
+# retrieve all files in a dataset in their original format (returns a list of raw vectors)
+file_ids <- get_dataset("doi:10.7910/DVN/CXOB4K")[['files']]$id
+f3 <- get_file(file_ids, format = "original")
 # read file as data.frame
 if (require("rio")) {
   tmp <- tempfile(fileext = ".dta")
