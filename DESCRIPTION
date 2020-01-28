@@ -6,7 +6,8 @@ Authors@R: c(person("Thomas J.", "Leeper",
                     role = c("aut", "cre"), 
                     email = "thosjleeper@gmail.com",
                     comment = c(ORCID = "0000-0003-4097-6326")),
-             person("Jan", "Kanis", role = "ctb"))
+             person("Jan", "Kanis", role = "ctb"),
+	         person("Edward", "Jee", role = "ctb"))
 Imports:
     stats,
     utils,
