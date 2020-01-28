@@ -29,7 +29,7 @@
 #' \dontrun{
 #' # retrieve your service document (dataverse list)
 #' d <- service_document()
-#' 
+#'
 #' # create a list of metadata
 #' metadat <- list(title = "My Study",
 #'                 creator = "Doe, John",
@@ -76,7 +76,7 @@ initiate_sword_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_
 #' \dontrun{
 #' # retrieve your service document
 #' d <- service_document()
-#' 
+#'
 #' # create a list of metadata
 #' metadat <- list(title = "My Study",
 #'                 creator = "Doe, John",
@@ -84,7 +84,7 @@ initiate_sword_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_
 #'
 #' # create the dataset in first dataverse
 #' dat <- initiate_sword_dataset(d[[2]], body = metadat)
-#' 
+#'
 #' # delete a dataset
 #' delete_dataset(dat)
 #' }
@@ -128,7 +128,7 @@ delete_sword_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), ser
 #' \dontrun{
 #' # retrieve your service document
 #' d <- service_document()
-#' 
+#'
 #' # create a list of metadata
 #' metadat <- list(title = "My Study",
 #'                 creator = "Doe, John",
@@ -136,10 +136,10 @@ delete_sword_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), ser
 #'
 #' # create the dataset in first dataverse
 #' dat <- initiate_sword_dataset(d[[2]], body = metadat)
-#' 
+#'
 #' # publish dataset
 #' publish_sword_dataset(dat)
-#' 
+#'
 #' # delete a dataset
 #' delete_dataset(dat)
 #' }
@@ -180,10 +180,10 @@ publish_sword_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), se
 #' \dontrun{
 #' # retrieve your service document
 #' d <- service_document()
-#' 
+#'
 #' # retrieve dataset statement (list contents)
 #' dataset_statement(d[[2]])
-#' 
+#'
 #' # retrieve dataset atom
 #' dataset_atom(d[[2]])
 #' }

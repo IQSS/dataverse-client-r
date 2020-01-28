@@ -30,8 +30,8 @@
 #' }
 #' @seealso \code{\link{get_file}}, \code{\link{get_dataverse}}, \code{\link{get_dataset}}, \code{\link{dataverse_contents}}
 #' @export
-dataverse_search <- 
-function(..., 
+dataverse_search <-
+function(...,
          type = c("dataverse", "dataset", "file"),
          subtree = NULL,
          sort = c("name", "date"),
@@ -45,7 +45,7 @@ function(...,
          server = Sys.getenv("DATAVERSE_SERVER"),
          verbose = TRUE,
          http_opts = NULL) {
-    
+
     # parse `...` search query argument(s)
     a <- list(...)
     if (length(a)) {
@@ -93,14 +93,15 @@ function(...,
     query[["show_relevance"]] <- show_relevance
     ## show_facets
     query[["show_facets"]] <- show_facets
-    ## fq
-    if (!is.null(start)) {
-        query[["fq"]] <- match.arg(fq)
+    ## fq 
+    # we're passing the unencoded fq string on to the API using I() as the API doesn't handle encoded strings properly
+    if (!is.null(fq)) {
+      query[["fq"]] <- I(fq)
     }
-    
+
     # setup URL
     u <- paste0(api_url(server), "search")
-    
+
     # execute request
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query)
     httr::stop_for_status(r)

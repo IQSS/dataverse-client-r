@@ -5,11 +5,19 @@
 \alias{dataset_statement}
 \title{View dataset (SWORD)}
 \usage{
-dataset_atom(dataset, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+dataset_atom(
+  dataset,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 
-dataset_statement(dataset, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+dataset_statement(
+  dataset,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{dataset}{A dataset DOI (or other persistent identifier), an object of class \dQuote{dataset_atom} or \dQuote{dataset_statement}, or an appropriate and complete SWORD URL.}

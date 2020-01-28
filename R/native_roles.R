@@ -58,9 +58,9 @@ list_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 
 # @rdname roles
 # @export
-create_role <- function(dataverse, alias, name, description, permissions, 
+create_role <- function(dataverse, alias, name, description, permissions,
                         key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    
+
     dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     b <- list(alias = alias, name = name, description = description)
     if (!missing(permissions)) {

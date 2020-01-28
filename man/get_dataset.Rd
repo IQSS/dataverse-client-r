@@ -6,17 +6,30 @@
 \alias{dataset_files}
 \title{Get dataset}
 \usage{
-get_dataset(dataset, version = ":latest",
+get_dataset(
+  dataset,
+  version = ":latest",
   key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 
-dataset_metadata(dataset, version = ":latest", block = "citation",
+dataset_metadata(
+  dataset,
+  version = ":latest",
+  block = "citation",
   key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 
-dataset_files(dataset, version = ":latest",
+dataset_files(
+  dataset,
+  version = ":latest",
   key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{dataset}{An integer specifying a dataset identification number or an object of class \dQuote{dataverse_dataset}. The identification number is the dataset's persistent identification number (not the integer specifying a specific version of the dataset, such as returned by \code{\link{dataset_versions}}).}
@@ -42,7 +55,7 @@ Retrieve a Dataverse dataset or its metadata
 }
 \examples{
 \dontrun{
-# download file from: 
+# download file from:
 # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
 monogan <- get_dataverse("monogan")
 monogan_data <- dataverse_contents(monogan)

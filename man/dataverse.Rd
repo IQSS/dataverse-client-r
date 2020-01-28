@@ -3,7 +3,6 @@
 \docType{package}
 \name{dataverse}
 \alias{dataverse}
-\alias{dataverse-package}
 \title{Client for Dataverse 4 Repositories}
 \description{
 Provides access to Dataverse 4 APIs, enabling data search, retrieval, and deposit.

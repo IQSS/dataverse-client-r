@@ -4,9 +4,13 @@
 \alias{initiate_sword_dataset}
 \title{Initiate dataset (SWORD)}
 \usage{
-initiate_sword_dataset(dataverse, body,
+initiate_sword_dataset(
+  dataverse,
+  body,
   key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{dataverse}{A Dataverse alias or ID number, or an object of class \dQuote{dataverse}, perhaps as returned by \code{\link{service_document}}.}

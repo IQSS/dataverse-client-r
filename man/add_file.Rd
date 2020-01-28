@@ -4,8 +4,13 @@
 \alias{add_file}
 \title{Add file (SWORD)}
 \usage{
-add_file(dataset, file, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+add_file(
+  dataset,
+  file,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{dataset}{A dataset DOI (or other persistent identifier), an object of class \dQuote{dataset_atom} or \dQuote{dataset_statement}, or an appropriate and complete SWORD URL.}

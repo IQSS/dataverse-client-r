@@ -4,8 +4,12 @@
 \alias{dataverse_metadata}
 \title{Dataverse metadata}
 \usage{
-dataverse_metadata(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+dataverse_metadata(
+  dataverse,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{dataverse}{A character string specifying a Dataverse name or an object of class \dQuote{dataverse}.}
@@ -27,7 +31,7 @@ This function returns a list of metadata for a named Dataverse. Use \code{\link{
 }
 \examples{
 \dontrun{
-# download file from: 
+# download file from:
 # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
 monogan <- get_dataverse("monogan")
 monogan_data <- dataverse_contents(monogan)
