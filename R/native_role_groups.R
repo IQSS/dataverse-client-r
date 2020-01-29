@@ -15,7 +15,7 @@
 # \dontrun{
 # # create a group
 # g <- create_group("my_dataverse", "testgroup", "aGroupName", "this is a test group")
-# 
+#
 # # update group details
 # update_group(g, description = "this needs a new description")
 #
@@ -138,16 +138,16 @@ delete_group <- function(group, dataverse, key = Sys.getenv("DATAVERSE_KEY"), se
 # @return A list.
 # @export
 add_roles_to_group <- function(group, role, dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    
+
     if (inherits(group, "dataverse_group")) {
         dataverse <- dataverse_id(group$dataverse, key = key, server = server, ...)
         group <- group$groupAliasInOwner
     } else {
         dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     }
-    
+
     # need support for bulk add
-    
+
     if(is.null(server) || server == "") {
         stop("'server' is missing, but required")
     }

@@ -1,5 +1,6 @@
 ^\.travis\.yml$
 ^appveyor\.yml$
+^for-developers/*
 man-roxygen/*
 ^Makefile$
 ^README\.Rmd$
@@ -13,3 +14,5 @@ man-roxygen/*
 ^doc$
 ^Meta$
 ^codecov\.yml$
+^.*\.Rproj$
+^\.Rproj\.user$

@@ -4,8 +4,12 @@
 \alias{delete_sword_dataset}
 \title{Delete dataset (SWORD)}
 \usage{
-delete_sword_dataset(dataset, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+delete_sword_dataset(
+  dataset,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{dataset}{A dataset DOI (or other persistent identifier).}

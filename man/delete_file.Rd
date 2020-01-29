@@ -4,8 +4,12 @@
 \alias{delete_file}
 \title{Delete file (SWORD)}
 \usage{
-delete_file(id, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+delete_file(
+  id,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{id}{A file ID, possibly returned by \code{\link{add_file}}, or a complete \dQuote{edit-media/file} URL.}

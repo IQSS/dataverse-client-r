@@ -26,9 +26,9 @@ parse_dataset_statement <- function(xml) {
     if (any(names(xmllist) == "entry")) {
         out$files <- list()
         for (i in which(names(xmllist) == "entry")) {
-            out$files[[length(out$files) + 1]] <- 
+            out$files[[length(out$files) + 1]] <-
                 list(id = regmatches(xmllist[[i]]$id[[1L]], regexpr("(?<=file/).+(?=/)", xmllist[[i]]$id[[1L]], perl = TRUE)),
-                     url = xmllist[[i]]$id[[1L]], 
+                     url = xmllist[[i]]$id[[1L]],
                      title = xmllist[[i]]$title[[1L]],
                      summary = xmllist[[i]]$summary[[1L]],
                      updated = xmllist[[i]]$updated[[1L]])
@@ -40,7 +40,7 @@ parse_dataset_statement <- function(xml) {
             tmp <- as.logical(tmp)
         }
         out[[unname(attributes(xmllist[[i]])[["term"]])]] <- tmp
-        
+
     }
     structure(out, class = "dataset_statement")
 }

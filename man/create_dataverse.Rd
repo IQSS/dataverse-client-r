@@ -4,8 +4,12 @@
 \alias{create_dataverse}
 \title{Create Dataverse}
 \usage{
-create_dataverse(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+create_dataverse(
+  dataverse,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{dataverse}{A character string specifying a Dataverse name or an object of class \dQuote{dataverse}. If missing, a top-level Dataverse is created.}
@@ -23,7 +27,7 @@ A list.
 Create a new Dataverse
 }
 \details{
-This function can create a new Dataverse. In the language of Dataverse, a user has a \dQuote{root} Dataverse into which they can create further nested Dataverses and/or \dQuote{datasets} that contain, for example, a set of files for a specific project. Creating a new Dataverse can therefore be a useful way to organize other related Dataverses or sets of related datasets. 
+This function can create a new Dataverse. In the language of Dataverse, a user has a \dQuote{root} Dataverse into which they can create further nested Dataverses and/or \dQuote{datasets} that contain, for example, a set of files for a specific project. Creating a new Dataverse can therefore be a useful way to organize other related Dataverses or sets of related datasets.
 
 For example, if one were involved in an ongoing project that generated monthly data. One may want to store each month's data and related files in a separate \dQuote{dataset}, so that each has its own persistent identifier (e.g., DOI), but keep all of these datasets within a named Dataverse so that the project's files are kept separate the user's personal Dataverse records. The flexible nesting of Dataverses allows for a number of possible organizational approaches.
 }

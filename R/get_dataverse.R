@@ -2,7 +2,7 @@
 #' @title Get Dataverse
 #' @description Retrieve details of a Dataverse
 #' @details \code{get_dataverse} function retrieves basic information about a Dataverse from a Dataverse server. To see the contents of the Dataverse, use \code{\link{dataverse_contents}} instead. Contents might include one or more \dQuote{datasets} and/or further Dataverses that themselves contain Dataverses and/or datasets. To view the file contents of a single Dataset, use \code{\link{get_dataset}}.
-#' @template dv 
+#' @template dv
 #' @template envvars
 #' @param check A logical indicating whether to check that the value of \code{dataverse} is actually a numeric
 #' @template dots
@@ -12,8 +12,8 @@
 #' # view the root dataverse for a server
 #' get_dataverse(":root")
 #' dataverse_contents(":root")
-#' 
-#' # download file from: 
+#'
+#' # download file from:
 #' # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
 #' monogan <- get_dataverse("monogan")
 #' (monogan_data <- dataverse_contents(monogan))

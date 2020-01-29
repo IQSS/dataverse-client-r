@@ -5,11 +5,20 @@
 \alias{dataverse_contents}
 \title{Get Dataverse}
 \usage{
-get_dataverse(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), check = TRUE, ...)
+get_dataverse(
+  dataverse,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  check = TRUE,
+  ...
+)
 
-dataverse_contents(dataverse, key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"), ...)
+dataverse_contents(
+  dataverse,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+)
 }
 \arguments{
 \item{dataverse}{A character string specifying a Dataverse name or an object of class \dQuote{dataverse}.}
@@ -37,7 +46,7 @@ Retrieve details of a Dataverse
 get_dataverse(":root")
 dataverse_contents(":root")
 
-# download file from: 
+# download file from:
 # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
 monogan <- get_dataverse("monogan")
 (monogan_data <- dataverse_contents(monogan))

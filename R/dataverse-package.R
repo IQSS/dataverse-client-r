@@ -5,9 +5,9 @@
 #' @details Dataverse is open-source data repository management software developed by the Institute for Quantitative Social Science at Harvard University. This package provides an R interface to Dataverse version 4 repositories, including the principal Dataverse hosted at Harvard (\url{https://dataverse.harvard.edu/}). Users can use the package to search for data stored in a Dataverse repository, retrieve data and other files, and also use the package to directly create and archive their own research data and software.
 #'
 #' A Dataverse is structured as a nested set of \dQuote{dataverse} repositories, such that a single dataverse can contain \dQuote{datasets} (a set of code files, data files, etc.) or other dataverses. Thus, users may want to search for dataverses (sets of dataverses and datasets), datasets (sets of files), or individual files, and retrieve those objects accordingly. To retrieve a given file, a user typically needs to know what dataset it is stored in. All datasets are identified by a persistent identifier (such as an DOI or Handle, depending on the age of the dataset and what Dataverse repository it is hosted in).
-#' 
+#'
 #' This package provides five main sets of functions to interact with Dataverse:
-#' 
+#'
 #' \itemize{
 #'   \item Search: \code{\link{dataverse_search}}
 #'   \item Data retrieval: \code{\link{get_dataverse}}, \code{\link{dataverse_contents}}, \code{\link{get_dataset}}, \code{\link{dataset_metadata}}, \code{\link{get_file}}
@@ -15,12 +15,12 @@
 #'   \item Dataverse management \dQuote{native} API: \code{\link{create_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{delete_dataverse}}
 #'   \item Dataset management \dQuote{native} API: \code{\link{create_dataset}}, \code{\link{update_dataset}}, \code{\link{publish_dataset}}, \code{\link{delete_dataset}}, \code{\link{dataset_files}}, \code{\link{dataset_versions}}
 #' }
-#' 
-#' @references 
+#'
+#' @references
 #'  \href{http://guides.dataverse.org/en/latest/api/index.html}{Dataverse API Documentation}
-#' 
+#'
 #'  \href{http://dataverse.org/}{Dataverse Homepage}
-#' 
+#'
 #'  \href{https://dataverse.harvard.edu/}{Harvard IQSS Dataverse}
-#' 
-NULL 
+#'
+NULL
