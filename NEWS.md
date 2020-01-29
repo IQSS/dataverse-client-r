@@ -4,6 +4,7 @@
 * Update maintainer to Will Beasley (wibeasley@hotmail.com) (#38)
 * More robust file retrieval (#39 @kuriwaki)
 * Tests use https://demo.dataverse.org/dataverse/dataverse-client-r/. (#40)
+* Fixes most get_file errors by removing query argument (#33 kuriwaki)
 * Fix getting multiple files by id in `get_file()` (#47 @adam3smith)
 
 # CHANGES TO dataverse 0.2.1
