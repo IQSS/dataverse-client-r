@@ -34,7 +34,12 @@ Authors@R: c(
   ),
   person(
     "Jan", "Kanis", role = "ctb"
+  )),
+  person(
+    "Guillaume", "Cornu", role = "ctb",
+    comment = c(ORCID="0000-0002-7523-5176")
   ))
+
 Imports:
     httr,
     jsonlite,

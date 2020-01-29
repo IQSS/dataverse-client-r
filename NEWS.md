@@ -6,6 +6,7 @@
 * Tests use https://demo.dataverse.org/dataverse/dataverse-client-r/. (#40)
 * Fixes most get_file errors by removing query argument (#33 kuriwaki)
 * Fix getting multiple files by id in `get_file()` (#47 @adam3smith)
+* Add missing JSON decoding for dataset_version (fix #27 @billy34)
 
 # CHANGES TO dataverse 0.2.1
 
