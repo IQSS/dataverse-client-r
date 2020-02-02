@@ -5,20 +5,32 @@ Authors@R: c(
   person(
     "Will", "Beasley",
     role=c("aut", "cre"),
-    email="wibeasley@hotmail.com", 
+    email="wibeasley@hotmail.com",
     comment = c(ORCID = "0000-0002-5613-5006")
   ),
   person(
     "Thomas J.", "Leeper",
-    role = c("aut"), 
+    role = c("aut"),
     email = "thosjleeper@gmail.com",
     comment = c(ORCID = "0000-0003-4097-6326")
   ),
   person(
     "Philip", "Durbin",
-    role = c("aut"), 
+    role = c("aut"),
     email = "philipdurbin@gmail.com",
     comment = c(ORCID = "0000-0002-9528-9470")
+  ),
+  person(
+    "Shiro", "Kuriwaki",
+    role = c("aut"), 
+    email = "shirokuriwaki@gmail.com",
+    comment = c(ORCID = "0000-0002-5687-2647")
+  ),
+  person(
+    "Sebastian", "Karcher",
+    role=c("aut"),
+    email="karcher@u.northwestern.edu",
+    comment = c(ORCID = "0000-0001-8249-7388")
   ),
   person(
     "Jan", "Kanis", role = "ctb"
@@ -39,8 +51,8 @@ Suggests:
     testthat,
     UNF,
     yaml
-Description: Provides access to Dataverse version 4 APIs <https://dataverse.org/>, 
-    enabling data search, retrieval, and deposit. For Dataverse versions <= 4.0, 
+Description: Provides access to Dataverse version 4 APIs <https://dataverse.org/>,
+    enabling data search, retrieval, and deposit. For Dataverse versions <= 4.0,
     use the deprecated 'dvn' package <https://cran.r-project.org/package=dvn>.
 License: GPL-2
 URL: https://github.com/iqss/dataverse-client-r
