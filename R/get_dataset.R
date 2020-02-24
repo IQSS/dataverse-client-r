@@ -19,43 +19,62 @@
 #' }
 #' @seealso \code{\link{create_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}, \code{\link{dataset_files}}, \code{\link{dataset_metadata}}
 #' @export
-get_dataset <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataset <- dataset_id(dataset, key = key, server = server, ...)
-    if (!is.null(version)) {
-        u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version)
-    } else {
-        u <- paste0(api_url(server), "datasets/", dataset)
-    }
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
-    parse_dataset(httr::content(r, as = "text", encoding = "UTF-8"))
+get_dataset <- function(
+  dataset,
+  version    = ":latest",
+  key        = Sys.getenv("DATAVERSE_KEY"),
+  server     = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+) {
+  dataset <- dataset_id(dataset, key = key, server = server, ...)
+  if (!is.null(version)) {
+    u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version)
+  } else {
+    u <- paste0(api_url(server), "datasets/", dataset)
+  }
+  r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
+  httr::stop_for_status(r)
+  parse_dataset(httr::content(r, as = "text", encoding = "UTF-8"))
 }
 
 #' @rdname get_dataset
 #' @param block A character string specifying a metadata block to retrieve. By default this is \dQuote{citation}. Other values may be available, depending on the dataset, such as \dQuote{geospatial} or \dQuote{socialscience}.
 #' @importFrom utils str
 #' @export
-dataset_metadata <- function(dataset, version = ":latest", block = "citation", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataset <- dataset_id(dataset, key = key, server = server, ...)
-    if (!is.null(block)) {
-        u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/metadata/", block)
-    } else {
-        u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/metadata")
-    }
+dataset_metadata <- function(
+  dataset,
+  version     = ":latest",
+  block       = "citation",
+  key         = Sys.getenv("DATAVERSE_KEY"),
+  server      = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+ ) {
+dataset <- dataset_id(dataset, key = key, server = server, ...)
+  if (!is.null(block)) {
+    u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/metadata/", block)
+  } else {
+    u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/metadata")
+  }
 
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
-    out <- httr::content(r, as = "text", encoding = "UTF-8")
-    jsonlite::fromJSON(out)[["data"]]
+  r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
+  httr::stop_for_status(r)
+  out <- httr::content(r, as = "text", encoding = "UTF-8")
+  jsonlite::fromJSON(out)[["data"]]
 }
 
 #' @rdname get_dataset
 #' @export
-dataset_files <- function(dataset, version = ":latest", key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
-    dataset <- dataset_id(dataset, key = key, server = server, ...)
-    u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/files")
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
-    out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"), simplifyDataFrame = FALSE)$data
-    structure(lapply(out, `class<-`, "dataverse_file"))
+dataset_files <- function(
+  dataset,
+  version   = ":latest",
+  key       = Sys.getenv("DATAVERSE_KEY"),
+  server    = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+) {
+  dataset <- dataset_id(dataset, key = key, server = server, ...)
+  u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/files")
+  r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
+  httr::stop_for_status(r)
+  out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"), simplifyDataFrame = FALSE)$data
+  structure(lapply(out, `class<-`, "dataverse_file"))
 }
