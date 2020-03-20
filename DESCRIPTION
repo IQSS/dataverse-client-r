@@ -1,5 +1,5 @@
 Package: dataverse
-Version: 0.2.1.9001
+Version: 0.2.1.9002
 Title: Client for Dataverse 4 Repositories
 Authors@R: c(
   person(
@@ -48,6 +48,7 @@ Suggests:
     covr,
     foreign,
     knitr,
+    purrr,
     testthat,
     UNF,
     yaml
@@ -59,4 +60,4 @@ URL: https://github.com/iqss/dataverse-client-r
 BugReports: https://github.com/iqss/dataverse-client-r/issues
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
