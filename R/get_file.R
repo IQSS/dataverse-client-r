@@ -47,17 +47,18 @@
 #' }
 #' @importFrom utils unzip
 #' @export
-get_file <-
-  function(file,
-           dataset = NULL,
-           format = c("original", "RData", "prep", "bundle"),
-           # thumb = TRUE,
-           vars = NULL,
-           key = Sys.getenv("DATAVERSE_KEY"),
-           server = Sys.getenv("DATAVERSE_SERVER"),
-           ...) {
+get_file <- function(
+  file,
+  dataset    = NULL,
+  format     = c("original", "RData", "prep", "bundle"),
+  # thumb    = TRUE,
+  vars       = NULL,
+  key        = Sys.getenv("DATAVERSE_KEY"),
+  server     = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+) {
     format <- match.arg(format)
-    
+
     # single file ID
     if (is.numeric(file))
       fileid <- file
@@ -74,7 +75,7 @@ get_file <-
     } else {
       fileid <- file
     }
-  
+
 
     # # request multiple files -----
     # if (length(fileid) > 1) {
@@ -142,13 +143,14 @@ get_file_name_from_header <- function(x) {
 #' @rdname files
 #' @import xml2
 #' @export
-get_file_metadata <-
-  function(file,
-           dataset = NULL,
-           format = c("ddi", "preprocessed"),
-           key = Sys.getenv("DATAVERSE_KEY"),
-           server = Sys.getenv("DATAVERSE_SERVER"),
-           ...) {
+get_file_metadata <- function(
+  file,
+  dataset  = NULL,
+  format   = c("ddi", "preprocessed"),
+  key      = Sys.getenv("DATAVERSE_KEY"),
+  server   = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+) {
     # get file ID from doi
     if (!is.numeric(file)) {
       if (inherits(file, "dataverse_file")) {

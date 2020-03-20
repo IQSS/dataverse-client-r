@@ -31,11 +31,10 @@ This function is used to list datasets in a given Dataverse. It is part of the S
 }
 \examples{
 \dontrun{
-# retrieve your service document
-d <- service_document()
-
-# list available datasets in first dataverse
-list_datasets(d[[2]])
+Sys.setenv("DATAVERSE_SERVER" = "demo.dataverse.org")
+Sys.setenv("DATAVERSE_KEY"    = "c7208dd2-6ec5-469a-bec5-f57e164888d4")
+dv <- get_dataverse("dataverse-client-r")
+list_datasets(dv)
 }
 }
 \seealso{

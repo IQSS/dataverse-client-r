@@ -14,7 +14,6 @@ retrieve_manifest <- function ( ) {
   d
 }
 # retrieve_manifest()
-# checkmate::assert_fi
 
 retrieve_file_expected <- function (subdataverse, file_name) {
   path <-
