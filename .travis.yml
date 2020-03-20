@@ -1,18 +1,19 @@
 # Travis's native R Image (http://docs.travis-ci.com/user/languages/r/)
 language: r
-sudo: false
 cache: packages
 warnings_are_errors: true
 
-matrix:
+jobs:
   include:
-    - os: linux
-      dist: xenial
-      env: R_CODECOV=true
-    - os: linux
+    - name: linux-bionic
+      os: linux
       dist: bionic
-    - os: osx
-      osx_image: xcode8.2
+      env: R_CODECOV=true
+    - name: linux-xenial
+      os: linux
+      dist: xenial
+    - name: osx-current
+      os: osx
       before_install:
         - brew install curl
         - brew link --force curl
