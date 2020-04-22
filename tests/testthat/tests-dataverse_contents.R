@@ -17,6 +17,7 @@ test_that("dataverse for 'dataverse-client-r'", {
       protocol = "doi",
       authority = "10.70122",
       publisher = "Demo Dataverse",
+      publicationDate = "2020-04-22",
       storageIdentifier = "file://10.70122/FK2/FAN622",
       type = "dataset"
     ),

@@ -36,7 +36,7 @@ test_that("dataverse for 'dataverse-client-r'", {
           uri = "http://www.swordapp.org/",
           version = "2.0"
         ),
-        dataverseHasBeenReleased = "false",
+        dataverseHasBeenReleased = "true",
         datasets = structure(
           list(
             title = structure(
