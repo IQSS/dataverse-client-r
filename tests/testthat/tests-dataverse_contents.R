@@ -9,7 +9,7 @@ test_that("dataverse root", {
 })
 
 test_that("dataverse for 'dataverse-client-r'", {
-    expected  <- structure(
+  expected  <- structure(
     list(
       id = 396356L,
       identifier = "FK2/FAN622",
