@@ -13,6 +13,7 @@ test_that("dataverse root", {
         dataverseHasBeenReleased = "true",
         datasets = structure(
           list(),
+          .Names = character(0),
           class = "data.frame",
           row.names = integer(0)
         )
@@ -36,19 +37,11 @@ test_that("dataverse for 'dataverse-client-r'", {
           uri = "http://www.swordapp.org/",
           version = "2.0"
         ),
-        dataverseHasBeenReleased = "false",
+        dataverseHasBeenReleased = "true",
         datasets = structure(
           list(
-            title = structure(
-              1L,
-              .Label = "Bulls Roster 1996-1997",
-              class = "factor"
-            ),
-            id = structure(
-              1L,
-              .Label = "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/FAN622",
-              class = "factor"
-            )
+            title = "Bulls Roster 1996-1997",
+            id = "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/FAN622"
           ),
           class = "data.frame",
           row.names = 1L
