@@ -13,6 +13,7 @@ test_that("dataverse root", {
         dataverseHasBeenReleased = "true",
         datasets = structure(
           list(),
+          .Names = character(0),
           class = "data.frame",
           row.names = integer(0)
         )
