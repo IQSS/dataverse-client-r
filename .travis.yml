@@ -2,8 +2,8 @@
 language: r
 cache: packages
 warnings_are_errors: true
-os: bionic
-dist: xenial
+os: linux
+dist: bionic
 
 jobs:
   include:
