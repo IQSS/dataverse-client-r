@@ -14,13 +14,11 @@
 #' @param format A character string specifying a file format. For \code{get_file}:
 #'  by default, this is \dQuote{original} (the original file format). If \dQuote{RData}
 #'  or \dQuote{prep} is used, an alternative is returned. If \dQuote{bundle}, a
-#'  compressed directory containing a bundle of file formats is returned. For
-#'  \code{get_file_metadata}, this is \dQuote{ddi}.
+#'  compressed directory containing a bundle of file formats is returned.
 #' @param vars A character vector specifying one or more variable names, used to
 #' extract a subset of the data.
 #'
-#' @return \code{get_file_metadata} returns a character vector containing a DDI
-#'  metadata file. \code{get_file} returns a raw vector (or list of raw vectors,
+#' @return \code{get_file} returns a raw vector (or list of raw vectors,
 #'   if \code{length(file) > 1}).
 #'
 #'
@@ -134,34 +132,6 @@ get_file <-
     }
   }
 
-get_file_name_from_header <- function(x) {
-  gsub("\"", "", strsplit(httr::headers(x)[["content-type"]], "name=")[[1]][2])
-}
 
-#' @rdname files
-#' @import xml2
-#' @export
-get_file_metadata <-
-  function(file,
-           dataset = NULL,
-           format = c("ddi", "preprocessed"),
-           key = Sys.getenv("DATAVERSE_KEY"),
-           server = Sys.getenv("DATAVERSE_SERVER"),
-           ...) {
-    # get file ID from doi
-    if (!is.numeric(file)) {
-      if (inherits(file, "dataverse_file")) {
-        file <- get_fileid(file)
-      } else if (is.null(dataset)) {
-        stop("When 'file' is a character string, dataset must be specified. Or, use a global fileid instead.")
-      } else {
-        file <- get_fileid(dataset, file, key = key, server = server, ...)
-      }
-    }
-    format <- match.arg(format)
-    u <- paste0(api_url(server), "access/datafile/", file, "/metadata/", format)
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
-    out <- httr::content(r, as = "text", encoding = "UTF-8")
-    return(out)
-  }
+
+
