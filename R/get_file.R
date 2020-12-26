@@ -79,17 +79,13 @@ get_file <-
     if (is.numeric(file))
       fileid <- file
 
-    # get file ID from 'dataset'
+    # get file ID from 'dataset'. Streamline in feature relying on get_fileid
     if (!is.numeric(file) & is.null(dataset))
       stop("When 'file' is a character (non-global ID), dataset must be specified.")
-
-    if (!is.numeric(file)) {
-        if (inherits(file, "dataverse_file")) {
-            fileid <- get_fileid(file, key = key, server = server)
-        } else {
-            fileid <- get_fileid(dataset, file, key = key, server = server, ...)
-        }
-    }
+    if (!is.numeric(file) & inherits(file, "dataverse_file"))
+      fileid <- get_fileid(file, key = key, server = server)
+    if (!is.numeric(file) & !inherits(file, "dataverse_file"))
+      fileid <- get_fileid(dataset, file, key = key, server = server, ...)
 
 
     # Main function. CAll get_file_by_id
