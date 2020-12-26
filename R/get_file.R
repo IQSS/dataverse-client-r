@@ -72,6 +72,7 @@ get_file <-
            key = Sys.getenv("DATAVERSE_KEY"),
            server = Sys.getenv("DATAVERSE_SERVER"),
            ...) {
+
     format <- match.arg(format)
 
     # single file ID
@@ -79,49 +80,28 @@ get_file <-
       fileid <- file
 
     # get file ID from 'dataset'
+    if (!is.numeric(file) & is.null(dataset))
+      stop("When 'file' is a character (non-global ID), dataset must be specified.")
+
     if (!is.numeric(file)) {
         if (inherits(file, "dataverse_file")) {
             fileid <- get_fileid(file, key = key, server = server)
-        } else if (is.null(dataset)) {
-            stop("When 'file' is a character string, dataset must be specified. Or, use a global fileid instead.")
         } else {
             fileid <- get_fileid(dataset, file, key = key, server = server, ...)
         }
-    } else {
-      fileid <- file
     }
 
 
-    # # request multiple files -----
-    # if (length(fileid) > 1) {
-    #     fileid <- paste0(fileid, collapse = ",")
-    #     u <- paste0(api_url(server), "access/datafiles/", fileid)
-    #     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    #     httr::stop_for_status(r)
-    #     tempf <- tempfile(fileext = ".zip")
-    #     tempd <- tempfile()
-    #     dir.create(tempd)
-    #     on.exit(unlink(tempf), add = TRUE)
-    #     on.exit(unlink(tempd), add = TRUE)
-    #     writeBin(httr::content(r, as = "raw"), tempf)
-    #     to_extract <- utils::unzip(tempf, list = TRUE)
-    #     out <- lapply(to_extract$Name[to_extract$Name != "MANIFEST.TXT"], function(zipf) {
-    #       utils::unzip(zipfile = tempf, files = zipf, exdir = tempd)
-    #       readBin(file.path(tempd, zipf), "raw", n = 1e8)
-    #     })
-    #     return(out)
-    # }
-
-    # downloading files sequentially and add the raw vectors to a list
+    # Main function. CAll get_file_by_id
     out <- vector("list", length(fileid))
     for (i in 1:length(fileid)) {
       out[[i]] <- get_file_by_id(
         fileid = fileid[i],
-        dataset,
-        format,
-        vars,
-        keys,
-        server
+        dataset = dataset,
+        format = format,
+        vars = vars,
+        key = key,
+        server = server
         )
     }
 
