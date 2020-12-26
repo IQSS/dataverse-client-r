@@ -33,8 +33,3 @@ get_file_metadata <-
     return(out)
   }
 
-
-
-get_file_name_from_header <- function(x) {
-  gsub("\"", "", strsplit(httr::headers(x)[["content-type"]], "name=")[[1]][2])
-}
