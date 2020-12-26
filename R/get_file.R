@@ -1,14 +1,29 @@
 #' @rdname files
+#'
+#'
 #' @title Download File(s)
-#' @description Download Dataverse File(s)
+#' @description Download Dataverse File(s). `get_file` internally calls
+#'  `get_file_by_id`.
+#'
 #' @details This function provides access to data files from a Dataverse entry.
-#' @param file An integer specifying a file identifier; or a vector of integers specifying file identifiers; or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset; or an object of class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
-#' @template ds
-#' @param format A character string specifying a file format. For \code{get_file}: by default, this is \dQuote{original} (the original file format). If \dQuote{RData} or \dQuote{prep} is used, an alternative is returned. If \dQuote{bundle}, a compressed directory containing a bundle of file formats is returned. For \code{get_file_metadata}, this is \dQuote{ddi}.
-#' @param vars A character vector specifying one or more variable names, used to extract a subset of the data.
-#' @template envvars
-#' @template dots
-#' @return \code{get_file_metadata} returns a character vector containing a DDI metadata file. \code{get_file} returns a raw vector (or list of raw vectors, if \code{length(file) > 1}).
+#' @param file An integer specifying a file identifier; or a vector of integers
+#'  specifying file identifiers; or, if \code{doi} is specified, a character string
+#'  specifying a file name within the DOI-identified dataset; or an object of
+#'   class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
+#' @param fileid A numeric ID internally used for `get_file_by_id`
+#' @param format A character string specifying a file format. For \code{get_file}:
+#'  by default, this is \dQuote{original} (the original file format). If \dQuote{RData}
+#'  or \dQuote{prep} is used, an alternative is returned. If \dQuote{bundle}, a
+#'  compressed directory containing a bundle of file formats is returned. For
+#'  \code{get_file_metadata}, this is \dQuote{ddi}.
+#' @param vars A character vector specifying one or more variable names, used to
+#' extract a subset of the data.
+#'
+#' @return \code{get_file_metadata} returns a character vector containing a DDI
+#'  metadata file. \code{get_file} returns a raw vector (or list of raw vectors,
+#'   if \code{length(file) > 1}).
+#'
+#'
 #' @examples
 #' \dontrun{
 #' # download file from:
@@ -47,16 +62,15 @@
 #' }
 #' @importFrom utils unzip
 #' @export
-get_file <- function(
-  file,
-  dataset    = NULL,
-  format     = c("original", "RData", "prep", "bundle"),
-  # thumb    = TRUE,
-  vars       = NULL,
-  key        = Sys.getenv("DATAVERSE_KEY"),
-  server     = Sys.getenv("DATAVERSE_SERVER"),
-  ...
-) {
+get_file <-
+  function(file,
+           dataset = NULL,
+           format = c("original", "RData", "prep", "bundle"),
+           # thumb = TRUE,
+           vars = NULL,
+           key = Sys.getenv("DATAVERSE_KEY"),
+           server = Sys.getenv("DATAVERSE_SERVER"),
+           ...) {
     format <- match.arg(format)
 
     # single file ID
@@ -100,32 +114,16 @@ get_file <- function(
     # downloading files sequentially and add the raw vectors to a list
     out <- vector("list", length(fileid))
     for (i in 1:length(fileid)) {
-        if (format == "bundle") {
-            u <- paste0(api_url(server), "access/datafile/bundle/", fileid[i])
-            r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-        }
-        if (format != "bundle") {
-            u <- paste0(api_url(server), "access/datafile/", fileid[i])
-            query <- list()
-            if (!is.null(vars)) {
-                query$vars <- paste0(vars, collapse = ",")
-            }
-            if (!is.null(format)) {
-                query$format <- match.arg(format)
-            }
-
-            # request single file in non-bundle format ----
-            # add query if ingesting a tab (detect from original file name)
-            if (length(query) == 1 & grepl("\\.tab$", file[i])) {
-                r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
-            } else {
-                # do not add query if not an ingestion file
-                r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-            }
-        }
-        httr::stop_for_status(r)
-        out[[i]] <-  httr::content(r, as = "raw")
+      out[[i]] <- get_file_by_id(
+        fileid = fileid[i],
+        dataset,
+        format,
+        vars,
+        keys,
+        server
+        )
     }
+
     # return the raw vector if there's a single file
     if (length(out) == 1) {
       return (out[[1]])
@@ -143,14 +141,13 @@ get_file_name_from_header <- function(x) {
 #' @rdname files
 #' @import xml2
 #' @export
-get_file_metadata <- function(
-  file,
-  dataset  = NULL,
-  format   = c("ddi", "preprocessed"),
-  key      = Sys.getenv("DATAVERSE_KEY"),
-  server   = Sys.getenv("DATAVERSE_SERVER"),
-  ...
-) {
+get_file_metadata <-
+  function(file,
+           dataset = NULL,
+           format = c("ddi", "preprocessed"),
+           key = Sys.getenv("DATAVERSE_KEY"),
+           server = Sys.getenv("DATAVERSE_SERVER"),
+           ...) {
     # get file ID from doi
     if (!is.numeric(file)) {
       if (inherits(file, "dataverse_file")) {
