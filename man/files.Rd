@@ -85,18 +85,9 @@ get_file(flist[[2]])
 # retrieve all files in a dataset in their original format (returns a list of raw vectors)
 file_ids <- get_dataset("doi:10.7910/DVN/CXOB4K")[['files']]$id
 f3 <- get_file(file_ids, format = "original")
-
-
-# read file as data.frame
-if (require("rio")) {
-  tmp <- tempfile(fileext = ".dta")
-  writeBin(f, tmp)
-  dat <- haven::read_dta(tmp)
-
-  # check UNF match
-  # if (require("UNF")) {
-  #  unf(dat) \%unf\% d1$files$datafile$UNF[3]
-  # }
 }
+
 }
+\seealso{
+\link{get_dataframe_by_name}
 }
