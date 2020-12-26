@@ -28,19 +28,14 @@
 #' @examples
 #' \dontrun{
 #' # download file from:
-#' # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
-#' monogan <- get_dataverse("monogan")
-#' monogan_data <- dataverse_contents(monogan)
+#' # https://doi.org/10.7910/DVN/ARKOTI
+#'
 #' d1 <- get_dataset("doi:10.7910/DVN/ARKOTI")
 #' f <- get_file(d1$files$datafile$id[3])
-#'
-#' # check file metadata
-#' m1 <- get_file_metadata("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
-#' m2 <- get_file_metadata(2437257)
+#' f2 <- get_file(2692202)
 #'
 #' # retrieve file based on DOI and filename
 #' f2 <- get_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
-#' f2 <- get_file(2692202)
 #'
 #' # retrieve file based on "dataverse_file" object
 #' flist <- dataset_files(2692151)
@@ -49,6 +44,8 @@
 #' # retrieve all files in a dataset in their original format (returns a list of raw vectors)
 #' file_ids <- get_dataset("doi:10.7910/DVN/CXOB4K")[['files']]$id
 #' f3 <- get_file(file_ids, format = "original")
+#'
+#'
 #' # read file as data.frame
 #' if (require("rio")) {
 #'   tmp <- tempfile(fileext = ".dta")
@@ -88,7 +85,7 @@ get_file <-
       fileid <- get_fileid(dataset, file, key = key, server = server, ...)
 
 
-    # Main function. CAll get_file_by_id
+    # Main function. Call get_file_by_id
     out <- vector("list", length(fileid))
     for (i in 1:length(fileid)) {
       out[[i]] <- get_file_by_id(
