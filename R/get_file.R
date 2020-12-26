@@ -18,6 +18,9 @@
 #' @param vars A character vector specifying one or more variable names, used to
 #' extract a subset of the data.
 #'
+#' @template envvars
+#' @template dots
+#'
 #' @return \code{get_file} returns a raw vector (or list of raw vectors,
 #'   if \code{length(file) > 1}).
 #'
