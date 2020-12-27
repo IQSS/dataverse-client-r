@@ -14,6 +14,7 @@
 #' @inheritDotParams get_file
 #'
 #' @examples
+#' # load dataset from file name and dataverse DOI
 #' gap_df <- get_dataframe_by_name(
 #'   file = "gapminder-FiveYearData.tab",
 #'   dataset = "doi:10.7910/DVN/GJQNEQ",
@@ -59,6 +60,7 @@ get_dataframe_by_name <- function(file,
 
 
 #' @rdname get_dataframe
+#' @export
 get_dataframe_by_id <- function(file,
                                 read_function = NULL,
                                 ...) {

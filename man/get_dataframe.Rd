@@ -45,6 +45,7 @@ or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")
 `get_dataframe_by_name` if you know the filename and doi. The dataset
 }
 \examples{
+# load dataset from file name and dataverse DOI
 gap_df <- get_dataframe_by_name(
   file = "gapminder-FiveYearData.tab",
   dataset = "doi:10.7910/DVN/GJQNEQ",
