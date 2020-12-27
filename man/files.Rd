@@ -21,7 +21,7 @@ get_file_by_id(
   server,
   format = c("original", "RData", "prep", "bundle"),
   vars,
-  use_ingested = NULL,
+  archival = NULL,
   key = Sys.getenv("DATAVERSE_KEY"),
   ...
 )
@@ -35,9 +35,7 @@ specifying a file name within the DOI-identified dataset; or an object of
 \item{format}{A character string specifying a file format for download.
 by default, this is \dQuote{original} (the original file format). If `NULL`,
 no query is added, so ingested files are returned in their ingested TSV form.
-If \dQuote{RData} or \dQuote{prep} is used, an alternative is returned.
-If \dQuote{bundle}, a compressed directory containing a bundle of file formats
-is returned.}
+For other formats, see <https://guides.dataverse.org/en/latest/api/dataaccess.html>.}
 
 \item{vars}{A character vector specifying one or more variable names, used to
 extract a subset of the data.}
@@ -58,13 +56,13 @@ or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")
 
 \item{fileid}{A numeric ID internally used for `get_file_by_id`}
 
-\item{use_ingested}{If a ingested (.tab) version is available, download
-the ingested version or not? If `format = "original"`, this is forced
-to `FALSE`}
+\item{archival}{If a ingested (.tab) version is available, download
+the ingested archival version or not?}
 }
 \value{
 \code{get_file} returns a raw vector (or list of raw vectors,
-  if \code{length(file) > 1}). To load as a dataframe, see \link{get_dataframe_by_name}.
+  if \code{length(file) > 1}). To load as a dataframe, see
+  \link{get_dataframe_by_name}.
 }
 \description{
 Download Dataverse File(s). `get_file` internally calls
@@ -94,9 +92,7 @@ f3 <- get_file(flist[[2]], server = "dataverse.harvard.edu")
 # 4. Retrieve bundle of raw data in list
 file_ids <- get_dataset("doi:10.7910/DVN/CXOB4K",
                         server = "dataverse.harvard.edu")$files$id
-## doesn't work yet
 f4 <- get_file(file_ids,
-               format = "original",
                server = "dataverse.harvard.edu")
 length(f4)
 
@@ -104,5 +100,5 @@ length(f4)
 
 }
 \seealso{
-To load the objects as datasets \link{get_dataframe_by_name}
+To load the objects as datasets \link{get_dataframe_by_name}.
 }

@@ -14,9 +14,7 @@
 #' @param format A character string specifying a file format for download.
 #'  by default, this is \dQuote{original} (the original file format). If `NULL`,
 #'  no query is added, so ingested files are returned in their ingested TSV form.
-#'  If \dQuote{RData} or \dQuote{prep} is used, an alternative is returned.
-#'  If \dQuote{bundle}, a compressed directory containing a bundle of file formats
-#'  is returned.
+#'  For other formats, see <https://guides.dataverse.org/en/latest/api/dataaccess.html>.
 #' @param vars A character vector specifying one or more variable names, used to
 #' extract a subset of the data.
 #'
@@ -24,9 +22,11 @@
 #' @template dots
 #'
 #' @return \code{get_file} returns a raw vector (or list of raw vectors,
-#'   if \code{length(file) > 1}). To load as a dataframe, see \link{get_dataframe_by_name}.
+#'   if \code{length(file) > 1}). To load as a dataframe, see
+#'   \link{get_dataframe_by_name}.
 #'
-#' @seealso To load the objects as datasets \link{get_dataframe_by_name}
+#' @seealso To load the objects as datasets \link{get_dataframe_by_name}.
+#'
 #' @examples
 #' \dontrun{
 #' # download file from:
@@ -48,9 +48,7 @@
 #' # 4. Retrieve bundle of raw data in list
 #' file_ids <- get_dataset("doi:10.7910/DVN/CXOB4K",
 #'                         server = "dataverse.harvard.edu")$files$id
-#' ## doesn't work yet
 #' f4 <- get_file(file_ids,
-#'                format = "original",
 #'                server = "dataverse.harvard.edu")
 #' length(f4)
 #'

@@ -11,6 +11,11 @@
 #'   raw file to a tempfile and read it back in with the supplied function. This
 #'   is useful when you want to start working with the data right away in the R
 #'   environment
+#' @param archival Whether to read from the ingested, archival version of the
+#'  dataset, or whether to read the original. The archival versions are tab-delimited
+#'  `.tab` files. If functions to read the original version is available without
+#'  loss of information, then `archival = FALSE` is better. If such functions
+#'  are not available or the original format is unknown, use `archival = TRUE`.
 #' @inheritDotParams get_file
 #'
 #' @examples
@@ -40,13 +45,14 @@
 #' gap_df <- get_dataframe_by_id(
 #'    3037713,
 #'    server = "dataverse.harvard.edu",
-#'    use_ingested = TRUE,
+#'    archival = TRUE,
 #'    read_function = readr::read_tsv)
 #'
 #' @export
 get_dataframe_by_name <- function(file,
                                   dataset = NULL,
                                   read_function = NULL,
+                                  archival = FALSE,
                                   ...) {
 
   # retrieve ID
@@ -54,7 +60,7 @@ get_dataframe_by_name <- function(file,
                                  file = file,
                                  ...)
 
-  get_dataframe_by_id(fileid, read_function, ...)
+  get_dataframe_by_id(fileid, read_function, archival = archival, ...)
 
 }
 
@@ -63,9 +69,10 @@ get_dataframe_by_name <- function(file,
 #' @export
 get_dataframe_by_id <- function(file,
                                 read_function = NULL,
+                                archival = FALSE,
                                 ...) {
 
-  raw <- get_file(file = file, ...)
+  raw <- get_file(file = file, archival = archival, ...)
 
   # default of get_file
   if (is.null(read_function))

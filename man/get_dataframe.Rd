@@ -5,9 +5,15 @@
 \alias{get_dataframe_by_id}
 \title{Get file from dataverse and convert it into a dataframe or tibble}
 \usage{
-get_dataframe_by_name(file, dataset = NULL, read_function = NULL, ...)
+get_dataframe_by_name(
+  file,
+  dataset = NULL,
+  read_function = NULL,
+  archival = FALSE,
+  ...
+)
 
-get_dataframe_by_id(file, read_function = NULL, ...)
+get_dataframe_by_id(file, read_function = NULL, archival = FALSE, ...)
 }
 \arguments{
 \item{file}{to be passed on to get_file}
@@ -19,15 +25,19 @@ raw file to a tempfile and read it back in with the supplied function. This
 is useful when you want to start working with the data right away in the R
 environment}
 
+\item{archival}{Whether to read from the ingested, archival version of the
+dataset, or whether to read the original. The archival versions are tab-delimited
+`.tab` files. If functions to read the original version is available without
+loss of information, then `archival = FALSE` is better. If such functions
+are not available or the original format is unknown, use `archival = TRUE`.}
+
 \item{...}{
   Arguments passed on to \code{\link[=get_file]{get_file}}
   \describe{
     \item{\code{format}}{A character string specifying a file format for download.
 by default, this is \dQuote{original} (the original file format). If `NULL`,
 no query is added, so ingested files are returned in their ingested TSV form.
-If \dQuote{RData} or \dQuote{prep} is used, an alternative is returned.
-If \dQuote{bundle}, a compressed directory containing a bundle of file formats
-is returned.}
+For other formats, see <https://guides.dataverse.org/en/latest/api/dataaccess.html>.}
     \item{\code{vars}}{A character vector specifying one or more variable names, used to
 extract a subset of the data.}
     \item{\code{key}}{A character string specifying a Dataverse server API key. If one
@@ -71,7 +81,7 @@ gap_df <- get_dataframe_by_id(
 gap_df <- get_dataframe_by_id(
    3037713,
    server = "dataverse.harvard.edu",
-   use_ingested = TRUE,
+   archival = TRUE,
    read_function = readr::read_tsv)
 
 }
