@@ -11,10 +11,12 @@
 #'  specifying a file name within the DOI-identified dataset; or an object of
 #'   class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
 #' @param fileid A numeric ID internally used for `get_file_by_id`
-#' @param format A character string specifying a file format. For \code{get_file}:
-#'  by default, this is \dQuote{original} (the original file format). If \dQuote{RData}
-#'  or \dQuote{prep} is used, an alternative is returned. If \dQuote{bundle}, a
-#'  compressed directory containing a bundle of file formats is returned.
+#' @param format A character string specifying a file format for download.
+#'  by default, this is \dQuote{original} (the original file format). If `NULL`,
+#'  no query is added, so ingested files are returned in their ingested TSV form.
+#'  If \dQuote{RData} or \dQuote{prep} is used, an alternative is returned.
+#'  If \dQuote{bundle}, a compressed directory containing a bundle of file formats
+#'  is returned.
 #' @param vars A character vector specifying one or more variable names, used to
 #' extract a subset of the data.
 #'
@@ -22,28 +24,36 @@
 #' @template dots
 #'
 #' @return \code{get_file} returns a raw vector (or list of raw vectors,
-#'   if \code{length(file) > 1}).
+#'   if \code{length(file) > 1}). To load as a dataframe, see \link{get_dataframe_by_name}.
 #'
-#' @seealso \link{get_dataframe_by_name}
+#' @seealso To load the objects as datasets \link{get_dataframe_by_name}
 #' @examples
 #' \dontrun{
 #' # download file from:
 #' # https://doi.org/10.7910/DVN/ARKOTI
 #'
-#' d1 <- get_dataset("doi:10.7910/DVN/ARKOTI")
-#' f <- get_file(d1$files$datafile$id[3])
-#' f2 <- get_file(2692202)
+#' # 1. Two-steps: Find ID from get_dataset
+#' d1 <- get_dataset("doi:10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu")
+#' f1 <- get_file(d1$files$id[1], server = "dataverse.harvard.edu")
 #'
-#' # retrieve file based on DOI and filename
-#' f2 <- get_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
+#' # 2. Using filename and dataverse
+#' f2 <- get_file("constructionData.tab",
+#'                "doi:10.7910/DVN/ARKOTI",
+#'                server = "dataverse.harvard.edu")
 #'
-#' # retrieve file based on "dataverse_file" object
-#' flist <- dataset_files(2692151)
-#' get_file(flist[[2]])
+#' # 3. Based on "dataverse_file" object
+#' flist <- dataset_files(2692151, server = "dataverse.harvard.edu")
+#' f3 <- get_file(flist[[2]], server = "dataverse.harvard.edu")
 #'
-#' # retrieve all files in a dataset in their original format (returns a list of raw vectors)
-#' file_ids <- get_dataset("doi:10.7910/DVN/CXOB4K")[['files']]$id
-#' f3 <- get_file(file_ids, format = "original")
+#' # 4. Retrieve bundle of raw data in list
+#' file_ids <- get_dataset("doi:10.7910/DVN/CXOB4K",
+#'                         server = "dataverse.harvard.edu")$files$id
+#' ## doesn't work yet
+#' f4 <- get_file(file_ids,
+#'                format = "original",
+#'                server = "dataverse.harvard.edu")
+#' length(f4)
+#'
 #' }
 #'
 #' @export
@@ -51,7 +61,6 @@ get_file <-
   function(file,
            dataset = NULL,
            format = c("original", "RData", "prep", "bundle"),
-           # thumb = TRUE,
            vars = NULL,
            key = Sys.getenv("DATAVERSE_KEY"),
            server = Sys.getenv("DATAVERSE_SERVER"),
@@ -64,12 +73,13 @@ get_file <-
       fileid <- file
 
     # get file ID from 'dataset'. Streamline in feature relying on get_fileid
-    if (!is.numeric(file) & is.null(dataset))
-      stop("When 'file' is a character (non-global ID), dataset must be specified.")
     if (!is.numeric(file) & inherits(file, "dataverse_file"))
-      fileid <- get_fileid(file, key = key, server = server)
+      fileid <- get_fileid.dataverse_file(file, key = key, server = server)
+
+    if (!is.numeric(file) & !inherits(file, "dataverse_file") & is.null(dataset))
+      stop("When 'file' is a character (non-global ID), dataset must be specified.")
     if (!is.numeric(file) & !inherits(file, "dataverse_file"))
-      fileid <- get_fileid(dataset, file, key = key, server = server, ...)
+      fileid <- get_fileid.character(dataset, file, key = key, server = server, ...)
 
 
     # Main function. Call get_file_by_id
@@ -82,7 +92,8 @@ get_file <-
         format = format,
         vars = vars,
         key = key,
-        server = server
+        server = server,
+        ...
         )
     }
 

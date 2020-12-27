@@ -2,9 +2,12 @@
 % Please edit documentation in R/get_file_as_dataframe.R
 \name{get_dataframe_by_name}
 \alias{get_dataframe_by_name}
+\alias{get_dataframe_by_id}
 \title{Get file from dataverse and convert it into a dataframe or tibble}
 \usage{
 get_dataframe_by_name(file, dataset = NULL, read_function = NULL, ...)
+
+get_dataframe_by_id(file, read_function = NULL, ...)
 }
 \arguments{
 \item{file}{to be passed on to get_file}
@@ -19,10 +22,12 @@ environment}
 \item{...}{
   Arguments passed on to \code{\link[=get_file]{get_file}}
   \describe{
-    \item{\code{format}}{A character string specifying a file format. For \code{get_file}:
-by default, this is \dQuote{original} (the original file format). If \dQuote{RData}
-or \dQuote{prep} is used, an alternative is returned. If \dQuote{bundle}, a
-compressed directory containing a bundle of file formats is returned.}
+    \item{\code{format}}{A character string specifying a file format for download.
+by default, this is \dQuote{original} (the original file format). If `NULL`,
+no query is added, so ingested files are returned in their ingested TSV form.
+If \dQuote{RData} or \dQuote{prep} is used, an alternative is returned.
+If \dQuote{bundle}, a compressed directory containing a bundle of file formats
+is returned.}
     \item{\code{vars}}{A character vector specifying one or more variable names, used to
 extract a subset of the data.}
     \item{\code{key}}{A character string specifying a Dataverse server API key. If one
@@ -36,13 +41,36 @@ or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")
   }}
 }
 \description{
-Get file from dataverse and convert it into a dataframe or tibble
+`get_dataframe_by_id`, if you know the numeric ID of the dataset, or instead
+`get_dataframe_by_name` if you know the filename and doi. The dataset
 }
 \examples{
 gap_df <- get_dataframe_by_name(
   file = "gapminder-FiveYearData.tab",
   dataset = "doi:10.7910/DVN/GJQNEQ",
   server = "dataverse.harvard.edu",
-  read_function = readr::read_tsv)
+  read_function = readr::read_csv)
+
+# equivalently, if you know the ID
+gap_df <- get_dataframe_by_id(
+  3037713,
+  server = "dataverse.harvard.edu",
+  read_function = readr::read_csv)
+
+# equivalently, using a dataverse object
+gap_ds <- dataset_files("doi:10.7910/DVN/GJQNEQ",
+                        server = "dataverse.harvard.edu")
+gap_df <- get_dataframe_by_id(
+  gap_ds[[2]],
+  server = "dataverse.harvard.edu",
+  read_function = readr::read_csv
+)
+
+# to use the ingested version (and read as TSV)
+gap_df <- get_dataframe_by_id(
+   3037713,
+   server = "dataverse.harvard.edu",
+   use_ingested = TRUE,
+   read_function = readr::read_tsv)
 
 }
