@@ -38,3 +38,11 @@ test_that("download multiple files with file id - with folders", {
   expect_true(is.raw(actual[[2]]))
   expect_true(object.size(actual[[2]]) > 70) # Should be >70 B
 })
+
+
+# Informative error message (PR #30)
+test_that("More informative error message when file does not exist", {
+  # wrong server
+  expect_error(get_file(2972336, server = "demo.dataverse.org"),
+               regexp = "API endpoint does not exist on this server")
+})
