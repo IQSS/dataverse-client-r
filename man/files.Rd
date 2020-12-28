@@ -86,13 +86,13 @@ f2 <- get_file("constructionData.tab",
                server = "dataverse.harvard.edu")
 
 # 3. Based on "dataverse_file" object
-flist <- dataset_files(2692151, server = "dataverse.harvard.edu")
-f3 <- get_file(flist[[2]], server = "dataverse.harvard.edu")
+f3_dvf <- dataset_files(2692151, server = "dataverse.harvard.edu")
+f3 <- get_file(f3_dvf[[2]], server = "dataverse.harvard.edu")
 
 # 4. Retrieve bundle of raw data in list
-file_ids <- get_dataset("doi:10.7910/DVN/CXOB4K",
+f4_meta <- get_dataset("doi:10.7910/DVN/CXOB4K",
                         server = "dataverse.harvard.edu")$files$id
-f4 <- get_file(file_ids,
+f4 <- get_file(f4_meta,
                server = "dataverse.harvard.edu")
 length(f4)
 
