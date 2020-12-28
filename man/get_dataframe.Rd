@@ -57,33 +57,41 @@ or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")
 \code{get_dataframe_by_name} if you know the filename and doi. The dataset
 }
 \examples{
-# load dataset from file name and dataverse DOI
 gap_df <- get_dataframe_by_name(
   file = "gapminder-FiveYearData.tab",
-  dataset = "doi:10.7910/DVN/GJQNEQ",
-  server = "dataverse.harvard.edu",
-  read_function = readr::read_csv)
+  dataset = "doi:10.70122/FK2/PPKHI1",
+  server = "demo.dataverse.org",
+  read_function = read_csv)
+
+# or a Stata dta
+stata_df <- get_dataframe_by_id(
+  file = "nlsw88.tab",
+  dataset = "doi:10.70122/FK2/PPKHI1",
+  server = "demo.dataverse.org",
+  read_function = haven::read_dta)
 
 # equivalently, if you know the ID
+# you can also customize the read_function (in this case to supress parse msg)
 gap_df <- get_dataframe_by_id(
-  3037713,
-  server = "dataverse.harvard.edu",
-  read_function = readr::read_csv)
+  1733998,
+  server = "demo.dataverse.org",
+  read_function = function(x) read_csv(x, col_types = cols()))
 
 # equivalently, using a dataverse object
-gap_ds <- dataset_files("doi:10.7910/DVN/GJQNEQ",
-                        server = "dataverse.harvard.edu")
-gap_df <- get_dataframe_by_id(
-  gap_ds[[2]],
-  server = "dataverse.harvard.edu",
-  read_function = readr::read_csv
-)
+gap_ds <- dataset_files("doi:10.70122/FK2/PPKHI1",
+                        server = "demo.dataverse.org")
 
-# to use the ingested version (and read as TSV)
 gap_df <- get_dataframe_by_id(
-   3037713,
-   server = "dataverse.harvard.edu",
-   archival = TRUE,
-   read_function = readr::read_tsv)
+  gap_ds[[1]],
+  server = "demo.dataverse.org",
+  read_function = function(x) read_csv(x, col_types = cols()))
+
+# to use the archival version (and read as TSV)
+gap_df <- get_dataframe_by_id(
+  1733998,
+  server = "demo.dataverse.org",
+  archival = TRUE,
+  read_function = function(x) read_tsv(x, col_types = cols()))
+
 
 }

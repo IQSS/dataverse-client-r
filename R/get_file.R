@@ -41,31 +41,33 @@
 #' \dontrun{
 #'
 #' # 1. Using filename and dataverse
-#' f1 <- get_file_by_name("constructionData.tab",
-#'                        dataset = "doi:10.7910/DVN/ARKOTI",
-#'                        server = "dataverse.harvard.edu")
+#' f1 <- get_file_by_name("gapminder-FiveYearData.tab",
+#'                        dataset = "doi:10.70122/FK2/PPKHI1",
+#'                        server = "demo.dataverse.org")
 #'
 #' # 2. Two-steps: Find ID from get_dataset
-#' d2 <- get_dataset("doi:10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu")
-#' f2 <- get_file(d1$files$id[1], server = "dataverse.harvard.edu")
+#' d2 <- get_dataset("doi:10.70122/FK2/PPKHI1", server = "demo.dataverse.org")
+#' f2 <- get_file(d1$files$id[1], server = "demo.dataverse.org")
 #'
 #'
-#' # 3. Based on "dataverse_file" object
-#' f3_dvf <- dataset_files(2692151, server = "dataverse.harvard.edu")
-#' f3 <- get_file(f3_dvf[[2]], server = "dataverse.harvard.edu")
+#' # 3. Alternatively, based on "dataverse_file" object
+#' f3_dvf <- dataset_files("doi:10.70122/FK2/PPKHI1", server = "demo.dataverse.org")
+#' f3 <- get_file(f3_dvf[[1]], server = "demo.dataverse.org")
 #'
 #' # 4. Retrieve multiple raw data in list
-#' f4_vec <- get_dataset("doi:10.7910/DVN/CXOB4K",
-#'                         server = "dataverse.harvard.edu")$files$id
+#' f4_vec <- get_dataset("doi:10.70122/FK2/PPKHI1",
+#'                       server = "demo.dataverse.org")$files$id
 #' f4 <- get_file(f4_vec,
-#'                server = "dataverse.harvard.edu")
+#'                server = "demo.dataverse.org")
 #' length(f4)
 #'
 #' # Write binary files.
 #' # The appropriate file extension needs to be assigned by the user.
-#' writeBin(f1, "constructionData.tab")
-#' writeBin(f4, "dataverse_download.zip")
-#' writeBin(f4[[1]], "Appendices.docx")
+#' writeBin(f1, "gapminder-FiveYearData.tab")
+#' writeBin(f4[[1]], "gapminder-FiveYearData.tab")
+#'
+#' # NOTE: fix so that get_file (with multiple) files
+#' # (f4) in example can return a tabulated dataset in original
 #'
 #' }
 #'
@@ -120,7 +122,6 @@ get_file <-
       return(out)
     }
   }
-
 
 
 #' @rdname files
