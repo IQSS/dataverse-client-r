@@ -41,12 +41,18 @@ get_file_by_id <-
 
     # create query -----
     query <- list()
-    if (!is.null(vars)) {
+    if (!is.null(vars))
       query$vars <- paste0(vars, collapse = ",")
-    }
-    if (!is.null(format)) {
+
+    # format only matters in ingested datasets,
+    # For non-ingested files (rds/docx), we need to NOT specify a format
+    if (is_ingested)
       query$format <- match.arg(format)
-    }
+
+    # if the archival version is desired, we need to NOT specify a format
+    if (is_ingested & archival)
+      query$format <- NULL
+
 
     # if bundle, use custom url ----
     if (format == "bundle") {
@@ -58,13 +64,7 @@ get_file_by_id <-
 
     # If not bundle, request single file in non-bundle format ----
     u <- paste0(api_url(server), "access/datafile/", fileid)
-    # add query if you want to want the original version even though ingested
-    if (is_ingested & !archival) {
-      r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
-    } else {
-      # do not add query if not an ingestion file
-      r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    }
+    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
 
     httr::stop_for_status(r)
     out <- httr::content(r, as = "raw")
