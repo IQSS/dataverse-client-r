@@ -8,7 +8,7 @@
 get_file(
   file,
   dataset = NULL,
-  format = c("original", "RData", "prep", "bundle"),
+  format = c("original", "bundle"),
   vars = NULL,
   key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"),
@@ -35,7 +35,9 @@ specifying a file name within the DOI-identified dataset; or an object of
 \item{format}{A character string specifying a file format for download.
 by default, this is \dQuote{original} (the original file format). If `NULL`,
 no query is added, so ingested files are returned in their ingested TSV form.
-For other formats, see <https://guides.dataverse.org/en/latest/api/dataaccess.html>.}
+For tabular datasets, the option \dQuote{bundle} downloads the bundle
+of the original and archival versions, as well as the documentation.
+See <https://guides.dataverse.org/en/latest/api/dataaccess.html> for details.}
 
 \item{vars}{A character vector specifying one or more variable names, used to
 extract a subset of the data.}
@@ -61,7 +63,8 @@ the ingested archival version or not?}
 }
 \value{
 \code{get_file} returns a raw vector (or list of raw vectors,
-  if \code{length(file) > 1}). To load as a dataframe, see
+  if \code{length(file) > 1}), which can be saved locally with the `writeBin`
+  function.  To load datasets into the R environment dataframe, see
   \link{get_dataframe_by_name}.
 }
 \description{
@@ -73,8 +76,6 @@ This function provides access to data files from a Dataverse entry.
 }
 \examples{
 \dontrun{
-# download file from:
-# https://doi.org/10.7910/DVN/ARKOTI
 
 # 1. Two-steps: Find ID from get_dataset
 d1 <- get_dataset("doi:10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu")
@@ -89,12 +90,18 @@ f2 <- get_file("constructionData.tab",
 f3_dvf <- dataset_files(2692151, server = "dataverse.harvard.edu")
 f3 <- get_file(f3_dvf[[2]], server = "dataverse.harvard.edu")
 
-# 4. Retrieve bundle of raw data in list
-f4_meta <- get_dataset("doi:10.7910/DVN/CXOB4K",
+# 4. Retrieve multiple raw data in list
+f4_vec <- get_dataset("doi:10.7910/DVN/CXOB4K",
                         server = "dataverse.harvard.edu")$files$id
-f4 <- get_file(f4_meta,
+f4 <- get_file(f4_vec,
                server = "dataverse.harvard.edu")
 length(f4)
+
+# Write binary files.
+# The appropriate file extension needs to be assigned by the user.
+writeBin(f2, "constructionData.tab")
+writeBin(f4, "dataverse_download.zip")
+writeBin(f4[[1]], "Appendices.docx")
 
 }
 

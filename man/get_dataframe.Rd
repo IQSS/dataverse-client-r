@@ -37,7 +37,9 @@ are not available or the original format is unknown, use `archival = TRUE`.}
     \item{\code{format}}{A character string specifying a file format for download.
 by default, this is \dQuote{original} (the original file format). If `NULL`,
 no query is added, so ingested files are returned in their ingested TSV form.
-For other formats, see <https://guides.dataverse.org/en/latest/api/dataaccess.html>.}
+For tabular datasets, the option \dQuote{bundle} downloads the bundle
+of the original and archival versions, as well as the documentation.
+See <https://guides.dataverse.org/en/latest/api/dataaccess.html> for details.}
     \item{\code{vars}}{A character vector specifying one or more variable names, used to
 extract a subset of the data.}
     \item{\code{key}}{A character string specifying a Dataverse server API key. If one
