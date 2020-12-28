@@ -27,11 +27,18 @@
 #'   read_function = read_csv)
 #'
 #' # or a Stata dta
-#' stata_df <- get_dataframe_by_id(
+#' stata_df <- get_dataframe_by_name(
 #'   file = "nlsw88.tab",
 #'   dataset = "doi:10.70122/FK2/PPKHI1",
 #'   server = "demo.dataverse.org",
 #'   read_function = haven::read_dta)
+#'
+#' # or a Rds file
+#' rds_df <- get_dataframe_by_name(
+#'  file = "nlsw88_rds-export.rds",
+#'  dataset = "doi:10.70122/FK2/PPKHI1",
+#'  server = "demo.dataverse.org",
+#'  read_function = read_rds)
 #'
 #' # equivalently, if you know the ID
 #' # you can also customize the read_function (in this case to supress parse msg)

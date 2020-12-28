@@ -22,21 +22,19 @@ get_file_by_id <-
     stopifnot(is.numeric(fileid))
     stopifnot(length(fileid) == 1)
 
-    # detect file type to determine if something is ingested
-    if (!is.null(archival)) {
-      xml <- read_xml(get_file_metadata(fileid, server = server))
-      filename <- as_list(xml)$codeBook$fileDscr$fileTxt$fileName[[1]]
-      is_ingested <- grepl(x = filename, pattern = "\\.tab$")
-
-      if (archival & !is_ingested)
-        stop("The file does not have a .tab suffix so does not appear ingested.")
-    } else {
-      is_ingested <- FALSE
-    }
+    # ping get_file_metadata to see if file is ingested
+    ping_metadata <- tryCatch(get_file_metadata(fileid, server = server),
+                              error = function(e) e)
+    is_ingested <- !inherits(ping_metadata, "error") # if error, not ingested
 
     # update archival if not specified
     if (is.null(archival))
       archival <- FALSE
+
+    # check
+    if (archival & !is_ingested)
+      stop("You requested an archival version, but the file has no metadata so does not appear ingested.")
+
 
     # downloading files sequentially and add the raw vectors to a list
     out <- vector("list", length(fileid))
