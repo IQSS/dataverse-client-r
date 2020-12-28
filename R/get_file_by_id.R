@@ -10,9 +10,9 @@
 get_file_by_id <-
   function(fileid,
            dataset = NULL,
-           server,
+           server = Sys.getenv("DATAVERSE_SERVER"),
            format = c("original", "RData", "prep", "bundle"),
-           vars,
+           vars = NULL,
            archival = NULL,
            key = Sys.getenv("DATAVERSE_KEY"),
            ...) {

@@ -31,9 +31,9 @@ get_file_by_name(
 get_file_by_id(
   fileid,
   dataset = NULL,
-  server,
+  server = Sys.getenv("DATAVERSE_SERVER"),
   format = c("original", "RData", "prep", "bundle"),
-  vars,
+  vars = NULL,
   archival = NULL,
   key = Sys.getenv("DATAVERSE_KEY"),
   ...
