@@ -49,7 +49,7 @@ Keys can be specified atomically or globally using
 
 \item{server}{A character string specifying a Dataverse server. There are
 multiple Dataverse installations, but the defaults is to use the Harvard
-Dataverse (`server = "dataverse.harvard.edu"`). This can be modified atomically
+Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
 or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 
 \item{verbose}{A logical indicating whether to display information about the search query (default is \code{TRUE}).}

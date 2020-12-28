@@ -17,7 +17,7 @@ get_file_metadata(
 \item{file}{An integer specifying a file identifier; or a vector of integers
 specifying file identifiers; or, if \code{doi} is specified, a character string
 specifying a file name within the DOI-identified dataset; or an object of
- class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
+class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
 
 \item{format}{Defaults to \dQuote{ddi} for metadata files}
 
@@ -28,7 +28,7 @@ Keys can be specified atomically or globally using
 
 \item{server}{A character string specifying a Dataverse server. There are
 multiple Dataverse installations, but the defaults is to use the Harvard
-Dataverse (`server = "dataverse.harvard.edu"`). This can be modified atomically
+Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
 or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 
 \item{...}{Additional arguments passed to an HTTP request function, such as
@@ -37,7 +37,7 @@ or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")
 }
 \value{
 A character vector containing a DDI
- metadata file.
+metadata file.
 }
 \description{
 Retrieve a ddi metadata file

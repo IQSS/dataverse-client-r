@@ -43,18 +43,18 @@ get_file_by_id(
 \item{file}{An integer specifying a file identifier; or a vector of integers
 specifying file identifiers; or, if \code{doi} is specified, a character string
 specifying a file name within the DOI-identified dataset; or an object of
- class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
+class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
 
 \item{format}{A character string specifying a file format for download.
-by default, this is \dQuote{original} (the original file format). If `NULL`,
+by default, this is \dQuote{original} (the original file format). If \code{NULL},
 no query is added, so ingested files are returned in their ingested TSV form.
 For tabular datasets, the option \dQuote{bundle} downloads the bundle
 of the original and archival versions, as well as the documentation.
-See <https://guides.dataverse.org/en/latest/api/dataaccess.html> for details.}
+See \url{https://guides.dataverse.org/en/latest/api/dataaccess.html} for details.}
 
 \item{server}{A character string specifying a Dataverse server. There are
 multiple Dataverse installations, but the defaults is to use the Harvard
-Dataverse (`server = "dataverse.harvard.edu"`). This can be modified atomically
+Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
 or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 
 \item{vars}{A character vector specifying one or more variable names, used to
@@ -74,22 +74,22 @@ the ingested archival version or not?}
 
 \item{filename}{Filename of the dataset, with file extension}
 
-\item{fileid}{A numeric ID internally used for `get_file_by_id`}
+\item{fileid}{A numeric ID internally used for \code{get_file_by_id}}
 }
 \value{
 \code{get_file} returns a raw vector (or list of raw vectors,
-  if \code{length(file) > 1}), which can be saved locally with the `writeBin`
-  function.  To load datasets into the R environment dataframe, see
-  \link{get_dataframe_by_name}.
+if \code{length(file) > 1}), which can be saved locally with the \code{writeBin}
+function.  To load datasets into the R environment dataframe, see
+\link{get_dataframe_by_name}.
 }
 \description{
-Download Dataverse File(s). `get_file` is a general wrapper,
- and can take either dataverse objects, file IDs, or a filename and dataverse.
- `get_file_by_name` is a shorthand for running `get_file` by
- specifying a file name (`filename`) and dataverse DOI (`dataset`).
- Internally, all functions download each file by `get_file_by_id`. `get_file_*`
- functions return a raw binary file, which cannot be readily analyzed in R.
- To download dataframes, see the `get_dataset_*` functions at \link{get_dataset}
+Download Dataverse File(s). \code{get_file} is a general wrapper,
+and can take either dataverse objects, file IDs, or a filename and dataverse.
+\code{get_file_by_name} is a shorthand for running \code{get_file} by
+specifying a file name (\code{filename}) and dataverse DOI (\code{dataset}).
+Internally, all functions download each file by \code{get_file_by_id}. \verb{get_file_*}
+functions return a raw binary file, which cannot be readily analyzed in R.
+To download dataframes, see the \verb{get_dataset_*} functions at \link{get_dataset}
 }
 \details{
 This function provides access to data files from a Dataverse entry.

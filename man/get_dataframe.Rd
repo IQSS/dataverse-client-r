@@ -27,19 +27,19 @@ environment}
 
 \item{archival}{Whether to read from the ingested, archival version of the
 dataset, or whether to read the original. The archival versions are tab-delimited
-`.tab` files. If functions to read the original version is available without
-loss of information, then `archival = FALSE` is better. If such functions
-are not available or the original format is unknown, use `archival = TRUE`.}
+\code{.tab} files. If functions to read the original version is available without
+loss of information, then \code{archival = FALSE} is better. If such functions
+are not available or the original format is unknown, use \code{archival = TRUE}.}
 
 \item{...}{
   Arguments passed on to \code{\link[=get_file]{get_file}}
   \describe{
     \item{\code{format}}{A character string specifying a file format for download.
-by default, this is \dQuote{original} (the original file format). If `NULL`,
+by default, this is \dQuote{original} (the original file format). If \code{NULL},
 no query is added, so ingested files are returned in their ingested TSV form.
 For tabular datasets, the option \dQuote{bundle} downloads the bundle
 of the original and archival versions, as well as the documentation.
-See <https://guides.dataverse.org/en/latest/api/dataaccess.html> for details.}
+See \url{https://guides.dataverse.org/en/latest/api/dataaccess.html} for details.}
     \item{\code{vars}}{A character vector specifying one or more variable names, used to
 extract a subset of the data.}
     \item{\code{key}}{A character string specifying a Dataverse server API key. If one
@@ -48,13 +48,13 @@ Keys can be specified atomically or globally using
 \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
     \item{\code{server}}{A character string specifying a Dataverse server. There are
 multiple Dataverse installations, but the defaults is to use the Harvard
-Dataverse (`server = "dataverse.harvard.edu"`). This can be modified atomically
+Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
 or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
   }}
 }
 \description{
-`get_dataframe_by_id`, if you know the numeric ID of the dataset, or instead
-`get_dataframe_by_name` if you know the filename and doi. The dataset
+\code{get_dataframe_by_id}, if you know the numeric ID of the dataset, or instead
+\code{get_dataframe_by_name} if you know the filename and doi. The dataset
 }
 \examples{
 # load dataset from file name and dataverse DOI
