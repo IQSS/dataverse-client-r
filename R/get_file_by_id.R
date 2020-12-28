@@ -51,7 +51,15 @@ get_file_by_id <-
       query$format <- match.arg(format)
     }
 
-    # request single file in non-bundle format ----
+    # if bundle, use custom url ----
+    if (format == "bundle") {
+      u <- paste0(api_url(server), "access/datafile/bundle/", fileid)
+      r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
+      out <- httr::content(r, as = "raw")
+      return(out)
+    }
+
+    # If not bundle, request single file in non-bundle format ----
     u <- paste0(api_url(server), "access/datafile/", fileid)
     # add query if you want to want the original version even though ingested
     if (is_ingested & !archival) {
@@ -62,8 +70,6 @@ get_file_by_id <-
     }
 
     httr::stop_for_status(r)
-    out <-  httr::content(r, as = "raw")
-
+    out <- httr::content(r, as = "raw")
     return(out)
-
   }
