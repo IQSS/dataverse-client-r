@@ -91,8 +91,10 @@ get_dataframe_by_id <- function(file,
   raw <- get_file(file = file, archival = archival, ...)
 
   # default of get_file
-  if (is.null(read_function))
+  if (is.null(read_function)) {
+    warning("function was not supplied so returning the raw binary file.")
     return(raw)
+  }
 
   # save to temp and then read it in with supplied function
   if (!is.null(read_function)) {
