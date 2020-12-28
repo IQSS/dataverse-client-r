@@ -2,6 +2,7 @@
 % Please edit documentation in R/get_file.R, R/get_file_by_id.R
 \name{get_file}
 \alias{get_file}
+\alias{get_file_by_name}
 \alias{get_file_by_id}
 \title{Download File(s)}
 \usage{
@@ -9,9 +10,21 @@ get_file(
   file,
   dataset = NULL,
   format = c("original", "bundle"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
   vars = NULL,
   key = Sys.getenv("DATAVERSE_KEY"),
+  archival = NULL,
+  ...
+)
+
+get_file_by_name(
+  filename,
+  dataset,
+  format = c("original", "bundle"),
   server = Sys.getenv("DATAVERSE_SERVER"),
+  vars = NULL,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  archival = NULL,
   ...
 )
 
@@ -39,6 +52,11 @@ For tabular datasets, the option \dQuote{bundle} downloads the bundle
 of the original and archival versions, as well as the documentation.
 See <https://guides.dataverse.org/en/latest/api/dataaccess.html> for details.}
 
+\item{server}{A character string specifying a Dataverse server. There are
+multiple Dataverse installations, but the defaults is to use the Harvard
+Dataverse (`server = "dataverse.harvard.edu"`). This can be modified atomically
+or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
+
 \item{vars}{A character vector specifying one or more variable names, used to
 extract a subset of the data.}
 
@@ -47,19 +65,16 @@ is not specified, functions calling authenticated API endpoints will fail.
 Keys can be specified atomically or globally using
 \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 
-\item{server}{A character string specifying a Dataverse server. There are
-multiple Dataverse installations, but the defaults is to use the Harvard
-Dataverse (`server = "dataverse.harvard.edu"`). This can be modified atomically
-or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
+\item{archival}{If a ingested (.tab) version is available, download
+the ingested archival version or not?}
 
 \item{...}{Additional arguments passed to an HTTP request function, such as
 \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
 \code{\link[httr]{DELETE}}.}
 
-\item{fileid}{A numeric ID internally used for `get_file_by_id`}
+\item{filename}{Filename of the dataset, with file extension}
 
-\item{archival}{If a ingested (.tab) version is available, download
-the ingested archival version or not?}
+\item{fileid}{A numeric ID internally used for `get_file_by_id`}
 }
 \value{
 \code{get_file} returns a raw vector (or list of raw vectors,
@@ -68,8 +83,13 @@ the ingested archival version or not?}
   \link{get_dataframe_by_name}.
 }
 \description{
-Download Dataverse File(s). `get_file` internally calls
- `get_file_by_id`.
+Download Dataverse File(s). `get_file` is a general wrapper,
+ and can take either dataverse objects, file IDs, or a filename and dataverse.
+ `get_file_by_name` is a shorthand for running `get_file` by
+ specifying a file name (`filename`) and dataverse DOI (`dataset`).
+ Internally, all functions download each file by `get_file_by_id`. `get_file_*`
+ functions return a raw binary file, which cannot be readily analyzed in R.
+ To download dataframes, see the `get_dataset_*` functions at \link{get_dataset}
 }
 \details{
 This function provides access to data files from a Dataverse entry.
@@ -77,14 +97,15 @@ This function provides access to data files from a Dataverse entry.
 \examples{
 \dontrun{
 
-# 1. Two-steps: Find ID from get_dataset
-d1 <- get_dataset("doi:10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu")
-f1 <- get_file(d1$files$id[1], server = "dataverse.harvard.edu")
+# 1. Using filename and dataverse
+f1 <- get_file_by_name("constructionData.tab",
+                       dataset = "doi:10.7910/DVN/ARKOTI",
+                       server = "dataverse.harvard.edu")
 
-# 2. Using filename and dataverse
-f2 <- get_file("constructionData.tab",
-               "doi:10.7910/DVN/ARKOTI",
-               server = "dataverse.harvard.edu")
+# 2. Two-steps: Find ID from get_dataset
+d2 <- get_dataset("doi:10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu")
+f2 <- get_file(d1$files$id[1], server = "dataverse.harvard.edu")
+
 
 # 3. Based on "dataverse_file" object
 f3_dvf <- dataset_files(2692151, server = "dataverse.harvard.edu")
@@ -99,7 +120,7 @@ length(f4)
 
 # Write binary files.
 # The appropriate file extension needs to be assigned by the user.
-writeBin(f2, "constructionData.tab")
+writeBin(f1, "constructionData.tab")
 writeBin(f4, "dataverse_download.zip")
 writeBin(f4[[1]], "Appendices.docx")
 

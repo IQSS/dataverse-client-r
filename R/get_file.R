@@ -2,15 +2,22 @@
 #'
 #'
 #' @title Download File(s)
-#' @description Download Dataverse File(s). `get_file` internally calls
-#'  `get_file_by_id`.
+#'
+#' @description Download Dataverse File(s). `get_file` is a general wrapper,
+#'  and can take either dataverse objects, file IDs, or a filename and dataverse.
+#'  `get_file_by_name` is a shorthand for running `get_file` by
+#'  specifying a file name (`filename`) and dataverse DOI (`dataset`).
+#'  Internally, all functions download each file by `get_file_by_id`. `get_file_*`
+#'  functions return a raw binary file, which cannot be readily analyzed in R.
+#'  To download dataframes, see the `get_dataset_*` functions at \link{get_dataset}
+#'
+#'
 #'
 #' @details This function provides access to data files from a Dataverse entry.
 #' @param file An integer specifying a file identifier; or a vector of integers
 #'  specifying file identifiers; or, if \code{doi} is specified, a character string
 #'  specifying a file name within the DOI-identified dataset; or an object of
 #'   class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
-#' @param fileid A numeric ID internally used for `get_file_by_id`
 #' @param format A character string specifying a file format for download.
 #'  by default, this is \dQuote{original} (the original file format). If `NULL`,
 #'  no query is added, so ingested files are returned in their ingested TSV form.
@@ -18,7 +25,7 @@
 #'  of the original and archival versions, as well as the documentation.
 #'  See <https://guides.dataverse.org/en/latest/api/dataaccess.html> for details.
 #' @param vars A character vector specifying one or more variable names, used to
-#' extract a subset of the data.
+#'  extract a subset of the data.
 #'
 #' @template envvars
 #' @template dots
@@ -33,14 +40,15 @@
 #' @examples
 #' \dontrun{
 #'
-#' # 1. Two-steps: Find ID from get_dataset
-#' d1 <- get_dataset("doi:10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu")
-#' f1 <- get_file(d1$files$id[1], server = "dataverse.harvard.edu")
+#' # 1. Using filename and dataverse
+#' f1 <- get_file_by_name("constructionData.tab",
+#'                        dataset = "doi:10.7910/DVN/ARKOTI",
+#'                        server = "dataverse.harvard.edu")
 #'
-#' # 2. Using filename and dataverse
-#' f2 <- get_file("constructionData.tab",
-#'                "doi:10.7910/DVN/ARKOTI",
-#'                server = "dataverse.harvard.edu")
+#' # 2. Two-steps: Find ID from get_dataset
+#' d2 <- get_dataset("doi:10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu")
+#' f2 <- get_file(d1$files$id[1], server = "dataverse.harvard.edu")
+#'
 #'
 #' # 3. Based on "dataverse_file" object
 #' f3_dvf <- dataset_files(2692151, server = "dataverse.harvard.edu")
@@ -55,7 +63,7 @@
 #'
 #' # Write binary files.
 #' # The appropriate file extension needs to be assigned by the user.
-#' writeBin(f2, "constructionData.tab")
+#' writeBin(f1, "constructionData.tab")
 #' writeBin(f4, "dataverse_download.zip")
 #' writeBin(f4[[1]], "Appendices.docx")
 #'
@@ -66,9 +74,10 @@ get_file <-
   function(file,
            dataset = NULL,
            format = c("original", "bundle"),
+           server = Sys.getenv("DATAVERSE_SERVER"),
            vars = NULL,
            key = Sys.getenv("DATAVERSE_KEY"),
-           server = Sys.getenv("DATAVERSE_SERVER"),
+           archival = NULL,
            ...) {
 
     format <- match.arg(format)
@@ -98,6 +107,7 @@ get_file <-
         vars = vars,
         key = key,
         server = server,
+        archival = archival,
         ...
         )
     }
@@ -113,4 +123,38 @@ get_file <-
 
 
 
+#' @rdname files
+#'
+#'
+#' @param filename Filename of the dataset, with file extension
+#'
+#' @inheritParams get_file
+#'
+#' @export
+get_file_by_name <- function(filename,
+                             dataset,
+                             format = c("original", "bundle"),
+                             server = Sys.getenv("DATAVERSE_SERVER"),
+                             vars = NULL,
+                             key = Sys.getenv("DATAVERSE_KEY"),
+                             archival = NULL,
+                             ...
+                             ) {
+  format <- match.arg(format)
 
+
+  # retrieve ID
+  fileid <- get_fileid.character(x = dataset,
+                                 file = filename,
+                                 server = server,
+                                 ...)
+
+  get_file_by_id(fileid,
+                 format = format,
+                 vars = vars,
+                 key = key,
+                 server = server,
+                 archival = archival,
+                 ...)
+
+}

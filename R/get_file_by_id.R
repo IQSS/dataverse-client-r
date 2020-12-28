@@ -1,9 +1,8 @@
-#' @title Download Single File by dataverse ID
-#'
 #' @rdname files
 #'
 #' @param archival If a ingested (.tab) version is available, download
 #'  the ingested archival version or not?
+#' @param fileid A numeric ID internally used for `get_file_by_id`
 #'
 #' @importFrom xml2 read_xml as_list
 #'
