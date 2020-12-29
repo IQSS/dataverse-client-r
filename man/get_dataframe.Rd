@@ -3,6 +3,7 @@
 \name{get_dataframe_by_name}
 \alias{get_dataframe_by_name}
 \alias{get_dataframe_by_id}
+\alias{get_dataframe_by_doi}
 \title{Get file from dataverse and convert it into a dataframe or tibble}
 \usage{
 get_dataframe_by_name(
@@ -14,6 +15,8 @@ get_dataframe_by_name(
 )
 
 get_dataframe_by_id(file, read_function = NULL, archival = FALSE, ...)
+
+get_dataframe_by_doi(filedoi, read_function = NULL, archival = FALSE, ...)
 }
 \arguments{
 \item{file}{to be passed on to get_file}
@@ -51,6 +54,9 @@ multiple Dataverse installations, but the defaults is to use the Harvard
 Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
 or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
   }}
+
+\item{filedoi}{A DOI for a single file (not the entire dataset), of the form
+\code{"10.70122/FK2/PPKHI1/ZYATZZ"} or \code{"doi:10.70122/FK2/PPKHI1/ZYATZZ"}}
 }
 \description{
 \code{get_dataframe_by_id}, if you know the numeric ID of the dataset, or instead
@@ -77,7 +83,14 @@ rds_df <- get_dataframe_by_name(
  server = "demo.dataverse.org",
  read_function = read_rds)
 
-# equivalently, if you know the ID
+# equivalently, if you know the DOI
+gap_df <- get_dataframe_by_doi(
+ filedoi = "10.70122/FK2/PPKHI1/ZYATZZ",
+ server = "demo.dataverse.rog",
+ read_function = read_csv
+)
+
+# or the id
 # you can also customize the read_function (in this case to supress parse msg)
 gap_df <- get_dataframe_by_id(
   1733998,

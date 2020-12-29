@@ -98,10 +98,11 @@ get_file <-
     if (!is.numeric(file) & inherits(file, "dataverse_file"))
       fileid <- get_fileid.dataverse_file(file, key = key, server = server)
 
-    if (!is.numeric(file) & !inherits(file, "dataverse_file") & is.null(dataset))
-      stop("When 'file' is a character (non-global ID), dataset must be specified.")
-    if (!is.numeric(file) & !inherits(file, "dataverse_file"))
+    if (!is.numeric(file) & !inherits(file, "dataverse_file") & !is.null(dataset))
       fileid <- get_fileid.character(dataset, file, key = key, server = server, ...)
+
+    if (!is.numeric(file) & !inherits(file, "dataverse_file") & is.null(dataset) & !grepl(x = file, pattern = "^doi"))
+      stop("When 'file' is a character (non-global ID), dataset must be specified.")
 
 
     # Main function. Call get_file_by_id

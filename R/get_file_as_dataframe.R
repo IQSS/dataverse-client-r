@@ -40,7 +40,14 @@
 #'  server = "demo.dataverse.org",
 #'  read_function = read_rds)
 #'
-#' # equivalently, if you know the ID
+#' # equivalently, if you know the DOI
+#' gap_df <- get_dataframe_by_doi(
+#'  filedoi = "10.70122/FK2/PPKHI1/ZYATZZ",
+#'  server = "demo.dataverse.rog",
+#'  read_function = read_csv
+#' )
+#'
+#' # or the id
 #' # you can also customize the read_function (in this case to supress parse msg)
 #' gap_df <- get_dataframe_by_id(
 #'   1733998,
@@ -102,12 +109,18 @@ get_dataframe_by_id <- function(file,
   }
 }
 
-get_dataframe_by_doi <- function(doi,
+
+#' @rdname get_dataframe
+#' @inheritParams get_file_by_doi
+#' @export
+get_dataframe_by_doi <- function(filedoi,
                                  read_function = NULL,
                                  archival = FALSE,
                                  ...) {
-  doi <- prepend_doi(doi)
+  filedoi <- prepend_doi(filedoi)
 
+  # get_file can also take doi now
+  get_dataframe_by_id(file = filedoi, read_function = read_function, archival = archival, ...)
 }
 
 #' Write to temp and apply function
