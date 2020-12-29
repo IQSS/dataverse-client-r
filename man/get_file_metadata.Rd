@@ -15,8 +15,9 @@ get_file_metadata(
 }
 \arguments{
 \item{file}{An integer specifying a file identifier; or a vector of integers
-specifying file identifiers; or, if \code{doi} is specified, a character string
-specifying a file name within the DOI-identified dataset; or an object of
+specifying file identifiers; or, if used with the prefix \code{"doi:"}, a
+character with the file-specific DOI; or, if used without the prefix, a
+filename accompanied by a dataset DOI in the \code{dataset} argument, or an object of
 class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
 
 \item{format}{Defaults to \dQuote{ddi} for metadata files}

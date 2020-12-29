@@ -15,18 +15,32 @@ get_file_metadata <-
            key = Sys.getenv("DATAVERSE_KEY"),
            server = Sys.getenv("DATAVERSE_SERVER"),
            ...) {
+
     # get file ID from doi
+    persistentID <- FALSE
     if (!is.numeric(file)) {
       if (inherits(file, "dataverse_file")) {
-        file <- get_fileid(file)
+        fileid <- get_fileid(file)
+      } else if (grepl(x = file, pattern = "^doi:")) {
+        # if file-specific DOI, then use DOI
+        fileid <- file
+        persistentID <- TRUE
       } else if (is.null(dataset)) {
         stop("When 'file' is a character string, dataset must be specified. Or, use a global fileid instead.")
       } else {
-        file <- get_fileid(dataset, file, key = key, server = server, ...)
+        fileid <- get_fileid(dataset, file, key = key, server = server, ...)
       }
     }
+
     format <- match.arg(format)
-    u <- paste0(api_url(server), "access/datafile/", file, "/metadata/", format)
+
+    # different URL depending on if you have persistentId
+    if (persistentID) {
+      u <- paste0(api_url(server), "access/datafile/:persistentId/metadata/", format, "/?persistentId=", fileid)
+    } else {
+      u <- paste0(api_url(server), "access/datafile/", fileid, "/metadata/", format)
+    }
+
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
     httr::stop_for_status(r)
     out <- httr::content(r, as = "text", encoding = "UTF-8")
