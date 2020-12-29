@@ -4,14 +4,13 @@
 #'  the ingested archival version or not?
 #' @param fileid A numeric ID internally used for `get_file_by_id`
 #'
-#' @importFrom xml2 read_xml as_list
 #'
 #' @export
 get_file_by_id <-
   function(fileid,
            dataset = NULL,
            server = Sys.getenv("DATAVERSE_SERVER"),
-           format = c("original", "RData", "prep", "bundle"),
+           format = c("original", "bundle"),
            vars = NULL,
            archival = NULL,
            key = Sys.getenv("DATAVERSE_KEY"),
@@ -70,3 +69,8 @@ get_file_by_id <-
     out <- httr::content(r, as = "raw")
     return(out)
   }
+
+
+get_file_by_doi <- function() {
+
+}
