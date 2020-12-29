@@ -17,9 +17,10 @@
 #'
 #' @details This function provides access to data files from a Dataverse entry.
 #' @param file An integer specifying a file identifier; or a vector of integers
-#'  specifying file identifiers; or, if \code{doi} is specified, a character string
-#'  specifying a file name within the DOI-identified dataset; or an object of
-#'   class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
+#'  specifying file identifiers; or, if used with the prefix \code{"doi:"}, a
+#'  character with the file-specific DOI; or, if used without the prefix, a
+#'  filename accompanied by a dataset DOI in the `dataset` argument, or an object of
+#'  class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
 #' @param format A character string specifying a file format for download.
 #'  by default, this is \dQuote{original} (the original file format). If `NULL`,
 #'  no query is added, so ingested files are returned in their ingested TSV form.
@@ -101,9 +102,13 @@ get_file <-
     if (!is.numeric(file) & !inherits(file, "dataverse_file") & !is.null(dataset))
       fileid <- get_fileid.character(dataset, file, key = key, server = server, ...)
 
-    if (!is.numeric(file) & !inherits(file, "dataverse_file") & is.null(dataset) & !grepl(x = file, pattern = "^doi"))
-      stop("When 'file' is a character (non-global ID), dataset must be specified.")
-
+    if (!is.numeric(file) & !inherits(file, "dataverse_file") & is.null(dataset)) {
+      if (grepl(x = file, pattern = "^doi")) {
+        fileid <- file # doi is allowed
+      } else {
+        stop("When 'file' is a character (non-global ID), dataset must be specified.")
+      }
+    }
 
     # Main function. Call get_file_by_id
     out <- vector("list", length(fileid))
