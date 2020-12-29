@@ -4,7 +4,8 @@
 \alias{get_file}
 \alias{get_file_by_name}
 \alias{get_file_by_id}
-\title{Download File(s)}
+\alias{get_file_by_doi}
+\title{Download File}
 \usage{
 get_file(
   file,
@@ -32,7 +33,18 @@ get_file_by_id(
   fileid,
   dataset = NULL,
   server = Sys.getenv("DATAVERSE_SERVER"),
-  format = c("original", "RData", "prep", "bundle"),
+  format = c("original", "bundle"),
+  vars = NULL,
+  archival = NULL,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  ...
+)
+
+get_file_by_doi(
+  filedoi,
+  dataset = NULL,
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  format = c("original", "bundle"),
   vars = NULL,
   archival = NULL,
   key = Sys.getenv("DATAVERSE_KEY"),
@@ -75,6 +87,9 @@ the ingested archival version or not?}
 \item{filename}{Filename of the dataset, with file extension}
 
 \item{fileid}{A numeric ID internally used for \code{get_file_by_id}}
+
+\item{filedoi}{A DOI for a single file (not the entire dataset), of the form
+\code{"10.70122/FK2/PPKHI1/ZYATZZ"} or \code{"doi:10.70122/FK2/PPKHI1/ZYATZZ"}}
 }
 \value{
 \code{get_file} returns a raw vector (or list of raw vectors,
@@ -86,10 +101,12 @@ function.  To load datasets into the R environment dataframe, see
 Download Dataverse File(s). \code{get_file} is a general wrapper,
 and can take either dataverse objects, file IDs, or a filename and dataverse.
 \code{get_file_by_name} is a shorthand for running \code{get_file} by
-specifying a file name (\code{filename}) and dataverse DOI (\code{dataset}).
+specifying a file name (\code{filename}) and dataset (\code{dataset}).
+\code{get_file_by_doi} obtains a file by its file DOI, bypassing the
+\code{dataset} argument.
 Internally, all functions download each file by \code{get_file_by_id}. \verb{get_file_*}
 functions return a raw binary file, which cannot be readily analyzed in R.
-To download dataframes, see the \verb{get_dataset_*} functions at \link{get_dataset}
+To use the objects as dataframes, see the \verb{get_dataset_*} functions at \link{get_dataset}
 }
 \details{
 This function provides access to data files from a Dataverse entry.
@@ -102,29 +119,33 @@ f1 <- get_file_by_name("gapminder-FiveYearData.tab",
                        dataset = "doi:10.70122/FK2/PPKHI1",
                        server = "demo.dataverse.org")
 
-# 2. Two-steps: Find ID from get_dataset
-d2 <- get_dataset("doi:10.70122/FK2/PPKHI1", server = "demo.dataverse.org")
-f2 <- get_file(d1$files$id[1], server = "demo.dataverse.org")
+# 2. Using DOI
+f2 <- get_file_by_doi("10.70122/FK2/PPKHI1/ZYATZZ",
+                      server = "demo.dataverse.org")
+
+# 3. Two-steps: Find ID from get_dataset
+d3 <- get_dataset("doi:10.70122/FK2/PPKHI1", server = "demo.dataverse.org")
+f3 <- get_file(d3$files$id[1], server = "demo.dataverse.org")
 
 
-# 3. Alternatively, based on "dataverse_file" object
-f3_dvf <- dataset_files("doi:10.70122/FK2/PPKHI1", server = "demo.dataverse.org")
-f3 <- get_file(f3_dvf[[1]], server = "demo.dataverse.org")
+# 4. Alternatively, based on "dataverse_file" object
+f4_dvf <- dataset_files("doi:10.70122/FK2/PPKHI1", server = "demo.dataverse.org")
+f4 <- get_file(f4_dvf[[1]], server = "demo.dataverse.org")
 
-# 4. Retrieve multiple raw data in list
-f4_vec <- get_dataset("doi:10.70122/FK2/PPKHI1",
+# 5. Retrieve multiple raw data in list
+f5_vec <- get_dataset("doi:10.70122/FK2/PPKHI1",
                       server = "demo.dataverse.org")$files$id
-f4 <- get_file(f4_vec,
+f5 <- get_file(f5_vec,
                server = "demo.dataverse.org")
-length(f4)
+length(f5)
 
 # Write binary files.
 # The appropriate file extension needs to be assigned by the user.
 writeBin(f1, "gapminder-FiveYearData.tab")
-writeBin(f4[[1]], "gapminder-FiveYearData.tab")
+writeBin(f5[[1]], "gapminder-FiveYearData.tab")
 
 # NOTE: fix so that get_file (with multiple) files
-# (f4) in example can return a tabulated dataset in original
+# (f5) in example can return a tabulated dataset in original
 
 }
 

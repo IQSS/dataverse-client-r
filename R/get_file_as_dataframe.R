@@ -102,6 +102,13 @@ get_dataframe_by_id <- function(file,
   }
 }
 
+get_dataframe_by_doi <- function(doi,
+                                 read_function = NULL,
+                                 archival = FALSE,
+                                 ...) {
+  doi <- prepend_doi(doi)
+
+}
 
 #' Write to temp and apply function
 #'
@@ -114,3 +121,4 @@ get_dataframe_internal <- function(raw, filename, .f) {
 
   do.call(.f, list(tmp))
 }
+

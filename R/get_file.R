@@ -1,15 +1,17 @@
 #' @rdname files
 #'
 #'
-#' @title Download File(s)
+#' @title Download File
 #'
 #' @description Download Dataverse File(s). `get_file` is a general wrapper,
 #'  and can take either dataverse objects, file IDs, or a filename and dataverse.
 #'  `get_file_by_name` is a shorthand for running `get_file` by
-#'  specifying a file name (`filename`) and dataverse DOI (`dataset`).
+#'  specifying a file name (`filename`) and dataset (`dataset`).
+#'  `get_file_by_doi` obtains a file by its file DOI, bypassing the
+#'  `dataset` argument.
 #'  Internally, all functions download each file by `get_file_by_id`. `get_file_*`
 #'  functions return a raw binary file, which cannot be readily analyzed in R.
-#'  To download dataframes, see the `get_dataset_*` functions at \link{get_dataset}
+#'  To use the objects as dataframes, see the `get_dataset_*` functions at \link{get_dataset}
 #'
 #'
 #'
@@ -45,29 +47,33 @@
 #'                        dataset = "doi:10.70122/FK2/PPKHI1",
 #'                        server = "demo.dataverse.org")
 #'
-#' # 2. Two-steps: Find ID from get_dataset
-#' d2 <- get_dataset("doi:10.70122/FK2/PPKHI1", server = "demo.dataverse.org")
-#' f2 <- get_file(d1$files$id[1], server = "demo.dataverse.org")
+#' # 2. Using DOI
+#' f2 <- get_file_by_doi("10.70122/FK2/PPKHI1/ZYATZZ",
+#'                       server = "demo.dataverse.org")
+#'
+#' # 3. Two-steps: Find ID from get_dataset
+#' d3 <- get_dataset("doi:10.70122/FK2/PPKHI1", server = "demo.dataverse.org")
+#' f3 <- get_file(d3$files$id[1], server = "demo.dataverse.org")
 #'
 #'
-#' # 3. Alternatively, based on "dataverse_file" object
-#' f3_dvf <- dataset_files("doi:10.70122/FK2/PPKHI1", server = "demo.dataverse.org")
-#' f3 <- get_file(f3_dvf[[1]], server = "demo.dataverse.org")
+#' # 4. Alternatively, based on "dataverse_file" object
+#' f4_dvf <- dataset_files("doi:10.70122/FK2/PPKHI1", server = "demo.dataverse.org")
+#' f4 <- get_file(f4_dvf[[1]], server = "demo.dataverse.org")
 #'
-#' # 4. Retrieve multiple raw data in list
-#' f4_vec <- get_dataset("doi:10.70122/FK2/PPKHI1",
+#' # 5. Retrieve multiple raw data in list
+#' f5_vec <- get_dataset("doi:10.70122/FK2/PPKHI1",
 #'                       server = "demo.dataverse.org")$files$id
-#' f4 <- get_file(f4_vec,
+#' f5 <- get_file(f5_vec,
 #'                server = "demo.dataverse.org")
-#' length(f4)
+#' length(f5)
 #'
 #' # Write binary files.
 #' # The appropriate file extension needs to be assigned by the user.
 #' writeBin(f1, "gapminder-FiveYearData.tab")
-#' writeBin(f4[[1]], "gapminder-FiveYearData.tab")
+#' writeBin(f5[[1]], "gapminder-FiveYearData.tab")
 #'
 #' # NOTE: fix so that get_file (with multiple) files
-#' # (f4) in example can return a tabulated dataset in original
+#' # (f5) in example can return a tabulated dataset in original
 #'
 #' }
 #'
