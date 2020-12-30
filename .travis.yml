@@ -13,9 +13,12 @@ jobs:
       env: R_CODECOV=true
     - name: osx-current
       os: osx
-      before_install:
-        - brew install curl
-        - brew link --force curl
+      addons:
+        homebrew:
+          packages: curl
+      # before_install:
+      #   - brew install curl
+      #   - brew link --force curl
       latex: false
       r_build_args: '--no-build-vignettes'
       r_check_args: '--ignore-vignettes --no-examples'
