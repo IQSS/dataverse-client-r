@@ -4,9 +4,11 @@ contents  <- dataverse_contents(dv)
 ds_1      <- dataset_files(contents[[1]])
 
 get_dataverse(":root") %>%
+  base::append(c("testing_name" = ":root")) %>%
   yaml::write_yaml("inst/expected-dataverse-root.yml")
 
 dv %>%
+  base::append(c("testing_name" = "dataverse-client-r")) %>%
   yaml::write_yaml("inst/expected-dataverse.yml")
 
 ds_1 %>%

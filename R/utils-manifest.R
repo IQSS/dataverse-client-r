@@ -16,9 +16,7 @@ retrieve_manifest <- function ( ) {
 # retrieve_manifest()
 
 retrieve_file_expected <- function (subdataverse, file_name) {
-  path <-
-    file.path(subdataverse, file_name) %>%
-    system.file(package = "dataverse")
+  path <- system.file(file.path(subdataverse, file_name), package = "dataverse")
 
   if (!file.exists(path)) {
     stop(

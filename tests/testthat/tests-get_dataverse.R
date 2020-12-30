@@ -2,9 +2,9 @@
 
 test_that("dataverse root", {
   expected <- retrieve_info_dataverse("expected-dataverse-root.yml")
-  actual <- get_dataverse(
-    dataverse = ":root"
-  )
+
+  # The code below can be encapsulted in a separate function, if many dataverses are tested.
+  actual <- get_dataverse(dataverse = expected$testing_name)
   expect_equal(actual$id                      , expected$id)
   expect_equal(actual$alias                   , expected$alias)
   expect_equal(actual$name                    , expected$name)
@@ -15,10 +15,9 @@ test_that("dataverse root", {
 
 test_that("dataverse for 'dataverse-client-r'", {
   expected <- retrieve_info_dataverse("expected-dataverse.yml")
-  actual <- get_dataverse(
-    dataverse = "dataverse-client-r"
-  )
 
+  # The code below can be encapsulted in a separate function, if many dataverses are tested.
+  actual <- get_dataverse(dataverse = expected$testing_name)
   expect_equal(actual$id                      , expected$id)
   expect_equal(actual$alias                   , expected$alias)
   expect_equal(actual$name                    , expected$name)

@@ -10,3 +10,4 @@ description: Dataverse for testing [dataverse-client-r](https://github.com/IQSS/
 dataverseType: RESEARCHERS
 ownerId: 1
 creationDate: '2020-01-02T04:18:06Z'
+testing_name: dataverse-client-r
