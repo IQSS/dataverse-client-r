@@ -14,7 +14,7 @@ get_file(
   server = Sys.getenv("DATAVERSE_SERVER"),
   vars = NULL,
   key = Sys.getenv("DATAVERSE_KEY"),
-  original = NULL,
+  original = TRUE,
   ...
 )
 
@@ -81,18 +81,20 @@ Keys can be specified atomically or globally using
 \item{original}{A logical, defaulting to TRUE. If a ingested (.tab) version is
 available, download the original version instead of the ingested? If there was
 no ingested version, is set to NA. Note in \verb{get_dataframe_*},
-\code{original} is set to FALSE by default can be changed.}
+\code{original} is set to FALSE by default. Either can be changed.}
 
 \item{...}{Additional arguments passed to an HTTP request function, such as
 \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
 \code{\link[httr]{DELETE}}.}
 
-\item{filename}{Filename of the dataset, with file extension}
+\item{filename}{Filename of the dataset, with file extension as shown in Dataverse
+(for example, if nlsw88.dta was the original but is displayed as the ingested
+nlsw88.tab, use the ingested version.)}
 
 \item{fileid}{A numeric ID internally used for \code{get_file_by_id}}
 
 \item{filedoi}{A DOI for a single file (not the entire dataset), of the form
-\code{"10.70122/FK2/PPKHI1/ZYATZZ"} or \code{"doi:10.70122/FK2/PPKHI1/ZYATZZ"}}
+\code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}}
 }
 \value{
 \code{get_file} returns a raw vector (or list of raw vectors,
@@ -119,10 +121,10 @@ This function provides access to data files from a Dataverse entry.
 
 # 1. Using filename and dataverse
 f1 <- get_file_by_name("nlsw88.tab",
-                       dataset = "doi:10.70122/FK2/PPIAXE",
+                       dataset = "10.70122/FK2/PPIAXE",
                        server = "demo.dataverse.org")
 
-# 2. Using DOI
+# 2. Using file DOI
 f2 <- get_file_by_doi("10.70122/FK2/PPIAXE/MHDB0O",
                       server = "demo.dataverse.org")
 
@@ -132,21 +134,21 @@ f3 <- get_file(d3$files$id[1], server = "demo.dataverse.org")
 
 
 
-# 5. Retrieve multiple raw data in list
-f5_vec <- get_dataset("doi:10.70122/FK2/PPIAXE",
+# 4. Retrieve multiple raw data in list
+f4_vec <- get_dataset("doi:10.70122/FK2/PPIAXE",
                       server = "demo.dataverse.org")$files$id
-f5 <- get_file(f5_vec,
+f4 <- get_file(f4_vec,
                server = "demo.dataverse.org")
-length(f5)
+length(f4)
 
-# Write binary files.
+# Write binary files
+# (see `get_dataframe_by_name` to load in environment)
 # The appropriate file extension needs to be assigned by the user.
-writeBin(f1, "nlsw88.tab")
-writeBin(f2, "nlsw88.tab")
-writeBin(f5[[1]], "nlsw88.tab")
+writeBin(f1, "nlsw88.dta")
+writeBin(f2, "nlsw88.dta")
 
-# NOTE: fix so that get_file (with multiple) files
-# (f5) in example can return a tabulated dataset in original
+writeBin(f4[[1]], "nlsw88.rds") # originally a rds file
+writeBin(f4[[2]], "nlsw88.dta") # originally a dta file
 
 }
 

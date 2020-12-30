@@ -3,7 +3,7 @@
 #' @param original A logical, defaulting to TRUE. If a ingested (.tab) version is
 #' available, download the original version instead of the ingested? If there was
 #' no ingested version, is set to NA. Note in `get_dataframe_*`,
-#' `original` is set to FALSE by default can be changed.
+#' `original` is set to FALSE by default. Either can be changed.
 #' @param fileid A numeric ID internally used for `get_file_by_id`
 #'
 #'
@@ -48,7 +48,7 @@ get_file_by_id <-
       query$format <- match.arg(format)
 
     # if the original is not desired, we need to NOT specify a format
-    if (is_ingested & (isFALSE(original) | is.na(original)))
+    if (is_ingested & (isFALSE(original) || is.na(original) || is.null(original)))
       query$format <- NULL
 
 
@@ -76,7 +76,7 @@ get_file_by_id <-
 
 #' @rdname files
 #' @param filedoi A DOI for a single file (not the entire dataset), of the form
-#'  `"10.70122/FK2/PPKHI1/ZYATZZ"` or `"doi:10.70122/FK2/PPKHI1/ZYATZZ"`
+#'  `"10.70122/FK2/PPIAXE/MHDB0O"` or `"doi:10.70122/FK2/PPIAXE/MHDB0O"`
 #'
 #' @export
 get_file_by_doi <- function(filedoi,

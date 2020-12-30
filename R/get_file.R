@@ -45,10 +45,10 @@
 #'
 #' # 1. Using filename and dataverse
 #' f1 <- get_file_by_name("nlsw88.tab",
-#'                        dataset = "doi:10.70122/FK2/PPIAXE",
+#'                        dataset = "10.70122/FK2/PPIAXE",
 #'                        server = "demo.dataverse.org")
 #'
-#' # 2. Using DOI
+#' # 2. Using file DOI
 #' f2 <- get_file_by_doi("10.70122/FK2/PPIAXE/MHDB0O",
 #'                       server = "demo.dataverse.org")
 #'
@@ -58,21 +58,21 @@
 #'
 #'
 #'
-#' # 5. Retrieve multiple raw data in list
-#' f5_vec <- get_dataset("doi:10.70122/FK2/PPIAXE",
+#' # 4. Retrieve multiple raw data in list
+#' f4_vec <- get_dataset("doi:10.70122/FK2/PPIAXE",
 #'                       server = "demo.dataverse.org")$files$id
-#' f5 <- get_file(f5_vec,
+#' f4 <- get_file(f4_vec,
 #'                server = "demo.dataverse.org")
-#' length(f5)
+#' length(f4)
 #'
-#' # Write binary files.
+#' # Write binary files
+#' # (see `get_dataframe_by_name` to load in environment)
 #' # The appropriate file extension needs to be assigned by the user.
-#' writeBin(f1, "nlsw88.tab")
-#' writeBin(f2, "nlsw88.tab")
-#' writeBin(f5[[1]], "nlsw88.tab")
+#' writeBin(f1, "nlsw88.dta")
+#' writeBin(f2, "nlsw88.dta")
 #'
-#' # NOTE: fix so that get_file (with multiple) files
-#' # (f5) in example can return a tabulated dataset in original
+#' writeBin(f4[[1]], "nlsw88.rds") # originally a rds file
+#' writeBin(f4[[2]], "nlsw88.dta") # originally a dta file
 #'
 #' }
 #'
@@ -84,7 +84,7 @@ get_file <-
            server = Sys.getenv("DATAVERSE_SERVER"),
            vars = NULL,
            key = Sys.getenv("DATAVERSE_KEY"),
-           original = NULL,
+           original = TRUE,
            ...) {
 
     format <- match.arg(format)
@@ -137,7 +137,9 @@ get_file <-
 #' @rdname files
 #'
 #'
-#' @param filename Filename of the dataset, with file extension
+#' @param filename Filename of the dataset, with file extension as shown in Dataverse
+#'  (for example, if nlsw88.dta was the original but is displayed as the ingested
+#'  nlsw88.tab, use the ingested version.)
 #'
 #' @inheritParams get_file
 #'

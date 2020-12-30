@@ -51,7 +51,7 @@ or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")
 \item{fileid}{A numeric ID internally used for \code{get_file_by_id}}
 
 \item{filedoi}{A DOI for a single file (not the entire dataset), of the form
-\code{"10.70122/FK2/PPKHI1/ZYATZZ"} or \code{"doi:10.70122/FK2/PPKHI1/ZYATZZ"}}
+\code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}}
 }
 \description{
 \code{get_dataframe_by_id}, if you know the numeric ID of the dataset, or instead
