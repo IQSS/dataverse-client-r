@@ -3,17 +3,14 @@ language: r
 cache: packages
 warnings_are_errors: true
 os: linux
-dist: bionic
+dist: focal
 
 jobs:
   include:
-    - name: linux-bionic
+    - name: linux-focal
       os: linux
-      dist: bionic
+      dist: focal
       env: R_CODECOV=true
-    - name: linux-xenial
-      os: linux
-      dist: xenial
     - name: osx-current
       os: osx
       before_install:
