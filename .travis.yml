@@ -11,17 +11,17 @@ jobs:
       os: linux
       dist: focal
       env: R_CODECOV=true
-    - name: osx-current
-      os: osx
-      # addons:
-      #   homebrew:
-      #     packages: curl
-      # before_install:
-      #   - brew install curl
-      #   - brew link --force curl
-      latex: false
-      r_build_args: '--no-build-vignettes'
-      r_check_args: '--ignore-vignettes --no-examples'
+    # - name: osx-current
+    #   os: osx
+    #   # addons:
+    #   #   homebrew:
+    #   #     packages: curl
+    #   # before_install:
+    #   #   - brew install curl
+    #   #   - brew link --force curl
+    #   latex: false
+    #   r_build_args: '--no-build-vignettes'
+    #   r_check_args: '--ignore-vignettes --no-examples'
 
 r_github_packages:
   - r-lib/covr
