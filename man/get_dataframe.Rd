@@ -75,12 +75,14 @@ stata_df <- get_dataframe_by_name(
 # To use the original version, or for non-ingested data,
 # please specify `orginal = TRUE` and specify a function in FUN
 
-stata_df <- get_dataframe_by_name(
-  file = "nlsw88.tab",
-  dataset = "doi:10.70122/FK2/PPIAXE",
-  server = "demo.dataverse.org",
-  original = TRUE,
-  FUN = haven::read_dta)
+if (requireNamespace("haven", quietly = T)) {
+  stata_df <- get_dataframe_by_name(
+    file = "nlsw88.tab",
+    dataset = "doi:10.70122/FK2/PPIAXE",
+    server = "demo.dataverse.org",
+    original = TRUE,
+    FUN = haven::read_dta)
+}
 
 rds_df <- get_dataframe_by_name(
   file = "nlsw88_rds-export.rds",
