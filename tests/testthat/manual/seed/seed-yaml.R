@@ -3,8 +3,14 @@ dv        <- get_dataverse("dataverse-client-r")
 contents  <- dataverse_contents(dv)
 ds_1      <- dataset_files(contents[[1]])
 
+get_dataverse(":root") %>%
+  yaml::write_yaml("inst/expected-dataverse-root.yml")
+
+dv %>%
+  yaml::write_yaml("inst/expected-dataverse.yml")
+
 ds_1 %>%
-  rlang::set_names(c("roster", "image")) %>%
+  rlang::set_names(c("roster", "image")) %>% # Manually add friendly names to each file
   yaml::write_yaml("inst/dataset-basketball/expected-metadata.yml")
 
 # retrieve-from-file ------------------------------------------------------

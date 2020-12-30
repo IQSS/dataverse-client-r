@@ -24,7 +24,7 @@ retrieve_file_expected <- function (subdataverse, file_name) {
     stop(
       "The testing file `",
       file_name,
-      "` in the (sub)datavserse `",
+      "` in the (sub)dataverse `",
       subdataverse,
       "` is not found.  Please verify that the manifest is synced with the collection of test files. "
     )
@@ -34,6 +34,15 @@ retrieve_file_expected <- function (subdataverse, file_name) {
 }
 # retrieve_file_expected("rosters", "roster-bulls-1996.csv")
 
+retrieve_info_dataverse <- function (path) {
+  yaml::read_yaml(system.file(path, package = "dataverse"))
+}
+# retrieve_info_dataverse("expected-dataverse.yml")
+
+retrieve_info_dataset <- function (path) {
+  yaml::read_yaml(system.file(path, package = "dataverse"))
+}
+# retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
 
 # compare_data_frame <- function (d_actual, d_expected) {
 #

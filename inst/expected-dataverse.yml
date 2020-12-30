@@ -1,0 +1,12 @@
+id: 396355
+alias: dataverse-client-r
+name: dataverse-client-r
+affiliation: IQSS
+dataverseContacts:
+  displayOrder: 0
+  contactEmail: wibeasley@hotmail.com
+permissionRoot: yes
+description: Dataverse for testing [dataverse-client-r](https://github.com/IQSS/dataverse-client-r)
+dataverseType: RESEARCHERS
+ownerId: 1
+creationDate: '2020-01-02T04:18:06Z'

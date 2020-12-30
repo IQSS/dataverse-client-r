@@ -6,6 +6,7 @@ test_that("download tab from DOI and filename", {
   contents  <- dataverse_contents(dv)
   actual    <- get_dataset(contents[[1]])
   files     <- actual$files
+  expected_dv <- retrieve_info_dataverse("expected-dataverse.yml")
 
   expect_length(actual                      , 16L)
   expect_equal(actual$id                    , 182158L)
