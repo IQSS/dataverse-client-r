@@ -38,15 +38,19 @@ test_that("dataverse for 'dataverse-client-r'", {
           version = "2.0"
         ),
         dataverseHasBeenReleased = "true",
-        datasets = structure(
-          list(
-            title = "Bulls Roster 1996-1997",
-            id = "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/FAN622"
+        datasets = structure(list(
+          title = c(
+            "Basketball - Example Dataset",
+            "National Longitudinal Study of Young Women - Example Dataset"
           ),
-          class = "data.frame",
-          row.names = 1L
-        )
-      ),
+          id = c(
+            "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/HXJVJU",
+            "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/PPIAXE"
+          )
+        ),
+        class = "data.frame",
+        row.names = 1:2
+      )),
       class = "dataverse_dataset_list"
     )
 
