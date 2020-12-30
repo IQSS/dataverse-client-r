@@ -9,9 +9,7 @@ retrieve_manifest <- function ( ) {
     `compare_cells`       = readr::col_logical(),
     `md5`                 = readr::col_character()
   )
-  d <- readr::read_csv(path, col_types = col_types)
-
-  d
+  readr::read_csv(path, col_types = col_types)
 }
 # retrieve_manifest()
 
@@ -30,7 +28,7 @@ retrieve_file_expected <- function (subdataverse, file_name) {
 
   readr::read_file(path)
 }
-# retrieve_file_expected("rosters", "roster-bulls-1996.csv")
+# retrieve_file_expected("dataset-basketball/original", "roster-bulls-1996.csv")
 
 retrieve_info_dataverse <- function (path) {
   yaml::read_yaml(system.file(path, package = "dataverse"))
