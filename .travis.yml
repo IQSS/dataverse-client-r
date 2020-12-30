@@ -13,9 +13,9 @@ jobs:
       env: R_CODECOV=true
     - name: osx-current
       os: osx
-      addons:
-        homebrew:
-          packages: curl
+      # addons:
+      #   homebrew:
+      #     packages: curl
       # before_install:
       #   - brew install curl
       #   - brew link --force curl
