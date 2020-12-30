@@ -120,7 +120,7 @@ get_dataframe_by_doi <- function(filedoi,
   filedoi <- prepend_doi(filedoi)
 
   # get_file can also take doi now
-  get_dataframe_by_id(file = filedoi, FUN = FUN, original = original, ...)
+  get_dataframe_by_id(fileid = filedoi, FUN = FUN, original = original, ...)
 }
 
 #' Write to temp and apply function
