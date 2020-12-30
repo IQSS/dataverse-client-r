@@ -123,7 +123,7 @@ get_dataframe_by_doi <- function(filedoi,
 
 #' Write to temp and apply function
 #'
-#' @importFrom stringr str_extract
+# @importFrom stringr str_extract
 #'
 #' @keywords internal
 get_dataframe_internal <- function(raw, filename, .f) {
