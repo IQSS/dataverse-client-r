@@ -75,7 +75,7 @@ stata_df <- get_dataframe_by_name(
 # To use the original version, or for non-ingested data,
 # please specify `orginal = TRUE` and specify a function in FUN
 
-if (requireNamespace("haven", quietly = T)) {
+if (requireNamespace("haven", quietly = TRUE)) {
   stata_df <- get_dataframe_by_name(
     file = "nlsw88.tab",
     dataset = "doi:10.70122/FK2/PPIAXE",
