@@ -65,28 +65,51 @@ Use the `get_dataframe_*` functions, depending on the input you have. For exampl
 With a file DOI
 
 ```{r get_dataframe_by_doi}
-nlsw <- get_dataframe_by_doi("10.70122/FK2/PPKHI1/ZYATZZ", 
-                             haven::read_dta, 
-                             server = "demo.dataverse.org")
-nlsw
-```
-
-With a name and dataset DOI
-
-```{r get_dataframe_by_name}
-nlsw <- get_dataframe_by_name(file = "nlsw88.tab",
-                             dataset = "10.70122/FK2/PPKHI1", 
-                             haven::read_dta, 
+nlsw <- get_dataframe_by_doi("10.70122/FK2/PPIAXE/MHDB0O", 
                              server = "demo.dataverse.org")
 ```
 
-Note that even though the file prefix is ".tab", we use `read_dta`. This is because this file was originally a dta file that was ingested into an archival format with a ".tab" file extension. The `get_dataframe_` functions do not attempt to download the archival versions by default, but it is possible to turn this option off with \`archival = TRUE\`.
+Alternatively, we can download the same file by specifying the filename and the DOI of the "dataset" (in Dataverse, a collection of files is called a dataset).
 
-Sometimes you may know the underlying file ID. In this case, the fileid is
+```{r get_dataframe_by_name_tsv, message=FALSE}
+nlsw_tsv <- get_dataframe_by_name(file = "nlsw88.tab",
+                                  dataset = "10.70122/FK2/PPIAXE", 
+                                  server = "demo.dataverse.org")
+```
+
+Many file formats are translated into an ingested, or "archival" version, which is application-neutral and easily-readable. `read_dataframe` takes this ingested version as a default by deafaulting `original = FALSE`. This is safer because you may not have the properietary software that was originally used. On the other hand, using the ingested version may lead to loss of information. 
+
+To read the same file but its original version, specify `original = TRUE` and set a `FUN` argument. In this case, we know that `nlsw88.tab` is a Stata `.dta` dataset, so we will use the `haven::read_dta` function.
+
+```{r get_dataframe_by_name_original}
+nlsw_original <- get_dataframe_by_name(file = "nlsw88.tab",
+                                       dataset = "10.70122/FK2/PPIAXE", 
+                                       FUN = haven::read_dta,
+                                       original = TRUE,
+                                       server = "demo.dataverse.org")
+```
+
+Note that even though the file prefix is ".tab", we use `read_dta`. 
+
+
+Note the difference between `nls_tsv` and `nls_original`. `nls_original` preserves the data attributes like value labels, whereas `nls_tsv` has dropped this or left this in file metadata.
+
+```{r}
+class(nlsw_tsv$race)
+class(nlsw_original$race)
+
+head(nlsw_tsv$race)
+head(haven::as_factor(nlsw_original$race))
+```
+
+
+
+You may know the underlying file ID, which is a single numeric number unique to the dataset. In this case, the fileid is `1734017`
 
 ```{r get_dataframe_by_id}
-nlsw <- get_dataframe_by_id(1733999,
-                            haven::read_dta,
+nlsw <- get_dataframe_by_id(fileid = 1734017,
+                            FUN = haven::read_dta,
+                            original = TRUE,
                             server = "demo.dataverse.org")
 ```
 
@@ -96,7 +119,7 @@ In some cases, you may not need to render the raw binary file, or you do not hav
 
 ```{r get_file_by_name}
 nlsw_raw <- get_file_by_name(file = "nlsw88.tab",
-                             dataset = "10.70122/FK2/PPKHI1", 
+                             dataset = "10.70122/FK2/PPIAXE", 
                              server = "demo.dataverse.org")
 class(nlsw_raw)
 ```
@@ -104,7 +127,8 @@ class(nlsw_raw)
 The function `get_file_metadata` can also be used similarly. This will return a metadata format for ingested tabular files in the `ddi` format. The function `get_dataset` will retrieve the list of files in a dataset.
 
 ```{r, get_dataset}
-get_dataset("doi:10.7910/DVN/ARKOTI")
+get_dataset(dataset = "10.70122/FK2/PPIAXE",
+            server = "demo.dataverse.org")
 ```
 
 ### Data Discovery

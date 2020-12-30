@@ -6,11 +6,11 @@
 \alias{get_dataframe_by_doi}
 \title{Get file from dataverse and convert it into a dataframe or tibble}
 \usage{
-get_dataframe_by_name(file, dataset = NULL, FUN = NULL, archival = FALSE, ...)
+get_dataframe_by_name(file, dataset = NULL, FUN = NULL, original = FALSE, ...)
 
-get_dataframe_by_id(fileid, FUN = NULL, archival = FALSE, ...)
+get_dataframe_by_id(fileid, FUN = NULL, original = FALSE, ...)
 
-get_dataframe_by_doi(filedoi, FUN = NULL, archival = FALSE, ...)
+get_dataframe_by_doi(filedoi, FUN = NULL, original = FALSE, ...)
 }
 \arguments{
 \item{file}{to be passed on to get_file}
@@ -18,14 +18,14 @@ get_dataframe_by_doi(filedoi, FUN = NULL, archival = FALSE, ...)
 \item{dataset}{to be passed on to get_file}
 
 \item{FUN}{The function to used for reading in the raw dataset. This user
-must choose the appropriate funuction: for example if the target is a .rds
+must choose the appropriate function: for example if the target is a .rds
 file, then \code{FUN} should be \code{readRDS} or \code{readr::read_rds}.}
 
-\item{archival}{Whether to read from the ingested, archival version of the
-dataset, or whether to read the original. The archival versions are tab-delimited
-\code{.tab} files. If functions to read the original version is available without
-loss of information, then \code{archival = FALSE} is better. If such functions
-are not available or the original format is unknown, use \code{archival = TRUE}.}
+\item{original}{A logical, defaulting to TRUE. Whether to read the ingested,
+archival version of the dataset if one exists. The archival versions are tab-delimited
+\code{.tab} files so if \code{original = FALSE}, \code{FUN} is set to \code{readr::read_tsv}.
+If functions to read the original version is available, then \code{original = TRUE}
+with a specified \code{FUN} is better.}
 
 \item{...}{
   Arguments passed on to \code{\link[=get_file]{get_file}}
@@ -60,55 +60,39 @@ or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")
 \examples{
 library(readr)
 
-gap_df <- get_dataframe_by_name(
-  file = "gapminder-FiveYearData.tab",
-  dataset = "doi:10.70122/FK2/PPKHI1",
-  server = "demo.dataverse.org",
-  FUN = read_csv)
+# load dataset from file name and dataverse DOI
+csv_tab <- get_dataframe_by_name(
+  file = "roster-bulls-1996.tab",
+  dataset = "doi:10.70122/FK2/HXJVJU",
+  server = "demo.dataverse.org")
 
 # or a Stata dta
 stata_df <- get_dataframe_by_name(
   file = "nlsw88.tab",
-  dataset = "doi:10.70122/FK2/PPKHI1",
+  dataset = "doi:10.70122/FK2/PPIAXE",
+  server = "demo.dataverse.org")
+
+# To use the original version, or for non-ingested data,
+# please specify `orginal = TRUE` and specify a function in FUN
+
+stata_df <- get_dataframe_by_name(
+  file = "nlsw88.tab",
+  dataset = "doi:10.70122/FK2/PPIAXE",
   server = "demo.dataverse.org",
+  original = TRUE,
   FUN = haven::read_dta)
 
-# or a Rds file
 rds_df <- get_dataframe_by_name(
- file = "nlsw88_rds-export.rds",
- dataset = "doi:10.70122/FK2/PPKHI1",
- server = "demo.dataverse.org",
- FUN = read_rds)
+  file = "nlsw88_rds-export.rds",
+  dataset = "doi:10.70122/FK2/PPIAXE",
+  server = "demo.dataverse.org",
+  FUN = readr::read_rds)
 
 # equivalently, if you know the DOI
-gap_df <- get_dataframe_by_doi(
- filedoi = "10.70122/FK2/PPKHI1/ZYATZZ",
- server = "demo.dataverse.org",
- FUN = read_csv
+stata_df <- get_dataframe_by_doi(
+  filedoi = "10.70122/FK2/PPIAXE/MHDB0O",
+  server = "demo.dataverse.org",
+  original = TRUE,
+  FUN = haven::read_dta
 )
-
-# or the id
-# you can also customize the FUN (in this case to supress parse msg)
-gap_df <- get_dataframe_by_id(
-  1733998,
-  server = "demo.dataverse.org",
-  FUN = function(x) read_csv(x, col_types = cols()))
-
-# equivalently, using a dataverse object
-gap_ds <- dataset_files("doi:10.70122/FK2/PPKHI1",
-                        server = "demo.dataverse.org")
-
-gap_df <- get_dataframe_by_id(
-  gap_ds[[1]],
-  server = "demo.dataverse.org",
-  FUN = function(x) read_csv(x, col_types = cols()))
-
-# to use the archival version (and read as TSV)
-gap_df <- get_dataframe_by_id(
-  1733998,
-  server = "demo.dataverse.org",
-  archival = TRUE,
-  FUN = function(x) read_tsv(x, col_types = cols()))
-
-
 }

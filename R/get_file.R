@@ -44,25 +44,22 @@
 #' \dontrun{
 #'
 #' # 1. Using filename and dataverse
-#' f1 <- get_file_by_name("gapminder-FiveYearData.tab",
-#'                        dataset = "doi:10.70122/FK2/PPKHI1",
+#' f1 <- get_file_by_name("nlsw88.tab",
+#'                        dataset = "doi:10.70122/FK2/PPIAXE",
 #'                        server = "demo.dataverse.org")
 #'
 #' # 2. Using DOI
-#' f2 <- get_file_by_doi("10.70122/FK2/PPKHI1/ZYATZZ",
+#' f2 <- get_file_by_doi("10.70122/FK2/PPIAXE/MHDB0O",
 #'                       server = "demo.dataverse.org")
 #'
 #' # 3. Two-steps: Find ID from get_dataset
-#' d3 <- get_dataset("doi:10.70122/FK2/PPKHI1", server = "demo.dataverse.org")
+#' d3 <- get_dataset("doi:10.70122/FK2/PPIAXE", server = "demo.dataverse.org")
 #' f3 <- get_file(d3$files$id[1], server = "demo.dataverse.org")
 #'
 #'
-#' # 4. Alternatively, based on "dataverse_file" object
-#' f4_dvf <- dataset_files("doi:10.70122/FK2/PPKHI1", server = "demo.dataverse.org")
-#' f4 <- get_file(f4_dvf[[1]], server = "demo.dataverse.org")
 #'
 #' # 5. Retrieve multiple raw data in list
-#' f5_vec <- get_dataset("doi:10.70122/FK2/PPKHI1",
+#' f5_vec <- get_dataset("doi:10.70122/FK2/PPIAXE",
 #'                       server = "demo.dataverse.org")$files$id
 #' f5 <- get_file(f5_vec,
 #'                server = "demo.dataverse.org")
@@ -70,8 +67,9 @@
 #'
 #' # Write binary files.
 #' # The appropriate file extension needs to be assigned by the user.
-#' writeBin(f1, "gapminder-FiveYearData.tab")
-#' writeBin(f5[[1]], "gapminder-FiveYearData.tab")
+#' writeBin(f1, "nlsw88.tab")
+#' writeBin(f2, "nlsw88.tab")
+#' writeBin(f5[[1]], "nlsw88.tab")
 #'
 #' # NOTE: fix so that get_file (with multiple) files
 #' # (f5) in example can return a tabulated dataset in original
@@ -86,7 +84,7 @@ get_file <-
            server = Sys.getenv("DATAVERSE_SERVER"),
            vars = NULL,
            key = Sys.getenv("DATAVERSE_KEY"),
-           archival = NULL,
+           original = NULL,
            ...) {
 
     format <- match.arg(format)
@@ -121,7 +119,7 @@ get_file <-
         vars = vars,
         key = key,
         server = server,
-        archival = archival,
+        original = original,
         ...
         )
     }
@@ -150,7 +148,7 @@ get_file_by_name <- function(filename,
                              server = Sys.getenv("DATAVERSE_SERVER"),
                              vars = NULL,
                              key = Sys.getenv("DATAVERSE_KEY"),
-                             archival = NULL,
+                             original = TRUE,
                              ...
                              ) {
   format <- match.arg(format)
@@ -167,7 +165,7 @@ get_file_by_name <- function(filename,
                  vars = vars,
                  key = key,
                  server = server,
-                 archival = archival,
+                 original = original,
                  ...)
 
 }

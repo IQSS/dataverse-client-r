@@ -1,7 +1,9 @@
 #' @rdname files
 #'
-#' @param archival If a ingested (.tab) version is available, download
-#'  the ingested archival version or not?
+#' @param original A logical, defaulting to TRUE. If a ingested (.tab) version is
+#' available, download the original version instead of the ingested? If there was
+#' no ingested version, is set to NA. Note in `get_dataframe_*`,
+#' `original` is set to FALSE by default can be changed.
 #' @param fileid A numeric ID internally used for `get_file_by_id`
 #'
 #'
@@ -12,7 +14,7 @@ get_file_by_id <-
            server = Sys.getenv("DATAVERSE_SERVER"),
            format = c("original", "bundle"),
            vars = NULL,
-           archival = NULL,
+           original = TRUE,
            key = Sys.getenv("DATAVERSE_KEY"),
            ...) {
     format <- match.arg(format)
@@ -28,21 +30,11 @@ get_file_by_id <-
 
 
     # ping get_file_metadata to see if file is ingested
-    ping_metadata <- tryCatch(get_file_metadata(fileid, server = server),
-                              error = function(e) e)
-    is_ingested <- !inherits(ping_metadata, "error") # if error, not ingested
+    is_ingested <- is_ingested(fileid, server = server)
 
     # update archival if not specified
-    if (is.null(archival))
-      archival <- FALSE
-
-    # check
-    if (archival & !is_ingested)
-      stop("You requested an archival version, but the file has no metadata so does not appear ingested.")
-
-
-    # downloading files sequentially and add the raw vectors to a list
-    out <- vector("list", length(fileid))
+    if (isFALSE(is_ingested))
+      original <- NA
 
     # create query -----
     query <- list()
@@ -55,8 +47,8 @@ get_file_by_id <-
     if (is_ingested & format != "bundle")
       query$format <- match.arg(format)
 
-    # if the archival version is desired, we need to NOT specify a format
-    if (is_ingested & archival)
+    # if the original is not desired, we need to NOT specify a format
+    if (is_ingested & (isFALSE(original) | is.na(original)))
       query$format <- NULL
 
 
@@ -92,7 +84,7 @@ get_file_by_doi <- function(filedoi,
                             server = Sys.getenv("DATAVERSE_SERVER"),
                             format = c("original", "bundle"),
                             vars = NULL,
-                            archival = NULL,
+                            original = TRUE,
                             key = Sys.getenv("DATAVERSE_KEY"),
                             ...) {
 
@@ -103,7 +95,7 @@ get_file_by_doi <- function(filedoi,
     vars = vars,
     key = key,
     server = server,
-    archival = archival,
+    original = original,
     ...
   )
 

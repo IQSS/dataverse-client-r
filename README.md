@@ -91,48 +91,92 @@ For example, we will read a survey dataset on dataverse,
 With a file DOI
 
 ``` r
-nlsw <- get_dataframe_by_doi("10.70122/FK2/PPKHI1/ZYATZZ", 
-                             haven::read_dta, 
-                             server = "demo.dataverse.org")
-nlsw
-```
-
-    ## # A tibble: 2,246 x 17
-    ##    idcode   age    race married never_married grade collgrad south    smsa c_city industry occupation    union  wage
-    ##     <dbl> <dbl> <dbl+l> <dbl+l>         <dbl> <dbl> <dbl+lb> <dbl> <dbl+l>  <dbl> <dbl+lb>  <dbl+lbl> <dbl+lb> <dbl>
-    ##  1      1    37 2 [bla… 0 [sin…             0    12 0 [not …     0 1 [SMS…      0  5 [Tra…  6 [Opera…  1 [uni… 11.7 
-    ##  2      2    37 2 [bla… 0 [sin…             0    12 0 [not …     0 1 [SMS…      1  4 [Man…  5 [Craft…  1 [uni…  6.40
-    ##  3      3    42 2 [bla… 0 [sin…             1    12 0 [not …     0 1 [SMS…      1  4 [Man…  3 [Sales] NA        5.02
-    ##  4      4    43 1 [whi… 1 [mar…             0    17 1 [coll…     0 1 [SMS…      0 11 [Pro… 13 [Other]  1 [uni…  9.03
-    ##  5      6    42 1 [whi… 1 [mar…             0    12 0 [not …     0 1 [SMS…      0  4 [Man…  6 [Opera…  0 [non…  8.08
-    ##  6      7    39 1 [whi… 1 [mar…             0    12 0 [not …     0 1 [SMS…      0 11 [Pro…  3 [Sales]  0 [non…  4.63
-    ##  7      9    37 1 [whi… 0 [sin…             0    12 0 [not …     0 1 [SMS…      1  5 [Tra…  2 [Manag…  1 [uni… 10.5 
-    ##  8     12    40 1 [whi… 1 [mar…             0    18 1 [coll…     0 1 [SMS…      0 11 [Pro…  2 [Manag…  0 [non… 17.2 
-    ##  9     13    40 1 [whi… 1 [mar…             0    14 0 [not …     0 1 [SMS…      0 11 [Pro…  3 [Sales]  0 [non… 13.1 
-    ## 10     14    40 1 [whi… 1 [mar…             0    15 0 [not …     0 1 [SMS…      0 11 [Pro…  1 [Profe…  0 [non…  7.75
-    ## # … with 2,236 more rows, and 3 more variables: hours <dbl>, ttl_exp <dbl>, tenure <dbl>
-
-With a name and dataset DOI
-
-``` r
-nlsw <- get_dataframe_by_name(file = "nlsw88.tab",
-                             dataset = "10.70122/FK2/PPKHI1", 
-                             haven::read_dta, 
+nlsw <- get_dataframe_by_doi("10.70122/FK2/PPIAXE/MHDB0O", 
                              server = "demo.dataverse.org")
 ```
 
-Note that even though the file prefix is “.tab”, we use `read_dta`. This
-is because this file was originally a dta file that was ingested into an
-archival format with a “.tab” file extension. The `get_dataframe_`
-functions do not attempt to download the archival versions by default,
-but it is possible to turn this option off with \`archival = TRUE\`.
+    ## Warning in get_dataframe_by_id(file = filedoi, FUN = FUN, original = original, : Downloading ingested version of data with read_tsv. To download the original version and remove this warning, set original = TRUE.
 
-Sometimes you may know the underlying file ID. In this case, the fileid
-is
+    ## Parsed with column specification:
+    ## cols(
+    ##   idcode = col_double(),
+    ##   age = col_double(),
+    ##   race = col_double(),
+    ##   married = col_double(),
+    ##   never_married = col_double(),
+    ##   grade = col_double(),
+    ##   collgrad = col_double(),
+    ##   south = col_double(),
+    ##   smsa = col_double(),
+    ##   c_city = col_double(),
+    ##   industry = col_double(),
+    ##   occupation = col_double(),
+    ##   union = col_double(),
+    ##   wage = col_double(),
+    ##   hours = col_double(),
+    ##   ttl_exp = col_double(),
+    ##   tenure = col_double()
+    ## )
+
+Alternatively, we can download the same file by specifying the filename
+and the DOI of the “dataset” (in Dataverse, a collection of files is
+called a dataset).
 
 ``` r
-nlsw <- get_dataframe_by_id(1733999,
-                            haven::read_dta,
+nlsw_tsv <- get_dataframe_by_name(file = "nlsw88.tab",
+                                  dataset = "10.70122/FK2/PPIAXE", 
+                                  server = "demo.dataverse.org")
+```
+
+    ## Warning in get_dataframe_by_id(fileid, FUN, original = original, ...): Downloading ingested version of data with read_tsv. To download the original version and remove this warning, set original = TRUE.
+
+Many file formats are translated into an ingested, or “archival”
+version, which is application-neutral and easily-readable.
+`read_dataframe` takes this ingested version as a default by deafaulting
+`original = FALSE`. This is safer because you may not have the
+properietary software that was originally used. On the other hand, using
+the ingested version may lead to loss of information.
+
+To read the same file but its original version, specify
+`original = TRUE` and set a `FUN` argument. In this case, we know that
+`nlsw88.tab` is a Stata `.dta` dataset, so we will use the
+`haven::read_dta` function.
+
+``` r
+nlsw_original <- get_dataframe_by_name(file = "nlsw88.tab",
+                                       dataset = "10.70122/FK2/PPIAXE", 
+                                       FUN = haven::read_dta,
+                                       original = TRUE,
+                                       server = "demo.dataverse.org")
+```
+
+Note that even though the file prefix is “.tab”, we use `read_dta`.
+
+Note the difference between `nls_tsv` and `nls_original`. `nls_original`
+preserves the data attributes like value labels, whereas `nls_tsv` has
+dropped this or left this in file metadata.
+
+``` r
+class(nlsw_tsv$race)
+class(nlsw_original$race)
+
+head(nlsw_tsv$race)
+head(haven::as_factor(nlsw_original$race))
+```
+
+    ## [1] "numeric"
+    ## [1] "haven_labelled" "vctrs_vctr"     "double"        
+    ## [1] 2 2 2 1 1 1
+    ## [1] black black black white white white
+    ## Levels: white black other
+
+You may know the underlying file ID, which is a single numeric number
+unique to the dataset. In this case, the fileid is `1734017`
+
+``` r
+nlsw <- get_dataframe_by_id(fileid = 1734017,
+                            FUN = haven::read_dta,
+                            original = TRUE,
                             server = "demo.dataverse.org")
 ```
 
@@ -146,7 +190,7 @@ argument
 
 ``` r
 nlsw_raw <- get_file_by_name(file = "nlsw88.tab",
-                             dataset = "10.70122/FK2/PPKHI1", 
+                             dataset = "10.70122/FK2/PPIAXE", 
                              server = "demo.dataverse.org")
 class(nlsw_raw)
 ```
@@ -158,48 +202,18 @@ return a metadata format for ingested tabular files in the `ddi` format.
 The function `get_dataset` will retrieve the list of files in a dataset.
 
 ``` r
-get_dataset("doi:10.7910/DVN/ARKOTI")
+get_dataset(dataset = "10.70122/FK2/PPIAXE",
+            server = "demo.dataverse.org")
 ```
 
-    ## Dataset (193956): 
-    ## Version: 2.0, RELEASED
-    ## Release Date: 2020-04-29T01:52:28Z
+    ## Dataset (182162): 
+    ## Version: 1.1, RELEASED
+    ## Release Date: 2020-12-30T00:00:24Z
     ## License: CC0
     ## 22 Files:
-    ##                           label version      id                  contentType
-    ## 1                  alpl2013.tab       1 2692294    text/tab-separated-values
-    ## 2                   BPchap7.tab       1 2692295    text/tab-separated-values
-    ## 3                   chapter01.R       1 2692202 text/plain; charset=US-ASCII
-    ## 4                   chapter02.R       1 2692206 text/plain; charset=US-ASCII
-    ## 5                   chapter03.R       1 2692210 text/plain; charset=US-ASCII
-    ## 6                   chapter04.R       1 2692204 text/plain; charset=US-ASCII
-    ## 7                   chapter05.R       1 2692205 text/plain; charset=US-ASCII
-    ## 8                   chapter06.R       1 2692212 text/plain; charset=US-ASCII
-    ## 9                   chapter07.R       1 2692209 text/plain; charset=US-ASCII
-    ## 10                  chapter08.R       1 2692208 text/plain; charset=US-ASCII
-    ## 11                  chapter09.R       1 2692211 text/plain; charset=US-ASCII
-    ## 12                  chapter10.R       1 2692203 text/plain; charset=US-ASCII
-    ## 13                  chapter11.R       1 2692207 text/plain; charset=US-ASCII
-    ## 14 comprehensiveJapanEnergy.tab       1 2692296    text/tab-separated-values
-    ## 15         constructionData.tab       1 2692293    text/tab-separated-values
-    ## 16             drugCoverage.csv       1 2692233 text/plain; charset=US-ASCII
-    ## 17                  erratum.pdf       1 3820744              application/pdf
-    ## 18         hanmerKalkanANES.tab       1 2692290    text/tab-separated-values
-    ## 19                 hmnrghts.tab       1 2692298    text/tab-separated-values
-    ## 20                 hmnrghts.txt       1 2692238                   text/plain
-    ## 21                   levant.tab       1 2692289    text/tab-separated-values
-    ## 22                       LL.csv       1 2692228 text/plain; charset=US-ASCII
-    ## 23                 moneyDem.tab       1 2692292    text/tab-separated-values
-    ## 24            owsiakJOP2013.tab       1 2692297    text/tab-separated-values
-    ## 25                PESenergy.csv       1 2692230 text/plain; charset=US-ASCII
-    ## 26                  pts1994.csv       1 2692229 text/plain; charset=US-ASCII
-    ## 27                  pts1995.csv       1 2692231 text/plain; charset=US-ASCII
-    ## 28                 sen113kh.ord       1 2692239 text/plain; charset=US-ASCII
-    ## 29                SinghEJPR.tab       1 2692299    text/tab-separated-values
-    ## 30                 SinghJTP.tab       1 2692288    text/tab-separated-values
-    ## 31                 stdSingh.tab       1 2692291    text/tab-separated-values
-    ## 32                       UN.csv       1 2692232 text/plain; charset=US-ASCII
-    ## 33                  war1800.tab       1 2692300    text/tab-separated-values
+    ##                   label version      id               contentType
+    ## 1 nlsw88_rds-export.rds       1 1734016  application/octet-stream
+    ## 2            nlsw88.tab       3 1734017 text/tab-separated-values
 
 ### Data Discovery
 
