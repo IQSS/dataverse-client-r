@@ -81,6 +81,30 @@ get_fileid.dataverse_file <- function(x, ...) {
     x[["dataFile"]][["id"]]
 }
 
+
+#' Identify if file is an ingested file
+#'
+#' @param fileid A numeric fileid or file-specific DOI
+#'
+#' @examples
+#' # https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/X5MUPQ/T0KKUZ
+#' # nlsw88.tab
+#' is_ingested(fileid = "doi:10.70122/FK2/X5MUPQ/T0KKUZ",
+#'             server = "demo.dataverse.org")
+#'
+#' # nlsw88_rds-export.rds
+#' is_ingested(fileid = "doi:10.70122/FK2/PPIAXE/SUCFNI",
+#'             server = "demo.dataverse.org")
+#'
+is_ingested <- function(fileid, server = Sys.getenv("DATAVERSE_SERVER")) {
+    ping_metadata <- tryCatch(get_file_metadata(fileid, server = server),
+                              error = function(e) e)
+    is_ingested <- !inherits(ping_metadata, "error") # if error, not ingested
+    is_ingested
+}
+
+
+
 # other functions
 prepend_doi <- function(dataset) {
     if (grepl("^hdl", dataset)) {
@@ -143,3 +167,4 @@ parse_dataset <- function(out) {
     out$files <- cbind(out$files, file_df)
     structure(out, class = "dataverse_dataset")
 }
+
