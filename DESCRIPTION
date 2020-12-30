@@ -22,7 +22,7 @@ Authors@R: c(
   ),
   person(
     "Shiro", "Kuriwaki",
-    role = c("aut"), 
+    role = c("aut"),
     email = "shirokuriwaki@gmail.com",
     comment = c(ORCID = "0000-0002-5687-2647")
   ),

@@ -11,14 +11,14 @@ test_that("dataverse root", {
 test_that("dataverse for 'dataverse-client-r'", {
   expected  <- structure(
     list(
-      id = 396356L,
-      identifier = "FK2/FAN622",
-      persistentUrl = "https://doi.org/10.70122/FK2/FAN622",
+      id = 1734004L,
+      identifier = "FK2/HXJVJU",
+      persistentUrl = "https://doi.org/10.70122/FK2/HXJVJU",
       protocol = "doi",
       authority = "10.70122",
       publisher = "Demo Dataverse",
-      publicationDate = "2020-04-22",
-      storageIdentifier = "file://10.70122/FK2/FAN622",
+      publicationDate = "2020-12-29",
+      storageIdentifier = "file://10.70122/FK2/HXJVJU",
       type = "dataset"
     ),
     class = "dataverse_dataset"
