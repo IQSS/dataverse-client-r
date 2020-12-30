@@ -1,5 +1,5 @@
 # See https://demo.dataverse.org/dataverse/dataverse-client-r
-# https://doi.org/10.70122/FK2/FAN622
+# https://doi.org/10.70122/FK2/HXJVJU
 
 test_that("download tab from DOI and filename", {
   dv        <- get_dataverse("dataverse-client-r")
