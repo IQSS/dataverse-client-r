@@ -21,6 +21,7 @@
 #'  character with the file-specific DOI; or, if used without the prefix, a
 #'  filename accompanied by a dataset DOI in the `dataset` argument, or an object of
 #'  class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
+#' @param dataset @kuriwaki, can you please add a description for this parameter?
 #' @param format A character string specifying a file format for download.
 #'  by default, this is \dQuote{original} (the original file format). If `NULL`,
 #'  no query is added, so ingested files are returned in their ingested TSV form.

@@ -4,10 +4,24 @@
 \alias{is_ingested}
 \title{Identify if file is an ingested file}
 \usage{
-is_ingested(fileid, server = Sys.getenv("DATAVERSE_SERVER"))
+is_ingested(
+  fileid,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER")
+)
 }
 \arguments{
 \item{fileid}{A numeric fileid or file-specific DOI}
+
+\item{key}{A character string specifying a Dataverse server API key. If one
+is not specified, functions calling authenticated API endpoints will fail.
+Keys can be specified atomically or globally using
+\code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
+
+\item{server}{A character string specifying a Dataverse server. There are
+multiple Dataverse installations, but the defaults is to use the Harvard
+Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
+or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 }
 \description{
 Identify if file is an ingested file

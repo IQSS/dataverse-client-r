@@ -20,6 +20,8 @@ character with the file-specific DOI; or, if used without the prefix, a
 filename accompanied by a dataset DOI in the \code{dataset} argument, or an object of
 class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
 
+\item{dataset}{@kuriwaki, can you please add a description for this parameter?}
+
 \item{format}{Defaults to \dQuote{ddi} for metadata files}
 
 \item{key}{A character string specifying a Dataverse server API key. If one

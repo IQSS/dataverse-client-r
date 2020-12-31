@@ -85,6 +85,7 @@ get_fileid.dataverse_file <- function(x, ...) {
 #' Identify if file is an ingested file
 #'
 #' @param fileid A numeric fileid or file-specific DOI
+#' @template envvars
 #'
 #' @examples
 #' # https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/X5MUPQ/T0KKUZ
@@ -97,9 +98,18 @@ get_fileid.dataverse_file <- function(x, ...) {
 #'             server = "demo.dataverse.org")
 #'
 #' @export
-is_ingested <- function(fileid, server = Sys.getenv("DATAVERSE_SERVER")) {
-    ping_metadata <- tryCatch(get_file_metadata(fileid, server = server),
-                              error = function(e) e)
+is_ingested <-
+  function(
+    fileid,
+    key     = Sys.getenv("DATAVERSE_KEY"),
+    server  = Sys.getenv("DATAVERSE_SERVER")
+  ) {
+    ping_metadata <- tryCatch(
+      {
+        get_file_metadata(fileid, key = key, server = server)
+      },
+      error = function(e) e
+    )
     !inherits(ping_metadata, "error") # if error, not ingested
 }
 
