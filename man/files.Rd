@@ -58,6 +58,10 @@ character with the file-specific DOI; or, if used without the prefix, a
 filename accompanied by a dataset DOI in the \code{dataset} argument, or an object of
 class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
 
+\item{dataset}{A character specifying a persistent identification ID for a dataset,
+for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
+\dQuote{dataverse_dataset} obtained by \code{dataverse_contents()}.}
+
 \item{format}{A character string specifying a file format for download.
 by default, this is \dQuote{original} (the original file format). If \code{NULL},
 no query is added, so ingested files are returned in their ingested TSV form.

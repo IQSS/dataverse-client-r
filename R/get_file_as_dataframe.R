@@ -5,8 +5,8 @@
 #'
 #' @rdname get_dataframe
 #'
-#' @param file to be passed on to get_file
-#' @param dataset to be passed on to get_file
+#' @param filename The name of the file of interest, with file extension, for example
+#'  `"roster-bulls-1996.tab"`.
 #' @param FUN The function to used for reading in the raw dataset. This user
 #'   must choose the appropriate function: for example if the target is a .rds
 #'   file, then `FUN` should be `readRDS` or `readr::read_rds`.
@@ -24,13 +24,13 @@
 #'
 #' # load dataset from file name and dataverse DOI
 #' csv_tab <- get_dataframe_by_name(
-#'   file = "roster-bulls-1996.tab",
+#'   filename = "roster-bulls-1996.tab",
 #'   dataset = "doi:10.70122/FK2/HXJVJU",
 #'   server = "demo.dataverse.org")
 #'
 #' # or a Stata dta
 #' stata_df <- get_dataframe_by_name(
-#'   file = "nlsw88.tab",
+#'   filename = "nlsw88.tab",
 #'   dataset = "doi:10.70122/FK2/PPIAXE",
 #'   server = "demo.dataverse.org")
 #'
@@ -39,7 +39,7 @@
 #'
 #' if (requireNamespace("haven", quietly = TRUE)) {
 #'   stata_df <- get_dataframe_by_name(
-#'     file = "nlsw88.tab",
+#'     filename = "nlsw88.tab",
 #'     dataset = "doi:10.70122/FK2/PPIAXE",
 #'     server = "demo.dataverse.org",
 #'     original = TRUE,
@@ -47,7 +47,7 @@
 #' }
 #'
 #' rds_df <- get_dataframe_by_name(
-#'   file = "nlsw88_rds-export.rds",
+#'   filename = "nlsw88_rds-export.rds",
 #'   dataset = "doi:10.70122/FK2/PPIAXE",
 #'   server = "demo.dataverse.org",
 #'   FUN = readr::read_rds)
@@ -60,7 +60,7 @@
 #'   FUN = haven::read_dta
 #' )
 #' @export
-get_dataframe_by_name <- function(file,
+get_dataframe_by_name <- function(filename,
                                   dataset = NULL,
                                   FUN = NULL,
                                   original = FALSE,
@@ -68,7 +68,7 @@ get_dataframe_by_name <- function(file,
 
   # retrieve ID
   fileid <- get_fileid.character(x = dataset,
-                                 file = file,
+                                 file = filename,
                                  ...)
 
   get_dataframe_by_id(fileid, FUN, original = original, ...)

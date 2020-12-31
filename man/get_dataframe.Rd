@@ -19,8 +19,12 @@ get_dataframe_by_id(fileid, FUN = NULL, original = FALSE, ...)
 get_dataframe_by_doi(filedoi, FUN = NULL, original = FALSE, ...)
 }
 \arguments{
-\item{filename}{The name of the file of interest, with file extension. e.g.
+\item{filename}{The name of the file of interest, with file extension, for example
 \code{"roster-bulls-1996.tab"}.}
+
+\item{dataset}{A character specifying a persistent identification ID for a dataset,
+for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
+\dQuote{dataverse_dataset} obtained by \code{dataverse_contents()}.}
 
 \item{FUN}{The function to used for reading in the raw dataset. This user
 must choose the appropriate function: for example if the target is a .rds
