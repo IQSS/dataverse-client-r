@@ -32,7 +32,9 @@ dataset_files(
 )
 }
 \arguments{
-\item{dataset}{An integer specifying a dataset identification number or an object of class \dQuote{dataverse_dataset}. The identification number is the dataset's persistent identification number (not the integer specifying a specific version of the dataset, such as returned by \code{\link{dataset_versions}}).}
+\item{dataset}{A character specifying a persistent identification ID for a dataset,
+for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
+\dQuote{dataverse_dataset} obtained by \code{dataverse_contents()}.}
 
 \item{version}{A character string specifying a version of the dataset. This can be one of \dQuote{:draft} (the current draft), \dQuote{:latest} (the latest draft, if it exists, or the latest published version), \dQuote{:latest-published} (the latest published version, ignoring any draft), or \dQuote{x.y} (where \samp{x} is a major version and \samp{y} is a minor version; the \samp{.y} can be omitted to obtain a major version). In lieu of this, a dataset's version-specific identification number can be used for the \code{dataset} argument.}
 

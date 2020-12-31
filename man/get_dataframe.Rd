@@ -6,16 +6,21 @@
 \alias{get_dataframe_by_doi}
 \title{Get file from dataverse and convert it into a dataframe or tibble}
 \usage{
-get_dataframe_by_name(file, dataset = NULL, FUN = NULL, original = FALSE, ...)
+get_dataframe_by_name(
+  filename,
+  dataset = NULL,
+  FUN = NULL,
+  original = FALSE,
+  ...
+)
 
 get_dataframe_by_id(fileid, FUN = NULL, original = FALSE, ...)
 
 get_dataframe_by_doi(filedoi, FUN = NULL, original = FALSE, ...)
 }
 \arguments{
-\item{file}{to be passed on to get_file}
-
-\item{dataset}{to be passed on to get_file}
+\item{filename}{The name of the file of interest, with file extension. e.g.
+\code{"roster-bulls-1996.tab"}.}
 
 \item{FUN}{The function to used for reading in the raw dataset. This user
 must choose the appropriate function: for example if the target is a .rds
@@ -30,6 +35,11 @@ with a specified \code{FUN} is better.}
 \item{...}{
   Arguments passed on to \code{\link[=get_file]{get_file}}
   \describe{
+    \item{\code{file}}{An integer specifying a file identifier; or a vector of integers
+specifying file identifiers; or, if used with the prefix \code{"doi:"}, a
+character with the file-specific DOI; or, if used without the prefix, a
+filename accompanied by a dataset DOI in the \code{dataset} argument, or an object of
+class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
     \item{\code{format}}{A character string specifying a file format for download.
 by default, this is \dQuote{original} (the original file format). If \code{NULL},
 no query is added, so ingested files are returned in their ingested TSV form.
@@ -62,13 +72,13 @@ library(readr)
 
 # load dataset from file name and dataverse DOI
 csv_tab <- get_dataframe_by_name(
-  file = "roster-bulls-1996.tab",
+  filename = "roster-bulls-1996.tab",
   dataset = "doi:10.70122/FK2/HXJVJU",
   server = "demo.dataverse.org")
 
 # or a Stata dta
 stata_df <- get_dataframe_by_name(
-  file = "nlsw88.tab",
+  filename = "nlsw88.tab",
   dataset = "doi:10.70122/FK2/PPIAXE",
   server = "demo.dataverse.org")
 
@@ -77,7 +87,7 @@ stata_df <- get_dataframe_by_name(
 
 if (requireNamespace("haven", quietly = TRUE)) {
   stata_df <- get_dataframe_by_name(
-    file = "nlsw88.tab",
+    filename = "nlsw88.tab",
     dataset = "doi:10.70122/FK2/PPIAXE",
     server = "demo.dataverse.org",
     original = TRUE,
@@ -85,7 +95,7 @@ if (requireNamespace("haven", quietly = TRUE)) {
 }
 
 rds_df <- get_dataframe_by_name(
-  file = "nlsw88_rds-export.rds",
+  filename = "nlsw88_rds-export.rds",
   dataset = "doi:10.70122/FK2/PPIAXE",
   server = "demo.dataverse.org",
   FUN = readr::read_rds)

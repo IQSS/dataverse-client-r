@@ -120,18 +120,17 @@ This function provides access to data files from a Dataverse entry.
 \dontrun{
 
 # 1. Using filename and dataverse
-f1 <- get_file_by_name("nlsw88.tab",
+f1 <- get_file_by_name(filename = "nlsw88.tab",
                        dataset = "10.70122/FK2/PPIAXE",
                        server = "demo.dataverse.org")
 
 # 2. Using file DOI
-f2 <- get_file_by_doi("10.70122/FK2/PPIAXE/MHDB0O",
+f2 <- get_file_by_doi(filedoi = "10.70122/FK2/PPIAXE/MHDB0O",
                       server = "demo.dataverse.org")
 
 # 3. Two-steps: Find ID from get_dataset
 d3 <- get_dataset("doi:10.70122/FK2/PPIAXE", server = "demo.dataverse.org")
 f3 <- get_file(d3$files$id[1], server = "demo.dataverse.org")
-
 
 
 # 4. Retrieve multiple raw data in list
