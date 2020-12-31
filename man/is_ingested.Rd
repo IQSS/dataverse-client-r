@@ -26,14 +26,3 @@ or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")
 \description{
 Identify if file is an ingested file
 }
-\examples{
-# https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/X5MUPQ/T0KKUZ
-# nlsw88.tab
-is_ingested(fileid = "doi:10.70122/FK2/X5MUPQ/T0KKUZ",
-            server = "demo.dataverse.org")
-
-# nlsw88_rds-export.rds
-is_ingested(fileid = "doi:10.70122/FK2/PPIAXE/SUCFNI",
-            server = "demo.dataverse.org")
-
-}
