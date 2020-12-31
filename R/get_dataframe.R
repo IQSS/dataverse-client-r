@@ -46,7 +46,7 @@
 #'
 #'
 #' # To use the original file version, or for non-ingested data,
-#' # please specify `orginal = TRUE` and specify a function in FUN.
+#' # please specify `original = TRUE` and specify a function in FUN.
 #'
 #' # A data.frame is still returned, but the
 #' if (requireNamespace("readr", quietly = TRUE)) {
