@@ -96,11 +96,11 @@ get_fileid.dataverse_file <- function(x, ...) {
 #' is_ingested(fileid = "doi:10.70122/FK2/PPIAXE/SUCFNI",
 #'             server = "demo.dataverse.org")
 #'
+#' @export
 is_ingested <- function(fileid, server = Sys.getenv("DATAVERSE_SERVER")) {
     ping_metadata <- tryCatch(get_file_metadata(fileid, server = server),
                               error = function(e) e)
-    is_ingested <- !inherits(ping_metadata, "error") # if error, not ingested
-    is_ingested
+    !inherits(ping_metadata, "error") # if error, not ingested
 }
 
 
