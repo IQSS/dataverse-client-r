@@ -93,7 +93,7 @@ nlsw <- get_dataframe_by_doi("10.70122/FK2/PPIAXE/MHDB0O",
                              server = "demo.dataverse.org")
 ```
 
-    ## Warning in get_dataframe_by_id(file = filedoi, FUN = FUN, original = original, : Downloading ingested version of data with read_tsv. To download the original version and remove this warning, set original = TRUE.
+    ## Warning in get_dataframe_by_id(fileid = filedoi, FUN = FUN, original = original, : Downloading ingested version of data with read_tsv. To download the original version and remove this warning, set original = TRUE.
 
     ## Parsed with column specification:
     ## cols(
@@ -126,7 +126,7 @@ and the DOI of the “dataset” (in Dataverse, a collection of files is
 called a dataset).
 
 ``` r
-nlsw_tsv <- get_dataframe_by_name(file = "nlsw88.tab",
+nlsw_tsv <- get_dataframe_by_name(filename = "nlsw88.tab",
                                   dataset = "10.70122/FK2/PPIAXE", 
                                   server = "demo.dataverse.org")
 ```
@@ -148,7 +148,7 @@ Instead, to read the same file but its original version, specify
 `haven::read_dta` function.
 
 ``` r
-nlsw_original <- get_dataframe_by_name(file = "nlsw88.tab",
+nlsw_original <- get_dataframe_by_name(filename = "nlsw88.tab",
                                        dataset = "10.70122/FK2/PPIAXE", 
                                        FUN = haven::read_dta,
                                        original = TRUE,
@@ -186,7 +186,7 @@ more primitive `get_file_*` commands. The arguments are equivalent,
 except we no longer need a `FUN` argument
 
 ``` r
-nlsw_raw <- get_file_by_name(file = "nlsw88.tab",
+nlsw_raw <- get_file_by_name(filename = "nlsw88.tab",
                              dataset = "10.70122/FK2/PPIAXE", 
                              server = "demo.dataverse.org")
 class(nlsw_raw)

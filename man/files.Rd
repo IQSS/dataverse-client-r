@@ -58,7 +58,9 @@ character with the file-specific DOI; or, if used without the prefix, a
 filename accompanied by a dataset DOI in the \code{dataset} argument, or an object of
 class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
 
-\item{dataset}{@kuriwaki, can you please add a description for this parameter?}
+\item{dataset}{A character specifying a persistent identification ID for a dataset,
+for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
+\dQuote{dataverse_dataset} obtained by \code{dataverse_contents()}.}
 
 \item{format}{A character string specifying a file format for download.
 by default, this is \dQuote{original} (the original file format). If \code{NULL},
@@ -122,18 +124,17 @@ This function provides access to data files from a Dataverse entry.
 \dontrun{
 
 # 1. Using filename and dataverse
-f1 <- get_file_by_name("nlsw88.tab",
+f1 <- get_file_by_name(filename = "nlsw88.tab",
                        dataset = "10.70122/FK2/PPIAXE",
                        server = "demo.dataverse.org")
 
 # 2. Using file DOI
-f2 <- get_file_by_doi("10.70122/FK2/PPIAXE/MHDB0O",
+f2 <- get_file_by_doi(filedoi = "10.70122/FK2/PPIAXE/MHDB0O",
                       server = "demo.dataverse.org")
 
 # 3. Two-steps: Find ID from get_dataset
 d3 <- get_dataset("doi:10.70122/FK2/PPIAXE", server = "demo.dataverse.org")
 f3 <- get_file(d3$files$id[1], server = "demo.dataverse.org")
-
 
 
 # 4. Retrieve multiple raw data in list

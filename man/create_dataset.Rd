@@ -40,7 +40,9 @@ or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")
 \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
 \code{\link[httr]{DELETE}}.}
 
-\item{dataset}{An integer specifying a dataset identification number or an object of class \dQuote{dataverse_dataset}. The identification number is the dataset's persistent identification number (not the integer specifying a specific version of the dataset, such as returned by \code{\link{dataset_versions}}).}
+\item{dataset}{A character specifying a persistent identification ID for a dataset,
+for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
+\dQuote{dataverse_dataset} obtained by \code{dataverse_contents()}.}
 }
 \value{
 An object of class \dQuote{dataverse_dataset}.

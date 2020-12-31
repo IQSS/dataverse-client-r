@@ -20,7 +20,9 @@ character with the file-specific DOI; or, if used without the prefix, a
 filename accompanied by a dataset DOI in the \code{dataset} argument, or an object of
 class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
 
-\item{dataset}{@kuriwaki, can you please add a description for this parameter?}
+\item{dataset}{A character specifying a persistent identification ID for a dataset,
+for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
+\dQuote{dataverse_dataset} obtained by \code{dataverse_contents()}.}
 
 \item{format}{Defaults to \dQuote{ddi} for metadata files}
 
