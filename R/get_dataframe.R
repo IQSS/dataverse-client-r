@@ -103,7 +103,7 @@ get_dataframe_by_id <- function(fileid,
   }
 
   if (is.null(FUN) & isTRUE(ingested) & isFALSE(original)) {
-    warning("Downloading ingested version of data with read_tsv. To download the original version and remove this warning, set original = TRUE.\n")
+    message("Downloading ingested version of data with read_tsv. To download the original version and remove this message, set original = TRUE.\n")
     FUN <- read_tsv
   }
 
