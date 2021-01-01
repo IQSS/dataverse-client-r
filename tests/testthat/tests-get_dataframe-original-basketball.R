@@ -1,7 +1,7 @@
 # See https://demo.dataverse.org/dataverse/dataverse-client-r
 # https://doi.org/10.70122/FK2/HXJVJU
 
-test_that("roster-original-by-name", {
+test_that("roster-by-name", {
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- expected_ds$roster$raw_value
 
@@ -19,7 +19,7 @@ test_that("roster-original-by-name", {
   expect_equal(actual, expected_file)
 })
 
-test_that("roster-original-by-doi", {
+test_that("roster-by-doi", {
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- expected_ds$roster$raw_value
 
@@ -36,7 +36,7 @@ test_that("roster-original-by-doi", {
   expect_equal(actual, expected_file)
 })
 
-test_that("roster-original-by-id", {
+test_that("roster-by-id", {
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- expected_ds$roster$raw_value
 
@@ -53,7 +53,7 @@ test_that("roster-original-by-id", {
   expect_equal(actual, expected_file)
 })
 
-test_that("image-original-by-name", {
+test_that("image-by-name", {
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- expected_ds$image$raw_value
 
@@ -71,7 +71,7 @@ test_that("image-original-by-name", {
   expect_equal(actual, expected_file)
 })
 
-test_that("image-original-by-doi", {
+test_that("image-by-doi", {
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- expected_ds$image$raw_value
 
@@ -88,7 +88,7 @@ test_that("image-original-by-doi", {
   expect_equal(actual, expected_file)
 })
 
-test_that("image-original-by-id", {
+test_that("image-by-id", {
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- expected_ds$image$raw_value
 
