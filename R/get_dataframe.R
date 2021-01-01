@@ -140,11 +140,15 @@ get_dataframe_by_doi <- function(filedoi,
 #'
 #' @keywords internal
 get_dataframe_internal <- function(raw, filename, .f) {
-  tmp <- tempfile(filename)
-  writeBin(raw, tmp)
-
-  do.call(.f, list(tmp))
-
-  # TODO: unlink/delete tmp file in a try/catch/finally block.
+  tryCatch(
+    {
+      tmp <- tempfile(filename)
+      writeBin(raw, tmp)
+      do.call(.f, list(tmp))
+    },
+    finally = {
+      if (file.exists(tmp)) unlink(tmp)
+    }
+  )
 }
 
