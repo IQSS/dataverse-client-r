@@ -10,6 +10,17 @@ pkgdown::clean_site()
 pkgdown::build_site()
 system("R CMD Rd2pdf --no-preview --force --output=./documentation-peek.pdf ." )
 
+checks_to_exclude <- c(
+  "covr",
+  "lintr_line_length_linter"
+)
+gp <-
+  goodpractice::all_checks() %>%
+  purrr::discard(~(. %in% checks_to_exclude)) %>%
+  goodpractice::gp(checks = .)
+goodpractice::results(gp)
+gp
+
 devtools::run_examples(); #dev.off() #This overwrites the NAMESPACE file too
 # devtools::run_examples(, "redcap_read.Rd")
 test_results_checked <- devtools::test()

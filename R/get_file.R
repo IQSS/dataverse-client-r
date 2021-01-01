@@ -112,7 +112,7 @@ get_file <-
     # Main function. Call get_file_by_id
     out <- vector("list", length(fileid))
 
-    for (i in 1:length(fileid)) {
+    for (i in seq_len(fileid)) {
       out[[i]] <- get_file_by_id(
         fileid = fileid[i],
         dataset = dataset,
