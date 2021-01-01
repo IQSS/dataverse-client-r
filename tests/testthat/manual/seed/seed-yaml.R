@@ -49,7 +49,17 @@ ds_1 %>%
   yaml::write_yaml("inst/dataset-basketball/expected-metadata.yml")
 
 
-# retrieve-from-file ------------------------------------------------------
+# ---- save-expected-dataframe -------------------------------------------------
+ds_1$roster %>%
+  {
+    get_dataframe_by_name(
+      filename = .$label,
+      dataset  = dirname(.$dataFile$persistentId)
+    )
+  } %>%
+  readr::write_rds("inst/dataset-basketball/dataframe-from-tab.rds")
+
+# ---- practice-retrieving-from-file ------------------------------------------------------
 y <- yaml::read_yaml(system.file("dataset-basketball/expected-metadata.yml", package = "dataverse"))
 
 y$roster
