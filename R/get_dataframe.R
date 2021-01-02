@@ -7,14 +7,14 @@
 #'
 #' @param filename The name of the file of interest, with file extension, for example
 #' `"roster-bulls-1996.tab"`.
-#' @param FUN The function to used for reading in the raw dataset. This user
+#' @param .f The function to used for reading in the raw dataset. This user
 #' must choose the appropriate function: for example if the target is a .rds
-#' file, then `FUN` should be `readRDS` or `readr::read_rds`.
+#' file, then `.f` should be `readRDS` or `readr::read_`rds`.
 #' @param original A logical, defaulting to TRUE. Whether to read the ingested,
 #' archival version of the dataset if one exists. The archival versions are tab-delimited
-#' `.tab` files so if `original = FALSE`, `FUN` is set to `readr::read_tsv`.
+#' `.tab` files so if `original = FALSE`, `.f` is set to `readr::read_tsv`.
 #' If functions to read the original version is available, then `original = TRUE`
-#' with a specified `FUN` is better.
+#' with a specified `.f` is better.
 #'
 #' @inheritDotParams get_file
 #'
@@ -45,7 +45,7 @@
 #'
 #'
 #' # To use the original file version, or for non-ingested data,
-#' # please specify `original = TRUE` and specify a function in FUN.
+#' # please specify `original = TRUE` and specify a function in .f.
 #'
 #' # A data.frame is still returned, but the
 #' if (requireNamespace("readr", quietly = TRUE)) {
@@ -55,7 +55,7 @@
 #'       dataset    = "doi:10.70122/FK2/PPIAXE",
 #'       server     = "demo.dataverse.org",
 #'       original   = TRUE,
-#'       FUN        = readr::read_rds
+#'       .f         = readr::read_rds
 #'    )
 #' }
 #'
@@ -66,28 +66,28 @@
 #'       dataset    = "doi:10.70122/FK2/PPIAXE",
 #'       server     = "demo.dataverse.org",
 #'       original   = TRUE,
-#'       FUN        = haven::read_dta
+#'       .f         = haven::read_dta
 #'    )
 #' }
 #' @export
 get_dataframe_by_name <- function (
   filename,
   dataset       = NULL,
-  FUN           = NULL,
+  .f            = NULL,
   original      = FALSE,
   ...
 ) {
   # retrieve ID
   fileid <- get_fileid.character(x = dataset, file = filename, ...)
 
-  get_dataframe_by_id(fileid, FUN, original = original, ...)
+  get_dataframe_by_id(fileid, .f, original = original, ...)
 }
 
 #' @rdname get_dataframe
 #' @export
 get_dataframe_by_id <- function(
   fileid,
-  FUN           = NULL,
+  .f            = NULL,
   original      = FALSE,
   ...
 ) {
@@ -99,21 +99,21 @@ get_dataframe_by_id <- function(
     original <- NA
   }
 
-  if (is.null(FUN) & isTRUE(ingested) & isFALSE(original)) {
+  if (is.null(.f) & isTRUE(ingested) & isFALSE(original)) {
     message("Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.\n")
-    FUN <- readr::read_tsv
+    .f <- readr::read_tsv
   }
 
-  if (is.null(FUN) & (isFALSE(ingested) | isTRUE(original))) {
-    stop("read-in function was left NULL, but the target file is not ingested or you asked for the original version. Please supply a FUN argument.\n")
+  if (is.null(.f) & (isFALSE(ingested) | isTRUE(original))) {
+    stop("read-in function was left NULL, but the target file is not ingested or you asked for the original version. Please supply a .f argument.\n")
   }
 
   # READ raw data
   raw <- get_file(file = fileid, original = original, ...)
 
   # save to temp and then read it in with supplied function
-  if (!is.null(FUN)) {
-    get_dataframe_internal(raw, filename = "foo", .f = FUN)
+  if (!is.null(.f)) {
+    get_dataframe_internal(raw, filename = "foo", .f = .f)
   }
 }
 
@@ -122,14 +122,14 @@ get_dataframe_by_id <- function(
 #' @export
 get_dataframe_by_doi <- function (
   filedoi,
-  FUN           = NULL,
+  .f            = NULL,
   original      = FALSE,
   ...
 ) {
   filedoi <- prepend_doi(filedoi)
 
   # get_file can also take doi now
-  get_dataframe_by_id(fileid = filedoi, FUN = FUN, original = original, ...)
+  get_dataframe_by_id(fileid = filedoi, .f = .f, original = original, ...)
 }
 
 #' Write to temp and apply function

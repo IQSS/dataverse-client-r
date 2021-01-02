@@ -9,14 +9,14 @@
 get_dataframe_by_name(
   filename,
   dataset = NULL,
-  FUN = NULL,
+  .f = NULL,
   original = FALSE,
   ...
 )
 
-get_dataframe_by_id(fileid, FUN = NULL, original = FALSE, ...)
+get_dataframe_by_id(fileid, .f = NULL, original = FALSE, ...)
 
-get_dataframe_by_doi(filedoi, FUN = NULL, original = FALSE, ...)
+get_dataframe_by_doi(filedoi, .f = NULL, original = FALSE, ...)
 }
 \arguments{
 \item{filename}{The name of the file of interest, with file extension, for example
@@ -26,15 +26,15 @@ get_dataframe_by_doi(filedoi, FUN = NULL, original = FALSE, ...)
 for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
 \dQuote{dataverse_dataset} obtained by \code{dataverse_contents()}.}
 
-\item{FUN}{The function to used for reading in the raw dataset. This user
+\item{.f}{The function to used for reading in the raw dataset. This user
 must choose the appropriate function: for example if the target is a .rds
-file, then \code{FUN} should be \code{readRDS} or \code{readr::read_rds}.}
+file, then \code{.f} should be \code{readRDS} or \code{readr::read_}rds`.}
 
 \item{original}{A logical, defaulting to TRUE. Whether to read the ingested,
 archival version of the dataset if one exists. The archival versions are tab-delimited
-\code{.tab} files so if \code{original = FALSE}, \code{FUN} is set to \code{readr::read_tsv}.
+\code{.tab} files so if \code{original = FALSE}, \code{.f} is set to \code{readr::read_tsv}.
 If functions to read the original version is available, then \code{original = TRUE}
-with a specified \code{FUN} is better.}
+with a specified \code{.f} is better.}
 
 \item{...}{
   Arguments passed on to \code{\link[=get_file]{get_file}}
@@ -98,7 +98,7 @@ df_from_stata_ingested <-
 
 
 # To use the original file version, or for non-ingested data,
-# please specify `original = TRUE` and specify a function in FUN.
+# please specify `original = TRUE` and specify a function in .f.
 
 # A data.frame is still returned, but the
 if (requireNamespace("readr", quietly = TRUE)) {
@@ -108,7 +108,7 @@ if (requireNamespace("readr", quietly = TRUE)) {
       dataset    = "doi:10.70122/FK2/PPIAXE",
       server     = "demo.dataverse.org",
       original   = TRUE,
-      FUN        = readr::read_rds
+      .f         = readr::read_rds
    )
 }
 
@@ -119,7 +119,7 @@ if (requireNamespace("haven", quietly = TRUE)) {
       dataset    = "doi:10.70122/FK2/PPIAXE",
       server     = "demo.dataverse.org",
       original   = TRUE,
-      FUN        = haven::read_dta
+      .f         = haven::read_dta
    )
 }
 }

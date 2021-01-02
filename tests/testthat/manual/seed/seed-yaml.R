@@ -20,7 +20,7 @@ file_csv <-
     filename = "roster-bulls-1996.tab",
     dataset  = "doi:10.70122/FK2/HXJVJU",
     original = TRUE,
-    FUN      = readr::read_file
+    .f       = readr::read_file
   )
 
 ds_1$roster$raw_value <-
@@ -29,7 +29,7 @@ ds_1$roster$raw_value <-
     filename = ds_1$roster$label,
     dataset  = dirname(ds_1$roster$dataFile$persistentId),
     original = TRUE,
-    FUN      = readr::read_file
+    .f       = readr::read_file
   )
 
 ds_1$image$raw_value <-
@@ -39,7 +39,7 @@ ds_1$image$raw_value <-
       filename = ds_1$image$label,
       dataset  = dirname(ds_1$image$dataFile$persistentId),
       original = TRUE,
-      FUN      = readr::read_file
+      .f       = readr::read_file
     ),
     "\n"
   )

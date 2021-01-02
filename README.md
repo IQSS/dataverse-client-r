@@ -9,13 +9,14 @@ Status](https://travis-ci.org/IQSS/dataverse-client-r.png?branch=master)](https:
 [![codecov.io](https://codecov.io/github/IQSS/dataverse-client-r/coverage.svg?branch=master)](https://codecov.io/github/IQSS/dataverse-client-r?branch=master)
 
 [![Dataverse Project
-logo](http://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png "Dataverse Project")](http://dataverse.org)
+logo](http://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png
+"Dataverse Project")](http://dataverse.org)
 
-The **dataverse** package provides access to [Dataverse
-4](http://dataverse.org/) APIs, enabling data search, retrieval, and
-deposit, thus allowing R users to integrate public data sharing into the
-reproducible research workflow. **dataverse** is the next-generation
-iteration of [the **dvn**
+The **dataverse** package provides access to
+[Dataverse 4](http://dataverse.org/) APIs, enabling data search,
+retrieval, and deposit, thus allowing R users to integrate public data
+sharing into the reproducible research workflow. **dataverse** is the
+next-generation iteration of [the **dvn**
 package](https://cran.r-project.org/package=dvn), which works with
 Dataverse 3 (“Dataverse Network”) applications. **dataverse** includes
 numerous improvements for data search, retrieval, and deposit, including
@@ -89,13 +90,14 @@ For example, we will read a survey dataset on Dataverse,
 With a file DOI, we can use the `get_dataframe_by_doi` function:
 
 ``` r
-nlsw <- get_dataframe_by_doi("10.70122/FK2/PPIAXE/MHDB0O", 
+nlsw <- get_dataframe_by_doi("10.70122/FK2/PPIAXE/MHDB0O",
                              server = "demo.dataverse.org")
 ```
 
-    ## Warning in get_dataframe_by_id(fileid = filedoi, FUN = FUN, original = original, : Downloading ingested version of data with read_tsv. To download the original version and remove this warning, set original = TRUE.
+    ## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.
 
-    ## Parsed with column specification:
+    ## 
+    ## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────
     ## cols(
     ##   idcode = col_double(),
     ##   age = col_double(),
@@ -127,11 +129,9 @@ called a dataset).
 
 ``` r
 nlsw_tsv <- get_dataframe_by_name(filename = "nlsw88.tab",
-                                  dataset = "10.70122/FK2/PPIAXE", 
+                                  dataset = "10.70122/FK2/PPIAXE",
                                   server = "demo.dataverse.org")
 ```
-
-    ## Warning in get_dataframe_by_id(fileid, FUN, original = original, ...): Downloading ingested version of data with read_tsv. To download the original version and remove this warning, set original = TRUE.
 
 Now, Dataverse often translates rectangular data into an ingested, or
 “archival” version, which is application-neutral and easily-readable.
@@ -143,14 +143,14 @@ that was originally used. On the other hand, the data may have lost
 information in the process of the ingestation.
 
 Instead, to read the same file but its original version, specify
-`original = TRUE` and set a `FUN` argument. In this case, we know that
+`original = TRUE` and set an `.f` argument. In this case, we know that
 `nlsw88.tab` is a Stata `.dta` dataset, so we will use the
 `haven::read_dta` function.
 
 ``` r
 nlsw_original <- get_dataframe_by_name(filename = "nlsw88.tab",
-                                       dataset = "10.70122/FK2/PPIAXE", 
-                                       FUN = haven::read_dta,
+                                       dataset = "10.70122/FK2/PPIAXE",
+                                       .f = haven::read_dta,
                                        original = TRUE,
                                        server = "demo.dataverse.org")
 ```
@@ -158,7 +158,7 @@ nlsw_original <- get_dataframe_by_name(filename = "nlsw88.tab",
 Note that even though the file prefix is “.tab”, we use `read_dta`.
 
 Of course, when the dataset is not ingested (such as a Rds file), users
-would always need to specify a `FUN` argument for the specific file.
+would always need to specify an `.f` argument for the specific file.
 
 Note the difference between `nls_tsv` and `nls_original`. `nls_original`
 preserves the data attributes like value labels, whereas `nls_tsv` has
@@ -183,11 +183,11 @@ In some cases, you may not want to read in the data in your environment,
 perhaps because that is not possible (e.g. for a `.docx` file), and you
 want to simply write these files your local disk. To do this, use the
 more primitive `get_file_*` commands. The arguments are equivalent,
-except we no longer need a `FUN` argument
+except we no longer need an `.f` argument
 
 ``` r
 nlsw_raw <- get_file_by_name(filename = "nlsw88.tab",
-                             dataset = "10.70122/FK2/PPIAXE", 
+                             dataset = "10.70122/FK2/PPIAXE",
                              server = "demo.dataverse.org")
 class(nlsw_raw)
 ```

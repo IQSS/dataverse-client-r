@@ -65,7 +65,7 @@ Use the `get_dataframe_*` functions, depending on the input you have. For exampl
 With a file DOI, we can use the `get_dataframe_by_doi` function:
 
 ```{r get_dataframe_by_doi}
-nlsw <- get_dataframe_by_doi("10.70122/FK2/PPIAXE/MHDB0O", 
+nlsw <- get_dataframe_by_doi("10.70122/FK2/PPIAXE/MHDB0O",
                              server = "demo.dataverse.org")
 ```
 which by default reads in the ingested file (not the original dta) by the [`readr::read_tsv`](https://readr.tidyverse.org/reference/read_delim.html) function.
@@ -74,27 +74,27 @@ Alternatively, we can download the same file by specifying the filename and the 
 
 ```{r get_dataframe_by_name_tsv, message=FALSE}
 nlsw_tsv <- get_dataframe_by_name(filename = "nlsw88.tab",
-                                  dataset = "10.70122/FK2/PPIAXE", 
+                                  dataset = "10.70122/FK2/PPIAXE",
                                   server = "demo.dataverse.org")
 ```
 
-Now, Dataverse often translates rectangular data into an ingested, or "archival" version, which is application-neutral and easily-readable. `read_dataframe_*` defaults to taking this ingested version rather than using the original, through the argument `original = FALSE`. 
+Now, Dataverse often translates rectangular data into an ingested, or "archival" version, which is application-neutral and easily-readable. `read_dataframe_*` defaults to taking this ingested version rather than using the original, through the argument `original = FALSE`.
 
-This default is safe because you may not have the proprietary software that was originally used. On the other hand, the data may have lost information in the process of the ingestation. 
+This default is safe because you may not have the proprietary software that was originally used. On the other hand, the data may have lost information in the process of the ingestation.
 
-Instead, to read the same file but its original version, specify `original = TRUE` and set a `FUN` argument. In this case, we know that `nlsw88.tab` is a Stata `.dta` dataset, so we will use the `haven::read_dta` function.
+Instead, to read the same file but its original version, specify `original = TRUE` and set an `.f` argument. In this case, we know that `nlsw88.tab` is a Stata `.dta` dataset, so we will use the `haven::read_dta` function.
 
 ```{r get_dataframe_by_name_original}
 nlsw_original <- get_dataframe_by_name(filename = "nlsw88.tab",
-                                       dataset = "10.70122/FK2/PPIAXE", 
-                                       FUN = haven::read_dta,
+                                       dataset = "10.70122/FK2/PPIAXE",
+                                       .f = haven::read_dta,
                                        original = TRUE,
                                        server = "demo.dataverse.org")
 ```
 
-Note that even though the file prefix is ".tab", we use `read_dta`. 
+Note that even though the file prefix is ".tab", we use `read_dta`.
 
-Of course, when the dataset is not ingested (such as a Rds file), users would always need to specify a `FUN` argument for the specific file.
+Of course, when the dataset is not ingested (such as a Rds file), users would always need to specify an `.f` argument for the specific file.
 
 
 Note the difference between `nls_tsv` and `nls_original`. `nls_original` preserves the data attributes like value labels, whereas `nls_tsv` has dropped this or left this in file metadata.
@@ -112,11 +112,11 @@ attr(nlsw_original$race, "labels") # original dta has value labels
 
 #### Reading a dataset as a binary file.
 
-In some cases, you may not want to read in the data in your environment, perhaps because that is not possible (e.g. for a `.docx` file), and you want to simply write these files your local disk. To do this, use the more primitive `get_file_*` commands. The arguments are equivalent, except we no longer need a `FUN` argument
+In some cases, you may not want to read in the data in your environment, perhaps because that is not possible (e.g. for a `.docx` file), and you want to simply write these files your local disk. To do this, use the more primitive `get_file_*` commands. The arguments are equivalent, except we no longer need an `.f` argument
 
 ```{r get_file_by_name}
 nlsw_raw <- get_file_by_name(filename = "nlsw88.tab",
-                             dataset = "10.70122/FK2/PPIAXE", 
+                             dataset = "10.70122/FK2/PPIAXE",
                              server = "demo.dataverse.org")
 class(nlsw_raw)
 ```
