@@ -82,9 +82,9 @@ get_file <-
   function(file,
            dataset = NULL,
            format = c("original", "bundle"),
-           server = Sys.getenv("DATAVERSE_SERVER"),
            vars = NULL,
            key = Sys.getenv("DATAVERSE_KEY"),
+           server = Sys.getenv("DATAVERSE_SERVER"),
            original = TRUE,
            ...) {
 
@@ -146,9 +146,9 @@ get_file <-
 get_file_by_name <- function(filename,
                              dataset,
                              format = c("original", "bundle"),
-                             server = Sys.getenv("DATAVERSE_SERVER"),
                              vars = NULL,
                              key = Sys.getenv("DATAVERSE_KEY"),
+                             server = Sys.getenv("DATAVERSE_SERVER"),
                              original = TRUE,
                              ...
                              ) {

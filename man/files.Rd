@@ -11,9 +11,9 @@ get_file(
   file,
   dataset = NULL,
   format = c("original", "bundle"),
-  server = Sys.getenv("DATAVERSE_SERVER"),
   vars = NULL,
   key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
   original = TRUE,
   ...
 )
@@ -22,9 +22,9 @@ get_file_by_name(
   filename,
   dataset,
   format = c("original", "bundle"),
-  server = Sys.getenv("DATAVERSE_SERVER"),
   vars = NULL,
   key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
   original = TRUE,
   ...
 )
@@ -32,22 +32,22 @@ get_file_by_name(
 get_file_by_id(
   fileid,
   dataset = NULL,
-  server = Sys.getenv("DATAVERSE_SERVER"),
   format = c("original", "bundle"),
   vars = NULL,
   original = TRUE,
   key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
   ...
 )
 
 get_file_by_doi(
   filedoi,
   dataset = NULL,
-  server = Sys.getenv("DATAVERSE_SERVER"),
   format = c("original", "bundle"),
   vars = NULL,
   original = TRUE,
   key = Sys.getenv("DATAVERSE_KEY"),
+  server = Sys.getenv("DATAVERSE_SERVER"),
   ...
 )
 }
@@ -69,11 +69,6 @@ For tabular datasets, the option \dQuote{bundle} downloads the bundle
 of the original and archival versions, as well as the documentation.
 See \url{https://guides.dataverse.org/en/latest/api/dataaccess.html} for details.}
 
-\item{server}{A character string specifying a Dataverse server. There are
-multiple Dataverse installations, but the defaults is to use the Harvard
-Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
-or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
-
 \item{vars}{A character vector specifying one or more variable names, used to
 extract a subset of the data.}
 
@@ -81,6 +76,11 @@ extract a subset of the data.}
 is not specified, functions calling authenticated API endpoints will fail.
 Keys can be specified atomically or globally using
 \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
+
+\item{server}{A character string specifying a Dataverse server. There are
+multiple Dataverse installations, but the defaults is to use the Harvard
+Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
+or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 
 \item{original}{A logical, defaulting to TRUE. If a ingested (.tab) version is
 available, download the original version instead of the ingested? If there was
