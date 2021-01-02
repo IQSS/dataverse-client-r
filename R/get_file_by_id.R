@@ -10,11 +10,11 @@
 get_file_by_id <-
   function(fileid,
            dataset = NULL,
-           server = Sys.getenv("DATAVERSE_SERVER"),
            format = c("original", "bundle"),
            vars = NULL,
            original = TRUE,
            key = Sys.getenv("DATAVERSE_KEY"),
+           server = Sys.getenv("DATAVERSE_SERVER"),
            ...) {
     format <- match.arg(format)
 
@@ -83,11 +83,11 @@ get_file_by_id <-
 #' @export
 get_file_by_doi <- function(filedoi,
                             dataset = NULL,
-                            server = Sys.getenv("DATAVERSE_SERVER"),
                             format = c("original", "bundle"),
                             vars = NULL,
                             original = TRUE,
                             key = Sys.getenv("DATAVERSE_KEY"),
+                            server = Sys.getenv("DATAVERSE_SERVER"),
                             ...) {
 
   get_file_by_id(
