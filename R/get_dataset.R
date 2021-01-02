@@ -66,7 +66,7 @@ get_dataset <- function(
 
 #' @rdname get_dataset
 #' @param block A character string specifying a metadata block to retrieve. By default this is \dQuote{citation}. Other values may be available, depending on the dataset, such as \dQuote{geospatial} or \dQuote{socialscience}.
-#' @importFrom utils str
+#'
 #' @export
 dataset_metadata <- function(
   dataset,

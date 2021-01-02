@@ -18,8 +18,6 @@
 #'
 #' @inheritDotParams get_file
 #'
-#' @importFrom readr read_tsv
-#'
 #' @examples
 #'
 #' # Retrieve data.frame from dataverse DOI and file name
@@ -86,7 +84,6 @@ get_dataframe_by_name <- function (
 }
 
 #' @rdname get_dataframe
-#' @importFrom readr read_tsv
 #' @export
 get_dataframe_by_id <- function(
   fileid,
@@ -103,8 +100,8 @@ get_dataframe_by_id <- function(
   }
 
   if (is.null(FUN) & isTRUE(ingested) & isFALSE(original)) {
-    message("Downloading ingested version of data with read_tsv. To download the original version and remove this message, set original = TRUE.\n")
-    FUN <- read_tsv
+    message("Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.\n")
+    FUN <- readr::read_tsv
   }
 
   if (is.null(FUN) & (isFALSE(ingested) | isTRUE(original))) {
