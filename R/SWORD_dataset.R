@@ -212,7 +212,6 @@ dataset_atom <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 }
 
 #' @rdname dataset_atom
-#' @import xml2
 #' @export
 dataset_statement <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     if (inherits(dataset, "dataset_atom")) {

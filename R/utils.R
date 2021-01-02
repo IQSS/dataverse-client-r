@@ -133,7 +133,6 @@ prepend_doi <- function(dataset) {
     dataset
 }
 
-#' @import httr
 api_url <- function(server = Sys.getenv("DATAVERSE_SERVER"), prefix = "api/") {
     if (is.null(server) || server == "") {
         stop("'server' is missing with no default set in DATAVERSE_SERVER environment variable.")

@@ -6,7 +6,6 @@
 #' @return A character vector containing a DDI
 #'  metadata file.
 #'
-#' @import xml2
 #' @export
 get_file_metadata <-
   function(file,
