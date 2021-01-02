@@ -82,7 +82,7 @@ dataset read in with the appropriate R function.
 
 #### Reading data as R objects
 
-Use the `get_dataframe_*` functions, depending on the input you have.
+Use the `get_dataframe_*()` functions, depending on the input you have.
 For example, we will read a survey dataset on Dataverse,
 [nlsw88.dta](https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/PPKHI1/ZYATZZ)
 (`doi:10.70122/FK2/PPKHI1/ZYATZZ`), originally in Stata dta form.
@@ -90,8 +90,11 @@ For example, we will read a survey dataset on Dataverse,
 With a file DOI, we can use the `get_dataframe_by_doi` function:
 
 ``` r
-nlsw <- get_dataframe_by_doi("10.70122/FK2/PPIAXE/MHDB0O",
-                             server = "demo.dataverse.org")
+nlsw <- 
+  get_dataframe_by_doi(
+    filedoi     = "10.70122/FK2/PPIAXE/MHDB0O",
+    server      = "demo.dataverse.org"
+  )
 ```
 
     ## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.
@@ -128,15 +131,18 @@ and the DOI of the “dataset” (in Dataverse, a collection of files is
 called a dataset).
 
 ``` r
-nlsw_tsv <- get_dataframe_by_name(filename = "nlsw88.tab",
-                                  dataset = "10.70122/FK2/PPIAXE",
-                                  server = "demo.dataverse.org")
+nlsw_tsv <- 
+  get_dataframe_by_name(
+    filename  = "nlsw88.tab",
+    dataset   = "10.70122/FK2/PPIAXE",
+    server    = "demo.dataverse.org"
+  )
 ```
 
 Now, Dataverse often translates rectangular data into an ingested, or
 “archival” version, which is application-neutral and easily-readable.
-`read_dataframe_*` defaults to taking this ingested version rather than
-using the original, through the argument `original = FALSE`.
+`read_dataframe_*()` defaults to taking this ingested version rather
+than using the original, through the argument `original = FALSE`.
 
 This default is safe because you may not have the proprietary software
 that was originally used. On the other hand, the data may have lost
@@ -148,11 +154,14 @@ Instead, to read the same file but its original version, specify
 `haven::read_dta` function.
 
 ``` r
-nlsw_original <- get_dataframe_by_name(filename = "nlsw88.tab",
-                                       dataset = "10.70122/FK2/PPIAXE",
-                                       .f = haven::read_dta,
-                                       original = TRUE,
-                                       server = "demo.dataverse.org")
+nlsw_original <- 
+  get_dataframe_by_name(
+    filename    = "nlsw88.tab",
+    dataset     = "10.70122/FK2/PPIAXE",
+    .f          = haven::read_dta,
+    original    = TRUE,
+    server      = "demo.dataverse.org"
+  )
 ```
 
 Note that even though the file prefix is “.tab”, we use `read_dta`.
@@ -186,9 +195,12 @@ more primitive `get_file_*` commands. The arguments are equivalent,
 except we no longer need an `.f` argument
 
 ``` r
-nlsw_raw <- get_file_by_name(filename = "nlsw88.tab",
-                             dataset = "10.70122/FK2/PPIAXE",
-                             server = "demo.dataverse.org")
+nlsw_raw <- 
+  get_file_by_name(
+    filename    = "nlsw88.tab",
+    dataset     = "10.70122/FK2/PPIAXE",
+    server      = "demo.dataverse.org"
+  )
 class(nlsw_raw)
 ```
 
@@ -196,13 +208,16 @@ class(nlsw_raw)
 
 #### Reading file metadata
 
-The function `get_file_metadata` can also be used similarly. This will
+The function `get_file_metadata()` can also be used similarly. This will
 return a metadata format for ingested tabular files in the `ddi` format.
-The function `get_dataset` will retrieve the list of files in a dataset.
+The function `get_dataset()` will retrieve the list of files in a
+dataset.
 
 ``` r
-get_dataset(dataset = "10.70122/FK2/PPIAXE",
-            server = "demo.dataverse.org")
+get_dataset(
+  dataset = "10.70122/FK2/PPIAXE",
+  server  = "demo.dataverse.org"
+)
 ```
 
     ## Dataset (182162): 
@@ -253,9 +268,12 @@ it. This looks something like the following:
 d <- service_document()
 
 # create a list of metadata
-metadat <- list(title = "My Study",
-                creator = "Doe, John",
-                description = "An example study")
+metadat <- 
+  list(
+    title       = "My Study",
+    creator     = "Doe, John",
+    description = "An example study"
+  )
 
 # create the dataset
 ds <- initiate_sword_dataset("mydataverse", body = metadat)
