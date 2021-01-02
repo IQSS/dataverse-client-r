@@ -6,7 +6,6 @@
 #' `original` is set to FALSE by default. Either can be changed.
 #' @param fileid A numeric ID internally used for `get_file_by_id`
 #'
-#'
 #' @export
 get_file_by_id <-
   function(fileid,
@@ -32,7 +31,6 @@ get_file_by_id <-
         stop("A 'non-persistent' fileid must be a whole number.  It was `", fileid, "`.")
     }
 
-
     # ping get_file_metadata to see if file is ingested
     is_ingested <- is_ingested(fileid, server = server)
 
@@ -55,16 +53,16 @@ get_file_by_id <-
     if (is_ingested & (isFALSE(original) || is.na(original) || is.null(original)))
       query$format <- NULL
 
-
     # part of URL depending on DOI, bundle, or file
-    if (format == "bundle")
-      u_part <- "access/datafile/bundle/"
-
-    if (format == "original")
-      u_part <- "access/datafile/"
-
-    if (use_persistent_id)
+    if (use_persistent_id) {
       u_part <- "access/datafile/:persistentId/?persistentId="
+    } else if (format == "bundle") {
+      u_part <- "access/datafile/bundle/"
+    } else if (format == "original") {
+      u_part <- "access/datafile/"
+    } else {
+      stop("The `format` value should be 'bundle' or 'original', or a doi needs to be passed to `fileid`.")
+    }
 
     # If not bundle, request single file in non-bundle format ----
     u <- paste0(api_url(server), u_part, fileid)
