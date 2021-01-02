@@ -3,39 +3,41 @@
 #' @title Download File
 #'
 #' @description Download Dataverse File(s). `get_file` is a general wrapper,
-#'  and can take either dataverse objects, file IDs, or a filename and dataverse.
-#'  `get_file_by_name` is a shorthand for running `get_file` by
-#'  specifying a file name (`filename`) and dataset (`dataset`).
-#'  `get_file_by_doi` obtains a file by its file DOI, bypassing the
-#'  `dataset` argument.
-#'  Internally, all functions download each file by `get_file_by_id`. `get_file_*`
-#'  functions return a raw binary file, which cannot be readily analyzed in R.
-#'  To use the objects as dataframes, see the `get_dataset_*` functions at \link{get_dataset}
+#' and can take either dataverse objects, file IDs, or a filename and dataverse.
+#' `get_file_by_name` is a shorthand for running `get_file` by
+#' specifying a file name (`filename`) and dataset (`dataset`).
+#' `get_file_by_doi` obtains a file by its file DOI, bypassing the
+#' `dataset` argument.
+#'
+#' Internally, all functions download each file by `get_file_by_id`. `get_file_*`
+#' functions return a raw binary file, which cannot be readily analyzed in R.
+#' To use the objects as dataframes, see the `get_dataset_*` functions at \link{get_dataset}
 #'
 #' @details This function provides access to data files from a Dataverse entry.
+#'
 #' @param file An integer specifying a file identifier; or a vector of integers
-#'  specifying file identifiers; or, if used with the prefix \code{"doi:"}, a
-#'  character with the file-specific DOI; or, if used without the prefix, a
-#'  filename accompanied by a dataset DOI in the `dataset` argument, or an object of
-#'  class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
+#' specifying file identifiers; or, if used with the prefix \code{"doi:"}, a
+#' character with the file-specific DOI; or, if used without the prefix, a
+#' filename accompanied by a dataset DOI in the `dataset` argument, or an object of
+#' class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
 #' @param dataset @kuriwaki, can you please add a description for this parameter?
 #' @param format A character string specifying a file format for download.
-#'  by default, this is \dQuote{original} (the original file format). If `NULL`,
-#'  no query is added, so ingested files are returned in their ingested TSV form.
-#'  For tabular datasets, the option \dQuote{bundle} downloads the bundle
-#'  of the original and archival versions, as well as the documentation.
-#'  See <https://guides.dataverse.org/en/latest/api/dataaccess.html> for details.
+#' by default, this is \dQuote{original} (the original file format). If `NULL`,
+#' no query is added, so ingested files are returned in their ingested TSV form.
+#' For tabular datasets, the option \dQuote{bundle} downloads the bundle
+#' of the original and archival versions, as well as the documentation.
+#' See <https://guides.dataverse.org/en/latest/api/dataaccess.html> for details.
 #' @param vars A character vector specifying one or more variable names, used to
-#'  extract a subset of the data.
+#' extract a subset of the data.
 #'
 #' @template envvars
 #' @template dots
 #' @template ds
 #'
 #' @return \code{get_file} returns a raw vector (or list of raw vectors,
-#'   if \code{length(file) > 1}), which can be saved locally with the `writeBin`
-#'   function.  To load datasets into the R environment dataframe, see
-#'   \link{get_dataframe_by_name}.
+#' if \code{length(file) > 1}), which can be saved locally with the `writeBin`
+#' function.  To load datasets into the R environment dataframe, see
+#' \link{get_dataframe_by_name}.
 #'
 #' @seealso To load the objects as datasets \link{get_dataframe_by_name}.
 #'
@@ -138,11 +140,11 @@ get_file <- function(
 #' @rdname files
 #'
 #' @param filename Filename of the dataset, with file extension as shown in Dataverse
-#'  (for example, if nlsw88.dta was the original but is displayed as the ingested
-#'  nlsw88.tab, use the ingested version.)
+#' (for example, if nlsw88.dta was the original but is displayed as the ingested
+#' nlsw88.tab, use the ingested version.)
 #'
 #' @export
-get_file_by_name <- function(
+get_file_by_name <- function (
   filename,
   dataset,
   format        = c("original", "bundle"),

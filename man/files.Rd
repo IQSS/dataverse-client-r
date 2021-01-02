@@ -113,6 +113,7 @@ and can take either dataverse objects, file IDs, or a filename and dataverse.
 specifying a file name (\code{filename}) and dataset (\code{dataset}).
 \code{get_file_by_doi} obtains a file by its file DOI, bypassing the
 \code{dataset} argument.
+
 Internally, all functions download each file by \code{get_file_by_id}. \verb{get_file_*}
 functions return a raw binary file, which cannot be readily analyzed in R.
 To use the objects as dataframes, see the \verb{get_dataset_*} functions at \link{get_dataset}

@@ -6,15 +6,16 @@
 #' @rdname get_dataframe
 #'
 #' @param filename The name of the file of interest, with file extension, for example
-#'  `"roster-bulls-1996.tab"`.
+#' `"roster-bulls-1996.tab"`.
 #' @param FUN The function to used for reading in the raw dataset. This user
-#'   must choose the appropriate function: for example if the target is a .rds
-#'   file, then `FUN` should be `readRDS` or `readr::read_rds`.
+#' must choose the appropriate function: for example if the target is a .rds
+#' file, then `FUN` should be `readRDS` or `readr::read_rds`.
 #' @param original A logical, defaulting to TRUE. Whether to read the ingested,
 #' archival version of the dataset if one exists. The archival versions are tab-delimited
-#'  `.tab` files so if `original = FALSE`, `FUN` is set to `readr::read_tsv`.
-#'  If functions to read the original version is available, then `original = TRUE`
-#'  with a specified `FUN` is better.
+#' `.tab` files so if `original = FALSE`, `FUN` is set to `readr::read_tsv`.
+#' If functions to read the original version is available, then `original = TRUE`
+#' with a specified `FUN` is better.
+#'
 #' @inheritDotParams get_file
 #'
 #' @importFrom readr read_tsv
@@ -71,29 +72,28 @@
 #'    )
 #' }
 #' @export
-get_dataframe_by_name <- function(filename,
-                                  dataset = NULL,
-                                  FUN = NULL,
-                                  original = FALSE,
-                                  ...) {
-
+get_dataframe_by_name <- function (
+  filename,
+  dataset       = NULL,
+  FUN           = NULL,
+  original      = FALSE,
+  ...
+) {
   # retrieve ID
-  fileid <- get_fileid.character(x = dataset,
-                                 file = filename,
-                                 ...)
+  fileid <- get_fileid.character(x = dataset, file = filename, ...)
 
   get_dataframe_by_id(fileid, FUN, original = original, ...)
-
 }
-
 
 #' @rdname get_dataframe
 #' @importFrom readr read_tsv
 #' @export
-get_dataframe_by_id <- function(fileid,
-                                FUN = NULL,
-                                original = FALSE,
-                                ...) {
+get_dataframe_by_id <- function(
+  fileid,
+  FUN           = NULL,
+  original      = FALSE,
+  ...
+) {
 
   # if not ingested, then whether to take the original is not relevant.
   ingested <- is_ingested(fileid, ...)
@@ -120,14 +120,15 @@ get_dataframe_by_id <- function(fileid,
   }
 }
 
-
 #' @rdname get_dataframe
 #' @inheritParams get_file_by_doi
 #' @export
-get_dataframe_by_doi <- function(filedoi,
-                                 FUN = NULL,
-                                 original = FALSE,
-                                 ...) {
+get_dataframe_by_doi <- function (
+  filedoi,
+  FUN           = NULL,
+  original      = FALSE,
+  ...
+) {
   filedoi <- prepend_doi(filedoi)
 
   # get_file can also take doi now
@@ -136,10 +137,8 @@ get_dataframe_by_doi <- function(filedoi,
 
 #' Write to temp and apply function
 #'
-# @importFrom stringr str_extract
-#'
 #' @keywords internal
-get_dataframe_internal <- function(raw, filename, .f) {
+get_dataframe_internal <- function (raw, filename, .f) {
   tryCatch(
     {
       tmp <- tempfile(filename)
@@ -151,4 +150,3 @@ get_dataframe_internal <- function(raw, filename, .f) {
     }
   )
 }
-

@@ -82,7 +82,6 @@ get_file_by_id <- function(
     httr::content(r, as = "raw")
   }
 
-
 #' @rdname files
 #' @param filedoi A DOI for a single file (not the entire dataset), of the form
 #'  `"10.70122/FK2/PPIAXE/MHDB0O"` or `"doi:10.70122/FK2/PPIAXE/MHDB0O"`
@@ -98,7 +97,6 @@ get_file_by_doi <- function(
   server          = Sys.getenv("DATAVERSE_SERVER"),
   ...
 ) {
-
   get_file_by_id(
     fileid      = prepend_doi(filedoi),
     dataset     = dataset,
@@ -109,5 +107,4 @@ get_file_by_doi <- function(
     original    = original,
     ...
   )
-
 }
