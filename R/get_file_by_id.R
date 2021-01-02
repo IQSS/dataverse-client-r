@@ -7,15 +7,16 @@
 #' @param fileid A numeric ID internally used for `get_file_by_id`
 #'
 #' @export
-get_file_by_id <-
-  function(fileid,
-           dataset = NULL,
-           format = c("original", "bundle"),
-           vars = NULL,
-           original = TRUE,
-           key = Sys.getenv("DATAVERSE_KEY"),
-           server = Sys.getenv("DATAVERSE_SERVER"),
-           ...) {
+get_file_by_id <- function(
+  fileid,
+  dataset         = NULL,
+  format          = c("original", "bundle"),
+  vars            = NULL,
+  original        = TRUE,
+  key             = Sys.getenv("DATAVERSE_KEY"),
+  server          = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+) {
     format <- match.arg(format)
 
     if (length(fileid) != 1L)
@@ -66,10 +67,7 @@ get_file_by_id <-
 
     # If not bundle, request single file in non-bundle format ----
     u <- paste0(api_url(server), u_part, fileid)
-    r <- httr::GET(u,
-                   httr::add_headers("X-Dataverse-key" = key),
-                   query = query,
-                   ...)
+    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
 
     httr::stop_for_status(r)
     httr::content(r, as = "raw")
@@ -81,23 +79,25 @@ get_file_by_id <-
 #'  `"10.70122/FK2/PPIAXE/MHDB0O"` or `"doi:10.70122/FK2/PPIAXE/MHDB0O"`
 #'
 #' @export
-get_file_by_doi <- function(filedoi,
-                            dataset = NULL,
-                            format = c("original", "bundle"),
-                            vars = NULL,
-                            original = TRUE,
-                            key = Sys.getenv("DATAVERSE_KEY"),
-                            server = Sys.getenv("DATAVERSE_SERVER"),
-                            ...) {
+get_file_by_doi <- function(
+  filedoi,
+  dataset         = NULL,
+  format          = c("original", "bundle"),
+  vars            = NULL,
+  original        = TRUE,
+  key             = Sys.getenv("DATAVERSE_KEY"),
+  server          = Sys.getenv("DATAVERSE_SERVER"),
+  ...
+) {
 
   get_file_by_id(
-    fileid = prepend_doi(filedoi),
-    dataset = dataset,
-    format = format,
-    vars = vars,
-    key = key,
-    server = server,
-    original = original,
+    fileid      = prepend_doi(filedoi),
+    dataset     = dataset,
+    format      = format,
+    vars        = vars,
+    key         = key,
+    server      = server,
+    original    = original,
     ...
   )
 

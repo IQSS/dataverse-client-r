@@ -1,6 +1,5 @@
 #' @rdname files
 #'
-#'
 #' @title Download File
 #'
 #' @description Download Dataverse File(s). `get_file` is a general wrapper,
@@ -12,8 +11,6 @@
 #'  Internally, all functions download each file by `get_file_by_id`. `get_file_*`
 #'  functions return a raw binary file, which cannot be readily analyzed in R.
 #'  To use the objects as dataframes, see the `get_dataset_*` functions at \link{get_dataset}
-#'
-#'
 #'
 #' @details This function provides access to data files from a Dataverse entry.
 #' @param file An integer specifying a file identifier; or a vector of integers
@@ -46,24 +43,29 @@
 #' \dontrun{
 #'
 #' # 1. Using filename and dataverse
-#' f1 <- get_file_by_name(filename = "nlsw88.tab",
-#'                        dataset = "10.70122/FK2/PPIAXE",
-#'                        server = "demo.dataverse.org")
+#' f1 <- get_file_by_name(
+#'   filename = "nlsw88.tab",
+#'   dataset  = "10.70122/FK2/PPIAXE",
+#'   server   = "demo.dataverse.org"
+#' )
 #'
 #' # 2. Using file DOI
-#' f2 <- get_file_by_doi(filedoi = "10.70122/FK2/PPIAXE/MHDB0O",
-#'                       server = "demo.dataverse.org")
+#' f2 <- get_file_by_doi(
+#'   filedoi  = "10.70122/FK2/PPIAXE/MHDB0O",
+#'   server   = "demo.dataverse.org"
+#' )
 #'
 #' # 3. Two-steps: Find ID from get_dataset
 #' d3 <- get_dataset("doi:10.70122/FK2/PPIAXE", server = "demo.dataverse.org")
 #' f3 <- get_file(d3$files$id[1], server = "demo.dataverse.org")
 #'
-#'
 #' # 4. Retrieve multiple raw data in list
-#' f4_vec <- get_dataset("doi:10.70122/FK2/PPIAXE",
-#'                       server = "demo.dataverse.org")$files$id
-#' f4 <- get_file(f4_vec,
-#'                server = "demo.dataverse.org")
+#' f4_vec <- get_dataset(
+#'   "doi:10.70122/FK2/PPIAXE",
+#'   server = "demo.dataverse.org"
+#' )$files$id
+#'
+#' f4 <- get_file(f4_vec, server = "demo.dataverse.org")
 #' length(f4)
 #'
 #' # Write binary files
@@ -74,19 +76,19 @@
 #'
 #' writeBin(f4[[1]], "nlsw88.rds") # originally a rds file
 #' writeBin(f4[[2]], "nlsw88.dta") # originally a dta file
-#'
 #' }
 #'
 #' @export
-get_file <-
-  function(file,
-           dataset = NULL,
-           format = c("original", "bundle"),
-           vars = NULL,
-           key = Sys.getenv("DATAVERSE_KEY"),
-           server = Sys.getenv("DATAVERSE_SERVER"),
-           original = TRUE,
-           ...) {
+get_file <- function(
+  file,
+  dataset       = NULL,
+  format        = c("original", "bundle"),
+  vars          = NULL,
+  key           = Sys.getenv("DATAVERSE_KEY"),
+  server        = Sys.getenv("DATAVERSE_SERVER"),
+  original      = TRUE,
+  ...
+) {
 
     format <- match.arg(format)
 
@@ -114,59 +116,60 @@ get_file <-
 
     for (i in seq_along(fileid)) {
       out[[i]] <- get_file_by_id(
-        fileid = fileid[i],
-        dataset = dataset,
-        format = format,
-        vars = vars,
-        key = key,
-        server = server,
-        original = original,
+        fileid      = fileid[i],
+        dataset     = dataset,
+        format      = format,
+        vars        = vars,
+        key         = key,
+        server      = server,
+        original    = original,
         ...
-        )
+      )
     }
 
-    # return the raw vector if there's a single file
-    if (length(out) == 1) {
+    if (length(out) == 1L) {    # return the raw vector if there's a single file
       return(out[[1]])
     } else {
-      # return a list of raw vectors otherwise
-      return(out)
+      return(out) # return a list of raw vectors otherwise
     }
   }
 
 
 #' @rdname files
 #'
-#'
 #' @param filename Filename of the dataset, with file extension as shown in Dataverse
 #'  (for example, if nlsw88.dta was the original but is displayed as the ingested
 #'  nlsw88.tab, use the ingested version.)
 #'
 #' @export
-get_file_by_name <- function(filename,
-                             dataset,
-                             format = c("original", "bundle"),
-                             vars = NULL,
-                             key = Sys.getenv("DATAVERSE_KEY"),
-                             server = Sys.getenv("DATAVERSE_SERVER"),
-                             original = TRUE,
-                             ...
-                             ) {
+get_file_by_name <- function(
+  filename,
+  dataset,
+  format        = c("original", "bundle"),
+  vars          = NULL,
+  key           = Sys.getenv("DATAVERSE_KEY"),
+  server        = Sys.getenv("DATAVERSE_SERVER"),
+  original      = TRUE,
+  ...
+) {
   format <- match.arg(format)
 
 
   # retrieve ID
-  fileid <- get_fileid.character(x = dataset,
-                                 file = filename,
-                                 server = server,
-                                 ...)
+  fileid <- get_fileid.character(
+    x       = dataset,
+    file    = filename,
+    server  = server,
+    ...
+  )
 
-  get_file_by_id(fileid,
-                 format = format,
-                 vars = vars,
-                 key = key,
-                 server = server,
-                 original = original,
-                 ...)
-
+  get_file_by_id(
+    fileid,
+    format      = format,
+    vars        = vars,
+    key         = key,
+    server      = server,
+    original    = original,
+    ...
+  )
 }
