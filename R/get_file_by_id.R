@@ -19,8 +19,17 @@ get_file_by_id <- function(
 ) {
     format <- match.arg(format)
 
-    if (length(fileid) != 1L)
-      stop("The fileid parameter must be single element.")
+    if (length(fileid) != 1L) {
+      stop("The `fileid` parameter must be single element.")
+    } else if (!(inherits(fileid, "numeric") | inherits(fileid, "integer") | inherits(fileid, "character"))) {
+      stop("The `fileid` data type must be numeric, integer, or character.")
+    }
+    # `dataset` place holder.
+    checkmate::assert_character(format  , any.missing = FALSE, len = 1)
+    # `vars` place holder.
+    checkmate::assert_logical(  original, any.missing = TRUE , len = 1)
+    checkmate::assert_character(key     , any.missing = FALSE, len = 1)
+    checkmate::assert_character(server  , any.missing = FALSE, len = 1)
 
     # must be a number OR doi string in the form of "doi:"
     use_persistent_id <- !is.numeric(fileid)
