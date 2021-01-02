@@ -36,6 +36,7 @@ Authors@R: c(
     "Jan", "Kanis", role = "ctb"
   ))
 Imports:
+    checkmate,
     httr,
     jsonlite,
     readr,
@@ -43,7 +44,6 @@ Imports:
     utils,
     xml2
 Suggests:
-    checkmate,
     covr,
     foreign,
     haven,

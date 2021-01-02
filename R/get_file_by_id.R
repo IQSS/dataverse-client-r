@@ -19,14 +19,18 @@ get_file_by_id <-
            ...) {
     format <- match.arg(format)
 
-    # single file ID
-    stopifnot(length(fileid) == 1)
+    if (length(fileid) != 1L)
+      stop("The fileid parameter must be single element.")
 
     # must be a number OR doi string in the form of "doi:"
-    if (is.numeric(fileid))
-      use_persistentID <- FALSE
-    if (grepl(x = fileid, pattern = "^doi:"))
-      use_persistentID <- TRUE
+    use_persistent_id <- !is.numeric(fileid)
+    if (use_persistent_id) {
+      if (!grepl(x = fileid, pattern = "^doi:"))
+        stop("A 'persistent' fileid must be prefixed with 'doi:'. It was `", fileid, "`.")
+    } else {
+      if (!checkmate::check_integerish(fileid))
+        stop("A 'non-persistent' fileid must be a whole number.  It was `", fileid, "`.")
+    }
 
 
     # ping get_file_metadata to see if file is ingested
@@ -59,7 +63,7 @@ get_file_by_id <-
     if (format == "original")
       u_part <- "access/datafile/"
 
-    if (use_persistentID)
+    if (use_persistent_id)
       u_part <- "access/datafile/:persistentId/?persistentId="
 
     # If not bundle, request single file in non-bundle format ----
