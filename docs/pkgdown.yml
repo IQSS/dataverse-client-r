@@ -6,5 +6,8 @@ articles:
   B-search: B-search.html
   C-retrieval: C-retrieval.html
   D-archiving: D-archiving.html
-last_built: 2021-01-03T18:35Z
+last_built: 2021-01-03T22:03Z
+urls:
+  reference: https://IQSS.github.io/dataverse-client-r/reference
+  article: https://IQSS.github.io/dataverse-client-r/articles
 
