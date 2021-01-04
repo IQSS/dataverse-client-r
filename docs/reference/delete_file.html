@@ -188,7 +188,31 @@ or globally using <code><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.set
     <div class='dont-index'><p>Managing a Dataverse: <code><a href='publish_dataverse.html'>publish_dataverse</a></code>; Managing a dataset: <code><a href='dataset_atom.html'>dataset_atom</a></code>, <code><a href='list_datasets.html'>list_datasets</a></code>, <code><a href='create_dataset.html'>create_dataset</a></code>, <code><a href='delete_dataset.html'>delete_dataset</a></code>, <code><a href='publish_dataset.html'>publish_dataset</a></code>; Managing files within a dataset: <code><a href='add_file.html'>add_file</a></code>, <code>delete_file</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># retrieve your service document</span>
+<span class='va'>d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='service_document.html'>service_document</a></span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='co'># create a list of metadata</span>
+<span class='va'>metadat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"My Study"</span>,
+                creator <span class='op'>=</span> <span class='st'>"Doe, John"</span>,
+                description <span class='op'>=</span> <span class='st'>"An example study"</span><span class='op'>)</span>
+
+<span class='co'># create the dataset</span>
+<span class='va'>dat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='initiate_sword_dataset.html'>initiate_sword_dataset</a></span><span class='op'>(</span><span class='st'>"mydataverse"</span>, body <span class='op'>=</span> <span class='va'>metadat</span><span class='op'>)</span>
+
+<span class='co'># add files to dataset</span>
+<span class='va'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/write.table.html'>write.csv</a></span><span class='op'>(</span><span class='va'>iris</span>, file <span class='op'>=</span> <span class='va'>tmp</span><span class='op'>)</span>
+<span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='add_file.html'>add_file</a></span><span class='op'>(</span><span class='va'>dat</span>, file <span class='op'>=</span> <span class='va'>tmp</span><span class='op'>)</span>
+
+<span class='co'># delete a file</span>
+<span class='va'>ds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='dataset_atom.html'>dataset_statement</a></span><span class='op'>(</span><span class='va'>dat</span><span class='op'>)</span>
+<span class='fu'>delete_file</span><span class='op'>(</span><span class='va'>ds</span><span class='op'>$</span><span class='va'>files</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>$</span><span class='va'>id</span><span class='op'>)</span>
+
+<span class='co'># delete a dataset</span>
+<span class='fu'><a href='delete_dataset.html'>delete_dataset</a></span><span class='op'>(</span><span class='va'>dat</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

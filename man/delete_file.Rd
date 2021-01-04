@@ -57,7 +57,7 @@ f <- add_file(dat, file = tmp)
 
 # delete a file
 ds <- dataset_statement(dat)
-delete_file(ds$files[[1]]$id
+delete_file(ds$files[[1]]$id)
 
 # delete a dataset
 delete_dataset(dat)
