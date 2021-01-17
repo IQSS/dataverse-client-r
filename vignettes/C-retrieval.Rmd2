@@ -20,7 +20,7 @@ options(width = 120)
 knitr::opts_chunk$set(results = "hold")
 ```
 
-This vignette shows how to download data from Dataverse using the dataverse package. We'll focus on a Dataverse repository that contains supplemental files for [Jamie Monogan](https://spia.uga.edu/faculty-member/jamie-monogan/)'s book [*Political Analysis Using R*](https://www.springer.com/gb/book/9783319234458), which is stored at Harvard University's [IQSS Dataverse Network](https://dataverse.harvard.edu/):
+This vignette shows how to download data from Dataverse using the dataverse package. We'll focus on a Dataverse repository that contains supplemental files for [*Political Analysis Using R*](https://www.springer.com/gb/book/9783319234458), which is stored at Harvard University's [IQSS Dataverse Network](https://dataverse.harvard.edu/):
 
 > Monogan, Jamie, 2015, "Political Analysis Using R: Example Code and Data, Plus Data for Practice Problems", [doi:10.7910/DVN/ARKOTI](https://doi.org/10.7910/DVN/ARKOTI), Harvard Dataverse, V1, UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==
 
