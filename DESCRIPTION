@@ -49,6 +49,7 @@ Suggests:
     haven,
     knitr,
     purrr,
+    rmarkdown,
     testthat,
     UNF,
     yaml
