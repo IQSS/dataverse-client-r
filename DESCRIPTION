@@ -1,5 +1,5 @@
 Package: dataverse
-Version: 0.2.1.9002
+Version: 0.3.0
 Title: Client for Dataverse 4 Repositories
 Authors@R: c(
   person(
