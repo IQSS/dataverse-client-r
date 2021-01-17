@@ -17,9 +17,9 @@
 #' }
 #'
 #' @references
-#'  \href{http://guides.dataverse.org/en/latest/api/index.html}{Dataverse API Documentation}
+#'  \href{https://guides.dataverse.org/en/latest/api/index.html}{Dataverse API Documentation}
 #'
-#'  \href{http://dataverse.org/}{Dataverse Homepage}
+#'  \href{https://dataverse.org/}{Dataverse Homepage}
 #'
 #'  \href{https://dataverse.harvard.edu/}{Harvard IQSS Dataverse}
 #'

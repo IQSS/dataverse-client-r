@@ -1,0 +1,72 @@
+url: https://IQSS.github.io/dataverse-client-r
+
+template:
+  params:
+    bootswatch: sandstone
+    # docsearch:
+    #   api_key: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    #   index_name: dataverse-client-r
+
+home:
+  links:
+#  - text: Ask a question
+#    href: http://discourse.mc-stan.org/
+
+development:
+  mode: release
+
+navbar:
+  title: "Dataverse R Client"
+  # type: inverse
+
+articles:
+- title: "Getting Started"
+  navbar: ~
+  desc: >
+    These vignettes provide an introduction to Dataverse with R.
+  contents:
+    - 'A-introduction'
+    - 'B-search'
+    - 'C-retrieval'
+    - 'D-archiving'
+
+reference:
+- title: "Retrieve"
+  contents:
+  - '`get_file`'
+  - '`get_dataframe_by_name`'
+  - '`get_dataset`'
+  - '`get_dataverse`'
+  - '`get_facets`'
+  - '`get_file_metadata`'
+  - '`get_user_key`'
+
+- title: "Create, Add, & Publish"
+  contents:
+  - '`create_dataset`'
+  - '`create_dataverse`'
+  - '`add_dataset_file`'
+  - '`add_file`'
+  - '`publish_dataset`'
+  - '`publish_dataverse`'
+  - '`publish_sword_dataset`'
+
+- title: "Delete"
+  contents:
+  - '`delete_dataset`'
+  - '`delete_dataverse`'
+  - '`delete_file`'
+  - '`delete_sword_dataset`'
+
+- title: Other
+  contents:
+  - '`dataset_atom`'
+  - '`dataset_versions`'
+  - '`dataverse`'
+  - '`dataverse_metadata`'
+  - '`dataverse_search`'
+  - '`initiate_sword_dataset`'
+  - '`is_ingested`'
+  - '`list_datasets`'
+  - '`service_document`'
+  - '`set_dataverse_metadata`'

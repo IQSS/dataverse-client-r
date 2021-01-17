@@ -17,11 +17,19 @@ add_file(
 
 \item{file}{A character vector of file names, a data.frame, or a list of R objects.}
 
-\item{key}{A character string specifying a Dataverse server API key. If one is not specified, functions calling authenticated API endpoints will fail. Keys can be specified atomically or globally using \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
+\item{key}{A character string specifying a Dataverse server API key. If one
+is not specified, functions calling authenticated API endpoints will fail.
+Keys can be specified atomically or globally using
+\code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 
-\item{server}{A character string specifying a Dataverse server. There are multiple Dataverse installations, but the defaults is to use the Harvard Dataverse. This can be modified atomically or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
+\item{server}{A character string specifying a Dataverse server. There are
+multiple Dataverse installations, but the defaults is to use the Harvard
+Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
+or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 
-\item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
+\item{...}{Additional arguments passed to an HTTP request function, such as
+\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
+\code{\link[httr]{DELETE}}.}
 }
 \value{
 An object of class \dQuote{dataset_atom}.
