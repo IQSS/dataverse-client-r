@@ -38,7 +38,7 @@ An object of class \dQuote{dataset_atom}.
 Initiate a SWORD (possibly unpublished) dataset
 }
 \details{
-This function is used to initiate a dataset in a (SWORD) Dataverse by supplying relevant metadata. The function is part of the SWORD API (see \href{http://www.ietf.org/rfc/rfc5023.txt}{Atom entry specification}), which is used to upload data to a Dataverse server.
+This function is used to initiate a dataset in a (SWORD) Dataverse by supplying relevant metadata. The function is part of the SWORD API (see \href{https://www.ietf.org/rfc/rfc5023.txt}{Atom entry specification}), which is used to upload data to a Dataverse server.
 Allowed fields are:
 \dQuote{abstract}, \dQuote{accessRights}, \dQuote{accrualMethod},
 \dQuote{accrualPeriodicity}, \dQuote{accrualPolicy}, \dQuote{alternative},

@@ -4,7 +4,7 @@
 #' @param body A list containing one or more metadata fields. Field names must be valid Dublin Core Terms labels (see details, below). The \samp{title}, \samp{description}, and \samp{creator} fields are required.
 #' @template envvars
 #' @template dots
-#' @details This function is used to initiate a dataset in a (SWORD) Dataverse by supplying relevant metadata. The function is part of the SWORD API (see \href{http://www.ietf.org/rfc/rfc5023.txt}{Atom entry specification}), which is used to upload data to a Dataverse server.
+#' @details This function is used to initiate a dataset in a (SWORD) Dataverse by supplying relevant metadata. The function is part of the SWORD API (see \href{https://www.ietf.org/rfc/rfc5023.txt}{Atom entry specification}), which is used to upload data to a Dataverse server.
 #' Allowed fields are:
 #' \dQuote{abstract}, \dQuote{accessRights}, \dQuote{accrualMethod},
 #' \dQuote{accrualPeriodicity}, \dQuote{accrualPolicy}, \dQuote{alternative},

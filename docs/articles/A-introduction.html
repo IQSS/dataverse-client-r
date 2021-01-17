@@ -102,7 +102,7 @@
 
     
     
-<p>The <strong>dataverse</strong> package is the official R client for <a href="http://dataverse.org/">Dataverse 4</a> data repositories. The package enables data search, retrieval, and deposit with any Dataverse installation, thus allowing R users to integrate public data sharing into the reproducible research workflow.</p>
+<p>The <strong>dataverse</strong> package is the official R client for <a href="https://dataverse.org/">Dataverse 4</a> data repositories. The package enables data search, retrieval, and deposit with any Dataverse installation, thus allowing R users to integrate public data sharing into the reproducible research workflow.</p>
 <p>In addition to this introduction, the package contains three additional vignettes covering:</p>
 <ul>
 <li><a href="B-search.html">“Data Search and Discovery”</a></li>
@@ -136,7 +136,7 @@
 <span class="fu"><a href="../reference/get_dataset.html">dataset_files</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/get_file_metadata.html">get_file_metadata</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/get_file.html">get_file</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>For “native” Dataverse features (such as user account controls) or to create and publish a dataset, you will need an API key linked to a Dataverse installation account. Instructions for obtaining an account and setting up an API key are available in the <a href="http://guides.dataverse.org/en/latest/user/account.html">Dataverse User Guide</a>. (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called <code>DATAVERSE_KEY</code>. It can be set within R using:</p>
+<p>For “native” Dataverse features (such as user account controls) or to create and publish a dataset, you will need an API key linked to a Dataverse installation account. Instructions for obtaining an account and setting up an API key are available in the <a href="https://guides.dataverse.org/en/latest/user/account.html">Dataverse User Guide</a>. (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called <code>DATAVERSE_KEY</code>. It can be set within R using:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span> <span class="op">=</span> <span class="st">"examplekey12345"</span><span class="op">)</span></code></pre></div>
 <p>With that set, you can easily create a new dataverse, create a dataset within that dataverse, push files to the dataset, and release it:</p>
@@ -164,7 +164,7 @@
 <div id="appendix-dvn-to-dataverse-crosswalk" class="section level2">
 <h2 class="hasAnchor">
 <a href="#appendix-dvn-to-dataverse-crosswalk" class="anchor"></a>Appendix: dvn to dataverse Crosswalk</h2>
-<p>The original Dataverse client for R was called <a href="https://cran.r-project.org/web/packages/dvn/index.html">dvn</a>; it worked with Dataverse versions &lt;= 3 and was removed from CRAN in favor of <a href="https://CRAN.R-project.org/package=dataverse">dataverse</a> in 2018. dvn provided functionality for searching, retrieving, and depositing data. Here is a cross-walk of functionality in case you were already familiar with the dvn package:</p>
+<p>The original Dataverse client for R was called <a href="https://CRAN.R-project.org/package=dvn">dvn</a>; it worked with Dataverse versions &lt;= 3 and was removed from CRAN in favor of <a href="https://CRAN.R-project.org/package=dataverse">dataverse</a> in 2018. dvn provided functionality for searching, retrieving, and depositing data. Here is a cross-walk of functionality in case you were already familiar with the dvn package:</p>
 <table class="table">
 <thead><tr class="header">
 <th>API Category</th>

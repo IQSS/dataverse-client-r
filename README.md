@@ -9,11 +9,11 @@ Status](https://travis-ci.org/IQSS/dataverse-client-r.png?branch=master)](https:
 [![codecov.io](https://codecov.io/github/IQSS/dataverse-client-r/coverage.svg?branch=master)](https://codecov.io/github/IQSS/dataverse-client-r?branch=master)
 
 [![Dataverse Project
-logo](http://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png
-"Dataverse Project")](http://dataverse.org)
+logo](https://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png
+"Dataverse Project")](https://dataverse.org)
 
 The **dataverse** package provides access to
-[Dataverse 4](http://dataverse.org/) APIs, enabling data search,
+[Dataverse 4](https://dataverse.org/) APIs, enabling data search,
 retrieval, and deposit, thus allowing R users to integrate public data
 sharing into the reproducible research workflow. **dataverse** is the
 next-generation iteration of [the **dvn**
@@ -42,7 +42,7 @@ installation. But, other features require a Dataverse account for the
 specific server installation of the Dataverse software, and an API key
 linked to that account. Instructions for obtaining an account and
 setting up an API key are available in the [Dataverse User
-Guide](http://guides.dataverse.org/en/latest/user/account.html). (Note:
+Guide](https://guides.dataverse.org/en/latest/user/account.html). (Note:
 if your key is compromised, it can be regenerated to preserve security.)
 Once you have an API key, this should be stored as an environment
 variable called `DATAVERSE_KEY`. It can be set within R using:
@@ -53,7 +53,7 @@ Sys.setenv("DATAVERSE_KEY" = "examplekey12345")
 
 #### Server
 
-Because [there are many Dataverse installations](http://dataverse.org/),
+Because [there are many Dataverse installations](https://dataverse.org/),
 all functions in the R client require specifying what server
 installation you are interacting with. This can be set by default with
 an environment variable, `DATAVERSE_SERVER`. This should be the
@@ -90,7 +90,7 @@ For example, we will read a survey dataset on Dataverse,
 With a file DOI, we can use the `get_dataframe_by_doi` function:
 
 ``` r
-nlsw <- 
+nlsw <-
   get_dataframe_by_doi(
     filedoi     = "10.70122/FK2/PPIAXE/MHDB0O",
     server      = "demo.dataverse.org"
@@ -99,7 +99,7 @@ nlsw <-
 
     ## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.
 
-    ## 
+    ##
     ## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────
     ## cols(
     ##   idcode = col_double(),
@@ -131,7 +131,7 @@ and the DOI of the “dataset” (in Dataverse, a collection of files is
 called a dataset).
 
 ``` r
-nlsw_tsv <- 
+nlsw_tsv <-
   get_dataframe_by_name(
     filename  = "nlsw88.tab",
     dataset   = "10.70122/FK2/PPIAXE",
@@ -154,7 +154,7 @@ Instead, to read the same file but its original version, specify
 `haven::read_dta` function.
 
 ``` r
-nlsw_original <- 
+nlsw_original <-
   get_dataframe_by_name(
     filename    = "nlsw88.tab",
     dataset     = "10.70122/FK2/PPIAXE",
@@ -183,7 +183,7 @@ class(nlsw_tsv$race) # tab ingested version only has numeric data
 attr(nlsw_original$race, "labels") # original dta has value labels
 ```
 
-    ## white black other 
+    ## white black other
     ##     1     2     3
 
 #### Reading a dataset as a binary file.
@@ -195,7 +195,7 @@ more primitive `get_file_*` commands. The arguments are equivalent,
 except we no longer need an `.f` argument
 
 ``` r
-nlsw_raw <- 
+nlsw_raw <-
   get_file_by_name(
     filename    = "nlsw88.tab",
     dataset     = "10.70122/FK2/PPIAXE",
@@ -220,7 +220,7 @@ get_dataset(
 )
 ```
 
-    ## Dataset (182162): 
+    ## Dataset (182162):
     ## Version: 1.1, RELEASED
     ## Release Date: 2020-12-30T00:00:24Z
     ## License: CC0
@@ -268,7 +268,7 @@ it. This looks something like the following:
 d <- service_document()
 
 # create a list of metadata
-metadat <- 
+metadat <-
   list(
     title       = "My Study",
     creator     = "Doe, John",

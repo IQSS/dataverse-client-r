@@ -11,9 +11,9 @@ Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 
 [![CRAN Version](https://www.r-pkg.org/badges/version/dataverse)](https://cran.r-project.org/package=dataverse) ![Downloads](https://cranlogs.r-pkg.org/badges/dataverse) [![Travis-CI Build Status](https://travis-ci.org/IQSS/dataverse-client-r.png?branch=master)](https://travis-ci.org/IQSS/dataverse-client-r) [![codecov.io](https://codecov.io/github/IQSS/dataverse-client-r/coverage.svg?branch=master)](https://codecov.io/github/IQSS/dataverse-client-r?branch=master)
 
-[![Dataverse Project logo](http://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png "Dataverse Project")](http://dataverse.org)
+[![Dataverse Project logo](https://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png "Dataverse Project")](https://dataverse.org)
 
-The **dataverse** package provides access to [Dataverse 4](http://dataverse.org/) APIs, enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. **dataverse** is the next-generation iteration of [the **dvn** package](https://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. **dataverse** includes numerous improvements for data search, retrieval, and deposit, including use of the (currently in development) **sword** package for data deposit and the **UNF** package for data fingerprinting.
+The **dataverse** package provides access to [Dataverse 4](https://dataverse.org/) APIs, enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. **dataverse** is the next-generation iteration of [the **dvn** package](https://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. **dataverse** includes numerous improvements for data search, retrieval, and deposit, including use of the (currently in development) **sword** package for data deposit and the **UNF** package for data fingerprinting.
 
 ### Getting Started
 
@@ -32,7 +32,7 @@ library("dataverse")
 
 #### Keys
 
-Some features of the Dataverse 4 API are public and require no authentication. This means in many cases you can search for and retrieve data without a Dataverse account for that a specific Dataverse installation. But, other features require a Dataverse account for the specific server installation of the Dataverse software, and an API key linked to that account. Instructions for obtaining an account and setting up an API key are available in the [Dataverse User Guide](http://guides.dataverse.org/en/latest/user/account.html). (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called `DATAVERSE_KEY`. It can be set within R using:
+Some features of the Dataverse 4 API are public and require no authentication. This means in many cases you can search for and retrieve data without a Dataverse account for that a specific Dataverse installation. But, other features require a Dataverse account for the specific server installation of the Dataverse software, and an API key linked to that account. Instructions for obtaining an account and setting up an API key are available in the [Dataverse User Guide](https://guides.dataverse.org/en/latest/user/account.html). (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called `DATAVERSE_KEY`. It can be set within R using:
 
 ``` r
 Sys.setenv("DATAVERSE_KEY" = "examplekey12345")
@@ -40,7 +40,7 @@ Sys.setenv("DATAVERSE_KEY" = "examplekey12345")
 
 #### Server
 
-Because [there are many Dataverse installations](http://dataverse.org/), all functions in the R client require specifying what server installation you are interacting with. This can be set by default with an environment variable, `DATAVERSE_SERVER`. This should be the Dataverse server, without the "https" prefix or the "/api" URL path, etc. For example, the Harvard Dataverse can be used by setting:
+Because [there are many Dataverse installations](https://dataverse.org/), all functions in the R client require specifying what server installation you are interacting with. This can be set by default with an environment variable, `DATAVERSE_SERVER`. This should be the Dataverse server, without the "https" prefix or the "/api" URL path, etc. For example, the Harvard Dataverse can be used by setting:
 
 ``` r
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
@@ -61,7 +61,7 @@ Use the `get_dataframe_*()` functions, depending on the input you have. For exam
 With a file DOI, we can use the `get_dataframe_by_doi` function:
 
 ```{r get_dataframe_by_doi}
-nlsw <- 
+nlsw <-
   get_dataframe_by_doi(
     filedoi     = "10.70122/FK2/PPIAXE/MHDB0O",
     server      = "demo.dataverse.org"
@@ -72,7 +72,7 @@ which by default reads in the ingested file (not the original dta) by the [`read
 Alternatively, we can download the same file by specifying the filename and the DOI of the "dataset" (in Dataverse, a collection of files is called a dataset).
 
 ```{r get_dataframe_by_name_tsv, message=FALSE}
-nlsw_tsv <- 
+nlsw_tsv <-
   get_dataframe_by_name(
     filename  = "nlsw88.tab",
     dataset   = "10.70122/FK2/PPIAXE",
@@ -87,7 +87,7 @@ This default is safe because you may not have the proprietary software that was 
 Instead, to read the same file but its original version, specify `original = TRUE` and set an `.f` argument. In this case, we know that `nlsw88.tab` is a Stata `.dta` dataset, so we will use the `haven::read_dta` function.
 
 ```{r get_dataframe_by_name_original}
-nlsw_original <- 
+nlsw_original <-
   get_dataframe_by_name(
     filename    = "nlsw88.tab",
     dataset     = "10.70122/FK2/PPIAXE",
@@ -120,7 +120,7 @@ attr(nlsw_original$race, "labels") # original dta has value labels
 In some cases, you may not want to read in the data in your environment, perhaps because that is not possible (e.g. for a `.docx` file), and you want to simply write these files your local disk. To do this, use the more primitive `get_file_*` commands. The arguments are equivalent, except we no longer need an `.f` argument
 
 ```{r get_file_by_name}
-nlsw_raw <- 
+nlsw_raw <-
   get_file_by_name(
     filename    = "nlsw88.tab",
     dataset     = "10.70122/FK2/PPIAXE",
@@ -171,7 +171,7 @@ Dataverse provides two - basically unrelated - workflows for managing (adding, d
 d <- service_document()
 
 # create a list of metadata
-metadat <- 
+metadat <-
   list(
     title       = "My Study",
     creator     = "Doe, John",
@@ -215,4 +215,4 @@ Through the native API it is possible to update a dataset by modifying its metad
 
 ### Other Installations
 
-Users interested in downloading metadata from archives other than Dataverse may be interested in Kurt Hornik's [OAIHarvester](https://cran.r-project.org/package=OAIHarvester) and Scott Chamberlain's [oai](https://cran.r-project.org/package=oai), which offer metadata download from any web repository that is compliant with the [Open Archives Initiative](http://www.openarchives.org/) standards. Additionally, [rdryad](https://cran.r-project.org/package=rdryad) uses OAIHarvester to interface with [Dryad](http://datadryad.org/). The [rfigshare](https://cran.r-project.org/package=rfigshare) package works in a similar spirit to **dataverse** with <https://figshare.com/>.
+Users interested in downloading metadata from archives other than Dataverse may be interested in Kurt Hornik's [OAIHarvester](https://cran.r-project.org/package=OAIHarvester) and Scott Chamberlain's [oai](https://cran.r-project.org/package=oai), which offer metadata download from any web repository that is compliant with the [Open Archives Initiative](http://www.openarchives.org/) standards. Additionally, [rdryad](https://cran.r-project.org/package=rdryad) uses OAIHarvester to interface with [Dryad](https://datadryad.org/stash). The [rfigshare](https://cran.r-project.org/package=rfigshare) package works in a similar spirit to **dataverse** with <https://figshare.com/>.
