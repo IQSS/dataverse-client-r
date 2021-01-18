@@ -12,6 +12,7 @@ standarize_string <- function (x, start = 1, stop = nchar(x)) {
       to    = "ASCII//TRANSLIT",
       sub   = "?"
     ) %>%
+    sub("KukoA?,SF", "Kukoc,SF") %>%
     substring(start, stop)
 }
 
