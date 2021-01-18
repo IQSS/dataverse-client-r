@@ -53,7 +53,7 @@ Suggests:
     testthat,
     UNF,
     yaml
-Description: Provides access to Dataverse version 4 APIs <https://dataverse.org/>,
+Description: Provides access to Dataverse APIs <https://dataverse.org/> (versions 4-5),
     enabling data search, retrieval, and deposit. For Dataverse versions <= 3.0,
     use the archived 'dvn' package <https://cran.r-project.org/package=dvn>.
 License: GPL-2
