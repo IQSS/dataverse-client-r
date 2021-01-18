@@ -3,7 +3,9 @@ Description
 
 This submission includes new features and updates to stay compliant with R checks.
 
-A second change is that I am now the package maintainer, taking over from Thomas J. Leeper (thosjleeper@gmail.com).
+A second change is that I am now the package maintainer, taking over from Thomas J. Leeper (thosjleeper@gmail.com).  See https://github.com/IQSS/dataverse-client-r/issues/42 and https://github.com/IQSS/dataverse-client-r/issues/21.
+
+The first submission on Jan 17/18 was rejected because the CRAN check had three notes that one documentation example exceeded 10 seconds.  In response, I've added a `dontrun{}` block on most of that example.
 
 Thank you for taking the time to review my submission, and please tell me if there's something else I should do for CRAN.  -Will Beasley
 

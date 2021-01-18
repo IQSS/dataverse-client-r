@@ -19,7 +19,6 @@
 #' @inheritDotParams get_file
 #'
 #' @examples
-#'
 #' # Retrieve data.frame from dataverse DOI and file name
 #' df_from_rds_ingested <-
 #'   get_dataframe_by_name(
@@ -35,13 +34,16 @@
 #'     server       = "demo.dataverse.org"
 #'   )
 #'
+#' # Do not run when submitting to CRAN, because the whole
+#' # example sometimes takes longer than 10 sec.
+#' \dontrun{
 #' # Retrieve ingested file originally a Stata dta
 #' df_from_stata_ingested <-
 #'   get_dataframe_by_name(
 #'     filename   = "nlsw88.tab",
 #'     dataset    = "doi:10.70122/FK2/PPIAXE",
 #'     server     = "demo.dataverse.org"
-#'  )
+#'   )
 #'
 #'
 #' # To use the original file version, or for non-ingested data,
@@ -56,7 +58,7 @@
 #'       server     = "demo.dataverse.org",
 #'       original   = TRUE,
 #'       .f         = readr::read_rds
-#'    )
+#'     )
 #' }
 #'
 #' if (requireNamespace("haven", quietly = TRUE)) {
@@ -67,8 +69,10 @@
 #'       server     = "demo.dataverse.org",
 #'       original   = TRUE,
 #'       .f         = haven::read_dta
-#'    )
+#'     )
 #' }
+#' }
+#'
 #' @export
 get_dataframe_by_name <- function (
   filename,
