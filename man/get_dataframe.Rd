@@ -95,16 +95,14 @@ df_tab <-
 # please specify `original = TRUE` and specify a function in .f.
 
 # Rds files are not ingested so original = TRUE and .f is required.
-if (requireNamespace("readr", quietly = TRUE)) {
-  df_rds_original <-
-    get_dataframe_by_name(
-      filename   = "nlsw88_rds-export.rds",
-      dataset    = "doi:10.70122/FK2/PPIAXE",
-      server     = "demo.dataverse.org",
-      original   = TRUE,
-      .f         = readr::read_rds
-   )
-}
+ df_rds_original <-
+   get_dataframe_by_name(
+    filename   = "nlsw88_rds-export.rds",
+    dataset    = "doi:10.70122/FK2/PPIAXE",
+    server     = "demo.dataverse.org",
+    original   = TRUE,
+    .f         = readr::read_rds
+ )
 
 # Get Stata file as original
 if (requireNamespace("haven", quietly = TRUE)) {
