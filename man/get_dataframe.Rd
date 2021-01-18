@@ -76,35 +76,27 @@ datafile.
 \examples{
 
 # Retrieve data.frame from dataverse DOI and file name
-df_from_rds_ingested <-
+df_tab <-
   get_dataframe_by_name(
     filename = "roster-bulls-1996.tab",
     dataset  = "doi:10.70122/FK2/HXJVJU",
     server   = "demo.dataverse.org"
   )
 
-# Retrieve the same data.frame from dataverse + file DOI
-df_from_rds_ingested_by_doi <-
+# Retrieve the same file from file DOI
+df_tab <-
   get_dataframe_by_doi(
     filedoi      = "10.70122/FK2/HXJVJU/SA3Z2V",
     server       = "demo.dataverse.org"
   )
 
-# Retrieve ingested file originally a Stata dta
-df_from_stata_ingested <-
-  get_dataframe_by_name(
-    filename   = "nlsw88.tab",
-    dataset    = "doi:10.70122/FK2/PPIAXE",
-    server     = "demo.dataverse.org"
- )
-
 
 # To use the original file version, or for non-ingested data,
 # please specify `original = TRUE` and specify a function in .f.
 
-# A data.frame is still returned, but the
+# Rds files are not ingested so original = TRUE and .f is required.
 if (requireNamespace("readr", quietly = TRUE)) {
-  df_from_rds_original <-
+  df_rds_original <-
     get_dataframe_by_name(
       filename   = "nlsw88_rds-export.rds",
       dataset    = "doi:10.70122/FK2/PPIAXE",
@@ -114,8 +106,9 @@ if (requireNamespace("readr", quietly = TRUE)) {
    )
 }
 
+# Get Stata file as original
 if (requireNamespace("haven", quietly = TRUE)) {
-  df_from_stata_original <-
+  df_stata_original <-
     get_dataframe_by_name(
       filename   = "nlsw88.tab",
       dataset    = "doi:10.70122/FK2/PPIAXE",
@@ -124,4 +117,13 @@ if (requireNamespace("haven", quietly = TRUE)) {
       .f         = haven::read_dta
    )
 }
+
+# Stata file as ingested file (less information than original)
+df_stata_ingested <-
+  get_dataframe_by_name(
+    filename   = "nlsw88.tab",
+    dataset    = "doi:10.70122/FK2/PPIAXE",
+    server     = "demo.dataverse.org"
+ )
+
 }
