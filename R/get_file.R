@@ -1,19 +1,20 @@
 #' @rdname files
 #'
-#' @title Download File
+#' @title Download dataverse file as a raw binary
 #'
-#' @description Download Dataverse File(s). `get_file` is a general wrapper,
-#' and can take either dataverse objects, file IDs, or a filename and dataverse.
+#' @description Download Dataverse File(s). `get_file_*`
+#' functions return a raw binary file, which cannot be readily analyzed in R.
+#' To use the objects as dataframes, see the `get_dataset_*` functions at
+#' \link{get_dataset} instead.
+#'
+#' @details This function provides access to data files from a Dataverse entry.
+#' `get_file` is a general wrapper,
+#'  and can take either dataverse objects, file IDs, or a filename and dataverse.
+#'  Internally, all functions download each file by `get_file_by_id`.
 #' `get_file_by_name` is a shorthand for running `get_file` by
 #' specifying a file name (`filename`) and dataset (`dataset`).
 #' `get_file_by_doi` obtains a file by its file DOI, bypassing the
 #' `dataset` argument.
-#'
-#' Internally, all functions download each file by `get_file_by_id`. `get_file_*`
-#' functions return a raw binary file, which cannot be readily analyzed in R.
-#' To use the objects as dataframes, see the `get_dataset_*` functions at \link{get_dataset}
-#'
-#' @details This function provides access to data files from a Dataverse entry.
 #'
 #' @param file An integer specifying a file identifier; or a vector of integers
 #' specifying file identifiers; or, if used with the prefix \code{"doi:"}, a

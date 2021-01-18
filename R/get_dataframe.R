@@ -1,7 +1,9 @@
-#' Get file from dataverse and convert it into a dataframe or tibble
+#' Download dataverse file as a dataframe
 #'
-#' `get_dataframe_by_id`, if you know the numeric ID of the dataset, or instead
-#' `get_dataframe_by_name` if you know the filename and doi. The dataset
+#' Use `get_dataframe_by_name` if you know the name of the datafile and the DOI
+#'  of the dataset. Use `get_dataframe_by_doi` if you know the DOI of the datafile
+#'  itself. Use `get_dataframe_by_id` if you know the numeric ID of the
+#'  datafile.
 #'
 #' @rdname get_dataframe
 #'
@@ -11,7 +13,7 @@
 #' must choose the appropriate function: for example if the target is a .rds
 #' file, then `.f` should be `readRDS` or `readr::read_rds`.
 #' @param original A logical, defaulting to TRUE. Whether to read the ingested,
-#' archival version of the dataset if one exists. The archival versions are tab-delimited
+#' archival version of the datafile if one exists. The archival versions are tab-delimited
 #' `.tab` files so if `original = FALSE`, `.f` is set to `readr::read_tsv`.
 #' If functions to read the original version is available, then `original = TRUE`
 #' with a specified `.f` is better.

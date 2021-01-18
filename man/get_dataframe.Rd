@@ -4,7 +4,7 @@
 \alias{get_dataframe_by_name}
 \alias{get_dataframe_by_id}
 \alias{get_dataframe_by_doi}
-\title{Get file from dataverse and convert it into a dataframe or tibble}
+\title{Download dataverse file as a dataframe}
 \usage{
 get_dataframe_by_name(
   filename,
@@ -31,7 +31,7 @@ must choose the appropriate function: for example if the target is a .rds
 file, then \code{.f} should be \code{readRDS} or \code{readr::read_rds}.}
 
 \item{original}{A logical, defaulting to TRUE. Whether to read the ingested,
-archival version of the dataset if one exists. The archival versions are tab-delimited
+archival version of the datafile if one exists. The archival versions are tab-delimited
 \code{.tab} files so if \code{original = FALSE}, \code{.f} is set to \code{readr::read_tsv}.
 If functions to read the original version is available, then \code{original = TRUE}
 with a specified \code{.f} is better.}
@@ -68,8 +68,10 @@ or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")
 \code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}}
 }
 \description{
-\code{get_dataframe_by_id}, if you know the numeric ID of the dataset, or instead
-\code{get_dataframe_by_name} if you know the filename and doi. The dataset
+Use \code{get_dataframe_by_name} if you know the name of the datafile and the DOI
+of the dataset. Use \code{get_dataframe_by_doi} if you know the DOI of the datafile
+itself. Use \code{get_dataframe_by_id} if you know the numeric ID of the
+datafile.
 }
 \examples{
 
