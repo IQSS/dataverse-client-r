@@ -121,7 +121,7 @@ add_file <- function(dataset, file, key = Sys.getenv("DATAVERSE_KEY"), server = 
 #'
 #' # delete a file
 #' ds <- dataset_statement(dat)
-#' delete_file(ds$files[[1]]$id
+#' delete_file(ds$files[[1]]$id)
 #'
 #' # delete a dataset
 #' delete_dataset(dat)

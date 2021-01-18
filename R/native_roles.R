@@ -1,7 +1,7 @@
 # @rdname roles
 # @title Roles
 # @description Get, create, update, and delete a Dataverse role
-# @details In Dataverse, roles provide one or more users with permissions. Rather than granting several permissions to each user, you can create a role that carries specific permissions and then freely change the roles to which each user is assigned. See \href{http://guides.dataverse.org/en/latest/user/dataverse-management.html#dataverse-permissions}{the Dataverse User Guide} for more details.
+# @details In Dataverse, roles provide one or more users with permissions. Rather than granting several permissions to each user, you can create a role that carries specific permissions and then freely change the roles to which each user is assigned. See \href{https://guides.dataverse.org/en/latest/user/dataverse-management.html#dataverse-permissions}{the Dataverse User Guide} for more details.
 #
 # Once created using \code{\link{create_role}}, \code{\link{delete_role}} can delete a role.
 # @template role

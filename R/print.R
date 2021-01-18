@@ -33,7 +33,6 @@ print.dataverse <- function(x, ...) {
 }
 
 # dataverse_dataset class
-#' @importFrom utils str
 #' @export
 print.dataverse_dataset <- function(x, ...) {
     cat("Dataset (", x$id, "): ", x$persistentUrl, "\n", sep = "")

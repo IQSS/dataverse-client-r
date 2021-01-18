@@ -20,11 +20,11 @@ options(width = 120)
 knitr::opts_chunk$set(results = "hold")
 ```
 
-This vignette shows how to download data from Dataverse using the dataverse package. We'll focus on a Dataverse repository that contains supplemental files for [Jamie Monogan](http://spia.uga.edu/faculty-member/jamie-monogan/)'s book [*Political Analysis Using R*](http://www.springer.com/gb/book/9783319234458), which is stored at Harvard University's [IQSS Dataverse Network](https://dataverse.harvard.edu/):
+This vignette shows how to download data from Dataverse using the dataverse package. We'll focus on a Dataverse repository that contains supplemental files for [Jamie Monogan](https://spia.uga.edu/faculty-member/jamie-monogan/)'s book [*Political Analysis Using R*](https://www.springer.com/gb/book/9783319234458), which is stored at Harvard University's [IQSS Dataverse Network](https://dataverse.harvard.edu/):
 
 > Monogan, Jamie, 2015, "Political Analysis Using R: Example Code and Data, Plus Data for Practice Problems", [doi:10.7910/DVN/ARKOTI](https://doi.org/10.7910/DVN/ARKOTI), Harvard Dataverse, V1, UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==
 
-This study is persistently retrievable by a "[Digital Object Identifier (DOI)](https://www.doi.org/)": https://doi.org/10.7910/DVN/ARKOTI and the citation above (taken from the Dataverse page) includes a "[Universal Numeric Fingerprint (UNF)](http://guides.dataverse.org/en/latest/developers/unf/index.html)": `UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==`, which provides a versioned, multi-file hash for the entire study, which contains 32 files.
+This study is persistently retrievable by a "[Digital Object Identifier (DOI)](https://www.doi.org/)": https://doi.org/10.7910/DVN/ARKOTI and the citation above (taken from the Dataverse page) includes a "[Universal Numeric Fingerprint (UNF)](https://guides.dataverse.org/en/latest/developers/unf/index.html)": `UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==`, which provides a versioned, multi-file hash for the entire study, which contains 32 files.
 
 If you don't already know what datasets and files you want to use from Dataverse, see the ["Data Search" vignette](B-search.html) for guidance on data search and discovery.
 
@@ -44,7 +44,7 @@ The output prints some basic metadata and then the `str()` of the `files` data f
 dataset$files[c("filename", "contentType")]
 ```
 
-This shows that there are indeed 32 files, a mix of .R code files and tab- and comma-separated data files. 
+This shows that there are indeed 32 files, a mix of .R code files and tab- and comma-separated data files.
 
 
 You can also retrieve more extensive metadata using `dataset_metadata()`:
@@ -67,9 +67,9 @@ writeBin(code3, "chapter03.R")
 Now we'll get the corresponding data and save it locally. For this code we need two data files:
 
 ```{r}
-writeBin(get_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI"), 
+writeBin(get_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI"),
          "constructionData.dta")
-writeBin(get_file("PESenergy.csv", "doi:10.7910/DVN/ARKOTI"), 
+writeBin(get_file("PESenergy.csv", "doi:10.7910/DVN/ARKOTI"),
          "PESenergy.csv")
 ```
 

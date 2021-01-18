@@ -32,15 +32,25 @@ dataset_files(
 )
 }
 \arguments{
-\item{dataset}{An integer specifying a dataset identification number or an object of class \dQuote{dataverse_dataset}. The identification number is the dataset's persistent identification number (not the integer specifying a specific version of the dataset, such as returned by \code{\link{dataset_versions}}).}
+\item{dataset}{A character specifying a persistent identification ID for a dataset,
+for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
+\dQuote{dataverse_dataset} obtained by \code{dataverse_contents()}.}
 
 \item{version}{A character string specifying a version of the dataset. This can be one of \dQuote{:draft} (the current draft), \dQuote{:latest} (the latest draft, if it exists, or the latest published version), \dQuote{:latest-published} (the latest published version, ignoring any draft), or \dQuote{x.y} (where \samp{x} is a major version and \samp{y} is a minor version; the \samp{.y} can be omitted to obtain a major version). In lieu of this, a dataset's version-specific identification number can be used for the \code{dataset} argument.}
 
-\item{key}{A character string specifying a Dataverse server API key. If one is not specified, functions calling authenticated API endpoints will fail. Keys can be specified atomically or globally using \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
+\item{key}{A character string specifying a Dataverse server API key. If one
+is not specified, functions calling authenticated API endpoints will fail.
+Keys can be specified atomically or globally using
+\code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 
-\item{server}{A character string specifying a Dataverse server. There are multiple Dataverse installations, but the defaults is to use the Harvard Dataverse. This can be modified atomically or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
+\item{server}{A character string specifying a Dataverse server. There are
+multiple Dataverse installations, but the defaults is to use the Harvard
+Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
+or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 
-\item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
+\item{...}{Additional arguments passed to an HTTP request function, such as
+\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
+\code{\link[httr]{DELETE}}.}
 
 \item{block}{A character string specifying a metadata block to retrieve. By default this is \dQuote{citation}. Other values may be available, depending on the dataset, such as \dQuote{geospatial} or \dQuote{socialscience}.}
 }

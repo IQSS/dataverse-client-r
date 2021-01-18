@@ -1,170 +1,177 @@
 #' @rdname files
-#' @title Download File(s)
-#' @description Download Dataverse File(s)
+#'
+#' @title Download File
+#'
+#' @description Download Dataverse File(s). `get_file` is a general wrapper,
+#' and can take either dataverse objects, file IDs, or a filename and dataverse.
+#' `get_file_by_name` is a shorthand for running `get_file` by
+#' specifying a file name (`filename`) and dataset (`dataset`).
+#' `get_file_by_doi` obtains a file by its file DOI, bypassing the
+#' `dataset` argument.
+#'
+#' Internally, all functions download each file by `get_file_by_id`. `get_file_*`
+#' functions return a raw binary file, which cannot be readily analyzed in R.
+#' To use the objects as dataframes, see the `get_dataset_*` functions at \link{get_dataset}
+#'
 #' @details This function provides access to data files from a Dataverse entry.
-#' @param file An integer specifying a file identifier; or a vector of integers specifying file identifiers; or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset; or an object of class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
-#' @template ds
-#' @param format A character string specifying a file format. For \code{get_file}: by default, this is \dQuote{original} (the original file format). If \dQuote{RData} or \dQuote{prep} is used, an alternative is returned. If \dQuote{bundle}, a compressed directory containing a bundle of file formats is returned. For \code{get_file_metadata}, this is \dQuote{ddi}.
-#' @param vars A character vector specifying one or more variable names, used to extract a subset of the data.
+#'
+#' @param file An integer specifying a file identifier; or a vector of integers
+#' specifying file identifiers; or, if used with the prefix \code{"doi:"}, a
+#' character with the file-specific DOI; or, if used without the prefix, a
+#' filename accompanied by a dataset DOI in the `dataset` argument, or an object of
+#' class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
+#' @param dataset @kuriwaki, can you please add a description for this parameter?
+#' @param format A character string specifying a file format for download.
+#' by default, this is \dQuote{original} (the original file format). If `NULL`,
+#' no query is added, so ingested files are returned in their ingested TSV form.
+#' For tabular datasets, the option \dQuote{bundle} downloads the bundle
+#' of the original and archival versions, as well as the documentation.
+#' See <https://guides.dataverse.org/en/latest/api/dataaccess.html> for details.
+#' @param vars A character vector specifying one or more variable names, used to
+#' extract a subset of the data.
+#'
 #' @template envvars
 #' @template dots
-#' @return \code{get_file_metadata} returns a character vector containing a DDI metadata file. \code{get_file} returns a raw vector (or list of raw vectors, if \code{length(file) > 1}).
+#' @template ds
+#'
+#' @return \code{get_file} returns a raw vector (or list of raw vectors,
+#' if \code{length(file) > 1}), which can be saved locally with the `writeBin`
+#' function.  To load datasets into the R environment dataframe, see
+#' \link{get_dataframe_by_name}.
+#'
+#' @seealso To load the objects as datasets \link{get_dataframe_by_name}.
+#'
 #' @examples
 #' \dontrun{
-#' # download file from:
-#' # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
-#' monogan <- get_dataverse("monogan")
-#' monogan_data <- dataverse_contents(monogan)
-#' d1 <- get_dataset("doi:10.7910/DVN/ARKOTI")
-#' f <- get_file(d1$files$datafile$id[3])
 #'
-#' # check file metadata
-#' m1 <- get_file_metadata("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
-#' m2 <- get_file_metadata(2437257)
+#' # 1. Using filename and dataverse
+#' f1 <- get_file_by_name(
+#'   filename = "nlsw88.tab",
+#'   dataset  = "10.70122/FK2/PPIAXE",
+#'   server   = "demo.dataverse.org"
+#' )
 #'
-#' # retrieve file based on DOI and filename
-#' f2 <- get_file("constructionData.tab", "doi:10.7910/DVN/ARKOTI")
-#' f2 <- get_file(2692202)
+#' # 2. Using file DOI
+#' f2 <- get_file_by_doi(
+#'   filedoi  = "10.70122/FK2/PPIAXE/MHDB0O",
+#'   server   = "demo.dataverse.org"
+#' )
 #'
-#' # retrieve file based on "dataverse_file" object
-#' flist <- dataset_files(2692151)
-#' get_file(flist[[2]])
+#' # 3. Two-steps: Find ID from get_dataset
+#' d3 <- get_dataset("doi:10.70122/FK2/PPIAXE", server = "demo.dataverse.org")
+#' f3 <- get_file(d3$files$id[1], server = "demo.dataverse.org")
 #'
-#' # retrieve all files in a dataset in their original format (returns a list of raw vectors)
-#' file_ids <- get_dataset("doi:10.7910/DVN/CXOB4K")[['files']]$id
-#' f3 <- get_file(file_ids, format = "original")
-#' # read file as data.frame
-#' if (require("rio")) {
-#'   tmp <- tempfile(fileext = ".dta")
-#'   writeBin(f, tmp)
-#'   dat <- haven::read_dta(tmp)
+#' # 4. Retrieve multiple raw data in list
+#' f4_vec <- get_dataset(
+#'   "doi:10.70122/FK2/PPIAXE",
+#'   server = "demo.dataverse.org"
+#' )$files$id
 #'
-#'   # check UNF match
-#'   # if (require("UNF")) {
-#'   #  unf(dat) %unf% d1$files$datafile$UNF[3]
-#'   # }
+#' f4 <- get_file(f4_vec, server = "demo.dataverse.org")
+#' length(f4)
+#'
+#' # Write binary files
+#' # (see `get_dataframe_by_name` to load in environment)
+#' # The appropriate file extension needs to be assigned by the user.
+#' writeBin(f1, "nlsw88.dta")
+#' writeBin(f2, "nlsw88.dta")
+#'
+#' writeBin(f4[[1]], "nlsw88.rds") # originally a rds file
+#' writeBin(f4[[2]], "nlsw88.dta") # originally a dta file
 #' }
-#' }
-#' @importFrom utils unzip
+#'
 #' @export
 get_file <- function(
   file,
-  dataset    = NULL,
-  format     = c("original", "RData", "prep", "bundle"),
-  # thumb    = TRUE,
-  vars       = NULL,
-  key        = Sys.getenv("DATAVERSE_KEY"),
-  server     = Sys.getenv("DATAVERSE_SERVER"),
+  dataset       = NULL,
+  format        = c("original", "bundle"),
+  vars          = NULL,
+  key           = Sys.getenv("DATAVERSE_KEY"),
+  server        = Sys.getenv("DATAVERSE_SERVER"),
+  original      = TRUE,
   ...
 ) {
+
     format <- match.arg(format)
 
     # single file ID
     if (is.numeric(file))
       fileid <- file
 
-    # get file ID from 'dataset'
-    if (!is.numeric(file)) {
-        if (inherits(file, "dataverse_file")) {
-            fileid <- get_fileid(file, key = key, server = server)
-        } else if (is.null(dataset)) {
-            stop("When 'file' is a character string, dataset must be specified. Or, use a global fileid instead.")
-        } else {
-            fileid <- get_fileid(dataset, file, key = key, server = server, ...)
-        }
-    } else {
-      fileid <- file
-    }
+    # get file ID from 'dataset'. Streamline in feature relying on get_fileid
+    if (!is.numeric(file) & inherits(file, "dataverse_file"))
+      fileid <- get_fileid.dataverse_file(file, key = key, server = server)
 
+    if (!is.numeric(file) & !inherits(file, "dataverse_file") & !is.null(dataset))
+      fileid <- get_fileid.character(dataset, file, key = key, server = server, ...)
 
-    # # request multiple files -----
-    # if (length(fileid) > 1) {
-    #     fileid <- paste0(fileid, collapse = ",")
-    #     u <- paste0(api_url(server), "access/datafiles/", fileid)
-    #     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    #     httr::stop_for_status(r)
-    #     tempf <- tempfile(fileext = ".zip")
-    #     tempd <- tempfile()
-    #     dir.create(tempd)
-    #     on.exit(unlink(tempf), add = TRUE)
-    #     on.exit(unlink(tempd), add = TRUE)
-    #     writeBin(httr::content(r, as = "raw"), tempf)
-    #     to_extract <- utils::unzip(tempf, list = TRUE)
-    #     out <- lapply(to_extract$Name[to_extract$Name != "MANIFEST.TXT"], function(zipf) {
-    #       utils::unzip(zipfile = tempf, files = zipf, exdir = tempd)
-    #       readBin(file.path(tempd, zipf), "raw", n = 1e8)
-    #     })
-    #     return(out)
-    # }
-
-    # downloading files sequentially and add the raw vectors to a list
-    out <- vector("list", length(fileid))
-    for (i in 1:length(fileid)) {
-        if (format == "bundle") {
-            u <- paste0(api_url(server), "access/datafile/bundle/", fileid[i])
-            r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-        }
-        if (format != "bundle") {
-            u <- paste0(api_url(server), "access/datafile/", fileid[i])
-            query <- list()
-            if (!is.null(vars)) {
-                query$vars <- paste0(vars, collapse = ",")
-            }
-            if (!is.null(format)) {
-                query$format <- match.arg(format)
-            }
-
-            # request single file in non-bundle format ----
-            # add query if ingesting a tab (detect from original file name)
-            if (length(query) == 1 & grepl("\\.tab$", file[i])) {
-                r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
-            } else {
-                # do not add query if not an ingestion file
-                r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-            }
-        }
-        httr::stop_for_status(r)
-        out[[i]] <-  httr::content(r, as = "raw")
-    }
-    # return the raw vector if there's a single file
-    if (length(out) == 1) {
-      return (out[[1]])
-    }
-    else {
-      # return a list of raw vectors otherwise
-      return (out)
-    }
-  }
-
-get_file_name_from_header <- function(x) {
-  gsub("\"", "", strsplit(httr::headers(x)[["content-type"]], "name=")[[1]][2])
-}
-
-#' @rdname files
-#' @import xml2
-#' @export
-get_file_metadata <- function(
-  file,
-  dataset  = NULL,
-  format   = c("ddi", "preprocessed"),
-  key      = Sys.getenv("DATAVERSE_KEY"),
-  server   = Sys.getenv("DATAVERSE_SERVER"),
-  ...
-) {
-    # get file ID from doi
-    if (!is.numeric(file)) {
-      if (inherits(file, "dataverse_file")) {
-        file <- get_fileid(file)
-      } else if (is.null(dataset)) {
-        stop("When 'file' is a character string, dataset must be specified. Or, use a global fileid instead.")
+    if (!is.numeric(file) & !inherits(file, "dataverse_file") & is.null(dataset)) {
+      if (grepl(x = file, pattern = "^doi")) {
+        fileid <- file # doi is allowed
       } else {
-        file <- get_fileid(dataset, file, key = key, server = server, ...)
+        stop("When 'file' is a character (non-global ID), dataset must be specified.")
       }
     }
-    format <- match.arg(format)
-    u <- paste0(api_url(server), "access/datafile/", file, "/metadata/", format)
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
-    out <- httr::content(r, as = "text", encoding = "UTF-8")
-    return(out)
+
+    # Main function. Call get_file_by_id
+    out <- vector("list", length(fileid))
+
+    for (i in seq_along(fileid)) {
+      out[[i]] <- get_file_by_id(
+        fileid      = fileid[i],
+        dataset     = dataset,
+        format      = format,
+        vars        = vars,
+        key         = key,
+        server      = server,
+        original    = original,
+        ...
+      )
+    }
+
+    if (length(out) == 1L) {    # return the raw vector if there's a single file
+      return(out[[1]])
+    } else {
+      return(out) # return a list of raw vectors otherwise
+    }
   }
+
+
+#' @rdname files
+#'
+#' @param filename Filename of the dataset, with file extension as shown in Dataverse
+#' (for example, if nlsw88.dta was the original but is displayed as the ingested
+#' nlsw88.tab, use the ingested version.)
+#'
+#' @export
+get_file_by_name <- function (
+  filename,
+  dataset,
+  format        = c("original", "bundle"),
+  vars          = NULL,
+  key           = Sys.getenv("DATAVERSE_KEY"),
+  server        = Sys.getenv("DATAVERSE_SERVER"),
+  original      = TRUE,
+  ...
+) {
+  format <- match.arg(format)
+
+
+  # retrieve ID
+  fileid <- get_fileid.character(
+    x       = dataset,
+    file    = filename,
+    server  = server,
+    ...
+  )
+
+  get_file_by_id(
+    fileid,
+    format      = format,
+    vars        = vars,
+    key         = key,
+    server      = server,
+    original    = original,
+    ...
+  )
+}
