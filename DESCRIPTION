@@ -15,16 +15,16 @@ Authors@R: c(
     comment = c(ORCID = "0000-0003-4097-6326")
   ),
   person(
-    "Philip", "Durbin",
-    role = c("aut"),
-    email = "philipdurbin@gmail.com",
-    comment = c(ORCID = "0000-0002-9528-9470")
-  ),
-  person(
     "Shiro", "Kuriwaki",
     role = c("aut"),
     email = "shirokuriwaki@gmail.com",
     comment = c(ORCID = "0000-0002-5687-2647")
+  ),
+  person(
+    "Philip", "Durbin",
+    role = c("aut"),
+    email = "philipdurbin@gmail.com",
+    comment = c(ORCID = "0000-0002-9528-9470")
   ),
   person(
     "Sebastian", "Karcher",
