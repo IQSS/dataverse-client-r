@@ -1,5 +1,5 @@
 Package: dataverse
-Version: 0.2.1.9002
+Version: 0.3.0
 Title: Client for Dataverse 4 Repositories
 Authors@R: c(
   person(
@@ -15,16 +15,16 @@ Authors@R: c(
     comment = c(ORCID = "0000-0003-4097-6326")
   ),
   person(
-    "Philip", "Durbin",
-    role = c("aut"),
-    email = "philipdurbin@gmail.com",
-    comment = c(ORCID = "0000-0002-9528-9470")
-  ),
-  person(
     "Shiro", "Kuriwaki",
     role = c("aut"),
     email = "shirokuriwaki@gmail.com",
     comment = c(ORCID = "0000-0002-5687-2647")
+  ),
+  person(
+    "Philip", "Durbin",
+    role = c("aut"),
+    email = "philipdurbin@gmail.com",
+    comment = c(ORCID = "0000-0002-9528-9470")
   ),
   person(
     "Sebastian", "Karcher",
@@ -49,13 +49,15 @@ Suggests:
     haven,
     knitr,
     purrr,
+    rmarkdown,
     testthat,
     UNF,
     yaml
-Description: Provides access to Dataverse version 4 APIs <https://dataverse.org/>,
-    enabling data search, retrieval, and deposit. For Dataverse versions <= 4.0,
-    use the deprecated 'dvn' package <https://cran.r-project.org/package=dvn>.
+Description: Provides access to Dataverse APIs <https://dataverse.org/> (versions 4-5),
+    enabling data search, retrieval, and deposit. For Dataverse versions <= 3.0,
+    use the archived 'dvn' package <https://cran.r-project.org/package=dvn>.
 License: GPL-2
+LazyData: true
 URL: https://github.com/iqss/dataverse-client-r
 BugReports: https://github.com/iqss/dataverse-client-r/issues
 VignetteBuilder: knitr

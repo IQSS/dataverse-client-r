@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -102,7 +102,7 @@
 
     
     
-<p>This vignette shows how to download data from Dataverse using the dataverse package. We’ll focus on a Dataverse repository that contains supplemental files for <a href="https://spia.uga.edu/faculty-member/jamie-monogan/">Jamie Monogan</a>’s book <a href="https://www.springer.com/gb/book/9783319234458"><em>Political Analysis Using R</em></a>, which is stored at Harvard University’s <a href="https://dataverse.harvard.edu/">IQSS Dataverse Network</a>:</p>
+<p>This vignette shows how to download data from Dataverse using the dataverse package. We’ll focus on a Dataverse repository that contains supplemental files for <a href="https://www.springer.com/gb/book/9783319234458"><em>Political Analysis Using R</em></a>, which is stored at Harvard University’s <a href="https://dataverse.harvard.edu/">IQSS Dataverse Network</a>:</p>
 <blockquote>
 <p>Monogan, Jamie, 2015, “Political Analysis Using R: Example Code and Data, Plus Data for Practice Problems”, <a href="https://doi.org/10.7910/DVN/ARKOTI">doi:10.7910/DVN/ARKOTI</a>, Harvard Dataverse, V1, UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==</p>
 </blockquote>
@@ -294,14 +294,14 @@
 <div id="reusing-files-and-reproducing-analysis" class="section level2">
 <h2 class="hasAnchor">
 <a href="#reusing-files-and-reproducing-analysis" class="anchor"></a>Reusing Files and Reproducing Analysis</h2>
-<p>To reproduce the analysis, we can simply run the code file either as a <code><a href="https://rdrr.io/r/base/system.html">system()</a></code> call or directly in R using <code><a href="https://rdrr.io/r/base/source.html">source()</a></code> (note this particular file begins with an <code><a href="https://rdrr.io/r/base/rm.html">rm()</a></code> call so you may want to run it in a <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/environment.html">new enviroment</a>):</p>
+<p>To reproduce the analysis, we can simply run the code file either as a <code><a href="https://rdrr.io/r/base/system.html">system()</a></code> call or directly in R using <code><a href="https://rdrr.io/r/base/source.html">source()</a></code> (note this particular file begins with an <code><a href="https://rdrr.io/r/base/rm.html">rm()</a></code> call so you may want to run it in a <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/environment.html">new environment</a>):</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Option 1</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span><span class="op">(</span><span class="st">"Rscript chapter03.R"</span><span class="op">)</span>
 
 <span class="co"># Option 2</span>
 <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"chapter03.R"</span>, local<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/environment.html">new.env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Any well-produced set of analysis reproduction files, like this one, should run without error once the data and code are in-hand. Troubleshooting anlaysis files is beyond the scope of this vignette, but common sources are</p>
+<p>Any well-produced set of analysis reproduction files, like this one, should run without error once the data and code are in-hand. Troubleshooting analysis files is beyond the scope of this vignette, but common sources are</p>
 <ol style="list-style-type: decimal">
 <li>The working directory is not set the same as the author intended. This could affect code files not finding the relative position of datasets or of other code files.</li>
 <li>Your local machine hasn’t downloaded or installed all the necessary datasets and packages.</li>

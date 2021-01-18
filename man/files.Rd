@@ -5,7 +5,7 @@
 \alias{get_file_by_name}
 \alias{get_file_by_id}
 \alias{get_file_by_doi}
-\title{Download File}
+\title{Download dataverse file as a raw binary}
 \usage{
 get_file(
   file,
@@ -107,19 +107,20 @@ function.  To load datasets into the R environment dataframe, see
 \link{get_dataframe_by_name}.
 }
 \description{
-Download Dataverse File(s). \code{get_file} is a general wrapper,
+Download Dataverse File(s). \verb{get_file_*}
+functions return a raw binary file, which cannot be readily analyzed in R.
+To use the objects as dataframes, see the \verb{get_dataset_*} functions at
+\link{get_dataset} instead.
+}
+\details{
+This function provides access to data files from a Dataverse entry.
+\code{get_file} is a general wrapper,
 and can take either dataverse objects, file IDs, or a filename and dataverse.
+Internally, all functions download each file by \code{get_file_by_id}.
 \code{get_file_by_name} is a shorthand for running \code{get_file} by
 specifying a file name (\code{filename}) and dataset (\code{dataset}).
 \code{get_file_by_doi} obtains a file by its file DOI, bypassing the
 \code{dataset} argument.
-
-Internally, all functions download each file by \code{get_file_by_id}. \verb{get_file_*}
-functions return a raw binary file, which cannot be readily analyzed in R.
-To use the objects as dataframes, see the \verb{get_dataset_*} functions at \link{get_dataset}
-}
-\details{
-This function provides access to data files from a Dataverse entry.
 }
 \examples{
 \dontrun{

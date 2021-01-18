@@ -19,3 +19,4 @@ man-roxygen/*
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^cran-comments\.md$

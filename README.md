@@ -1,4 +1,4 @@
-R Client for Dataverse 4 Repositories
+R Client for Dataverse Repositories
 ================
 
 [![CRAN
@@ -9,14 +9,13 @@ Status](https://travis-ci.org/IQSS/dataverse-client-r.png?branch=master)](https:
 [![codecov.io](https://codecov.io/github/IQSS/dataverse-client-r/coverage.svg?branch=master)](https://codecov.io/github/IQSS/dataverse-client-r?branch=master)
 
 [![Dataverse Project
-logo](https://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png
-"Dataverse Project")](https://dataverse.org)
+logo](https://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png)](https://dataverse.org)
 
 The **dataverse** package provides access to
-[Dataverse 4](https://dataverse.org/) APIs, enabling data search,
-retrieval, and deposit, thus allowing R users to integrate public data
-sharing into the reproducible research workflow. **dataverse** is the
-next-generation iteration of [the **dvn**
+[Dataverse](https://dataverse.org/) APIs (versions 4-5), enabling data
+search, retrieval, and deposit, thus allowing R users to integrate
+public data sharing into the reproducible research workflow.
+**dataverse** is the next-generation iteration of [the **dvn**
 package](https://cran.r-project.org/package=dvn), which works with
 Dataverse 3 (“Dataverse Network”) applications. **dataverse** includes
 numerous improvements for data search, retrieval, and deposit, including
@@ -35,7 +34,7 @@ library("dataverse")
 
 #### Keys
 
-Some features of the Dataverse 4 API are public and require no
+Some features of the Dataverse API are public and require no
 authentication. This means in many cases you can search for and retrieve
 data without a Dataverse account for that a specific Dataverse
 installation. But, other features require a Dataverse account for the
@@ -53,12 +52,13 @@ Sys.setenv("DATAVERSE_KEY" = "examplekey12345")
 
 #### Server
 
-Because [there are many Dataverse installations](https://dataverse.org/),
-all functions in the R client require specifying what server
-installation you are interacting with. This can be set by default with
-an environment variable, `DATAVERSE_SERVER`. This should be the
-Dataverse server, without the “https” prefix or the “/api” URL path,
-etc. For example, the Harvard Dataverse can be used by setting:
+Because [there are many Dataverse
+installations](https://dataverse.org/), all functions in the R client
+require specifying what server installation you are interacting with.
+This can be set by default with an environment variable,
+`DATAVERSE_SERVER`. This should be the Dataverse server, without the
+“https” prefix or the “/api” URL path, etc. For example, the Harvard
+Dataverse can be used by setting:
 
 ``` r
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
@@ -99,7 +99,7 @@ nlsw <-
 
     ## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.
 
-    ##
+    ## 
     ## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────
     ## cols(
     ##   idcode = col_double(),
@@ -164,7 +164,8 @@ nlsw_original <-
   )
 ```
 
-Note that even though the file prefix is “.tab”, we use `read_dta`.
+Note that even though the file prefix is “.tab”, we use
+`haven::read_dta`.
 
 Of course, when the dataset is not ingested (such as a Rds file), users
 would always need to specify an `.f` argument for the specific file.
@@ -183,7 +184,7 @@ class(nlsw_tsv$race) # tab ingested version only has numeric data
 attr(nlsw_original$race, "labels") # original dta has value labels
 ```
 
-    ## white black other
+    ## white black other 
     ##     1     2     3
 
 #### Reading a dataset as a binary file.
@@ -220,7 +221,7 @@ get_dataset(
 )
 ```
 
-    ## Dataset (182162):
+    ## Dataset (182162): 
     ## Version: 1.1, RELEASED
     ## Release Date: 2020-12-30T00:00:24Z
     ## License: CC0
@@ -256,13 +257,12 @@ subsequent pages, specify `start`.
 
 ### Data Archiving
 
-Dataverse provides two - basically unrelated - workflows for managing 
-(adding, documenting, and publishing) datasets. The first is built on 
-[SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a 
-new dataset listing, you will have to first initialize a dataset entry with 
-some metadata, add one or more files to the dataset, and then publish 
-it. This looks something like the following:
-
+Dataverse provides two - basically unrelated - workflows for managing
+(adding, documenting, and publishing) datasets. The first is built on
+[SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a
+new dataset listing, you will have to first initialize a dataset entry
+with some metadata, add one or more files to the dataset, and then
+publish it. This looks something like the following:
 
 ``` r
 # retrieve your service document
@@ -324,6 +324,6 @@ Scott Chamberlain’s [oai](https://cran.r-project.org/package=oai), which
 offer metadata download from any web repository that is compliant with
 the [Open Archives Initiative](http://www.openarchives.org/) standards.
 Additionally, [rdryad](https://cran.r-project.org/package=rdryad) uses
-OAIHarvester to interface with [Dryad](http://datadryad.org/). The
+OAIHarvester to interface with [Dryad](https://datadryad.org/stash). The
 [rfigshare](https://cran.r-project.org/package=rfigshare) package works
 in a similar spirit to **dataverse** with <https://figshare.com/>.

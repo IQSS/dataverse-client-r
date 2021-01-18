@@ -1,5 +1,5 @@
 ---
-title: "R Client for Dataverse 4 Repositories"
+title: "R Client for Dataverse Repositories"
 output: github_document
 ---
 
@@ -11,9 +11,9 @@ Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 
 [![CRAN Version](https://www.r-pkg.org/badges/version/dataverse)](https://cran.r-project.org/package=dataverse) ![Downloads](https://cranlogs.r-pkg.org/badges/dataverse) [![Travis-CI Build Status](https://travis-ci.org/IQSS/dataverse-client-r.png?branch=master)](https://travis-ci.org/IQSS/dataverse-client-r) [![codecov.io](https://codecov.io/github/IQSS/dataverse-client-r/coverage.svg?branch=master)](https://codecov.io/github/IQSS/dataverse-client-r?branch=master)
 
-[![Dataverse Project logo](https://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png "Dataverse Project")](https://dataverse.org)
+[![Dataverse Project logo](https://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png)](https://dataverse.org)
 
-The **dataverse** package provides access to [Dataverse 4](https://dataverse.org/) APIs, enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. **dataverse** is the next-generation iteration of [the **dvn** package](https://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. **dataverse** includes numerous improvements for data search, retrieval, and deposit, including use of the (currently in development) **sword** package for data deposit and the **UNF** package for data fingerprinting.
+The **dataverse** package provides access to [Dataverse](https://dataverse.org/) APIs (versions 4-5), enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. **dataverse** is the next-generation iteration of [the **dvn** package](https://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. **dataverse** includes numerous improvements for data search, retrieval, and deposit, including use of the (currently in development) **sword** package for data deposit and the **UNF** package for data fingerprinting.
 
 ### Getting Started
 
@@ -32,7 +32,7 @@ library("dataverse")
 
 #### Keys
 
-Some features of the Dataverse 4 API are public and require no authentication. This means in many cases you can search for and retrieve data without a Dataverse account for that a specific Dataverse installation. But, other features require a Dataverse account for the specific server installation of the Dataverse software, and an API key linked to that account. Instructions for obtaining an account and setting up an API key are available in the [Dataverse User Guide](https://guides.dataverse.org/en/latest/user/account.html). (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called `DATAVERSE_KEY`. It can be set within R using:
+Some features of the Dataverse API are public and require no authentication. This means in many cases you can search for and retrieve data without a Dataverse account for that a specific Dataverse installation. But, other features require a Dataverse account for the specific server installation of the Dataverse software, and an API key linked to that account. Instructions for obtaining an account and setting up an API key are available in the [Dataverse User Guide](https://guides.dataverse.org/en/latest/user/account.html). (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called `DATAVERSE_KEY`. It can be set within R using:
 
 ``` r
 Sys.setenv("DATAVERSE_KEY" = "examplekey12345")

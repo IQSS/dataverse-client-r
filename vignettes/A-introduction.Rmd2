@@ -56,7 +56,7 @@ You can search for and retrieve data without a Dataverse account for that a spec
 dataverse_search("ecological inference")[c("name", "type", "description")]
 ```
 
-The [search vignette](search.html) describes this functionality in more detail. To retrieve a data file, we need to investigate the dataset being returned and look at what files it contains using a variety of functions, the last of which - `get_file()` - can retrieve the files as raw vectors:
+The [search vignette](B-search.html) describes this functionality in more detail. To retrieve a data file, we need to investigate the dataset being returned and look at what files it contains using a variety of functions, the last of which - `get_file()` - can retrieve the files as raw vectors:
 
 ```R
 get_dataset()

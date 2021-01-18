@@ -1,4 +1,10 @@
-# CHANGES TO dataverse 0.2.2 (upcoming)
+# CHANGES TO dataverse 0.3.0
+
+New Methods
+
+* Add new `get_dataframe_*()` methods (#48, #66)
+
+Small updates
 
 * Make filter queries (fq) work in `dataverse_search` (#36 @adam3smith)
 * Update maintainer to Will Beasley (wibeasley@hotmail.com) (#38)

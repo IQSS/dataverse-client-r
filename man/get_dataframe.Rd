@@ -4,7 +4,7 @@
 \alias{get_dataframe_by_name}
 \alias{get_dataframe_by_id}
 \alias{get_dataframe_by_doi}
-\title{Get file from dataverse and convert it into a dataframe or tibble}
+\title{Download dataverse file as a dataframe}
 \usage{
 get_dataframe_by_name(
   filename,
@@ -28,10 +28,10 @@ for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
 
 \item{.f}{The function to used for reading in the raw dataset. This user
 must choose the appropriate function: for example if the target is a .rds
-file, then \code{.f} should be \code{readRDS} or \code{readr::read_}rds`.}
+file, then \code{.f} should be \code{readRDS} or \code{readr::read_rds}.}
 
 \item{original}{A logical, defaulting to TRUE. Whether to read the ingested,
-archival version of the dataset if one exists. The archival versions are tab-delimited
+archival version of the datafile if one exists. The archival versions are tab-delimited
 \code{.tab} files so if \code{original = FALSE}, \code{.f} is set to \code{readr::read_tsv}.
 If functions to read the original version is available, then \code{original = TRUE}
 with a specified \code{.f} is better.}
@@ -68,39 +68,41 @@ or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")
 \code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}}
 }
 \description{
-\code{get_dataframe_by_id}, if you know the numeric ID of the dataset, or instead
-\code{get_dataframe_by_name} if you know the filename and doi. The dataset
+Use \code{get_dataframe_by_name} if you know the name of the datafile and the DOI
+of the dataset. Use \code{get_dataframe_by_doi} if you know the DOI of the datafile
+itself. Use \code{get_dataframe_by_id} if you know the numeric ID of the
+datafile.
 }
 \examples{
-
 # Retrieve data.frame from dataverse DOI and file name
-df_from_rds_ingested <-
+df_tab <-
   get_dataframe_by_name(
     filename = "roster-bulls-1996.tab",
     dataset  = "doi:10.70122/FK2/HXJVJU",
     server   = "demo.dataverse.org"
   )
 
-# Retrieve the same data.frame from dataverse + file DOI
-df_from_rds_ingested_by_doi <-
+# Retrieve the same file from file DOI
+df_tab <-
   get_dataframe_by_doi(
     filedoi      = "10.70122/FK2/HXJVJU/SA3Z2V",
     server       = "demo.dataverse.org"
   )
 
+# Do not run when submitting to CRAN, because the whole
+# example sometimes takes longer than 10 sec.
+\dontrun{
 # Retrieve ingested file originally a Stata dta
 df_from_stata_ingested <-
   get_dataframe_by_name(
     filename   = "nlsw88.tab",
     dataset    = "doi:10.70122/FK2/PPIAXE",
     server     = "demo.dataverse.org"
- )
-
+  )
 
 # To use the original file version, or for non-ingested data,
 # please specify `original = TRUE` and specify a function in .f.
 
-# A data.frame is still returned, but the
 if (requireNamespace("readr", quietly = TRUE)) {
   df_from_rds_original <-
     get_dataframe_by_name(
@@ -109,17 +111,29 @@ if (requireNamespace("readr", quietly = TRUE)) {
       server     = "demo.dataverse.org",
       original   = TRUE,
       .f         = readr::read_rds
-   )
+    )
 }
 
+# Get Stata file as original
 if (requireNamespace("haven", quietly = TRUE)) {
-  df_from_stata_original <-
+  df_stata_original <-
     get_dataframe_by_name(
       filename   = "nlsw88.tab",
       dataset    = "doi:10.70122/FK2/PPIAXE",
       server     = "demo.dataverse.org",
       original   = TRUE,
       .f         = haven::read_dta
-   )
+    )
 }
+
+# Stata file as ingested file (less information than original)
+df_stata_ingested <-
+  get_dataframe_by_name(
+    filename   = "nlsw88.tab",
+    dataset    = "doi:10.70122/FK2/PPIAXE",
+    server     = "demo.dataverse.org"
+ )
+
+}
+
 }

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -121,7 +121,7 @@
 <div id="quick-start" class="section level2">
 <h2 class="hasAnchor">
 <a href="#quick-start" class="anchor"></a>Quick Start</h2>
-<p>Dataverse has some terminology that is worth quickly reviewing before showing how to work with Dataverse in R. Dataverse is an application that can be installed in many places. As a result, <strong>dataverse</strong> can work with any instllation but you need to specify which installation you want to work with. This can be set by default with an environment variable, <code>DATAVERSE_SERVER</code>:</p>
+<p>Dataverse has some terminology that is worth quickly reviewing before showing how to work with Dataverse in R. Dataverse is an application that can be installed in many places. As a result, <strong>dataverse</strong> can work with any installation but you need to specify which installation you want to work with. This can be set by default with an environment variable, <code>DATAVERSE_SERVER</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/iqss/dataverse-client-r">"dataverse"</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></code></pre></div>
@@ -130,7 +130,7 @@
 <p>You can search for and retrieve data without a Dataverse account for that a specific Dataverse installation. For example, to search for data files or datasets that mention “ecological inference”, we can just do:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"ecological inference"</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"type"</span>, <span class="st">"description"</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<p>The <a href="search.html">search vignette</a> describes this functionality in more detail. To retrieve a data file, we need to investigate the dataset being returned and look at what files it contains using a variety of functions, the last of which - <code><a href="../reference/get_file.html">get_file()</a></code> - can retrieve the files as raw vectors:</p>
+<p>The <a href="B-search.html">search vignette</a> describes this functionality in more detail. To retrieve a data file, we need to investigate the dataset being returned and look at what files it contains using a variety of functions, the last of which - <code><a href="../reference/get_file.html">get_file()</a></code> - can retrieve the files as raw vectors:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_dataset.html">get_dataset</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/get_dataset.html">dataset_files</a></span><span class="op">(</span><span class="op">)</span>
