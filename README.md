@@ -1,4 +1,4 @@
-R Client for Dataverse 4 Repositories
+R Client for Dataverse Repositories
 ================
 
 [![CRAN
@@ -12,10 +12,10 @@ Status](https://travis-ci.org/IQSS/dataverse-client-r.png?branch=master)](https:
 logo](https://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png)](https://dataverse.org)
 
 The **dataverse** package provides access to
-[Dataverse 4](https://dataverse.org/) APIs, enabling data search,
-retrieval, and deposit, thus allowing R users to integrate public data
-sharing into the reproducible research workflow. **dataverse** is the
-next-generation iteration of [the **dvn**
+[Dataverse](https://dataverse.org/) APIs (versions 4-5), enabling data
+search, retrieval, and deposit, thus allowing R users to integrate
+public data sharing into the reproducible research workflow.
+**dataverse** is the next-generation iteration of [the **dvn**
 package](https://cran.r-project.org/package=dvn), which works with
 Dataverse 3 (“Dataverse Network”) applications. **dataverse** includes
 numerous improvements for data search, retrieval, and deposit, including
@@ -34,7 +34,7 @@ library("dataverse")
 
 #### Keys
 
-Some features of the Dataverse 4 API are public and require no
+Some features of the Dataverse API are public and require no
 authentication. This means in many cases you can search for and retrieve
 data without a Dataverse account for that a specific Dataverse
 installation. But, other features require a Dataverse account for the
@@ -257,13 +257,12 @@ subsequent pages, specify `start`.
 
 ### Data Archiving
 
-Dataverse provides two - basically unrelated - workflows for managing 
-(adding, documenting, and publishing) datasets. The first is built on 
-[SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a 
-new dataset listing, you will have to first initialize a dataset entry with 
-some metadata, add one or more files to the dataset, and then publish 
-it. This looks something like the following:
-
+Dataverse provides two - basically unrelated - workflows for managing
+(adding, documenting, and publishing) datasets. The first is built on
+[SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a
+new dataset listing, you will have to first initialize a dataset entry
+with some metadata, add one or more files to the dataset, and then
+publish it. This looks something like the following:
 
 ``` r
 # retrieve your service document
