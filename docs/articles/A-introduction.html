@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -130,7 +130,7 @@
 <p>You can search for and retrieve data without a Dataverse account for that a specific Dataverse installation. For example, to search for data files or datasets that mention “ecological inference”, we can just do:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"ecological inference"</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"type"</span>, <span class="st">"description"</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<p>The <a href="search.html">search vignette</a> describes this functionality in more detail. To retrieve a data file, we need to investigate the dataset being returned and look at what files it contains using a variety of functions, the last of which - <code><a href="../reference/get_file.html">get_file()</a></code> - can retrieve the files as raw vectors:</p>
+<p>The <a href="B-search.html">search vignette</a> describes this functionality in more detail. To retrieve a data file, we need to investigate the dataset being returned and look at what files it contains using a variety of functions, the last of which - <code><a href="../reference/get_file.html">get_file()</a></code> - can retrieve the files as raw vectors:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_dataset.html">get_dataset</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/get_dataset.html">dataset_files</a></span><span class="op">(</span><span class="op">)</span>
