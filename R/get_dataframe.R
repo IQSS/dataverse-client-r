@@ -9,7 +9,7 @@
 #' `"roster-bulls-1996.tab"`.
 #' @param .f The function to used for reading in the raw dataset. This user
 #' must choose the appropriate function: for example if the target is a .rds
-#' file, then `.f` should be `readRDS` or `readr::read_`rds`.
+#' file, then `.f` should be `readRDS` or `readr::read_rds`.
 #' @param original A logical, defaulting to TRUE. Whether to read the ingested,
 #' archival version of the dataset if one exists. The archival versions are tab-delimited
 #' `.tab` files so if `original = FALSE`, `.f` is set to `readr::read_tsv`.

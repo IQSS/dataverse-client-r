@@ -28,7 +28,7 @@ for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
 
 \item{.f}{The function to used for reading in the raw dataset. This user
 must choose the appropriate function: for example if the target is a .rds
-file, then \code{.f} should be \code{readRDS} or \code{readr::read_}rds`.}
+file, then \code{.f} should be \code{readRDS} or \code{readr::read_rds}.}
 
 \item{original}{A logical, defaulting to TRUE. Whether to read the ingested,
 archival version of the dataset if one exists. The archival versions are tab-delimited
