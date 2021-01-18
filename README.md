@@ -256,12 +256,13 @@ subsequent pages, specify `start`.
 
 ### Data Archiving
 
-Dataverse provides two - basically unrelated - workflows for managing
-(adding, documenting, and publishing) datasets. The first is built on
-[SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a
-new dataset listing, you will have first initialize a dataset entry with
-some metadata, add one or more files to the dataset, and then publish
+Dataverse provides two - basically unrelated - workflows for managing 
+(adding, documenting, and publishing) datasets. The first is built on 
+[SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a 
+new dataset listing, you will have to first initialize a dataset entry with 
+some metadata, add one or more files to the dataset, and then publish 
 it. This looks something like the following:
+
 
 ``` r
 # retrieve your service document
