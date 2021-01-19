@@ -13,20 +13,23 @@ Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 
 [![Dataverse Project logo](https://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png)](https://dataverse.org)
 
-The **dataverse** package provides access to [Dataverse](https://dataverse.org/) APIs (versions 4-5), enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. **dataverse** is the next-generation iteration of [the **dvn** package](https://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. **dataverse** includes numerous improvements for data search, retrieval, and deposit, including use of the (currently in development) **sword** package for data deposit and the **UNF** package for data fingerprinting.
+The **dataverse** package provides access to [Dataverse](https://dataverse.org/) APIs (versions 4+), enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. **dataverse** is the next-generation iteration of [the **dvn** package](https://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. **dataverse** includes numerous improvements for data search, retrieval, and deposit, including use of the (currently in development) **sword** package for data deposit and the **UNF** package for data fingerprinting.
 
 ### Getting Started
 
-You can find a stable 2017 release on [CRAN](https://cran.r-project.org/package=dataverse), or install the latest development version from GitHub:
+You can find a stable release on [CRAN](https://cran.r-project.org/package=dataverse), or install the latest development version from [GitHub](https://github.com/iqss/dataverse-client-r/):
 
-```{r, echo = FALSE, eval = FALSE}
-if (!require("remotes")) {
-  install.packages("remotes")
-}
+
+```{r, eval = FALSE}
+# Install from CRAN
+install.packages("dataverse")
+
+# Install from GitHub
+if (!require("remotes")) install.packages("remotes")
 remotes::install_github("iqss/dataverse-client-r")
 ```
 
-```{r}
+```{r, eval = TRUE, echo = FALSE}
 library("dataverse")
 ```
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download File — get_file • dataverse</title>
+<title>Download dataverse file as a raw binary — get_file • dataverse</title>
 
 
 <!-- jquery -->
@@ -39,16 +39,11 @@
 
 
 
-<meta property="og:title" content="Download File — get_file" />
-<meta property="og:description" content="Download Dataverse File(s). get_file is a general wrapper,
-and can take either dataverse objects, file IDs, or a filename and dataverse.
-get_file_by_name is a shorthand for running get_file by
-specifying a file name (filename) and dataset (dataset).
-get_file_by_doi obtains a file by its file DOI, bypassing the
-dataset argument.
-Internally, all functions download each file by get_file_by_id. get_file_*
+<meta property="og:title" content="Download dataverse file as a raw binary — get_file" />
+<meta property="og:description" content="Download Dataverse File(s). get_file_*
 functions return a raw binary file, which cannot be readily analyzed in R.
-To use the objects as dataframes, see the get_dataset_* functions at get_dataset" />
+To use the objects as dataframes, see the get_dataset_* functions at
+get_dataset instead." />
 
 
 
@@ -140,21 +135,16 @@ To use the objects as dataframes, see the get_dataset_* functions at get_dataset
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download File</h1>
+    <h1>Download dataverse file as a raw binary</h1>
     <small class="dont-index">Source: <a href='https://github.com/iqss/dataverse-client-r/blob/master/R/get_file.R'><code>R/get_file.R</code></a>, <a href='https://github.com/iqss/dataverse-client-r/blob/master/R/get_file_by_id.R'><code>R/get_file_by_id.R</code></a></small>
     <div class="hidden name"><code>files.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Download Dataverse File(s). <code>get_file</code> is a general wrapper,
-and can take either dataverse objects, file IDs, or a filename and dataverse.
-<code>get_file_by_name</code> is a shorthand for running <code>get_file</code> by
-specifying a file name (<code>filename</code>) and dataset (<code>dataset</code>).
-<code>get_file_by_doi</code> obtains a file by its file DOI, bypassing the
-<code>dataset</code> argument.</p>
-<p>Internally, all functions download each file by <code>get_file_by_id</code>. <code>get_file_*</code>
+    <p>Download Dataverse File(s). <code>get_file_*</code>
 functions return a raw binary file, which cannot be readily analyzed in R.
-To use the objects as dataframes, see the <code>get_dataset_*</code> functions at <a href='get_dataset.html'>get_dataset</a></p>
+To use the objects as dataframes, see the <code>get_dataset_*</code> functions at
+<a href='get_dataset.html'>get_dataset</a> instead.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_file</span><span class='op'>(</span>
@@ -284,7 +274,14 @@ function.  To load datasets into the R environment dataframe, see
 <a href='get_dataframe_by_name.html'>get_dataframe_by_name</a>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function provides access to data files from a Dataverse entry.</p>
+    <p>This function provides access to data files from a Dataverse entry.
+<code>get_file</code> is a general wrapper,
+and can take either dataverse objects, file IDs, or a filename and dataverse.
+Internally, all functions download each file by <code>get_file_by_id</code>.
+<code>get_file_by_name</code> is a shorthand for running <code>get_file</code> by
+specifying a file name (<code>filename</code>) and dataset (<code>dataset</code>).
+<code>get_file_by_doi</code> obtains a file by its file DOI, bypassing the
+<code>dataset</code> argument.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>To load the objects as datasets <a href='get_dataframe_by_name.html'>get_dataframe_by_name</a>.</p></div>
@@ -340,7 +337,7 @@ function.  To load datasets into the R environment dataframe, see
 
       <footer>
       <div class="copyright">
-  <p>Developed by Will Beasley, Thomas J. Leeper, Philip Durbin, Shiro Kuriwaki, Sebastian Karcher.</p>
+  <p>Developed by Will Beasley, Thomas J. Leeper, Shiro Kuriwaki, Philip Durbin, Sebastian Karcher.</p>
 </div>
 
 <div class="pkgdown">
