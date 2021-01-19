@@ -12,7 +12,7 @@ Status](https://travis-ci.org/IQSS/dataverse-client-r.png?branch=master)](https:
 logo](https://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png)](https://dataverse.org)
 
 The **dataverse** package provides access to
-[Dataverse](https://dataverse.org/) APIs (versions 4-5), enabling data
+[Dataverse](https://dataverse.org/) APIs (versions 4+), enabling data
 search, retrieval, and deposit, thus allowing R users to integrate
 public data sharing into the reproducible research workflow.
 **dataverse** is the next-generation iteration of [the **dvn**
@@ -24,12 +24,18 @@ and the **UNF** package for data fingerprinting.
 
 ### Getting Started
 
-You can find a stable 2017 release on
+You can find a stable release on
 [CRAN](https://cran.r-project.org/package=dataverse), or install the
-latest development version from GitHub:
+latest development version from
+[GitHub](https://github.com/iqss/dataverse-client-r/):
 
 ``` r
-library("dataverse")
+# Install from CRAN
+install.packages("dataverse")
+
+# Install from GitHub
+if (!require("remotes")) install.packages("remotes")
+remotes::install_github("iqss/dataverse-client-r")
 ```
 
 #### Keys
@@ -100,7 +106,7 @@ nlsw <-
     ## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.
 
     ## 
-    ## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────
+    ## -- Column specification ------------------------------------------------------------------------------------------------
     ## cols(
     ##   idcode = col_double(),
     ##   age = col_double(),

@@ -1,7 +1,7 @@
 #' @docType package
 #' @name dataverse
-#' @title Client for Dataverse 4 Repositories
-#' @description Provides access to Dataverse 4 APIs, enabling data search, retrieval, and deposit.
+#' @title Client for Dataverse Repositories
+#' @description Provides access to Dataverse 4+ APIs, enabling data search, retrieval, and deposit.
 #' @details Dataverse is open-source data repository management software developed by the Institute for Quantitative Social Science at Harvard University. This package provides an R interface to Dataverse version 4 repositories, including the principal Dataverse hosted at Harvard (\url{https://dataverse.harvard.edu/}). Users can use the package to search for data stored in a Dataverse repository, retrieve data and other files, and also use the package to directly create and archive their own research data and software.
 #'
 #' A Dataverse is structured as a nested set of \dQuote{dataverse} repositories, such that a single dataverse can contain \dQuote{datasets} (a set of code files, data files, etc.) or other dataverses. Thus, users may want to search for dataverses (sets of dataverses and datasets), datasets (sets of files), or individual files, and retrieve those objects accordingly. To retrieve a given file, a user typically needs to know what dataset it is stored in. All datasets are identified by a persistent identifier (such as an DOI or Handle, depending on the age of the dataset and what Dataverse repository it is hosted in).
@@ -17,6 +17,10 @@
 #' }
 #'
 #' @references
+#'  \href{http://iqss.github.io/dataverse-client-r/}{Documentation for this R Package}
+#'
+#'  \href{https://github.com/iqss/dataverse-client-r/}{Code Repository for the R Package}
+#'
 #'  \href{https://guides.dataverse.org/en/latest/api/index.html}{Dataverse API Documentation}
 #'
 #'  \href{https://dataverse.org/}{Dataverse Homepage}
