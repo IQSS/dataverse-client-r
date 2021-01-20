@@ -1,3 +1,7 @@
+# CHANGES TO dataverse 0.3.1
+
+* Avoids tests in R Check if the dataverse server is not available (#77)
+
 # CHANGES TO dataverse 0.3.0
 
 New Methods

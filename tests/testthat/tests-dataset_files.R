@@ -2,6 +2,7 @@
 # https://doi.org/10.70122/FK2/HXJVJU
 
 test_that("download tab from DOI and filename", {
+  testthat::skip_if_offline("demo.dataverse.org")
   dv        <- get_dataverse("dataverse-client-r")
   contents  <- dataverse_contents(dv)
   actual    <- dataset_files(contents[[1]])
