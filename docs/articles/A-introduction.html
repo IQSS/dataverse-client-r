@@ -88,7 +88,7 @@
 
       
 
-      </header><script src="A-introduction_files/header-attrs-2.6/header-attrs.js"></script><script src="A-introduction_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="A-introduction_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to Dataverse</h1>
@@ -116,14 +116,14 @@
     <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"iqss/dataverse-client-r"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/iqss/dataverse-client-r">"dataverse"</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="http://iqss.github.io/dataverse-client-r/">"dataverse"</a></span><span class="op">)</span></code></pre></div>
 <p>(Note: <strong>dataverse</strong> is the next-generation iteration of <a href="https://cran.r-project.org/package=dvn">the <strong>dvn</strong> package</a>, which works with Dataverse 3 (“Dataverse Network”) applications. See the appendix of this vignette for a cross-walk of functionality between <strong>dvn</strong> and <strong>dataverse</strong>.)</p>
 <div id="quick-start" class="section level2">
 <h2 class="hasAnchor">
 <a href="#quick-start" class="anchor"></a>Quick Start</h2>
 <p>Dataverse has some terminology that is worth quickly reviewing before showing how to work with Dataverse in R. Dataverse is an application that can be installed in many places. As a result, <strong>dataverse</strong> can work with any installation but you need to specify which installation you want to work with. This can be set by default with an environment variable, <code>DATAVERSE_SERVER</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/iqss/dataverse-client-r">"dataverse"</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="http://iqss.github.io/dataverse-client-r/">"dataverse"</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></code></pre></div>
 <p>This should be the Dataverse server, without the “https” prefix or the “/api” URL path, etc. The package attempts to compensate for any malformed values, though.</p>
 <p>Within a given Dataverse installation, organizations or individuals can create objects that are also called “Dataverses”. These Dataverses can then contain other <em>dataverses</em>, which can contain other <em>dataverses</em>, and so on. They can also contain <em>datasets</em> which in turn contain files. You can think of Harvard’s Dataverse as a top-level installation, where an institution might have a <em>dataverse</em> that contains a subsidiary <em>dataverse</em> for each researcher at the organization, who in turn publishes all files relevant to a given study as a <em>dataset</em>.</p>
@@ -255,7 +255,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Will Beasley, Thomas J. Leeper, Philip Durbin, Shiro Kuriwaki, Sebastian Karcher.</p>
+  <p>Developed by Will Beasley, Thomas J. Leeper, Shiro Kuriwaki, Philip Durbin, Sebastian Karcher.</p>
 </div>
 
 <div class="pkgdown">
