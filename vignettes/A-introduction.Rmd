@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Dataverse"
-date: "2017-06-13"
+date: "`r Sys.Date()`"
 output:
   html_document:
     fig_caption: false
@@ -41,8 +41,7 @@ library("dataverse")
 
 Dataverse has some terminology that is worth quickly reviewing before showing how to work with Dataverse in R. Dataverse is an application that can be installed in many places. As a result, **dataverse** can work with any installation but you need to specify which installation you want to work with. This can be set by default with an environment variable, `DATAVERSE_SERVER`:
 
-
-```r
+```{r}
 library("dataverse")
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 ```
@@ -76,7 +75,7 @@ With that set, you can easily create a new dataverse, create a dataset within th
 
 ```R
 # create a dataverse
-dat <- create_dataverse("mydataverse")
+dat <- create_daverse("mydataverse")
 
 # create a list of metadata
 metadat <- list(title = "My Study",
@@ -100,7 +99,7 @@ Your data are now publicly accessible.
 
 ## Appendix: dvn to dataverse Crosswalk
 
-The original Dataverse client for R was called [dvn](https://CRAN.R-project.org/package=dvn); it worked with Dataverse versions <= 3 and was removed from CRAN in favor of [dataverse](https://CRAN.R-project.org/package=dataverse) in 2018.  dvn provided functionality for searching, retrieving, and depositing data. Here is a cross-walk of functionality in case you were already familiar with the dvn package:
+The original [dvn](https://cran.r-project.org/?package=dvn) package, which worked with Dataverse versions <= 3, provided functionality for searching, retrieving, and depositing data. Here is a cross-walk of functionality in case you were already familiar with the dvn package:
 
 | API Category | **dataverse** functions | **dvn** functions |
 | ------------ | ----------------------- | ----------------- |

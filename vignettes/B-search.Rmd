@@ -1,6 +1,6 @@
 ---
 title: "Data Search and Discovery"
-date: "2017-06-15"
+date: "`r Sys.Date()`"
 output:
   html_document:
     fig_caption: false
@@ -15,111 +15,33 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
+```{r knitr_options, echo=FALSE, results="hide"}
+options(width = 120)
+knitr::opts_chunk$set(results = "hold")
+```
 
 Searching for data within Dataverse is quite easy using the `dataverse_search()` function. The simplest searches simply consist of a query string:
 
-
-```r
+```{r}
 library("dataverse")
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 dataverse_search("Gary King")[c("name")]
 ```
 
-```
-## 10 of 1043 results retrieved
-```
-
-```
-##                                                                          name
-## 1                                       00698McArthur-King-BoxCoverSheets.pdf
-## 2                                      00698McArthur-King-MemoOfAgreement.pdf
-## 3                                     00698McArthur-King-StudyDescription.pdf
-## 4                                                            077_mod1_s2m.tab
-## 5                                      10 Million International Dyadic Events
-## 6             1998 Jewish Community Study of the Coachella Valley, California
-## 7                                               2002 State Legislative Survey
-## 8  A Comparative Study between Gurukul System and Western System of Education
-## 9    A Demographic and Attitudinal Study of the Jewish Community of St. Louis
-## 10       A Demographic Study of the Jewish Community of Atlantic County, 1985
-```
-
 The results are paginated, so users can rely upon the `per_page` and `start` argument to requested subsequent pages of results. We'll start at 6 and to show that we retrieve the last five results from the previous query plus 15 more (due to `per_page = 20`):
 
-
-```r
+```{r}
 dataverse_search("Gary King", start = 6, per_page = 20)[c("name")]
-```
-
-```
-## 20 of 1043 results retrieved
-```
-
-```
-##                                                                          name
-## 1                                               2002 State Legislative Survey
-## 2  A Comparative Study between Gurukul System and Western System of Education
-## 3    A Demographic and Attitudinal Study of the Jewish Community of St. Louis
-## 4        A Demographic Study of the Jewish Community of Atlantic County, 1985
-## 5          A Demographic Study of the Jewish Community of Greater Kansas City
-## 6     A Demographic Study of the Jewish Community of Greater Washington, 1983
-## 7                                     A Lexicial Index of Electoral Democracy
-## 8         A Population Study of the Jewish Community of Metrowest, New Jersey
-## 9               A Population Study of the Jewish Community of Rochester, 1986
-## 10                    A Population Study of the Jewish Community of Worcester
-## 11                                  A Study of Jewish Culture in the Bay Area
-## 12        A Unified Model of Cabinet Dissolution in Parliamentary Democracies
-## 13                        ABC News / The Washington Post  Poll: January, 1988
-## 14 ABC News / The Washington Post poll # 7925:  Social Security/1984 Election
-## 15                        ABC News / The Washington Post Poll: December, 1987
-## 16                                     ABC News Gary Hart Poll, December 1987
-## 17                                     ABC News Gary Hart Poll, December 1987
-## 18                                            ABC News Iraq Poll, August 1990
-## 19                                   ABC News Kosovo Peace Poll #1, June 1999
-## 20                    ABC News New Hampshire Primary Voter Poll, January 2000
 ```
 
 More complicated searches can specify metadata fields like `title` and restrict results to a specific `type` of Dataverse object (a "dataverse", "dataset", or "file"):
 
-
-```r
+```{r}
 ei <- dataverse_search(author = "Gary King", title = "Ecological Inference", type = "dataset", per_page = 20)
-```
-
-```
-## 20 of 867 results retrieved
-```
-
-```r
 # fields returned
 names(ei)
 # names of datasets
 ei$name
-```
-
-```
-## [1] "name"         "type"         "url"          "global_id"    "description"  "published_at" "citationHtml"
-## [8] "citation"     "authors"
-##  [1] "10 Million International Dyadic Events"
-##  [2] "3D Dust map from Green et al. (2015)"
-##  [3] "[KRISNA02]³ New Religious Movements : Case of ISKCON"
-##  [4] "A Comparative Study between Gurukul System and Western System of Education"
-##  [5] "A Lexicial Index of Electoral Democracy"
-##  [6] "A Statistical Inference Engine for Small, Dependent Samples  [Version 2.310]"
-##  [7] "A Unified Model of Cabinet Dissolution in Parliamentary Democracies"
-##  [8] "ABC News / The Washington Post poll # 7925:  Social Security/1984 Election"
-##  [9] "ABC News Iraq Poll, August 1990"
-## [10] "ABC News/The Washington Post Poll:  Los Angeles Race Riots"
-## [11] "ABC News/The Washington Post Poll:  Race Relations"
-## [12] "ABC News/Washington Post Los Angeles Beating Poll, April 1992"
-## [13] "ABC News/Washington Post Poll #1, September 1990"
-## [14] "ABC News/Washington Post Race Relations Poll, May 1992"
-## [15] "ABC News/Washington Post Reagan 100 Days Poll, April 1981"
-## [16] "Afrobarometer Round 3: The Quality of Democracy and Governance in 18 African Countries, 2005-2006"
-## [17] "Afrobarometer Round 3: The Quality of Democracy and Governance in Benin, 2005"
-## [18] "Afrobarometer Round 3: The Quality of Democracy and Governance in Botswana, 2005"
-## [19] "Afrobarometer Round 3: The Quality of Democracy and Governance in Cape Verde, 2005"
-## [20] "Afrobarometer Round 3: The Quality of Democracy and Governance in Ghana, 2005"
 ```
 
 Once datasets and files are identified, it is easy to download and use them directly in R. See the ["Data Retrieval" vignette](C-retrieval.html) for details.
