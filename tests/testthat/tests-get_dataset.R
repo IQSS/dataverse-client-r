@@ -5,7 +5,8 @@ test_that("download tab from DOI and filename", {
   testthat::skip_if_offline("demo.dataverse.org")
   dv        <- get_dataverse("dataverse-client-r")
   contents  <- dataverse_contents(dv)
-  actual    <- get_dataset(contents[[1]])
+  ds_index  <- which(sapply(contents, function(x) x$identifier) == "FK2/HXJVJU")
+  actual    <- get_dataset(contents[[ds_index]])
   files     <- actual$files
   expected_dv <- retrieve_info_dataverse("expected-dataverse.yml")
 

@@ -1,7 +1,8 @@
 import::from("magrittr", "%>%")
 dv        <- get_dataverse("dataverse-client-r")
 contents  <- dataverse_contents(dv)
-ds_1      <- dataset_files(contents[[1]]) %>%
+ds_index  <- which(sapply(contents, function(x) x$identifier) == "FK2/HXJVJU")
+ds_1      <- dataset_files(contents[[ds_index]]) %>%
   rlang::set_names(c("roster", "image")) # Manually add friendly names to each file
 
 # ---- seed-dataverses ---------------------------------------------------

@@ -27,6 +27,7 @@ test_that("dataverse for 'dataverse-client-r'", {
   )
 
   dv      <- get_dataverse(dataverse = "dataverse-client-r")
-  actual  <- dataverse_contents(dv)
+  actual    <- dataverse_contents(dv)
+  ds_index  <- which(sapply(actual, function(x) x$identifier) == "FK2/HXJVJU")
   expect_equal(actual[[1]], expected)
 })
