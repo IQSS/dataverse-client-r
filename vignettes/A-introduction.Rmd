@@ -2,13 +2,8 @@
 title: "Introduction to Dataverse"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_vignette:
     fig_caption: false
-    toc: true
-    toc_float:
-      collapsed: false
-      smooth_scroll: false
-    toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{1. Introduction to Dataverse}
   %\VignetteEngine{knitr::rmarkdown}

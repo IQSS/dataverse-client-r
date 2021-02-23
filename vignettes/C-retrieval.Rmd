@@ -2,13 +2,8 @@
 title: "Data Retrieval and Reuse"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_vignette:
     fig_caption: false
-    toc: true
-    toc_float:
-      collapsed: false
-      smooth_scroll: false
-    toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{3. Data Retrieval and Reuse}
   %\VignetteEngine{knitr::rmarkdown}
@@ -95,7 +90,7 @@ dataset$files[c("label", "UNF")]
 
 To reproduce the analysis, we can simply run the code file either as a `system()` call or directly in R using `source()` (note this particular file begins with an `rm()` call so you may want to run it in a clean R session):
 
-```R
+```{r, eval = FALSE}
 system("Rscript chapter03.R")
 source("chapter03.R")
 ```

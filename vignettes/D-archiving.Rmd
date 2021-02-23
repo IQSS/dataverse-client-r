@@ -2,13 +2,8 @@
 title: "Data Archiving"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_vignette:
     fig_caption: false
-    toc: true
-    toc_float:
-      collapsed: false
-      smooth_scroll: false
-    toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{4. Data Archiving}
   %\VignetteEngine{knitr::rmarkdown}
@@ -26,7 +21,7 @@ Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 
 The main data archiving (or "deposit") workflow for Dataverse is built on [SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a new dataset listing, you will have to first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:
 
-```R
+```{r, eval = FALSE}
 # retrieve your service document
 d <- service_document()
 
@@ -44,7 +39,7 @@ dat <- initiate_sword_dataset("mydataverse", body = metadat)
 
 Once the dataset is initiated, it is possible to add and delete files:
 
-```R
+```{r, eval = FALSE}
 tmp <- tempfile()
 write.csv(iris, file = tmp)
 f <- add_file(dat, file = tmp)
@@ -52,7 +47,7 @@ f <- add_file(dat, file = tmp)
 
 The `add_file()` function accepts, as its first argument, a character vector of file names, a data.frame, or a list of R objects. Files can be deleted using `delete_file()`. Once the dataset is finalized, it can be published using `publish_dataset()`:
 
-```R
+```{r, eval = FALSE}
 publish_dataset(dat)
 ```
 
@@ -62,7 +57,7 @@ And it will then show up in the list of published datasets returned by `list_dat
 
 Dataverse also implements a second way to release datasets, called the "native" API. It is similar to to the SWORD API:
 
-```R
+```{r, eval = FALSE}
 # create the dataset
 ds <- create_dataset("mydataverse")
 
