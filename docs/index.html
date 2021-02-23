@@ -133,7 +133,7 @@
 <div id="reading-data-as-r-objects" class="section level4">
 <h4 class="hasAnchor">
 <a href="#reading-data-as-r-objects" class="anchor"></a>Reading data as R objects</h4>
-<p>Use the <code>get_dataframe_*()</code> functions, depending on the input you have. For example, we will read a survey dataset on Dataverse, <a href="https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/PPKHI1/ZYATZZ">nlsw88.dta</a> (<code>doi:10.70122/FK2/PPKHI1/ZYATZZ</code>), originally in Stata dta form.</p>
+<p>Use the <code>get_dataframe_*()</code> functions, depending on the input you have. For example, we will read a survey dataset on Dataverse, <a href="https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.70122/FK2/PPIAXE">nlsw88.dta</a> (<code>doi:10.70122/FK2/PPKHI1/ZYATZZ</code>), originally in Stata dta form.</p>
 <p>With a file DOI, we can use the <code>get_dataframe_by_doi</code> function:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nlsw</span> <span class="op">&lt;-</span>
@@ -141,29 +141,29 @@
     filedoi     <span class="op">=</span> <span class="st">"10.70122/FK2/PPIAXE/MHDB0O"</span>,
     server      <span class="op">=</span> <span class="st">"demo.dataverse.org"</span>
   <span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">## </span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">## -- Column specification ------------------------------------------------------------------------------------------------</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">## cols(</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">##   idcode = col_double(),</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">##   age = col_double(),</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">##   race = col_double(),</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">##   married = col_double(),</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">##   never_married = col_double(),</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">##   grade = col_double(),</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">##   collgrad = col_double(),</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">##   south = col_double(),</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="co">##   smsa = col_double(),</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="co">##   c_city = col_double(),</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="co">##   industry = col_double(),</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="co">##   occupation = col_double(),</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co">##   union = col_double(),</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="co">##   wage = col_double(),</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="co">##   hours = col_double(),</span></span>
-<span id="cb5-21"><a href="#cb5-21"></a><span class="co">##   ttl_exp = col_double(),</span></span>
-<span id="cb5-22"><a href="#cb5-22"></a><span class="co">##   tenure = col_double()</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a><span class="co">## )</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="co">## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="co">## </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a><span class="co">## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a><span class="co">## cols(</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a><span class="co">##   idcode = col_double(),</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a><span class="co">##   age = col_double(),</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a><span class="co">##   race = col_double(),</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a><span class="co">##   married = col_double(),</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a><span class="co">##   never_married = col_double(),</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a><span class="co">##   grade = col_double(),</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a><span class="co">##   collgrad = col_double(),</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true"></a><span class="co">##   south = col_double(),</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true"></a><span class="co">##   smsa = col_double(),</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true"></a><span class="co">##   c_city = col_double(),</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true"></a><span class="co">##   industry = col_double(),</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true"></a><span class="co">##   occupation = col_double(),</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true"></a><span class="co">##   union = col_double(),</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true"></a><span class="co">##   wage = col_double(),</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true"></a><span class="co">##   hours = col_double(),</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true"></a><span class="co">##   ttl_exp = col_double(),</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true"></a><span class="co">##   tenure = col_double()</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true"></a><span class="co">## )</span></span></code></pre></div>
 <p>which by default reads in the ingested file (not the original dta) by the <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr::read_tsv</code></a> function.</p>
 <p>Alternatively, we can download the same file by specifying the filename and the DOI of the “dataset” (in Dataverse, a collection of files is called a dataset).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -190,11 +190,11 @@
 <p>Note the difference between <code>nls_tsv</code> and <code>nls_original</code>. <code>nls_original</code> preserves the data attributes like value labels, whereas <code>nls_tsv</code> has dropped this or left this in file metadata.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">nlsw_tsv</span><span class="op">$</span><span class="va">race</span><span class="op">)</span> <span class="co"># tab ingested version only has numeric data</span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">## [1] "numeric"</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="co">## [1] "numeric"</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">nlsw_original</span><span class="op">$</span><span class="va">race</span>, <span class="st">"labels"</span><span class="op">)</span> <span class="co"># original dta has value labels</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## white black other </span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="co">##     1     2     3</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="co">## white black other </span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a><span class="co">##     1     2     3</span></span></code></pre></div>
 </div>
 <div id="reading-a-dataset-as-a-binary-file" class="section level4">
 <h4 class="hasAnchor">
@@ -208,7 +208,7 @@
     server      <span class="op">=</span> <span class="st">"demo.dataverse.org"</span>
   <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">nlsw_raw</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">## [1] "raw"</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="co">## [1] "raw"</span></span></code></pre></div>
 </div>
 <div id="reading-file-metadata" class="section level4">
 <h4 class="hasAnchor">
@@ -219,14 +219,14 @@
   dataset <span class="op">=</span> <span class="st">"10.70122/FK2/PPIAXE"</span>,
   server  <span class="op">=</span> <span class="st">"demo.dataverse.org"</span>
 <span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">## Dataset (182162): </span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="co">## Version: 1.1, RELEASED</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="co">## Release Date: 2020-12-30T00:00:24Z</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="co">## License: CC0</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="co">## 22 Files:</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="co">##                   label version      id               contentType</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a><span class="co">## 1 nlsw88_rds-export.rds       1 1734016  application/octet-stream</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a><span class="co">## 2            nlsw88.tab       3 1734017 text/tab-separated-values</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="co">## Dataset (182162): </span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="co">## Version: 1.1, RELEASED</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a><span class="co">## Release Date: 2020-12-30T00:00:24Z</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a><span class="co">## License: CC0</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a><span class="co">## 22 Files:</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a><span class="co">##                   label version      id               contentType</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true"></a><span class="co">## 1 nlsw88_rds-export.rds       1 1734016  application/octet-stream</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true"></a><span class="co">## 2            nlsw88.tab       3 1734017 text/tab-separated-values</span></span></code></pre></div>
 </div>
 </div>
 <div id="data-discovery" class="section level3">
