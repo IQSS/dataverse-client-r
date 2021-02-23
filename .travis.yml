@@ -4,7 +4,7 @@ cache: packages
 warnings_are_errors: true
 os:
   - linux
-  - windows
+  # - windows
 dist: focal
 
 jobs:
@@ -13,10 +13,10 @@ jobs:
       os: linux
       dist: focal
       env: R_CODECOV=true
-    - name: windows-focal
-      os: windows
-      dist: focal
-      env: R_CODECOV=false
+    # - name: windows-focal
+    #   os: windows
+    #   dist: focal
+    #   env: R_CODECOV=false
     # - name: osx-current
     #   os: osx
     #   # addons:
