@@ -90,7 +90,7 @@ dataset read in with the appropriate R function.
 
 Use the `get_dataframe_*()` functions, depending on the input you have.
 For example, we will read a survey dataset on Dataverse,
-[nlsw88.dta](https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/PPKHI1/ZYATZZ)
+[nlsw88.dta](https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.70122/FK2/PPIAXE)
 (`doi:10.70122/FK2/PPKHI1/ZYATZZ`), originally in Stata dta form.
 
 With a file DOI, we can use the `get_dataframe_by_doi` function:
@@ -106,7 +106,7 @@ nlsw <-
     ## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.
 
     ## 
-    ## -- Column specification ------------------------------------------------------------------------------------------------
+    ## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────
     ## cols(
     ##   idcode = col_double(),
     ##   age = col_double(),

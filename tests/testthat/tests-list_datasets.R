@@ -1,6 +1,7 @@
 # See https://demo.dataverse.org/dataverse/dataverse-client-r
 
 test_that("dataverse root", {
+  testthat::skip_if_offline("demo.dataverse.org")
   expected <-
     structure(
       list(
@@ -28,6 +29,7 @@ test_that("dataverse root", {
 })
 
 test_that("dataverse for 'dataverse-client-r'", {
+  testthat::skip_if_offline("demo.dataverse.org")
   expected <-
     structure(
       list(

@@ -1,6 +1,7 @@
 # See https://demo.dataverse.org/dataverse/dataverse-client-r
 
 test_that("dataverse root", {
+  testthat::skip_if_offline("demo.dataverse.org")
   expected_length_minimum <- 300 # 397 as of Feb 2020
 
   dv      <- get_dataverse(dataverse = ":root")
@@ -9,6 +10,7 @@ test_that("dataverse root", {
 })
 
 test_that("dataverse for 'dataverse-client-r'", {
+  testthat::skip_if_offline("demo.dataverse.org")
   expected  <- structure(
     list(
       id = 1734004L,
@@ -25,6 +27,7 @@ test_that("dataverse for 'dataverse-client-r'", {
   )
 
   dv      <- get_dataverse(dataverse = "dataverse-client-r")
-  actual  <- dataverse_contents(dv)
+  actual    <- dataverse_contents(dv)
+  ds_index  <- which(sapply(actual, function(x) x$identifier) == "FK2/HXJVJU")
   expect_equal(actual[[1]], expected)
 })
