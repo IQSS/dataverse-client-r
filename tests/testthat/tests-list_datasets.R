@@ -57,10 +57,10 @@ test_that("dataverse for 'dataverse-client-r'", {
     )
 
   dv <- get_dataverse("dataverse-client-r")
-  dvlist <- list_datasets(dv)
-  ds_order  <- c(which(dvlist$datasets$id == "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/HXJVJU"),
-                 which(dvlist$datasets$id == "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/PPIAXE"))
-  actual <- dvlist[ds_order, ]
+  actual <- list_datasets(dv)
+  ds_order  <- c(which(actual$datasets$id == "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/HXJVJU"),
+                 which(actual$datasets$id == "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/PPIAXE"))
+  actual$datasets <- actual$datasets[ds_order, ]
 
   expect_equal(actual, expected)
 })
