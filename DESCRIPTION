@@ -66,7 +66,4 @@ BugReports: https://github.com/iqss/dataverse-client-r/issues
 VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 7.1.1
-<<<<<<< HEAD
-=======
 Roxygen: list(markdown = TRUE)
->>>>>>> upstream/master
