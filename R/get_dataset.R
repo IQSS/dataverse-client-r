@@ -60,7 +60,7 @@ get_dataset <- function(
     u <- paste0(api_url(server), "datasets/", dataset)
   }
   r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-  httr::stop_for_status(r)
+  httr::stop_for_status(r, task = httr::content(r)$message)
   parse_dataset(httr::content(r, as = "text", encoding = "UTF-8"))
 }
 
