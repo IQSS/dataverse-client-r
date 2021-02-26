@@ -18,6 +18,6 @@ delete_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = 
     dataset <- dataset_id(dataset, key = key, server = server, ...)
     u <- paste0(api_url(server), "datasets/", dataset, "/versions/:draft")
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     httr::content(r, as = "text", encoding = "UTF-8")
 }

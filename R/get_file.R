@@ -81,7 +81,7 @@ get_file <-
     #     fileid <- paste0(fileid, collapse = ",")
     #     u <- paste0(api_url(server), "access/datafiles/", fileid)
     #     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    #     httr::stop_for_status(r)
+    #     httr::stop_for_status(r, task = httr::content(r)$message)
     #     tempf <- tempfile(fileext = ".zip")
     #     tempd <- tempfile()
     #     dir.create(tempd)

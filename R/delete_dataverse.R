@@ -16,6 +16,6 @@ delete_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
     dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     u <- paste0(api_url(server), "dataverses/", dataverse)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     httr::content(r, as = "text", encoding = "UTF-8")
 }

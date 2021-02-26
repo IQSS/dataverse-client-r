@@ -18,7 +18,7 @@
 service_document <- function(key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/service-document")
     r <- httr::GET(u, httr::authenticate(key, ""), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     x <- xml2::as_list(xml2::read_xml(httr::content(r, "text")))
     w <- x$workspace
     out <- list()
@@ -76,7 +76,7 @@ list_datasets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
     }
     u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/collection/dataverse/", dataverse)
     r <- httr::GET(u, httr::authenticate(key, ""), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
 
     # clean up response structure
     x <- xml2::as_list(xml2::read_xml(r$content))

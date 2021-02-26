@@ -104,7 +104,7 @@ function(...,
 
     # execute request
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))
     if (isTRUE(verbose)) {
         n_total <- ngettext(out$data$total_count, "result", "results")
