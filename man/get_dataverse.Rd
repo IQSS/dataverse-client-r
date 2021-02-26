@@ -23,13 +23,21 @@ dataverse_contents(
 \arguments{
 \item{dataverse}{A character string specifying a Dataverse name or an object of class \dQuote{dataverse}.}
 
-\item{key}{A character string specifying a Dataverse server API key. If one is not specified, functions calling authenticated API endpoints will fail. Keys can be specified atomically or globally using \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
+\item{key}{A character string specifying a Dataverse server API key. If one
+is not specified, functions calling authenticated API endpoints will fail.
+Keys can be specified atomically or globally using
+\code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 
-\item{server}{A character string specifying a Dataverse server. There are multiple Dataverse installations, but the defaults is to use the Harvard Dataverse. This can be modified atomically or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
+\item{server}{A character string specifying a Dataverse server. There are
+multiple Dataverse installations, but the defaults is to use the Harvard
+Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
+or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 
 \item{check}{A logical indicating whether to check that the value of \code{dataverse} is actually a numeric}
 
-\item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
+\item{...}{Additional arguments passed to an HTTP request function, such as
+\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
+\code{\link[httr]{DELETE}}.}
 }
 \value{
 A list of class \dQuote{dataverse}.
@@ -46,16 +54,27 @@ Retrieve details of a Dataverse
 get_dataverse(":root")
 dataverse_contents(":root")
 
+Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 # download file from:
 # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
-monogan <- get_dataverse("monogan")
-(monogan_data <- dataverse_contents(monogan))
+dv <- get_dataverse("monogan")
+(contents <- dataverse_contents(dv))
 
 # get a dataset from the dataverse
-d1 <- get_dataset(monogan_data[[1]])
-f <- get_file(d1$files$datafile$id[3])
+d1 <- get_dataset(contents[[1]])
+f <- get_file(d1$files$id[3])
 }
 }
 \seealso{
-To manage Dataverses: \code{\link{create_dataverse}}, \code{\link{delete_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{dataverse_contents}}; to get datasets: \code{\link{get_dataset}}; to search for Dataverses, datasets, or files: \code{\link{dataverse_search}}
+To manage Dataverses:
+\code{\link{create_dataverse}},
+\code{\link{delete_dataverse}},
+\code{\link{publish_dataverse}},
+\code{\link{dataverse_contents}};
+
+To get datasets:
+\code{\link{get_dataset}};
+
+To search for Dataverses, datasets, or files:
+\code{\link{dataverse_search}}
 }

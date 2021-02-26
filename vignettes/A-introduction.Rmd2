@@ -15,7 +15,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The **dataverse** package is the official R client for [Dataverse 4](http://dataverse.org/) data repositories. The package enables data search, retrieval, and deposit with any Dataverse installation, thus allowing R users to integrate public data sharing into the reproducible research workflow.
+The **dataverse** package is the official R client for [Dataverse 4](https://dataverse.org/) data repositories. The package enables data search, retrieval, and deposit with any Dataverse installation, thus allowing R users to integrate public data sharing into the reproducible research workflow.
 
 In addition to this introduction, the package contains three additional vignettes covering:
 
@@ -39,14 +39,14 @@ library("dataverse")
 
 ## Quick Start
 
-Dataverse has some terminology that is worth quickly reviewing before showing how to work with Dataverse in R. Dataverse is an application that can be installed in many places. As a result, **dataverse** can work with any instllation but you need to specify which installation you want to work with. This can be set by default with an environment variable, `DATAVERSE_SERVER`:
+Dataverse has some terminology that is worth quickly reviewing before showing how to work with Dataverse in R. Dataverse is an application that can be installed in many places. As a result, **dataverse** can work with any installation but you need to specify which installation you want to work with. This can be set by default with an environment variable, `DATAVERSE_SERVER`:
 
 ```{r}
 library("dataverse")
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 ```
 
-This should be the Dataverse server, without the "https" prefix or the "/api" URL path, etc. The package attempts to compensate for any malformed values, though. 
+This should be the Dataverse server, without the "https" prefix or the "/api" URL path, etc. The package attempts to compensate for any malformed values, though.
 
 Within a given Dataverse installation, organizations or individuals can create objects that are also called "Dataverses". These Dataverses can then contain other *dataverses*, which can contain other *dataverses*, and so on. They can also contain *datasets* which in turn contain files. You can think of Harvard's Dataverse as a top-level installation, where an institution might have a *dataverse* that contains a subsidiary *dataverse* for each researcher at the organization, who in turn publishes all files relevant to a given study as a *dataset*.
 
@@ -56,7 +56,7 @@ You can search for and retrieve data without a Dataverse account for that a spec
 dataverse_search("ecological inference")[c("name", "type", "description")]
 ```
 
-The [search vignette](search.html) describes this functionality in more detail. To retrieve a data file, we need to investigate the dataset being returned and look at what files it contains using a variety of functions, the last of which - `get_file()` - can retrieve the files as raw vectors:
+The [search vignette](B-search.html) describes this functionality in more detail. To retrieve a data file, we need to investigate the dataset being returned and look at what files it contains using a variety of functions, the last of which - `get_file()` - can retrieve the files as raw vectors:
 
 ```R
 get_dataset()
@@ -65,7 +65,7 @@ get_file_metadata()
 get_file()
 ```
 
-For "native" Dataverse features (such as user account controls) or to create and publish a dataset, you will need an API key linked to a Dataverse installation account. Instructions for obtaining an account and setting up an API key are available in the [Dataverse User Guide](http://guides.dataverse.org/en/latest/user/account.html). (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called `DATAVERSE_KEY`. It can be set within R using: 
+For "native" Dataverse features (such as user account controls) or to create and publish a dataset, you will need an API key linked to a Dataverse installation account. Instructions for obtaining an account and setting up an API key are available in the [Dataverse User Guide](https://guides.dataverse.org/en/latest/user/account.html). (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called `DATAVERSE_KEY`. It can be set within R using:
 
 ```R
 Sys.setenv("DATAVERSE_KEY" = "examplekey12345")

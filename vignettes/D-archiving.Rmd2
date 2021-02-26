@@ -24,7 +24,7 @@ Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 
 ## SWORD-based Data Archiving
 
-The main data archiving (or "deposit") workflow for Dataverse is built on [SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a new dataset listing, you will have first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:
+The main data archiving (or "deposit") workflow for Dataverse is built on [SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a new dataset listing, you will have to first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:
 
 ```R
 # retrieve your service document

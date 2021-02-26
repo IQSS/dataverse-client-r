@@ -1,6 +1,6 @@
 Package: dataverse
-Version: 0.2.1.9001
-Title: Client for Dataverse 4 Repositories
+Version: 0.3.2
+Title: Client for Dataverse 4+ Repositories
 Authors@R: c(
   person(
     "Will", "Beasley",
@@ -15,16 +15,16 @@ Authors@R: c(
     comment = c(ORCID = "0000-0003-4097-6326")
   ),
   person(
+    "Shiro", "Kuriwaki",
+    role = c("aut"),
+    email = "shirokuriwaki@gmail.com",
+    comment = c(ORCID = "0000-0002-5687-2647")
+  ),
+  person(
     "Philip", "Durbin",
     role = c("aut"),
     email = "philipdurbin@gmail.com",
     comment = c(ORCID = "0000-0002-9528-9470")
-  ),
-  person(
-    "Shiro", "Kuriwaki",
-    role = c("aut"), 
-    email = "shirokuriwaki@gmail.com",
-    comment = c(ORCID = "0000-0002-5687-2647")
   ),
   person(
     "Sebastian", "Karcher",
@@ -39,27 +39,34 @@ Authors@R: c(
     "Edward", "Jee", role = "ctb"
   ))
 Imports:
+    checkmate,
     httr,
     jsonlite,
-    magrittr,
     readr,
     stats,
     utils,
     xml2
 Suggests:
-    checkmate,
     covr,
     foreign,
+    haven,
     knitr,
+    purrr,
+    rmarkdown,
     testthat,
     UNF,
     yaml
-Description: Provides access to Dataverse version 4 APIs <https://dataverse.org/>,
-    enabling data search, retrieval, and deposit. For Dataverse versions <= 4.0,
-    use the deprecated 'dvn' package <https://cran.r-project.org/package=dvn>.
+Description: Provides access to Dataverse APIs <https://dataverse.org/> (versions 4-5),
+    enabling data search, retrieval, and deposit. For Dataverse versions <= 3.0,
+    use the archived 'dvn' package <https://cran.r-project.org/package=dvn>.
 License: GPL-2
-URL: https://github.com/iqss/dataverse-client-r
+LazyData: true
+URL: http://iqss.github.io/dataverse-client-r/, https://dataverse.org/, https://github.com/iqss/dataverse-client-r
 BugReports: https://github.com/iqss/dataverse-client-r/issues
 VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 7.1.1
+<<<<<<< HEAD
+=======
+Roxygen: list(markdown = TRUE)
+>>>>>>> upstream/master

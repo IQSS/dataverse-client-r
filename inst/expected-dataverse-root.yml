@@ -1,0 +1,23 @@
+id: 1
+alias: demo
+name: Demo Dataverse
+dataverseContacts:
+  displayOrder: 0
+  contactEmail: rootdataverse@mailinator.com
+permissionRoot: yes
+description: "<span><span><span><h3>This Dataverse is for demo purposes only.</h3></span></span></span>\r\n\r\nTo
+  archive and publish to the Harvard repository, visit <a href=\"https://dataverse.harvard.edu\"
+  title=\"Harvard Dataverse\" target=\"_blank\">dataverse.harvard.edu</a>. To learn
+  about and publish to other repositories, visit The Dataverse Project at <a href=\"https://dataverse.org\"
+  title=\"The Dataverse Project\" target=\"_blank\">dataverse.org</a>."
+dataverseType: UNCATEGORIZED
+creationDate: '2015-04-16T17:46:00Z'
+theme:
+  id: 1
+  logo: HarvardShield_RGB.png
+  tagline: This Dataverse is for demo purposes only. To deposit actual datasets please
+    visit dataverse.harvard.edu.
+  linkColor: '000000'
+  textColor: a51c30
+  backgroundColor: F5F5F5
+testing_name: :root

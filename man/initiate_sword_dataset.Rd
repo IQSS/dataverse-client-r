@@ -17,11 +17,19 @@ initiate_sword_dataset(
 
 \item{body}{A list containing one or more metadata fields. Field names must be valid Dublin Core Terms labels (see details, below). The \samp{title}, \samp{description}, and \samp{creator} fields are required.}
 
-\item{key}{A character string specifying a Dataverse server API key. If one is not specified, functions calling authenticated API endpoints will fail. Keys can be specified atomically or globally using \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
+\item{key}{A character string specifying a Dataverse server API key. If one
+is not specified, functions calling authenticated API endpoints will fail.
+Keys can be specified atomically or globally using
+\code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 
-\item{server}{A character string specifying a Dataverse server. There are multiple Dataverse installations, but the defaults is to use the Harvard Dataverse. This can be modified atomically or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
+\item{server}{A character string specifying a Dataverse server. There are
+multiple Dataverse installations, but the defaults is to use the Harvard
+Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
+or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 
-\item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
+\item{...}{Additional arguments passed to an HTTP request function, such as
+\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
+\code{\link[httr]{DELETE}}.}
 }
 \value{
 An object of class \dQuote{dataset_atom}.
@@ -30,7 +38,7 @@ An object of class \dQuote{dataset_atom}.
 Initiate a SWORD (possibly unpublished) dataset
 }
 \details{
-This function is used to initiate a dataset in a (SWORD) Dataverse by supplying relevant metadata. The function is part of the SWORD API (see \href{http://www.ietf.org/rfc/rfc5023.txt}{Atom entry specification}), which is used to upload data to a Dataverse server.
+This function is used to initiate a dataset in a (SWORD) Dataverse by supplying relevant metadata. The function is part of the SWORD API (see \href{https://www.ietf.org/rfc/rfc5023.txt}{Atom entry specification}), which is used to upload data to a Dataverse server.
 Allowed fields are:
 \dQuote{abstract}, \dQuote{accessRights}, \dQuote{accrualMethod},
 \dQuote{accrualPeriodicity}, \dQuote{accrualPolicy}, \dQuote{alternative},

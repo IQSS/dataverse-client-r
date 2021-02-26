@@ -13,7 +13,7 @@ create_zip.character <- function(x, ...) {
 }
 create_zip.data.frame <- function(x, ...) {
     tmpdf <- tempfile(fileext = ".zip")
-    on.exit(file.remove(tmpdf))
+    on.exit(file.remove(tmpdf), add = TRUE)
     tmp <- tempfile(fileext = ".zip")
     save(x, file = tmpdf)
     stopifnot(!utils::zip(tmp, tmpdf))
@@ -21,7 +21,7 @@ create_zip.data.frame <- function(x, ...) {
 }
 create_zip.list <- function(x, ...) {
     tmpdf <- sapply(seq_along(x), tempfile(fileext = ".zip"))
-    on.exit(file.remove(tmpdf))
+    on.exit(file.remove(tmpdf), add = TRUE)
     mapply(x, tmpdf, function(x, f) save(x, file = f), SIMPLIFY = TRUE)
     tmp <- tempfile(fileext = ".zip")
     stopifnot(!utils::zip(tmp, tmpdf))
@@ -121,7 +121,7 @@ add_file <- function(dataset, file, key = Sys.getenv("DATAVERSE_KEY"), server = 
 #'
 #' # delete a file
 #' ds <- dataset_statement(dat)
-#' delete_file(ds$files[[1]]$id
+#' delete_file(ds$files[[1]]$id)
 #'
 #' # delete a dataset
 #' delete_dataset(dat)

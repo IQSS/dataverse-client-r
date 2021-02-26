@@ -32,15 +32,25 @@ dataset_files(
 )
 }
 \arguments{
-\item{dataset}{An integer specifying a dataset identification number or an object of class \dQuote{dataverse_dataset}. The identification number is the dataset's persistent identification number (not the integer specifying a specific version of the dataset, such as returned by \code{\link{dataset_versions}}).}
+\item{dataset}{A character specifying a persistent identification ID for a dataset,
+for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
+\dQuote{dataverse_dataset} obtained by \code{dataverse_contents()}.}
 
 \item{version}{A character string specifying a version of the dataset. This can be one of \dQuote{:draft} (the current draft), \dQuote{:latest} (the latest draft, if it exists, or the latest published version), \dQuote{:latest-published} (the latest published version, ignoring any draft), or \dQuote{x.y} (where \samp{x} is a major version and \samp{y} is a minor version; the \samp{.y} can be omitted to obtain a major version). In lieu of this, a dataset's version-specific identification number can be used for the \code{dataset} argument.}
 
-\item{key}{A character string specifying a Dataverse server API key. If one is not specified, functions calling authenticated API endpoints will fail. Keys can be specified atomically or globally using \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
+\item{key}{A character string specifying a Dataverse server API key. If one
+is not specified, functions calling authenticated API endpoints will fail.
+Keys can be specified atomically or globally using
+\code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 
-\item{server}{A character string specifying a Dataverse server. There are multiple Dataverse installations, but the defaults is to use the Harvard Dataverse. This can be modified atomically or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
+\item{server}{A character string specifying a Dataverse server. There are
+multiple Dataverse installations, but the defaults is to use the Harvard
+Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
+or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 
-\item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
+\item{...}{Additional arguments passed to an HTTP request function, such as
+\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
+\code{\link[httr]{DELETE}}.}
 
 \item{block}{A character string specifying a metadata block to retrieve. By default this is \dQuote{citation}. Other values may be available, depending on the dataset, such as \dQuote{geospatial} or \dQuote{socialscience}.}
 }
@@ -51,17 +61,41 @@ A list of class \dQuote{dataverse_dataset} or a list of a form dependent on the 
 Retrieve a Dataverse dataset or its metadata
 }
 \details{
-\code{get_dataset} retrieves details about a Dataverse dataset. \code{dataset_metadata} returns a named metadata block for a dataset. This is already returned by \code{\link{get_dataset}}, but this function allows you to retrieve just a specific block of metadata, such as citation information. \code{dataset_files} returns a list of files in a dataset, similar to \code{\link{get_dataset}}. The difference is that this returns only a list of \dQuote{dataverse_dataset} objects, whereas \code{\link{get_dataset}} returns metadata and a data.frame of files (rather than a list of file objects).
+\code{get_dataset} retrieves details about a Dataverse dataset.
+
+\code{dataset_metadata} returns a named metadata block for a dataset.
+This is already returned by \code{\link{get_dataset}}, but this function allows
+you to retrieve just a specific block of metadata, such as citation information.
+
+\code{dataset_files} returns a list of files in a dataset, similar to
+\code{\link{get_dataset}}. The difference is that this returns only a list of
+\dQuote{dataverse_dataset} objects, whereas \code{\link{get_dataset}} returns
+metadata and a data.frame of files (rather than a list of file objects).
 }
 \examples{
 \dontrun{
-# download file from:
-# https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
-monogan <- get_dataverse("monogan")
-monogan_data <- dataverse_contents(monogan)
-d1 <- get_dataset(monogan_data[[1]])
-dataset_files(monogan_data[[1]])
-f <- get_file(d1$files$datafile$id[3])
+Sys.setenv("DATAVERSE_SERVER" = "demo.dataverse.org")
+Sys.setenv("DATAVERSE_KEY"    = "c7208dd2-6ec5-469a-bec5-f57e164888d4")
+
+# Download file from: https://demo.dataverse.org/file.xhtml?fileId=769385
+dv       <- get_dataverse("dataverse-client-r")
+contents <- dataverse_contents(dv)
+
+dataset_files(contents[[1]])            # Dataset contains 2 files
+dataset_metadata(contents[[1]])         # Easier to query later
+
+set      <- get_dataset(contents[[1]])  # 1st dataset w/n dataverse
+f        <- get_file(set$files$id[2])   # 2nd file w/n dataset
+
+# Check the *binary* representation of the file.
+length(f)
+head(f)
+
+# Examine the plain-text representation.
+tmp <- tempfile(fileext = "svg")
+writeBin(as.vector(f), tmp)
+svg_lines <- readLines(tmp)
+head(svg_lines)
 }
 }
 \seealso{

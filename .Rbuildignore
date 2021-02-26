@@ -16,3 +16,7 @@ man-roxygen/*
 ^codecov\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^cran-comments\.md$

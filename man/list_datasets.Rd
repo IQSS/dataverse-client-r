@@ -14,11 +14,19 @@ list_datasets(
 \arguments{
 \item{dataverse}{A Dataverse alias or ID number, or an object of class \dQuote{dataverse}, perhaps as returned by \code{\link{service_document}}.}
 
-\item{key}{A character string specifying a Dataverse server API key. If one is not specified, functions calling authenticated API endpoints will fail. Keys can be specified atomically or globally using \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
+\item{key}{A character string specifying a Dataverse server API key. If one
+is not specified, functions calling authenticated API endpoints will fail.
+Keys can be specified atomically or globally using
+\code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 
-\item{server}{A character string specifying a Dataverse server. There are multiple Dataverse installations, but the defaults is to use the Harvard Dataverse. This can be modified atomically or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
+\item{server}{A character string specifying a Dataverse server. There are
+multiple Dataverse installations, but the defaults is to use the Harvard
+Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
+or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
 
-\item{...}{Additional arguments passed to an HTTP request function, such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or \code{\link[httr]{DELETE}}.}
+\item{...}{Additional arguments passed to an HTTP request function, such as
+\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
+\code{\link[httr]{DELETE}}.}
 }
 \value{
 A list.
@@ -31,11 +39,10 @@ This function is used to list datasets in a given Dataverse. It is part of the S
 }
 \examples{
 \dontrun{
-# retrieve your service document
-d <- service_document()
-
-# list available datasets in first dataverse
-list_datasets(d[[2]])
+Sys.setenv("DATAVERSE_SERVER" = "demo.dataverse.org")
+Sys.setenv("DATAVERSE_KEY"    = "c7208dd2-6ec5-469a-bec5-f57e164888d4")
+dv <- get_dataverse("dataverse-client-r")
+list_datasets(dv)
 }
 }
 \seealso{

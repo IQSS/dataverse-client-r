@@ -15,7 +15,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The **dataverse** package is the official R client for [Dataverse 4](http://dataverse.org/) data repositories. The package enables data search, retrieval, and deposit with any Dataverse installation, thus allowing R users to integrate public data sharing into the reproducible research workflow.
+The **dataverse** package is the official R client for [Dataverse 4](https://dataverse.org/) data repositories. The package enables data search, retrieval, and deposit with any Dataverse installation, thus allowing R users to integrate public data sharing into the reproducible research workflow.
 
 In addition to this introduction, the package contains three additional vignettes covering:
 
@@ -39,7 +39,7 @@ library("dataverse")
 
 ## Quick Start
 
-Dataverse has some terminology that is worth quickly reviewing before showing how to work with Dataverse in R. Dataverse is an application that can be installed in many places. As a result, **dataverse** can work with any instllation but you need to specify which installation you want to work with. This can be set by default with an environment variable, `DATAVERSE_SERVER`:
+Dataverse has some terminology that is worth quickly reviewing before showing how to work with Dataverse in R. Dataverse is an application that can be installed in many places. As a result, **dataverse** can work with any installation but you need to specify which installation you want to work with. This can be set by default with an environment variable, `DATAVERSE_SERVER`:
 
 
 ```r
@@ -57,7 +57,7 @@ You can search for and retrieve data without a Dataverse account for that a spec
 dataverse_search("ecological inference")[c("name", "type", "description")]
 ```
 
-The [search vignette](search.html) describes this functionality in more detail. To retrieve a data file, we need to investigate the dataset being returned and look at what files it contains using a variety of functions, the last of which - `get_file()` - can retrieve the files as raw vectors:
+The [search vignette](B-search.html) describes this functionality in more detail. To retrieve a data file, we need to investigate the dataset being returned and look at what files it contains using a variety of functions, the last of which - `get_file()` - can retrieve the files as raw vectors:
 
 ```R
 get_dataset()
@@ -66,7 +66,7 @@ get_file_metadata()
 get_file()
 ```
 
-For "native" Dataverse features (such as user account controls) or to create and publish a dataset, you will need an API key linked to a Dataverse installation account. Instructions for obtaining an account and setting up an API key are available in the [Dataverse User Guide](http://guides.dataverse.org/en/latest/user/account.html). (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called `DATAVERSE_KEY`. It can be set within R using:
+For "native" Dataverse features (such as user account controls) or to create and publish a dataset, you will need an API key linked to a Dataverse installation account. Instructions for obtaining an account and setting up an API key are available in the [Dataverse User Guide](https://guides.dataverse.org/en/latest/user/account.html). (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called `DATAVERSE_KEY`. It can be set within R using:
 
 ```R
 Sys.setenv("DATAVERSE_KEY" = "examplekey12345")
@@ -100,7 +100,7 @@ Your data are now publicly accessible.
 
 ## Appendix: dvn to dataverse Crosswalk
 
-The original Dataverse client for R was called [dvn](https://cran.r-project.org/web/packages/dvn/index.html); it worked with Dataverse versions <= 3 and was removed from CRAN in favor of [dataverse](https://CRAN.R-project.org/package=dataverse) in 2018.  dvn provided functionality for searching, retrieving, and depositing data. Here is a cross-walk of functionality in case you were already familiar with the dvn package:
+The original Dataverse client for R was called [dvn](https://CRAN.R-project.org/package=dvn); it worked with Dataverse versions <= 3 and was removed from CRAN in favor of [dataverse](https://CRAN.R-project.org/package=dataverse) in 2018.  dvn provided functionality for searching, retrieving, and depositing data. Here is a cross-walk of functionality in case you were already familiar with the dvn package:
 
 | API Category | **dataverse** functions | **dvn** functions |
 | ------------ | ----------------------- | ----------------- |

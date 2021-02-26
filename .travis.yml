@@ -1,24 +1,33 @@
 # Travis's native R Image (http://docs.travis-ci.com/user/languages/r/)
 language: r
-sudo: false
 cache: packages
 warnings_are_errors: true
+os:
+  - linux
+  # - windows
+dist: focal
 
-matrix:
+jobs:
   include:
-    - os: linux
-      dist: xenial
+    - name: linux-focal
+      os: linux
+      dist: focal
       env: R_CODECOV=true
-    - os: linux
-      dist: bionic
-    - os: osx
-      osx_image: xcode8.2
-      before_install:
-        - brew install curl
-        - brew link --force curl
-      latex: false
-      r_build_args: '--no-build-vignettes'
-      r_check_args: '--ignore-vignettes --no-examples'
+    # - name: windows-focal
+    #   os: windows
+    #   dist: focal
+    #   env: R_CODECOV=false
+    # - name: osx-current
+    #   os: osx
+    #   # addons:
+    #   #   homebrew:
+    #   #     packages: curl
+    #   # before_install:
+    #   #   - brew install curl
+    #   #   - brew link --force curl
+    #   latex: false
+    #   r_build_args: '--no-build-vignettes'
+    #   r_check_args: '--ignore-vignettes --no-examples'
 
 r_github_packages:
   - r-lib/covr

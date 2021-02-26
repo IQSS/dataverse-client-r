@@ -17,11 +17,11 @@ vignette: >
 
 
 
-This vignette shows how to download data from Dataverse using the dataverse package. We'll focus on a Dataverse repository that contains supplemental files for [Jamie Monogan](http://spia.uga.edu/faculty-member/jamie-monogan/)'s book [*Political Analysis Using R*](http://www.springer.com/gb/book/9783319234458), which is stored at Harvard University's [IQSS Dataverse Network](https://dataverse.harvard.edu/):
+This vignette shows how to download data from Dataverse using the dataverse package. We'll focus on a Dataverse repository that contains supplemental files for [*Political Analysis Using R*](https://www.springer.com/gb/book/9783319234458), which is stored at Harvard University's [IQSS Dataverse Network](https://dataverse.harvard.edu/):
 
 > Monogan, Jamie, 2015, "Political Analysis Using R: Example Code and Data, Plus Data for Practice Problems", [doi:10.7910/DVN/ARKOTI](https://doi.org/10.7910/DVN/ARKOTI), Harvard Dataverse, V1, UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==
 
-This study is persistently retrievable by a "[Digital Object Identifier (DOI)](https://www.doi.org/)": https://doi.org/10.7910/DVN/ARKOTI and the citation above (taken from the Dataverse page) includes a "[Universal Numeric Fingerprint (UNF)](http://guides.dataverse.org/en/latest/developers/unf/index.html)": `UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==`, which provides a versioned, multi-file hash for the entire study, which contains 32 files.
+This study is persistently retrievable by a "[Digital Object Identifier (DOI)](https://www.doi.org/)": https://doi.org/10.7910/DVN/ARKOTI and the citation above (taken from the Dataverse page) includes a "[Universal Numeric Fingerprint (UNF)](https://guides.dataverse.org/en/latest/developers/unf/index.html)": `UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==`, which provides a versioned, multi-file hash for the entire study, which contains 32 files.
 
 If you don't already know what datasets and files you want to use from Dataverse, see the ["Data Search" vignette](B-search.html) for guidance on data search and discovery.
 
@@ -249,7 +249,7 @@ dataset$files[c("label", "UNF")]
 
 ## Reusing Files and Reproducing Analysis
 
-To reproduce the analysis, we can simply run the code file either as a `system()` call or directly in R using `source()` (note this particular file begins with an `rm()` call so you may want to run it in a [new enviroment](https://stat.ethz.ch/R-manual/R-devel/library/base/html/environment.html)):
+To reproduce the analysis, we can simply run the code file either as a `system()` call or directly in R using `source()` (note this particular file begins with an `rm()` call so you may want to run it in a [new environment](https://stat.ethz.ch/R-manual/R-devel/library/base/html/environment.html)):
 
 ```R
 # Option 1
@@ -259,7 +259,7 @@ system("Rscript chapter03.R")
 source("chapter03.R", local=new.env())
 ```
 
-Any well-produced set of analysis reproduction files, like this one, should run without error once the data and code are in-hand.  Troubleshooting anlaysis files is beyond the scope of this vignette, but common sources are
+Any well-produced set of analysis reproduction files, like this one, should run without error once the data and code are in-hand.  Troubleshooting analysis files is beyond the scope of this vignette, but common sources are
 
 1. The working directory is not set the same as the author intended.  This could affect code files not finding the relative position of datasets or of other code files.
 1. Your local machine hasn't downloaded or installed all the necessary datasets and packages.
