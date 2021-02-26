@@ -1,0 +1,36 @@
+---
+title: "Appendix: Comparisons with other clients"
+date: "`r Sys.Date()`"
+output:
+  html_vignette:
+    fig_caption: false
+vignette: >
+  %\VignetteIndexEntry{Appendix: Comparisons with other clients}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## dvn
+
+The original [dvn](https://cran.r-project.org/?package=dvn) package, which worked with Dataverse versions <= 3, provided functionality for searching, retrieving, and depositing data. Here is a cross-walk of functionality in case you were already familiar with the dvn package:
+
+| API Category | **dataverse** functions | **dvn** functions |
+| ------------ | ----------------------- | ----------------- |
+| Data Search | `dataverse_search()` | `dvSearch()` |
+| Data Retrieval | `get_file_metadata()` | `dvMetadata()` |
+|| `get_file()` |  |
+| Data Deposit | `create_dataverse()` |  |
+|| `initiate_dataset()` | `dvCreateStudy()` |
+|| `update_dataset()` | `dvEditStudy()` |
+|| `add_file()` | `addFile()` |
+|| `delete_file()` | `dvDeleteFile()` |
+|| `publish_sword_dataset()` | `dvReleaseStudy()` |
+|| `delete_sword_dataset()` |  |
+|| `service_document()` | `dvServiceDoc()` |
+|| `dataset_statement()` | `dvStudyStatement()` |
+|| `list_datasets()` | `dvUserStudies()` |
+
