@@ -1,5 +1,5 @@
 ---
-title: "Data Retrieval and Reuse"
+title: "3. Data Retrieval and Reuse"
 date: "`r Sys.Date()`"
 output:
   html_vignette:

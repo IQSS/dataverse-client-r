@@ -1,11 +1,11 @@
 ---
-title: "Data Search and Discovery"
+title: "2. Data Search and Discovery"
 date: "`r Sys.Date()`"
 output:
   html_vignette:
     fig_caption: false
 vignette: >
-  %\VignetteIndexEntry{2. Data Search and Discovery}
+  %\VignetteIndexEntry{3. Data Search and Discovery}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
