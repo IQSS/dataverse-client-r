@@ -1,0 +1,13 @@
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  A-introduction: A-introduction.html
+  B-search: B-search.html
+  C-retrieval: C-retrieval.html
+  D-archiving: D-archiving.html
+last_built: 2021-02-26T06:01Z
+urls:
+  reference: https://iqss.github.io/dataverse-client-r/reference
+  article: https://iqss.github.io/dataverse-client-r/articles
+
