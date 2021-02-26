@@ -1,11 +1,9 @@
 Description
 -----------------------------------------------
 
-This submission includes new features and updates to stay compliant with R checks.
+In response to a January notification from Brian Ripley, the tests are now skipped if the server cannot be contacted.  Unfortunately I couldn't attend to this package quickly enough, and understandably it was archived a few days ago.
 
-A second change is that I am now the package maintainer, taking over from Thomas J. Leeper (thosjleeper@gmail.com).  See https://github.com/IQSS/dataverse-client-r/issues/42 and https://github.com/IQSS/dataverse-client-r/issues/21.
-
-The first submission on Jan 17/18 was rejected because the CRAN check had three notes that one documentation example exceeded 10 seconds.  In response, I've added a `dontrun{}` block on most of that example.
+All checks and tests are passing on win-builder, Travis, and my two local machines.  However it is failing on R-hub with a message I haven't encountered before. I suspect it's specific to R-hub, but haven't found similar posts online.  The error message involves the 'pillar' package (which isn't called) on the `get_dataframe_by_name()` examples (which are wrapped by `\donttest{...}`).
 
 Thank you for taking the time to review my submission, and please tell me if there's something else I should do for CRAN.  -Will Beasley
 
@@ -14,14 +12,17 @@ Test environments
 -----------------------------------------------
 
 1. Local Ubuntu, R 4.0.3
-1. Local Win10, R 4.0.3 Patched
-1. [r-hub](https://builder.r-hub.io/status/dataverse_0.3.0.tar.gz-905624c45a92467eb688858acab1a13)
-1. [win-builder](https://win-builder.r-project.org/xYyWrC1uFjXH), development version.
+1. Local Win10, R 4.0.4 Patched
+1. [win-builder](https://win-builder.r-project.org/U4UPm5oO0b32), development version.
 1. [Travis CI](https://travis-ci.org/github/IQSS/dataverse-client-r), Ubuntu 18.04 LTS
 
+
+*Failing*:
+
+1. [r-hub](https://builder.r-hub.io/status/dataverse_0.3.2.tar.gz-4acdf7c445774c06aad526114a6e1a80)
 
 R CMD check results
 -----------------------------------------------
 
-* No ERRORs or WARNINGs on any builds.
+* No ERRORs or WARNINGs on any builds, except for the R-hub problem mentioned above.
 * One NOTE about the new package maintainer

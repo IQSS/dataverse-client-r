@@ -2,6 +2,7 @@
 # https://doi.org/10.70122/FK2/HXJVJU
 
 test_that("roster-by-name", {
+  testthat::skip_if_offline("demo.dataverse.org")
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- readr::read_rds(system.file("dataset-basketball/dataframe-from-tab.rds", package = "dataverse"))
 
@@ -15,6 +16,7 @@ test_that("roster-by-name", {
 })
 
 test_that("roster-by-doi", {
+  testthat::skip_if_offline("demo.dataverse.org")
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- readr::read_rds(system.file("dataset-basketball/dataframe-from-tab.rds", package = "dataverse"))
 
@@ -27,6 +29,7 @@ test_that("roster-by-doi", {
 })
 
 test_that("roster-by-id", {
+  testthat::skip_if_offline("demo.dataverse.org")
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- readr::read_rds(system.file("dataset-basketball/dataframe-from-tab.rds", package = "dataverse"))
 

@@ -74,6 +74,7 @@ itself. Use \code{get_dataframe_by_id} if you know the numeric ID of the
 datafile.
 }
 \examples{
+\donttest{
 # Retrieve data.frame from dataverse DOI and file name
 df_tab <-
   get_dataframe_by_name(
@@ -89,9 +90,6 @@ df_tab <-
     server       = "demo.dataverse.org"
   )
 
-# Do not run when submitting to CRAN, because the whole
-# example sometimes takes longer than 10 sec.
-\dontrun{
 # Retrieve ingested file originally a Stata dta
 df_from_stata_ingested <-
   get_dataframe_by_name(
