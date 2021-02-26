@@ -58,9 +58,9 @@ test_that("dataverse for 'dataverse-client-r'", {
 
   dv <- get_dataverse("dataverse-client-r")
   actual <- list_datasets(dv)
-  ds_order  <- c(which(actual$datasets$id == "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/HXJVJU"),
-                 which(actual$datasets$id == "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/PPIAXE"))
-  actual$datasets <- actual$datasets[ds_order, ]
 
-  expect_equal(actual, expected)
+  expect_equal(actual$title, expected$title)
+  expect_equal(actual$generator, expected$generator)
+  expect_equal(class(actual), class(expected))
+  expect_setequal(actual$datasets$id, expected$datasets$id) # order does not matter
 })
