@@ -22,7 +22,7 @@
 get_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     u <- paste0(api_url(server), "roles/", role)
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     j <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))$data
     j
 }
@@ -32,7 +32,7 @@ get_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.geten
 delete_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     u <- paste0(api_url(server), "roles/", role)
     r <- httr::DELETE(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     j <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))$data
     j
 }
@@ -44,13 +44,13 @@ list_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
         dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
         u <- paste0(api_url(server), "dataverses/", dataverse, "/roles")
         r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-        httr::stop_for_status(r)
+        httr::stop_for_status(r, task = httr::content(r)$message)
         out <- jsonlite::fromJSON(httr::content(r, "text", encoding = "UTF-8"))$data
         structure(lapply(out, `class<-`, "dataverse_role"))
     } else {
         u <- paste0(api_url(server), "admin/roles")
         r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-        httr::stop_for_status(r)
+        httr::stop_for_status(r, task = httr::content(r)$message)
         out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))$data
         structure(lapply(out, `class<-`, "dataverse_role"))
     }
@@ -68,7 +68,7 @@ create_role <- function(dataverse, alias, name, description, permissions,
     }
     u <- paste0(api_url(server), "dataverses/", dataverse, "/roles")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), body = b, encode = "json", ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     j <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))$data
     structure(j, class = "dataverse_role")
 }

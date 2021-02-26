@@ -60,7 +60,7 @@ initiate_sword_dataset <- function(dataverse, body, key = Sys.getenv("DATAVERSE_
         b <- do.call("build_metadata", c(body, metadata_format = "dcterms"))
     }
     r <- httr::POST(u, httr::authenticate(key, ""), httr::add_headers("Content-Type" = "application/atom+xml"), body = b, ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     structure(parse_atom(httr::content(r, as = "text", encoding = "UTF-8")))
 }
 
@@ -107,7 +107,7 @@ delete_sword_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), ser
     }
 
     r <- httr::DELETE(u, httr::authenticate(key, ""), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     cont <- httr::content(r, as = "text", encoding = "UTF-8")
     if (cont == "") {
         return(TRUE)
@@ -162,7 +162,7 @@ publish_sword_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), se
     }
 
     r <- httr::POST(u, httr::authenticate(key, ""), httr::add_headers("In-Progress" = "false"), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     out <- xml2::as_list(xml2::read_xml(httr::content(r, as = "text", encoding = "UTF-8")))
     out
 }
@@ -206,7 +206,7 @@ dataset_atom <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
     }
 
     r <- httr::GET(u, httr::authenticate(key, ""), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     out <- parse_atom(rawToChar(r$content))
     out
 }
@@ -230,6 +230,6 @@ dataset_statement <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server
         u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/statement/study/", dataset)
     }
     r <- httr::GET(u, httr::authenticate(key, ""), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     parse_dataset_statement(rawToChar(r$content))
 }

@@ -40,7 +40,7 @@ get_file_metadata <-
     }
 
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     out <- httr::content(r, as = "text", encoding = "UTF-8")
     return(out)
   }

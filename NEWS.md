@@ -1,3 +1,6 @@
+# CHANGES in dataverse 0.3.3
+* More verbose error messages returned on httr failure. (#31 @EdJeeOnGithub)
+
 # CHANGES in dataverse 0.3.1
 
 * Avoids tests in R Check if the dataverse server is not available (#77)

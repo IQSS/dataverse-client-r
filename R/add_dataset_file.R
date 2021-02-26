@@ -56,7 +56,7 @@ function(file,
                     body = list(file = httr::upload_file(file),
                                 jsonData = jsondata),
                     encode = "multipart")
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     out <- jsonlite::fromJSON(httr::content(r, "text", encoding = "UTF-8"))
     out$data$files$dataFile$id[1L]
 }
@@ -97,6 +97,6 @@ function(file,
                                 jsonData = jsondata
                                 ),
                     encode = "multipart")
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     structure(jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"), simplifyDataFrame = FALSE)$data$files[[1L]], class = "dataverse_file")
 }

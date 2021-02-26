@@ -34,6 +34,9 @@ Authors@R: c(
   ),
   person(
     "Jan", "Kanis", role = "ctb"
+  ),
+  person(
+    "Edward", "Jee", role = "ctb"
   ))
 Imports:
     checkmate,

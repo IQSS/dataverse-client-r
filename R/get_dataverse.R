@@ -45,7 +45,7 @@ get_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
     }
     u <- paste0(api_url(server), "dataverses/", dataverse)
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))
     structure(out$data, class = "dataverse")
 }
@@ -56,7 +56,7 @@ dataverse_contents <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), ser
     dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     u <- paste0(api_url(server), "dataverses/", dataverse, "/contents")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"), simplifyDataFrame = FALSE)
     structure(lapply(out$data, function(x) {
         `class<-`(x, if (x$type == "dataset") "dataverse_dataset" else "dataverse")
