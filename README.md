@@ -34,7 +34,7 @@ latest development version from
 install.packages("dataverse")
 
 # Install from GitHub
-if (!require("remotes")) install.packages("remotes")
+# install.packages("remotes")
 remotes::install_github("iqss/dataverse-client-r")
 ```
 
@@ -55,6 +55,8 @@ variable called `DATAVERSE_KEY`. It can be set within R using:
 ``` r
 Sys.setenv("DATAVERSE_KEY" = "examplekey12345")
 ```
+
+where `examplekey12345` should be replace with your own key.
 
 #### Server
 
@@ -193,74 +195,6 @@ attr(nlsw_original$race, "labels") # original dta has value labels
     ## white black other 
     ##     1     2     3
 
-#### Reading a dataset as a binary file.
-
-In some cases, you may not want to read in the data in your environment,
-perhaps because that is not possible (e.g. for a `.docx` file), and you
-want to simply write these files your local disk. To do this, use the
-more primitive `get_file_*` commands. The arguments are equivalent,
-except we no longer need an `.f` argument
-
-``` r
-nlsw_raw <-
-  get_file_by_name(
-    filename    = "nlsw88.tab",
-    dataset     = "10.70122/FK2/PPIAXE",
-    server      = "demo.dataverse.org"
-  )
-class(nlsw_raw)
-```
-
-    ## [1] "raw"
-
-#### Reading file metadata
-
-The function `get_file_metadata()` can also be used similarly. This will
-return a metadata format for ingested tabular files in the `ddi` format.
-The function `get_dataset()` will retrieve the list of files in a
-dataset.
-
-``` r
-get_dataset(
-  dataset = "10.70122/FK2/PPIAXE",
-  server  = "demo.dataverse.org"
-)
-```
-
-    ## Dataset (182162): 
-    ## Version: 1.1, RELEASED
-    ## Release Date: 2020-12-30T00:00:24Z
-    ## License: CC0
-    ## 22 Files:
-    ##                   label version      id               contentType
-    ## 1 nlsw88_rds-export.rds       1 1734016  application/octet-stream
-    ## 2            nlsw88.tab       3 1734017 text/tab-separated-values
-
-### Data Discovery
-
-Dataverse supplies a robust search API to discover Dataverses, datasets,
-and files. The simplest searches simply consist of a query string:
-
-``` r
-dataverse_search("Gary King")
-```
-
-More complicated searches might specify metadata fields:
-
-``` r
-dataverse_search(author = "Gary King", title = "Ecological Inference")
-```
-
-And searches can be restricted to specific types of objects (Dataverse,
-dataset, or file):
-
-``` r
-dataverse_search(author = "Gary King", type = "dataset")
-```
-
-The results are paginated using `per_page` argument. To retrieve
-subsequent pages, specify `start`.
-
 ### Data Archiving
 
 Dataverse provides two - basically unrelated - workflows for managing
@@ -322,6 +256,10 @@ its metadata with `update_dataset()` or file contents using
 `publish_dataset()`.
 
 ### Other Installations
+
+Other dataverse clients include
+[pyDataverse](https://pydataverse.readthedocs.io/en/latest/) for python
+and the [Java client](https://github.com/IQSS/dataverse-client-java).
 
 Users interested in downloading metadata from archives other than
 Dataverse may be interested in Kurt Hornik’s
