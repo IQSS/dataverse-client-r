@@ -18,9 +18,7 @@ public data sharing into the reproducible research workflow.
 **dataverse** is the next-generation iteration of [the **dvn**
 package](https://cran.r-project.org/package=dvn), which works with
 Dataverse 3 (“Dataverse Network”) applications. **dataverse** includes
-numerous improvements for data search, retrieval, and deposit, including
-use of the (currently in development) **sword** package for data deposit
-and the **UNF** package for data fingerprinting.
+numerous improvements for data search, download, and deposit.
 
 ### Getting Started
 
@@ -81,7 +79,7 @@ management and permissions - are not currently exported in the package
 (but are drafted in the [source
 code](https://github.com/IQSS/dataverse-client-r)).
 
-### Data and Metadata Retrieval
+### Data Download
 
 The dataverse package provides multiple interfaces to obtain data into
 R. Users can supply a file DOI, a dataset DOI combined with a filename,
