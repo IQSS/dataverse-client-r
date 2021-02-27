@@ -18,12 +18,12 @@ publish_dataverse <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), serv
         dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
         u <- paste0(api_url(server), "dataverses/", dataverse, "/actions/:publish")
         r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
-        httr::stop_for_status(r)
+        httr::stop_for_status(r, task = httr::content(r)$message)
         return(httr::content(r)$data)
     }
     # publish via sword API
     r <- httr::POST(u, httr::authenticate(key, ""), httr::add_headers("In-Progress" = "false"), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     out <- xml2::as_list(xml2::read_xml(httr::content(r, as = "text", encoding = "UTF-8")))
     # clean up response structure
     out

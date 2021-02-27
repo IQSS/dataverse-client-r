@@ -21,7 +21,7 @@ dataset_versions <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server 
     dataset <- dataset_id(dataset, key = key, server = server, ...)
     u <- paste0(api_url(server), "datasets/", dataset, "/versions")
     r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     out <- httr::content(r, as = "text", encoding = "UTF-8")$data
     lapply(out, function(x) {
         x <- `class<-`(x, "dataverse_dataset_version")

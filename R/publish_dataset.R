@@ -19,6 +19,6 @@ publish_dataset <- function(dataset, minor = TRUE, key = Sys.getenv("DATAVERSE_K
     dataset <- dataset_id(dataset, key = key, server = server, ...)
     u <- paste0(api_url(server), "datasets/", dataset, "/actions/:publish?type=", if (minor) "minor" else "major")
     r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r)
+    httr::stop_for_status(r, task = httr::content(r)$message)
     httr::content(r, as = "text", encoding = "UTF-8")
 }
