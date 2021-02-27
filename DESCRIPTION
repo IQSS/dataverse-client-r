@@ -51,7 +51,6 @@ Suggests:
     purrr,
     rmarkdown,
     testthat,
-    UNF,
     yaml
 Description: Provides access to Dataverse APIs <https://dataverse.org/> (versions 4-5),
     enabling data search, retrieval, and deposit. For Dataverse versions <= 3.0,
