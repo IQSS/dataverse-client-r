@@ -15,7 +15,7 @@ The **dataverse** package is the official R client for [Dataverse 4](https://dat
 In addition to this introduction, the package contains additional vignettes covering:
 
   * ["Data Search and Discovery"](B-search.html)
-  * ["Data Retrieval and Reuse"](C-retrieval.html)
+  * ["Data Retrieval"](C-retrieval.html)
 
 They can be accessed from [CRAN](https://cran.r-project.org/package=dataverse) or from within R using `vignettes(package = "dataverse")`.
 

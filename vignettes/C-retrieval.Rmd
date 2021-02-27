@@ -1,11 +1,11 @@
 ---
-title: "3. Data Retrieval and Reuse"
+title: "3. Data Retrieval"
 date: "`r Sys.Date()`"
 output:
   html_vignette:
     fig_caption: false
 vignette: >
-  %\VignetteIndexEntry{3. Data Retrieval and Reuse}
+  %\VignetteIndexEntry{3. Data Retrieval}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -85,22 +85,3 @@ unf(constructionData)
 unf(PESenergy)
 dataset$files[c("label", "UNF")]
 ```
-
-## Reusing Files and Reproducing Analysis
-
-To reproduce the analysis, we can simply run the code file either as a `system()` call or directly in R using `source()` (note this particular file begins with an `rm()` call so you may want to run it in a clean R session):
-
-```{r, eval = FALSE}
-system("Rscript chapter03.R")
-source("chapter03.R")
-```
-
-Any well-produced set of analysis reproduction files, like this one, will easily run without error once the data and code are in-hand.
-
-```{r, echo = FALSE, results = "hide"}
-unlink("constructionData.dta")
-unlink("PESenergy.csv")
-unlink("chapter03.R")
-```
-
-To archive your own reproducible analyses using Dataverse, see the ["Archiving Data" vignette](D-archiving.html).
