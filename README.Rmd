@@ -13,7 +13,7 @@ Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 
 [![Dataverse Project logo](https://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png)](https://dataverse.org)
 
-The **dataverse** package provides access to [Dataverse](https://dataverse.org/) APIs (versions 4+), enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. **dataverse** is the next-generation iteration of [the **dvn** package](https://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. **dataverse** includes numerous improvements for data search, retrieval, and deposit, including use of the (currently in development) **sword** package for data deposit and the **UNF** package for data fingerprinting.
+The **dataverse** package provides access to [Dataverse](https://dataverse.org/) APIs (versions 4+), enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. **dataverse** is the next-generation iteration of [the **dvn** package](https://cran.r-project.org/package=dvn), which works with Dataverse 3 ("Dataverse Network") applications. **dataverse** includes numerous improvements for data search, download, and deposit, including use of the (currently in development) **sword** package for data deposit and the **UNF** package for data fingerprinting.
 
 
 ### Getting Started
@@ -58,7 +58,7 @@ Note: The package attempts to compensate for any malformed values, though.
 Currently, the package wraps the data management features of the Dataverse API. Functions for other API features - related to user management and permissions - are not currently exported in the package (but are drafted in the [source code](https://github.com/IQSS/dataverse-client-r)).
 
 
-### Data and Metadata Retrieval
+### Data Download
 
 The dataverse package provides multiple interfaces to obtain data into R. Users can supply a file DOI, a dataset DOI combined with a filename, or a dataverse object. They can read in the file as a raw binary or a dataset read in with the appropriate R function.
 

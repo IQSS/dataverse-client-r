@@ -39,4 +39,4 @@ names(ei)
 ei$name
 ```
 
-Once datasets and files are identified, it is easy to download and use them directly in R. See the ["Data Retrieval" vignette](C-retrieval.html) for details.
+Once datasets and files are identified, it is easy to download and use them directly in R. See the ["Data Download" vignette](C-download.html) for details.

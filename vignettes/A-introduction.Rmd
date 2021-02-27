@@ -68,7 +68,7 @@ The most practical of these is likely `get_dataframe_by_name()` which imports th
 
 Recall that, because _datasets_ in Dataverse are a collection of files rather than a single csv file, for example, the `get_dataset()` funtion does not return data but rather information about a Dataverse dataset.
 
-The [retrieval vignette](C-retrieval.html) describes this functionality in more detail. 
+The [download vignette](C-download.html) describes this functionality in more detail. 
 
 ## Upload and Maintain
 
