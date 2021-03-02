@@ -127,30 +127,36 @@ attr(nlsw_original$race, "labels") # original dta has value labels
 Dataverse provides two - basically unrelated - workflows for managing (adding, documenting, and publishing) datasets. The first is built on [SWORD v2.0](http://swordapp.org/sword-v2/). This means that to create a new dataset listing, you will have to first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:
 
 ``` r
-# retrieve your service document
+# After setting appropriate dataverse server and environment, obtain SWORD
+# service doc
 d <- service_document()
 
-# create a list of metadata
+# create a list of metadata for a file
 metadat <-
   list(
-    title       = "My Study",
+    title       = paste0("My-Study_", format(Sys.time(), '%Y-%m-%d_%H:%M')),
     creator     = "Doe, John",
     description = "An example study"
   )
 
-# create the dataset
-ds <- initiate_sword_dataset("mydataverse", body = metadat)
+# create the dataset, where "mydataverse" is to be replaced by the name 
+# of the already-created dataverse as shown in the URL
+ds <- initiate_sword_dataset("<mydataverse>", body = metadat)
 
 # add files to dataset
-tmp <- tempfile()
-write.csv(iris, file = tmp)
-f <- add_file(ds, file = tmp)
+readr::write_csv(iris, file = "iris.csv")
+
+# Search the initiated dataset and give a DOI and version of the dataverse as an identifier
+mydoi <- "doi:10.70122/FK2/BMZPJZ&version=DRAFT"
+
+# add dataset
+add_dataset_file(file = "iris.csv", dataset = mydoi)
 
 # publish new dataset
 publish_sword_dataset(ds)
 
 # dataset will now be published
-list_datasets("mydataverse")
+list_datasets("<mydataverse>")
 ```
 
 The second workflow is called the "native" API and is similar but uses slightly different functions:
@@ -173,8 +179,11 @@ get_dataverse("mydataverse")
 
 Through the native API it is possible to update a dataset by modifying its metadata with `update_dataset()` or file contents using `update_dataset_file()` and then republish a new version using `publish_dataset()`.
 
-### Other Installations
+For more extensive features of updating and maintaining data, see [pyDataverse](https://pydataverse.readthedocs.io/en/latest/).
 
-Other dataverse clients include [pyDataverse](https://pydataverse.readthedocs.io/en/latest/) for python and the [Java client](https://github.com/IQSS/dataverse-client-java). 
+
+### Related Software
+
+Other dataverse clients include [pyDataverse](https://pydataverse.readthedocs.io/en/latest/) for Python and the [Java client](https://github.com/IQSS/dataverse-client-java). 
 
 Users interested in downloading metadata from archives other than Dataverse may be interested in Kurt Hornik's [OAIHarvester](https://cran.r-project.org/package=OAIHarvester) and Scott Chamberlain's [oai](https://cran.r-project.org/package=oai), which offer metadata download from any web repository that is compliant with the [Open Archives Initiative](http://www.openarchives.org/) standards. Additionally, [rdryad](https://cran.r-project.org/package=rdryad) uses OAIHarvester to interface with [Dryad](https://datadryad.org/stash). The [rfigshare](https://cran.r-project.org/package=rfigshare) package works in a similar spirit to **dataverse** with <https://figshare.com/>.

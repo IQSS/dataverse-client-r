@@ -203,30 +203,36 @@ with some metadata, add one or more files to the dataset, and then
 publish it. This looks something like the following:
 
 ``` r
-# retrieve your service document
+# After setting appropriate dataverse server and environment, obtain SWORD
+# service doc
 d <- service_document()
 
-# create a list of metadata
+# create a list of metadata for a file
 metadat <-
   list(
-    title       = "My Study",
+    title       = paste0("My-Study_", format(Sys.time(), '%Y-%m-%d_%H:%M')),
     creator     = "Doe, John",
     description = "An example study"
   )
 
-# create the dataset
-ds <- initiate_sword_dataset("mydataverse", body = metadat)
+# create the dataset, where "mydataverse" is to be replaced by the name 
+# of the already-created dataverse as shown in the URL
+ds <- initiate_sword_dataset("<mydataverse>", body = metadat)
 
 # add files to dataset
-tmp <- tempfile()
-write.csv(iris, file = tmp)
-f <- add_file(ds, file = tmp)
+readr::write_csv(iris, file = "iris.csv")
+
+# Search the initiated dataset and give a DOI and version of the dataverse as an identifier
+mydoi <- "doi:10.70122/FK2/BMZPJZ&version=DRAFT"
+
+# add dataset
+add_dataset_file(file = "iris.csv", dataset = mydoi)
 
 # publish new dataset
 publish_sword_dataset(ds)
 
 # dataset will now be published
-list_datasets("mydataverse")
+list_datasets("<mydataverse>")
 ```
 
 The second workflow is called the “native” API and is similar but uses
@@ -253,10 +259,13 @@ its metadata with `update_dataset()` or file contents using
 `update_dataset_file()` and then republish a new version using
 `publish_dataset()`.
 
-### Other Installations
+For more extensive features of updating and maintaining data, see
+[pyDataverse](https://pydataverse.readthedocs.io/en/latest/).
+
+### Related Software
 
 Other dataverse clients include
-[pyDataverse](https://pydataverse.readthedocs.io/en/latest/) for python
+[pyDataverse](https://pydataverse.readthedocs.io/en/latest/) for Python
 and the [Java client](https://github.com/IQSS/dataverse-client-java).
 
 Users interested in downloading metadata from archives other than
