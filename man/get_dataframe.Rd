@@ -74,7 +74,7 @@ itself. Use \code{get_dataframe_by_id} if you know the numeric ID of the
 datafile.
 }
 \examples{
-\donttest{
+\dontrun{
 # Retrieve data.frame from dataverse DOI and file name
 df_tab <-
   get_dataframe_by_name(
