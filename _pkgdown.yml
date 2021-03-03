@@ -27,8 +27,7 @@ articles:
   contents:
     - 'A-introduction'
     - 'B-search'
-    - 'C-retrieval'
-    - 'D-archiving'
+    - 'C-download'
 
 reference:
 - title: "Retrieve"
