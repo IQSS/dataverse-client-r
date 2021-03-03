@@ -56,16 +56,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/A-introduction.html">Introduction to Dataverse</a>
+      <a href="articles/A-introduction.html">1. Introduction to Dataverse</a>
     </li>
     <li>
-      <a href="articles/B-search.html">Data Search and Discovery</a>
+      <a href="articles/B-search.html">2. Data Search and Discovery</a>
     </li>
     <li>
-      <a href="articles/C-retrieval.html">Data Retrieval and Reuse</a>
-    </li>
-    <li>
-      <a href="articles/D-archiving.html">Data Archiving</a>
+      <a href="articles/C-download.html">3. Data Download</a>
     </li>
   </ul>
 </li>
@@ -97,7 +94,7 @@
 <a href="#r-client-for-dataverse-repositories" class="anchor"></a>R Client for Dataverse Repositories</h1></div>
 
 <p><a href="https://dataverse.org"><img src="https://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png" alt="Dataverse Project logo"></a></p>
-<p>The <strong>dataverse</strong> package provides access to <a href="https://dataverse.org/">Dataverse</a> APIs (versions 4+), enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. <strong>dataverse</strong> is the next-generation iteration of <a href="https://cran.r-project.org/package=dvn">the <strong>dvn</strong> package</a>, which works with Dataverse 3 (“Dataverse Network”) applications. <strong>dataverse</strong> includes numerous improvements for data search, retrieval, and deposit, including use of the (currently in development) <strong>sword</strong> package for data deposit and the <strong>UNF</strong> package for data fingerprinting.</p>
+<p>The <strong>dataverse</strong> package provides access to <a href="https://dataverse.org/">Dataverse</a> APIs (versions 4+), enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. <strong>dataverse</strong> is the next-generation iteration of <a href="https://cran.r-project.org/package=dvn">the <strong>dvn</strong> package</a>, which works with Dataverse 3 (“Dataverse Network”) applications. <strong>dataverse</strong> includes numerous improvements for data search, download, and deposit.</p>
 <div id="getting-started" class="section level3">
 <h3 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting Started</h3>
@@ -107,7 +104,7 @@
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"dataverse"</span><span class="op">)</span>
 
 <span class="co"># Install from GitHub</span>
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org">"remotes"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="co"># install.packages("remotes")</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"iqss/dataverse-client-r"</span><span class="op">)</span></code></pre></div>
 <div id="keys" class="section level4">
 <h4 class="hasAnchor">
@@ -115,6 +112,7 @@
 <p>Some features of the Dataverse API are public and require no authentication. This means in many cases you can search for and retrieve data without a Dataverse account for that a specific Dataverse installation. But, other features require a Dataverse account for the specific server installation of the Dataverse software, and an API key linked to that account. Instructions for obtaining an account and setting up an API key are available in the <a href="https://guides.dataverse.org/en/latest/user/account.html">Dataverse User Guide</a>. (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called <code>DATAVERSE_KEY</code>. It can be set within R using:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span> <span class="op">=</span> <span class="st">"examplekey12345"</span><span class="op">)</span></code></pre></div>
+<p>where <code>examplekey12345</code> should be replace with your own key.</p>
 </div>
 <div id="server" class="section level4">
 <h4 class="hasAnchor">
@@ -126,9 +124,9 @@
 <p>Currently, the package wraps the data management features of the Dataverse API. Functions for other API features - related to user management and permissions - are not currently exported in the package (but are drafted in the <a href="https://github.com/IQSS/dataverse-client-r">source code</a>).</p>
 </div>
 </div>
-<div id="data-and-metadata-retrieval" class="section level3">
+<div id="data-download" class="section level3">
 <h3 class="hasAnchor">
-<a href="#data-and-metadata-retrieval" class="anchor"></a>Data and Metadata Retrieval</h3>
+<a href="#data-download" class="anchor"></a>Data Download</h3>
 <p>The dataverse package provides multiple interfaces to obtain data into R. Users can supply a file DOI, a dataset DOI combined with a filename, or a dataverse object. They can read in the file as a raw binary or a dataset read in with the appropriate R function.</p>
 <div id="reading-data-as-r-objects" class="section level4">
 <h4 class="hasAnchor">
@@ -196,84 +194,44 @@
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## white black other </span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co">##     1     2     3</span></span></code></pre></div>
 </div>
-<div id="reading-a-dataset-as-a-binary-file" class="section level4">
-<h4 class="hasAnchor">
-<a href="#reading-a-dataset-as-a-binary-file" class="anchor"></a>Reading a dataset as a binary file.</h4>
-<p>In some cases, you may not want to read in the data in your environment, perhaps because that is not possible (e.g. for a <code>.docx</code> file), and you want to simply write these files your local disk. To do this, use the more primitive <code>get_file_*</code> commands. The arguments are equivalent, except we no longer need an <code>.f</code> argument</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nlsw_raw</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="reference/get_file.html">get_file_by_name</a></span><span class="op">(</span>
-    filename    <span class="op">=</span> <span class="st">"nlsw88.tab"</span>,
-    dataset     <span class="op">=</span> <span class="st">"10.70122/FK2/PPIAXE"</span>,
-    server      <span class="op">=</span> <span class="st">"demo.dataverse.org"</span>
-  <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">nlsw_raw</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">## [1] "raw"</span></span></code></pre></div>
-</div>
-<div id="reading-file-metadata" class="section level4">
-<h4 class="hasAnchor">
-<a href="#reading-file-metadata" class="anchor"></a>Reading file metadata</h4>
-<p>The function <code><a href="reference/get_file_metadata.html">get_file_metadata()</a></code> can also be used similarly. This will return a metadata format for ingested tabular files in the <code>ddi</code> format. The function <code><a href="reference/get_dataset.html">get_dataset()</a></code> will retrieve the list of files in a dataset.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/get_dataset.html">get_dataset</a></span><span class="op">(</span>
-  dataset <span class="op">=</span> <span class="st">"10.70122/FK2/PPIAXE"</span>,
-  server  <span class="op">=</span> <span class="st">"demo.dataverse.org"</span>
-<span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">## Dataset (182162): </span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="co">## Version: 1.1, RELEASED</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="co">## Release Date: 2020-12-30T00:00:24Z</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="co">## License: CC0</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="co">## 22 Files:</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="co">##                   label version      id               contentType</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a><span class="co">## 1 nlsw88_rds-export.rds       1 1734016  application/octet-stream</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a><span class="co">## 2            nlsw88.tab       3 1734017 text/tab-separated-values</span></span></code></pre></div>
-</div>
-</div>
-<div id="data-discovery" class="section level3">
-<h3 class="hasAnchor">
-<a href="#data-discovery" class="anchor"></a>Data Discovery</h3>
-<p>Dataverse supplies a robust search API to discover Dataverses, datasets, and files. The simplest searches simply consist of a query string:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"Gary King"</span><span class="op">)</span></code></pre></div>
-<p>More complicated searches might specify metadata fields:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span>author <span class="op">=</span> <span class="st">"Gary King"</span>, title <span class="op">=</span> <span class="st">"Ecological Inference"</span><span class="op">)</span></code></pre></div>
-<p>And searches can be restricted to specific types of objects (Dataverse, dataset, or file):</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span>author <span class="op">=</span> <span class="st">"Gary King"</span>, type <span class="op">=</span> <span class="st">"dataset"</span><span class="op">)</span></code></pre></div>
-<p>The results are paginated using <code>per_page</code> argument. To retrieve subsequent pages, specify <code>start</code>.</p>
 </div>
 <div id="data-archiving" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data-archiving" class="anchor"></a>Data Archiving</h3>
 <p>Dataverse provides two - basically unrelated - workflows for managing (adding, documenting, and publishing) datasets. The first is built on <a href="http://swordapp.org/sword-v2/">SWORD v2.0</a>. This means that to create a new dataset listing, you will have to first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># retrieve your service document</span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># After setting appropriate dataverse server and environment, obtain SWORD</span>
+<span class="co"># service doc</span>
 <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/service_document.html">service_document</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="co"># create a list of metadata</span>
+<span class="co"># create a list of metadata for a file</span>
 <span class="va">metadat</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
-    title       <span class="op">=</span> <span class="st">"My Study"</span>,
+    title       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"My-Study_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">'%Y-%m-%d_%H:%M'</span><span class="op">)</span><span class="op">)</span>,
     creator     <span class="op">=</span> <span class="st">"Doe, John"</span>,
     description <span class="op">=</span> <span class="st">"An example study"</span>
   <span class="op">)</span>
 
-<span class="co"># create the dataset</span>
-<span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/initiate_sword_dataset.html">initiate_sword_dataset</a></span><span class="op">(</span><span class="st">"mydataverse"</span>, body <span class="op">=</span> <span class="va">metadat</span><span class="op">)</span>
+<span class="co"># create the dataset, where "mydataverse" is to be replaced by the name </span>
+<span class="co"># of the already-created dataverse as shown in the URL</span>
+<span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/initiate_sword_dataset.html">initiate_sword_dataset</a></span><span class="op">(</span><span class="st">"&lt;mydataverse&gt;"</span>, body <span class="op">=</span> <span class="va">metadat</span><span class="op">)</span>
 
 <span class="co"># add files to dataset</span>
-<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="va">tmp</span><span class="op">)</span>
-<span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/add_file.html">add_file</a></span><span class="op">(</span><span class="va">ds</span>, file <span class="op">=</span> <span class="va">tmp</span><span class="op">)</span>
+<span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="st">"iris.csv"</span><span class="op">)</span>
+
+<span class="co"># Search the initiated dataset and give a DOI and version of the dataverse as an identifier</span>
+<span class="va">mydoi</span> <span class="op">&lt;-</span> <span class="st">"doi:10.70122/FK2/BMZPJZ&amp;version=DRAFT"</span>
+
+<span class="co"># add dataset</span>
+<span class="fu"><a href="reference/add_dataset_file.html">add_dataset_file</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"iris.csv"</span>, dataset <span class="op">=</span> <span class="va">mydoi</span><span class="op">)</span>
 
 <span class="co"># publish new dataset</span>
 <span class="fu"><a href="reference/publish_sword_dataset.html">publish_sword_dataset</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span>
 
 <span class="co"># dataset will now be published</span>
-<span class="fu"><a href="reference/list_datasets.html">list_datasets</a></span><span class="op">(</span><span class="st">"mydataverse"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="reference/list_datasets.html">list_datasets</a></span><span class="op">(</span><span class="st">"&lt;mydataverse&gt;"</span><span class="op">)</span></code></pre></div>
 <p>The second workflow is called the “native” API and is similar but uses slightly different functions:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create the dataset</span>
 <span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/create_dataset.html">create_dataset</a></span><span class="op">(</span><span class="st">"mydataverse"</span><span class="op">)</span>
 
@@ -288,10 +246,12 @@
 <span class="co"># dataset will now be published</span>
 <span class="fu"><a href="reference/get_dataverse.html">get_dataverse</a></span><span class="op">(</span><span class="st">"mydataverse"</span><span class="op">)</span></code></pre></div>
 <p>Through the native API it is possible to update a dataset by modifying its metadata with <code><a href="reference/create_dataset.html">update_dataset()</a></code> or file contents using <code><a href="reference/add_dataset_file.html">update_dataset_file()</a></code> and then republish a new version using <code><a href="reference/publish_dataset.html">publish_dataset()</a></code>.</p>
+<p>For more extensive features of updating and maintaining data, see <a href="https://pydataverse.readthedocs.io/en/latest/">pyDataverse</a>.</p>
 </div>
-<div id="other-installations" class="section level3">
+<div id="related-software" class="section level3">
 <h3 class="hasAnchor">
-<a href="#other-installations" class="anchor"></a>Other Installations</h3>
+<a href="#related-software" class="anchor"></a>Related Software</h3>
+<p>Other dataverse clients include <a href="https://pydataverse.readthedocs.io/en/latest/">pyDataverse</a> for Python and the <a href="https://github.com/IQSS/dataverse-client-java">Java client</a>.</p>
 <p>Users interested in downloading metadata from archives other than Dataverse may be interested in Kurt Hornik’s <a href="https://cran.r-project.org/package=OAIHarvester">OAIHarvester</a> and Scott Chamberlain’s <a href="https://cran.r-project.org/package=oai">oai</a>, which offer metadata download from any web repository that is compliant with the <a href="http://www.openarchives.org/">Open Archives Initiative</a> standards. Additionally, <a href="https://cran.r-project.org/package=rdryad">rdryad</a> uses OAIHarvester to interface with <a href="https://datadryad.org/stash">Dryad</a>. The <a href="https://cran.r-project.org/package=rfigshare">rfigshare</a> package works in a similar spirit to <strong>dataverse</strong> with <a href="https://figshare.com/" class="uri">https://figshare.com/</a>.</p>
 </div>
 </div>

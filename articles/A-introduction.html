@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction to Dataverse • dataverse</title>
+<title>1. Introduction to Dataverse • dataverse</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to Dataverse">
+<script src="../pkgdown.js"></script><meta property="og:title" content="1. Introduction to Dataverse">
 <meta property="og:description" content="dataverse">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -54,16 +54,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/A-introduction.html">Introduction to Dataverse</a>
+      <a href="../articles/A-introduction.html">1. Introduction to Dataverse</a>
     </li>
     <li>
-      <a href="../articles/B-search.html">Data Search and Discovery</a>
+      <a href="../articles/B-search.html">2. Data Search and Discovery</a>
     </li>
     <li>
-      <a href="../articles/C-retrieval.html">Data Retrieval and Reuse</a>
-    </li>
-    <li>
-      <a href="../articles/D-archiving.html">Data Archiving</a>
+      <a href="../articles/C-download.html">3. Data Download</a>
     </li>
   </ul>
 </li>
@@ -91,9 +88,9 @@
       </header><script src="A-introduction_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Introduction to Dataverse</h1>
+      <h1 data-toc-skip>1. Introduction to Dataverse</h1>
             
-            <h4 class="date">2017-06-13</h4>
+            <h4 class="date">2021-03-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/iqss/dataverse-client-r/blob/master/vignettes/A-introduction.Rmd"><code>vignettes/A-introduction.Rmd</code></a></small>
       <div class="hidden name"><code>A-introduction.Rmd</code></div>
@@ -103,144 +100,66 @@
     
     
 <p>The <strong>dataverse</strong> package is the official R client for <a href="https://dataverse.org/">Dataverse 4</a> data repositories. The package enables data search, retrieval, and deposit with any Dataverse installation, thus allowing R users to integrate public data sharing into the reproducible research workflow.</p>
-<p>In addition to this introduction, the package contains three additional vignettes covering:</p>
+<p>In addition to this introduction, the package contains additional vignettes covering:</p>
 <ul>
 <li><a href="B-search.html">“Data Search and Discovery”</a></li>
-<li><a href="C-retrieval.html">“Data Retrieval and Reuse”</a></li>
-<li><a href="D-archiving.html">“Data Archiving”</a></li>
+<li><a href="C-retrieval.html">“Data Retrieval”</a></li>
 </ul>
 <p>They can be accessed from <a href="https://cran.r-project.org/package=dataverse">CRAN</a> or from within R using <code><a href="https://rdrr.io/r/utils/vignette.html">vignettes(package = "dataverse")</a></code>.</p>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
 <p>The dataverse client package can be installed from <a href="https://cran.r-project.org/package=dataverse">CRAN</a>, and you can find the latest development version and report any issues on GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org">"remotes"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"iqss/dataverse-client-r"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"iqss/dataverse-client-r"</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://iqss.github.io/dataverse-client-r">"dataverse"</a></span><span class="op">)</span></code></pre></div>
-<p>(Note: <strong>dataverse</strong> is the next-generation iteration of <a href="https://cran.r-project.org/package=dvn">the <strong>dvn</strong> package</a>, which works with Dataverse 3 (“Dataverse Network”) applications. See the appendix of this vignette for a cross-walk of functionality between <strong>dvn</strong> and <strong>dataverse</strong>.)</p>
-<div id="quick-start" class="section level2">
+</div>
+<div id="terminology" class="section level2">
 <h2 class="hasAnchor">
-<a href="#quick-start" class="anchor"></a>Quick Start</h2>
+<a href="#terminology" class="anchor"></a>Terminology</h2>
 <p>Dataverse has some terminology that is worth quickly reviewing before showing how to work with Dataverse in R. Dataverse is an application that can be installed in many places. As a result, <strong>dataverse</strong> can work with any installation but you need to specify which installation you want to work with. This can be set by default with an environment variable, <code>DATAVERSE_SERVER</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://iqss.github.io/dataverse-client-r">"dataverse"</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></code></pre></div>
 <p>This should be the Dataverse server, without the “https” prefix or the “/api” URL path, etc. The package attempts to compensate for any malformed values, though.</p>
 <p>Within a given Dataverse installation, organizations or individuals can create objects that are also called “Dataverses”. These Dataverses can then contain other <em>dataverses</em>, which can contain other <em>dataverses</em>, and so on. They can also contain <em>datasets</em> which in turn contain files. You can think of Harvard’s Dataverse as a top-level installation, where an institution might have a <em>dataverse</em> that contains a subsidiary <em>dataverse</em> for each researcher at the organization, who in turn publishes all files relevant to a given study as a <em>dataset</em>.</p>
+</div>
+<div id="search" class="section level2">
+<h2 class="hasAnchor">
+<a href="#search" class="anchor"></a>Search</h2>
 <p>You can search for and retrieve data without a Dataverse account for that a specific Dataverse installation. For example, to search for data files or datasets that mention “ecological inference”, we can just do:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"ecological inference"</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"type"</span>, <span class="st">"description"</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<p>The <a href="B-search.html">search vignette</a> describes this functionality in more detail. To retrieve a data file, we need to investigate the dataset being returned and look at what files it contains using a variety of functions, the last of which - <code><a href="../reference/get_file.html">get_file()</a></code> - can retrieve the files as raw vectors:</p>
+<p>The <a href="B-search.html">search vignette</a> describes this functionality in more detail.</p>
+</div>
+<div id="get" class="section level2">
+<h2 class="hasAnchor">
+<a href="#get" class="anchor"></a>Get</h2>
+<p>To retrieve a data file, we need to investigate the dataset being returned and look at what files it contains using a variety of functions:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_dataset.html">get_dataset</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/get_dataset.html">dataset_files</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/get_file_metadata.html">get_file_metadata</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="../reference/get_file.html">get_file</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/get_file.html">get_file</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="../reference/get_dataframe_by_name.html">get_dataframe_by_name</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>The most practical of these is likely <code><a href="../reference/get_dataframe_by_name.html">get_dataframe_by_name()</a></code> which imports the object directly as a dataframe. <code><a href="../reference/get_file.html">get_file()</a></code> is more primitive, and calls a raw vector.</p>
+<p>Recall that, because <em>datasets</em> in Dataverse are a collection of files rather than a single csv file, for example, the <code><a href="../reference/get_dataset.html">get_dataset()</a></code> funtion does not return data but rather information about a Dataverse dataset.</p>
+<p>The <a href="C-download.html">download vignette</a> describes this functionality in more detail.</p>
+</div>
+<div id="upload-and-maintain" class="section level2">
+<h2 class="hasAnchor">
+<a href="#upload-and-maintain" class="anchor"></a>Upload and Maintain</h2>
 <p>For “native” Dataverse features (such as user account controls) or to create and publish a dataset, you will need an API key linked to a Dataverse installation account. Instructions for obtaining an account and setting up an API key are available in the <a href="https://guides.dataverse.org/en/latest/user/account.html">Dataverse User Guide</a>. (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called <code>DATAVERSE_KEY</code>. It can be set within R using:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span> <span class="op">=</span> <span class="st">"examplekey12345"</span><span class="op">)</span></code></pre></div>
-<p>With that set, you can easily create a new dataverse, create a dataset within that dataverse, push files to the dataset, and release it:</p>
+<p>where <code>examplekey12345</code> should be replace with your own key.</p>
+<p>With that set, you can easily create a new dataverse, create a dataset within that dataverse, push files to the dataset, and release it, using functions such as</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create a dataverse</span>
-<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_dataverse.html">create_dataverse</a></span><span class="op">(</span><span class="st">"mydataverse"</span><span class="op">)</span>
-
-<span class="co"># create a list of metadata</span>
-<span class="va">metadat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"My Study"</span>,
-                creator <span class="op">=</span> <span class="st">"Doe, John"</span>,
-                description <span class="op">=</span> <span class="st">"An example study"</span><span class="op">)</span>
-
-<span class="co"># create the dataset</span>
-<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">initiate_dataset</span><span class="op">(</span><span class="st">"mydataverse"</span>, body <span class="op">=</span> <span class="va">metadat</span><span class="op">)</span>
-
-<span class="co"># add files to dataset</span>
-<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="va">tmp</span><span class="op">)</span>
-<span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_file.html">add_file</a></span><span class="op">(</span><span class="va">dat</span>, file <span class="op">=</span> <span class="va">tmp</span><span class="op">)</span>
-
-<span class="co"># publish new dataset</span>
-<span class="fu"><a href="../reference/publish_dataset.html">publish_dataset</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></code></pre></div>
-<p>Your data are now publicly accessible.</p>
-</div>
-<div id="appendix-dvn-to-dataverse-crosswalk" class="section level2">
-<h2 class="hasAnchor">
-<a href="#appendix-dvn-to-dataverse-crosswalk" class="anchor"></a>Appendix: dvn to dataverse Crosswalk</h2>
-<p>The original Dataverse client for R was called <a href="https://CRAN.R-project.org/package=dvn">dvn</a>; it worked with Dataverse versions &lt;= 3 and was removed from CRAN in favor of <a href="https://CRAN.R-project.org/package=dataverse">dataverse</a> in 2018. dvn provided functionality for searching, retrieving, and depositing data. Here is a cross-walk of functionality in case you were already familiar with the dvn package:</p>
-<table class="table">
-<thead><tr class="header">
-<th>API Category</th>
-<th>
-<strong>dataverse</strong> functions</th>
-<th>
-<strong>dvn</strong> functions</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>Data Search</td>
-<td><code><a href="../reference/dataverse_search.html">dataverse_search()</a></code></td>
-<td><code>dvSearch()</code></td>
-</tr>
-<tr class="even">
-<td>Data Retrieval</td>
-<td><code><a href="../reference/get_file_metadata.html">get_file_metadata()</a></code></td>
-<td><code>dvMetadata()</code></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><code><a href="../reference/get_file.html">get_file()</a></code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Data Deposit</td>
-<td><code><a href="../reference/create_dataverse.html">create_dataverse()</a></code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><code>initiate_dataset()</code></td>
-<td><code>dvCreateStudy()</code></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><code><a href="../reference/create_dataset.html">update_dataset()</a></code></td>
-<td><code>dvEditStudy()</code></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><code><a href="../reference/add_file.html">add_file()</a></code></td>
-<td><code>addFile()</code></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><code><a href="../reference/delete_file.html">delete_file()</a></code></td>
-<td><code>dvDeleteFile()</code></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><code><a href="../reference/publish_sword_dataset.html">publish_sword_dataset()</a></code></td>
-<td><code>dvReleaseStudy()</code></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><code><a href="../reference/delete_sword_dataset.html">delete_sword_dataset()</a></code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><code><a href="../reference/service_document.html">service_document()</a></code></td>
-<td><code>dvServiceDoc()</code></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><code><a href="../reference/dataset_atom.html">dataset_statement()</a></code></td>
-<td><code>dvStudyStatement()</code></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><code><a href="../reference/list_datasets.html">list_datasets()</a></code></td>
-<td><code>dvUserStudies()</code></td>
-</tr>
-</tbody>
-</table>
+<code class="sourceCode R"><span class="fu">create_daverse</span><span class="op">(</span><span class="op">)</span>
+<span class="fu">initiate_dataset</span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="../reference/add_file.html">add_file</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="../reference/publish_dataset.html">publish_dataset</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>As of <code>dataverse</code> version 0.3.0, we recommended the Python client (<code>https://github.com/gdcc/pyDataverse</code>) for these upload and maintenance functions.</p>
 </div>
   </div>
 
