@@ -3,9 +3,9 @@ Description
 
 In response to a January notification from Brian Ripley, the tests are now skipped if the server cannot be contacted.  Unfortunately I couldn't attend to this package quickly enough, and understandably it was archived a few days ago.
 
-All checks and tests are passing on win-builder, Travis, and my two local machines.  However it is failing on R-hub with a message I haven't encountered before. I suspect it's specific to R-hub, but haven't found similar posts online.  The error message involves the 'pillar' package (which isn't called) on the `get_dataframe_by_name()` examples (which are wrapped by `\donttest{...}`).
+All checks and tests are passing on win-builder, Travis, and my two local machines.  However it is failing on R-hub with a message I haven't encountered before. I suspect it's specific to R-hub, but haven't found similar posts online.  The error message involves the 'utf8' package (which isn't called) on the `get_dataframe_by_name()` examples (which are wrapped by `\donttest{...}`).
 
-We just made another modification (related to last night's rejection of v0.3.2) to account for different sorting orders that I assume are related to different platforms.  They hadn't appeared in any of our tests.
+We just made another modification (related to the previous rejections this week) to account for different sorting orders that I assume are related to different platforms.  They hadn't appeared in any of our tests.
 
 Thank you for taking the time to review my submission, and please tell me if there's something else I should do for CRAN.  -Will Beasley
 
