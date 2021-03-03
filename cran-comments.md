@@ -15,13 +15,13 @@ Test environments
 
 1. Local Ubuntu, R 4.0.3
 1. Local Win10, R 4.0.4 Patched
-1. [win-builder](https://win-builder.r-project.org/4ML5zvxJzOw6/), development version.
+1. [win-builder](https://win-builder.r-project.org/4ML5zvxJzOw6/), development version was passing, but hasn't responded to my submissions today.
 1. [Travis CI](https://travis-ci.org/github/IQSS/dataverse-client-r), Ubuntu 18.04 LTS
 
 
 *Failing on some builds*:
 
-1. [r-hub](https://builder.r-hub.io/status/dataverse_0.3.3.tar.gz-ad235e27f3624c7ca85e8a13ab5e41b0)
+1. [r-hub](https://builder.r-hub.io/status/dataverse_0.3.5.tar.gz-a1c9106ec8544f36820073f6c2626f70).  I believe it's related to the utf8 package (which isn't a direct dependency of our package) and is currently [not building correctly on windows](https://cran.r-project.org/web/checks/check_results_utf8.html).
 
 R CMD check results
 -----------------------------------------------
