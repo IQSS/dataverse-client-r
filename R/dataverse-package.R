@@ -10,7 +10,7 @@
 #'
 #' \itemize{
 #'   \item Search: \code{\link{dataverse_search}}
-#'   \item Data retrieval: \code{\link{get_dataverse}}, \code{\link{dataverse_contents}}, \code{\link{get_dataset}}, \code{\link{dataset_metadata}}, \code{\link{get_file}}
+#'   \item Data download: \code{\link{get_dataframe_by_name}}, \code{\link{get_dataverse}}, \code{\link{dataverse_contents}}, \code{\link{get_dataset}}, \code{\link{dataset_metadata}}, \code{\link{get_file}}
 #'   \item Data archiving (SWORD API): \code{\link{service_document}}, \code{\link{list_datasets}}, \code{\link{initiate_sword_dataset}}, \code{\link{delete_sword_dataset}}, \code{\link{publish_sword_dataset}}, \code{\link{add_file}}, \code{\link{delete_file}}
 #'   \item Dataverse management \dQuote{native} API: \code{\link{create_dataverse}}, \code{\link{publish_dataverse}}, \code{\link{delete_dataverse}}
 #'   \item Dataset management \dQuote{native} API: \code{\link{create_dataset}}, \code{\link{update_dataset}}, \code{\link{publish_dataset}}, \code{\link{delete_dataset}}, \code{\link{dataset_files}}, \code{\link{dataset_versions}}
