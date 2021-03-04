@@ -5,6 +5,7 @@ options(device = deviceType) #http://support.rstudio.org/help/discussions/proble
 
 devtools::document()
 devtools::check_man() #Should return NULL
+devtools::clean_vignettes()
 devtools::build_vignettes()
 # pkgdown::clean_site()
 # pkgdown::build_site()
