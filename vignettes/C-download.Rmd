@@ -41,7 +41,7 @@ This shows that there are indeed 32 files, a mix of .R code files and tab- and c
 You can also retrieve more extensive metadata using `dataset_metadata()`:
 
 ```{r}
-str(dataset_metadata("doi:10.7910/DVN/ARKOTI"), 2)
+str(dataset_metadata("10.7910/DVN/ARKOTI"), 2)
 ```
 
 
@@ -54,7 +54,7 @@ Now we'll get the corresponding data files. First, we retrieve a plain-text file
 ```{r, messages=FALSE}
 energy <- get_dataframe_by_name(
   "comprehensiveJapanEnergy.tab",
-  "doi:10.7910/DVN/ARKOTI")
+  "10.7910/DVN/ARKOTI")
 
 head(energy)
 ```
@@ -66,7 +66,7 @@ These `get_dataframe_*` functions, introduced in v0.3.0, directly read in the da
 library(readr)
 energy <- get_dataframe_by_name(
   "comprehensiveJapanEnergy.tab",
-  "doi:10.7910/DVN/ARKOTI",
+  "10.7910/DVN/ARKOTI",
   .f = function(x) read.delim(x, sep = "\t"))
 
 head(energy)
@@ -82,7 +82,7 @@ If a file is displayed on dataverse as a `.tab` file like the survey data by [Al
 ```{r,  message=FALSE}
 argentina_tab <- get_dataframe_by_name(
   "alpl2013.tab",
-  "doi:10.7910/DVN/ARKOTI")
+  "10.7910/DVN/ARKOTI")
 ```
 
 
@@ -97,7 +97,7 @@ For such files Dataverse retains a `original` version, which keeps the original 
 ```{r}
 argentina_dta <- get_dataframe_by_name(
   "alpl2013.tab",
-  "doi:10.7910/DVN/ARKOTI",
+  "10.7910/DVN/ARKOTI",
   original = TRUE,
   .f = haven::read_dta)
 ```
