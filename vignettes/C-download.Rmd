@@ -41,7 +41,7 @@ This shows that there are indeed 32 files, a mix of .R code files and tab- and c
 You can also retrieve more extensive metadata using `dataset_metadata()`:
 
 ```{r}
-str(dataset_metadata("doi:10.7910/DVN/ARKOTI"), 2)
+str(dataset_metadata("10.7910/DVN/ARKOTI"), 2)
 ```
 
 
@@ -54,19 +54,19 @@ Now we'll get the corresponding data files. First, we retrieve a plain-text file
 ```{r, messages=FALSE}
 energy <- get_dataframe_by_name(
   "comprehensiveJapanEnergy.tab",
-  "doi:10.7910/DVN/ARKOTI")
+  "10.7910/DVN/ARKOTI")
 
 head(energy)
 ```
 
-These `get_dataframe_*` functions, introduced in v0.3.0, directly read in the data into a R environment through whatever R function supplied by `.f`. The default of the  `get_dataframe_*` functions is to read in such data by `readr::read_tsv`. The `.f` function can be modified to modify the read-in settings. For example, this modification is a base-R equivalent way to read in the raw data.
+These `get_dataframe_*` functions, introduced in v0.3.0, directly read in the data into a R environment through whatever R function supplied by `.f`. The default of the  `get_dataframe_*` functions is to read in such data by `readr::read_tsv()`. The `.f` function can be modified to modify the read-in settings. For example, the following modification is a base-R equivalent to read in the ingested data.
 
 
 ```{r}
 library(readr)
 energy <- get_dataframe_by_name(
   "comprehensiveJapanEnergy.tab",
-  "doi:10.7910/DVN/ARKOTI",
+  "10.7910/DVN/ARKOTI",
   .f = function(x) read.delim(x, sep = "\t"))
 
 head(energy)
@@ -82,22 +82,22 @@ If a file is displayed on dataverse as a `.tab` file like the survey data by [Al
 ```{r,  message=FALSE}
 argentina_tab <- get_dataframe_by_name(
   "alpl2013.tab",
-  "doi:10.7910/DVN/ARKOTI")
+  "10.7910/DVN/ARKOTI")
 ```
 
 
-However, ingested files may not retain the dataset attributes one wants. For example, Stata and SPSS datasets encode value labels into numeric values which are critical for understanding the data. Factor variables in R dataframes encode levels, not only labels. A plain-text ingested file will discard such information. For example,  the `polling_place` variable in this data is only given by numbers, although the original data labelled these numbers with informative values.
+However, ingested files may not retain important dataset attributes. For example, Stata and SPSS datasets encode value labels on to numeric values. Factor variables in R dataframes encode levels, not only labels. A plain-text ingested file will discard such information. For example,  the `polling_place` variable in this data is only given by numbers, although the original data labelled these numbers with informative values.
 
 ```{r}
 str(argentina_tab$polling_place)
 ```
 
-For such files Dataverse retains a `original` version, which keeps the original labels but may not be readable in some platforms. The `get_dataframe_*` functions have an argument that can be set to `original = TRUE`. In this case we know that `alpl2013.tab` was originally a Stata dta file, so we can run:
+When ingesting, Dataverse retains a `original` version that retains these attributes but may not be readable in some platforms. The `get_dataframe_*` functions have an argument that can be set to `original = TRUE`. In this case we know that `alpl2013.tab` was originally a Stata dta file, so we can run:
 
 ```{r}
 argentina_dta <- get_dataframe_by_name(
   "alpl2013.tab",
-  "doi:10.7910/DVN/ARKOTI",
+  "10.7910/DVN/ARKOTI",
   original = TRUE,
   .f = haven::read_dta)
 ```
@@ -121,7 +121,7 @@ In addition to visual inspection, we can compare the UNF signatures for each dat
 
 ## Retrieving Scripts and other files
 
-If the file you want to retrieve is not data, you may want to use the  more primitive function, `get_file`, which gets the file data as a raw binary file. See the help page examples of `get_file` that use the `base::writeBin()` function for details on how to write and read these binary files instead.
+If the file you want to retrieve is not data, you may want to use the  more primitive function, `get_file`, which gets the file data as a raw binary file. See the help page examples of `get_file()` that use the `base::writeBin()` function for details on how to write and read these binary files instead.
 
 ```{r, eval = FALSE}
 code3 <- get_file("chapter03.R", "doi:10.7910/DVN/ARKOTI")

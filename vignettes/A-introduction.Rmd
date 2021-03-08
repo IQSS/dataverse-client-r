@@ -15,7 +15,7 @@ The **dataverse** package is the official R client for [Dataverse 4](https://dat
 In addition to this introduction, the package contains additional vignettes covering:
 
   * ["Data Search and Discovery"](B-search.html)
-  * ["Data Retrieval"](C-retrieval.html)
+  * ["Data Retrieval"](C-download.html)
 
 They can be accessed from [CRAN](https://cran.r-project.org/package=dataverse) or from within R using `vignettes(package = "dataverse")`.
 
@@ -78,14 +78,13 @@ For "native" Dataverse features (such as user account controls) or to create and
 Sys.setenv("DATAVERSE_KEY" = "examplekey12345")
 ```
 
-where `examplekey12345` should be replace with your own key. 
+where `examplekey12345` should be replaced with your own key. 
 
 With that set, you can easily create a new dataverse, create a dataset within that dataverse, push files to the dataset, and release it, using functions such as 
 
 ```R
-create_daverse()
-initiate_dataset()
-add_file()
+initiate_sword_dataset()
+add_dataset_file()
 publish_dataset()
 ```
 

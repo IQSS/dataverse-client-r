@@ -21,7 +21,7 @@
 #' @inheritDotParams get_file
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Retrieve data.frame from dataverse DOI and file name
 #' df_tab <-
 #'   get_dataframe_by_name(

@@ -17,7 +17,7 @@
 #' }
 #'
 #' @references
-#'  \href{http://iqss.github.io/dataverse-client-r/}{Documentation for this R Package}
+#'  \href{https://iqss.github.io/dataverse-client-r/}{Documentation for this R Package}
 #'
 #'  \href{https://github.com/iqss/dataverse-client-r/}{Code Repository for the R Package}
 #'
