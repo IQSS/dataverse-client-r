@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>1. Introduction to Dataverse</h1>
             
-            <h4 class="date">2021-03-03</h4>
+            <h4 class="date">2021-03-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/iqss/dataverse-client-r/blob/master/vignettes/A-introduction.Rmd"><code>vignettes/A-introduction.Rmd</code></a></small>
       <div class="hidden name"><code>A-introduction.Rmd</code></div>
@@ -103,7 +103,7 @@
 <p>In addition to this introduction, the package contains additional vignettes covering:</p>
 <ul>
 <li><a href="B-search.html">“Data Search and Discovery”</a></li>
-<li><a href="C-retrieval.html">“Data Retrieval”</a></li>
+<li><a href="C-download.html">“Data Retrieval”</a></li>
 </ul>
 <p>They can be accessed from <a href="https://cran.r-project.org/package=dataverse">CRAN</a> or from within R using <code><a href="https://rdrr.io/r/utils/vignette.html">vignettes(package = "dataverse")</a></code>.</p>
 <div id="installation" class="section level2">
@@ -112,14 +112,14 @@
 <p>The dataverse client package can be installed from <a href="https://cran.r-project.org/package=dataverse">CRAN</a>, and you can find the latest development version and report any issues on GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"iqss/dataverse-client-r"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://iqss.github.io/dataverse-client-r">"dataverse"</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://iqss.github.io/dataverse-client-r/">"dataverse"</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="terminology" class="section level2">
 <h2 class="hasAnchor">
 <a href="#terminology" class="anchor"></a>Terminology</h2>
 <p>Dataverse has some terminology that is worth quickly reviewing before showing how to work with Dataverse in R. Dataverse is an application that can be installed in many places. As a result, <strong>dataverse</strong> can work with any installation but you need to specify which installation you want to work with. This can be set by default with an environment variable, <code>DATAVERSE_SERVER</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://iqss.github.io/dataverse-client-r">"dataverse"</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://iqss.github.io/dataverse-client-r/">"dataverse"</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></code></pre></div>
 <p>This should be the Dataverse server, without the “https” prefix or the “/api” URL path, etc. The package attempts to compensate for any malformed values, though.</p>
 <p>Within a given Dataverse installation, organizations or individuals can create objects that are also called “Dataverses”. These Dataverses can then contain other <em>dataverses</em>, which can contain other <em>dataverses</em>, and so on. They can also contain <em>datasets</em> which in turn contain files. You can think of Harvard’s Dataverse as a top-level installation, where an institution might have a <em>dataverse</em> that contains a subsidiary <em>dataverse</em> for each researcher at the organization, who in turn publishes all files relevant to a given study as a <em>dataset</em>.</p>
@@ -152,12 +152,11 @@
 <p>For “native” Dataverse features (such as user account controls) or to create and publish a dataset, you will need an API key linked to a Dataverse installation account. Instructions for obtaining an account and setting up an API key are available in the <a href="https://guides.dataverse.org/en/latest/user/account.html">Dataverse User Guide</a>. (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called <code>DATAVERSE_KEY</code>. It can be set within R using:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span> <span class="op">=</span> <span class="st">"examplekey12345"</span><span class="op">)</span></code></pre></div>
-<p>where <code>examplekey12345</code> should be replace with your own key.</p>
+<p>where <code>examplekey12345</code> should be replaced with your own key.</p>
 <p>With that set, you can easily create a new dataverse, create a dataset within that dataverse, push files to the dataset, and release it, using functions such as</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">create_daverse</span><span class="op">(</span><span class="op">)</span>
-<span class="fu">initiate_dataset</span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="../reference/add_file.html">add_file</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/initiate_sword_dataset.html">initiate_sword_dataset</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="../reference/add_dataset_file.html">add_dataset_file</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/publish_dataset.html">publish_dataset</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>As of <code>dataverse</code> version 0.3.0, we recommended the Python client (<code>https://github.com/gdcc/pyDataverse</code>) for these upload and maintenance functions.</p>
 </div>

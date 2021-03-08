@@ -75,7 +75,7 @@ datafile." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -224,7 +224,7 @@ or globally using <code><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.set
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># Retrieve data.frame from dataverse DOI and file name</span>
 <span class='va'>df_tab</span> <span class='op'>&lt;-</span>
   <span class='fu'>get_dataframe_by_name</span><span class='op'>(</span>
@@ -232,38 +232,14 @@ or globally using <code><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.set
     dataset  <span class='op'>=</span> <span class='st'>"doi:10.70122/FK2/HXJVJU"</span>,
     server   <span class='op'>=</span> <span class='st'>"demo.dataverse.org"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Column specification</span><span> </span><span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span><span></span>
-#&gt; <span class='message'>cols(</span>
-#&gt; <span class='message'>  number = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  player = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  position = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  height = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  weight = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  dob = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  country_birth = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  experience_years = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  college = </span><span style='color: #BB0000;'>col_character()</span><span></span>
-#&gt; <span class='message'>)</span></div><div class='input'>
+
 <span class='co'># Retrieve the same file from file DOI</span>
 <span class='va'>df_tab</span> <span class='op'>&lt;-</span>
   <span class='fu'>get_dataframe_by_doi</span><span class='op'>(</span>
     filedoi      <span class='op'>=</span> <span class='st'>"10.70122/FK2/HXJVJU/SA3Z2V"</span>,
     server       <span class='op'>=</span> <span class='st'>"demo.dataverse.org"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Column specification</span><span> </span><span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span><span></span>
-#&gt; <span class='message'>cols(</span>
-#&gt; <span class='message'>  number = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  player = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  position = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  height = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  weight = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  dob = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  country_birth = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  experience_years = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  college = </span><span style='color: #BB0000;'>col_character()</span><span></span>
-#&gt; <span class='message'>)</span></div><div class='input'>
+
 <span class='co'># Retrieve ingested file originally a Stata dta</span>
 <span class='va'>df_from_stata_ingested</span> <span class='op'>&lt;-</span>
   <span class='fu'>get_dataframe_by_name</span><span class='op'>(</span>
@@ -271,27 +247,7 @@ or globally using <code><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.set
     dataset    <span class='op'>=</span> <span class='st'>"doi:10.70122/FK2/PPIAXE"</span>,
     server     <span class='op'>=</span> <span class='st'>"demo.dataverse.org"</span>
   <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Column specification</span><span> </span><span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span><span></span>
-#&gt; <span class='message'>cols(</span>
-#&gt; <span class='message'>  idcode = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  age = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  race = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  married = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  never_married = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  grade = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  collgrad = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  south = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  smsa = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  c_city = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  industry = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  occupation = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  union = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  wage = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  hours = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  ttl_exp = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  tenure = </span><span style='color: #00BB00;'>col_double()</span><span></span>
-#&gt; <span class='message'>)</span></div><div class='input'>
+
 <span class='co'># To use the original file version, or for non-ingested data,</span>
 <span class='co'># please specify `original = TRUE` and specify a function in .f.</span>
 
@@ -325,30 +281,10 @@ or globally using <code><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.set
     dataset    <span class='op'>=</span> <span class='st'>"doi:10.70122/FK2/PPIAXE"</span>,
     server     <span class='op'>=</span> <span class='st'>"demo.dataverse.org"</span>
  <span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Column specification</span><span> </span><span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span><span></span>
-#&gt; <span class='message'>cols(</span>
-#&gt; <span class='message'>  idcode = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  age = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  race = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  married = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  never_married = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  grade = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  collgrad = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  south = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  smsa = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  c_city = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  industry = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  occupation = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  union = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  wage = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  hours = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  ttl_exp = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  tenure = </span><span style='color: #00BB00;'>col_double()</span><span></span>
-#&gt; <span class='message'>)</span></div><div class='input'>
-<span class='co'># }</span>
 
-</div></span></pre>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
