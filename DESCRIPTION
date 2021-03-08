@@ -1,43 +1,38 @@
 Package: dataverse
 Version: 0.3.7
 Title: Client for Dataverse 4+ Repositories
-Authors@R: c(
-  person(
-    "Will", "Beasley",
-    role=c("aut", "cre"),
-    email="wibeasley@hotmail.com",
-    comment = c(ORCID = "0000-0002-5613-5006")
-  ),
-  person(
-    "Thomas J.", "Leeper",
-    role = c("aut"),
-    email = "thosjleeper@gmail.com",
-    comment = c(ORCID = "0000-0003-4097-6326")
-  ),
-  person(
-    "Shiro", "Kuriwaki",
-    role = c("aut"),
-    email = "shirokuriwaki@gmail.com",
-    comment = c(ORCID = "0000-0002-5687-2647")
-  ),
-  person(
-    "Philip", "Durbin",
-    role = c("aut"),
-    email = "philipdurbin@gmail.com",
-    comment = c(ORCID = "0000-0002-9528-9470")
-  ),
-  person(
-    "Sebastian", "Karcher",
-    role=c("aut"),
-    email="karcher@u.northwestern.edu",
-    comment = c(ORCID = "0000-0001-8249-7388")
-  ),
-  person(
-    "Jan", "Kanis", role = "ctb"
-  ),
-  person(
-    "Edward", "Jee", role = "ctb"
-  ))
+Authors@R:
+   c(person(given = "Will", 
+            family = "Beasley",
+            role=c("aut", "cre"),
+            email="wibeasley@hotmail.com",
+            comment = c(ORCID = "0000-0002-5613-5006")),
+     person(given = "Thomas J.", 
+            family = "Leeper",
+            role = c("aut"),
+            email = "thosjleeper@gmail.com",
+            comment = c(ORCID = "0000-0003-4097-6326")),
+     person(given = "Shiro", 
+            family = "Kuriwaki",
+            role = c("aut"),
+            email = "shirokuriwaki@gmail.com",
+            comment = c(ORCID = "0000-0002-5687-2647")),
+     person(given = "Philip", 
+            family = "Durbin",
+            role = c("aut"),
+            email = "philipdurbin@gmail.com",
+            comment = c(ORCID = "0000-0002-9528-9470")),
+     person(given = "Sebastian", 
+            family = "Karcher",
+            role = c("aut"),
+            email = "karcher@u.northwestern.edu",
+            comment = c(ORCID = "0000-0001-8249-7388")),
+     person(given = "Jan", 
+            family = "Kanis", 
+            role = "ctb"),
+     person(given = "Edward", 
+            family = "Jee", 
+            role = "ctb"))
 Imports:
     checkmate,
     httr,
