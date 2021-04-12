@@ -65,7 +65,7 @@ get_file_by_id <- function(
 
     # part of URL depending on DOI, bundle, or file
     if (use_persistent_id) {
-      u_part <- "access/datafile/:persistentId/?persistentId="
+      u_part <- "access/datafile/:persistentId?persistentId="
     } else if (format == "bundle") {
       u_part <- "access/datafile/bundle/"
     } else if (format == "original") {
