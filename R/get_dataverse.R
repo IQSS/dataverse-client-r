@@ -12,19 +12,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' # view the root dataverse for a server
-#' get_dataverse(":root")
-#' dataverse_contents(":root")
-#'
-#' Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 #' # download file from:
-#' # https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
-#' dv <- get_dataverse("monogan")
+#' # https://demo.dataverse.org/dataverse/dataverse-client-r
+#' Sys.setenv("DATAVERSE_SERVER" = "demo.dataverse.org")
+#' # download file from:
+#' dv <- get_dataverse("dataverse-client-r")
 #' (contents <- dataverse_contents(dv))
 #'
 #' # get a dataset from the dataverse
 #' d1 <- get_dataset(contents[[1]])
-#' f <- get_file(d1$files$id[3])
+#' f <- get_file(d1$files$id[1])
 #' }
 #' @seealso To manage Dataverses:
 #' \code{\link{create_dataverse}},
