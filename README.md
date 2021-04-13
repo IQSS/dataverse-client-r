@@ -3,8 +3,9 @@ R Client for Dataverse Repositories
 
 [![CRAN
 Version](https://www.r-pkg.org/badges/version/dataverse)](https://cran.r-project.org/package=dataverse)
-![Downloads](https://cranlogs.r-pkg.org/badges/dataverse) [![Travis-CI
-Build
+![Downloads](https://cranlogs.r-pkg.org/badges/dataverse)
+[![R-CMD-check](https://github.com/IQSS/dataverse-client-r/workflows/R-CMD-check/badge.svg)](https://github.com/IQSS/dataverse-client-r/actions)
+[![Travis-CI Build
 Status](https://travis-ci.org/IQSS/dataverse-client-r.png?branch=master)](https://travis-ci.org/IQSS/dataverse-client-r)
 [![codecov.io](https://codecov.io/github/IQSS/dataverse-client-r/coverage.svg?branch=master)](https://codecov.io/github/IQSS/dataverse-client-r?branch=master)
 

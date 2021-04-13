@@ -2,6 +2,7 @@
 * Adapt to Dataverse 5.4.1 (#94 @kuriwaki)
 * Doesn't rely on CRAN for daily tests of API functions (#96)
 * Upgrade testthat to 3.0 edition (#97)
+* Move to GitHub Actions (#98)
 
 # CHANGES in dataverse 0.3.3
 * More verbose error messages returned on httr failure. (#31 @EdJeeOnGithub)
