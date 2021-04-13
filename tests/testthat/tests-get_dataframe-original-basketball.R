@@ -17,7 +17,8 @@ standarize_string <- function (x, start = 1, stop = nchar(x)) {
 }
 
 test_that("roster-by-name", {
-  testthat::skip_if_offline("demo.dataverse.org")
+  # testthat::skip_if_offline("demo.dataverse.org")
+  testthat::skip_on_cran()
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- expected_ds$roster$raw_value
 
@@ -52,7 +53,8 @@ test_that("roster-by-name", {
 })
 
 test_that("roster-by-doi", {
-  testthat::skip_if_offline("demo.dataverse.org")
+  # testthat::skip_if_offline("demo.dataverse.org")
+  testthat::skip_on_cran()
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- expected_ds$roster$raw_value
 
@@ -73,7 +75,8 @@ test_that("roster-by-doi", {
 })
 
 test_that("roster-by-id", {
-  testthat::skip_if_offline("demo.dataverse.org")
+  # testthat::skip_if_offline("demo.dataverse.org")
+  testthat::skip_on_cran()
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- expected_ds$roster$raw_value
 
@@ -94,7 +97,8 @@ test_that("roster-by-id", {
 })
 
 test_that("image-by-name", {
-  testthat::skip_if_offline("demo.dataverse.org")
+  # testthat::skip_if_offline("demo.dataverse.org")
+  testthat::skip_on_cran()
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- expected_ds$image$raw_value
 
@@ -113,7 +117,8 @@ test_that("image-by-name", {
 })
 
 test_that("image-by-doi", {
-  testthat::skip_if_offline("demo.dataverse.org")
+  # testthat::skip_if_offline("demo.dataverse.org")
+  testthat::skip_on_cran()
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- expected_ds$image$raw_value
 
@@ -131,7 +136,8 @@ test_that("image-by-doi", {
 })
 
 test_that("image-by-id", {
-  testthat::skip_if_offline("demo.dataverse.org")
+  # testthat::skip_if_offline("demo.dataverse.org")
+  testthat::skip_on_cran()
   expected_ds <- retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
   expected_file <- expected_ds$image$raw_value
 

@@ -2,7 +2,8 @@
 # https://doi.org/10.70122/FK2/HXJVJU
 
 test_that("download tab from DOI and filename", {
-  testthat::skip_if_offline("demo.dataverse.org")
+  # testthat::skip_if_offline("demo.dataverse.org")
+  testthat::skip_on_cran()
   dv        <- get_dataverse("dataverse-client-r")
   contents  <- dataverse_contents(dv)
   ds_index  <- which(sapply(contents, function(x) x$identifier) == "FK2/HXJVJU")
