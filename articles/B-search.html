@@ -90,7 +90,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>2. Data Search and Discovery</h1>
             
-            <h4 class="date">2021-03-08</h4>
+            <h4 class="date">2021-04-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/iqss/dataverse-client-r/blob/master/vignettes/B-search.Rmd"><code>vignettes/B-search.Rmd</code></a></small>
       <div class="hidden name"><code>B-search.Rmd</code></div>
@@ -104,47 +104,47 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://iqss.github.io/dataverse-client-r/">"dataverse"</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"Gary King"</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<pre><code>## 10 of 1295 results retrieved</code></pre>
+<pre><code>## 10 of 1304 results retrieved</code></pre>
+<pre><code>##                                                                                                                   name
+## 1                                                                                00698McArthur-King-BoxCoverSheets.pdf
+## 2                                                                               00698McArthur-King-MemoOfAgreement.pdf
+## 3                                                                              00698McArthur-King-StudyDescription.pdf
+## 4  01 ReadMe Unlocking history through automated virtual unfolding of sealed documents imaged by X-ray microtomography
+## 5                                     03 Brienne Collection letterlocking data: Images folder 02/16, DB-0874_2–DB-0903
+## 6                                    03 Brienne Collection letterlocking data: Images folder 04/16, DB-0988–DB-1109_03
+## 7                                 03 Brienne Collection letterlocking data: Images folder 06/16, DB-1241_02–DB-1339_06
+## 8                                 03 Brienne Collection letterlocking data: Images folder 08/16, DB-1455_02–DB-1564_01
+## 9                                    03 Brienne Collection letterlocking data: Images folder 12/16, DB-1868–DB-1963_03
+## 10                                   03 Brienne Collection letterlocking data: Images folder 14/16, DB-2064_01–2155_03</code></pre>
+<p>The results are paginated, so users can rely upon the <code>per_page</code> and <code>start</code> argument to requested subsequent pages of results. We’ll start at 6 and to show that we retrieve the last five results from the previous query plus 15 more (due to <code>per_page = 20</code>):</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"Gary King"</span>, start <span class="op">=</span> <span class="fl">6</span>, per_page <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<pre><code>## 20 of 1304 results retrieved</code></pre>
 <pre><code>##                                                                                                                           name
-## 1                                                                                        00698McArthur-King-BoxCoverSheets.pdf
-## 2                                                                                       00698McArthur-King-MemoOfAgreement.pdf
-## 3                                                                                      00698McArthur-King-StudyDescription.pdf
-## 4          01 ReadMe Unlocking history through automated virtual unfolding of sealed documents imaged by X-ray microtomography
+## 1                                         03 Brienne Collection letterlocking data: Images folder 06/16, DB-1241_02–DB-1339_06
+## 2                                         03 Brienne Collection letterlocking data: Images folder 08/16, DB-1455_02–DB-1564_01
+## 3                                            03 Brienne Collection letterlocking data: Images folder 12/16, DB-1868–DB-1963_03
+## 4                                            03 Brienne Collection letterlocking data: Images folder 14/16, DB-2064_01–2155_03
 ## 5                                                                                07 Letterlocking Categories and Formats Chart
 ## 6  10 Foldable: Launch Little Book of Locks (UH6089), with Categories and Formats Chart. Letterlocking Instructional Resources
 ## 7                                                                                       10 Million International Dyadic Events
 ## 8                                                                            1479 data points of covid19 policy response times
 ## 9                                                              1998 Jewish Community Study of the Coachella Valley, California
-## 10                                                                                               2002 State Legislative Survey</code></pre>
-<p>The results are paginated, so users can rely upon the <code>per_page</code> and <code>start</code> argument to requested subsequent pages of results. We’ll start at 6 and to show that we retrieve the last five results from the previous query plus 15 more (due to <code>per_page = 20</code>):</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"Gary King"</span>, start <span class="op">=</span> <span class="fl">6</span>, per_page <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<pre><code>## 20 of 1295 results retrieved</code></pre>
-<pre><code>##                                                                                                                                            name
-## 1                                                                                                        10 Million International Dyadic Events
-## 2                                                                                             1479 data points of covid19 policy response times
-## 3                                                                               1998 Jewish Community Study of the Coachella Valley, California
-## 4                                                                                                                 2002 State Legislative Survey
-## 5                                                                                            2007 White Sands Dune Field lidar topographic data
-## 6                                                                                            2008 White Sands Dune Field lidar topographic data
-## 7                                      A Comparative Analysis of Brazil's Foreign Policy Drivers Towards the USA: Comment on Amorim Neto (2011)
-## 8                                                                      A Demographic and Attitudinal Study of the Jewish Community of St. Louis
-## 9                                                                          A Demographic Study of the Jewish Community of Atlantic County, 1985
-## 10                                                                           A Demographic Study of the Jewish Community of Greater Kansas City
-## 11                                                                      A Demographic Study of the Jewish Community of Greater Washington, 1983
-## 12                                                       A Framework to Quantify the Signs of Abandonment in Online Digital Humanities Projects
-## 13                                                                                                      A Lexicial Index of Electoral Democracy
-## 14                                                                          A Population Study of the Jewish Community of Metrowest, New Jersey
-## 15                                                                                A Population Study of the Jewish Community of Rochester, 1986
-## 16                                                                                      A Population Study of the Jewish Community of Worcester
-## 17                                                                                                    A Study of Jewish Culture in the Bay Area
-## 18 A survey of experiences of and attitudes to advance decision-making amongst people with bipolar: questionnaire and supplementary information
-## 19                                                                          A Unified Model of Cabinet Dissolution in Parliamentary Democracies
-## 20                                                                   ABC News / The Washington Post poll # 7925:  Social Security/1984 Election</code></pre>
+## 10                                                                                               2002 State Legislative Survey
+## 11                                                                          2007 White Sands Dune Field lidar topographic data
+## 12                                                                          2008 White Sands Dune Field lidar topographic data
+## 13                    A Comparative Analysis of Brazil's Foreign Policy Drivers Towards the USA: Comment on Amorim Neto (2011)
+## 14                                                    A Demographic and Attitudinal Study of the Jewish Community of St. Louis
+## 15                                                        A Demographic Study of the Jewish Community of Atlantic County, 1985
+## 16                                                          A Demographic Study of the Jewish Community of Greater Kansas City
+## 17                                                     A Demographic Study of the Jewish Community of Greater Washington, 1983
+## 18                                      A Framework to Quantify the Signs of Abandonment in Online Digital Humanities Projects
+## 19                                                                                     A Lexicial Index of Electoral Democracy
+## 20                                                         A Population Study of the Jewish Community of Metrowest, New Jersey</code></pre>
 <p>More complicated searches can specify metadata fields like <code>title</code> and restrict results to a specific <code>type</code> of Dataverse object (a “dataverse”, “dataset”, or “file”):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ei</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span>author <span class="op">=</span> <span class="st">"Gary King"</span>, title <span class="op">=</span> <span class="st">"Ecological Inference"</span>, type <span class="op">=</span> <span class="st">"dataset"</span>, per_page <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></code></pre></div>
-<pre><code>## 20 of 1203 results retrieved</code></pre>
+<pre><code>## 20 of 1221 results retrieved</code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># fields returned</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">ei</span><span class="op">)</span>
@@ -156,27 +156,27 @@
 ## [13] "keywords"                "subjects"                "fileCount"               "versionId"              
 ## [17] "versionState"            "majorVersion"            "minorVersion"            "createdAt"              
 ## [21] "updatedAt"               "contacts"                "authors"                 "publications"           
-## [25] "geographicCoverage"      "producers"               "dataSources"            
+## [25] "geographicCoverage"     
 ##  [1] "01 ReadMe Unlocking history through automated virtual unfolding of sealed documents imaged by X-ray microtomography"                                                               
-##  [2] "07 Letterlocking Categories and Formats Chart"                                                                                                                                     
-##  [3] "10 Foldable: Launch Little Book of Locks (UH6089), with Categories and Formats Chart. Letterlocking Instructional Resources"                                                       
-##  [4] "10 Million International Dyadic Events"                                                                                                                                            
-##  [5] "1479 data points of covid19 policy response times"                                                                                                                                 
-##  [6] "3D Dust map from Green et al. (2015)"                                                                                                                                              
-##  [7] "3D dust map from Green et al. (2017)"                                                                                                                                              
-##  [8] "3D dust map from Green et al. (2019)"                                                                                                                                              
-##  [9] "A 1D Lyman-alpha Profile Camera for Plasma Edge Neutral Studies  on the DIII-D Tokamak"                                                                                            
-## [10] "A Comparative Analysis of Brazil's Foreign Policy Drivers Towards the USA: Comment on Amorim Neto (2011)"                                                                          
-## [11] "A Critique of Dyadic Design"                                                                                                                                                       
-## [12] "A Framework to Quantify the Signs of Abandonment in Online Digital Humanities Projects"                                                                                            
-## [13] "A Lexicial Index of Electoral Democracy"                                                                                                                                           
-## [14] "A Replication of ‘The long-run impact of foreign aid in 36 African countries: Insights from multivariate time series analysis’ (Oxford Bulletin of Statistics and Economics, 2014)"
-## [15] "A Statistical Inference Engine for Small, Dependent Samples  [Version 2.310]"                                                                                                      
-## [16] "A survey of experiences of and attitudes to advance decision-making amongst people with bipolar: questionnaire and supplementary information"                                      
-## [17] "A Unified Model of Cabinet Dissolution in Parliamentary Democracies"                                                                                                               
-## [18] "ABC News / The Washington Post poll # 7925:  Social Security/1984 Election"                                                                                                        
-## [19] "ABC News Iraq Poll, August 1990"                                                                                                                                                   
-## [20] "ABC News/The Washington Post Poll:  Los Angeles Race Riots"</code></pre>
+##  [2] "03 Brienne Collection letterlocking data: Images folder 02/16, DB-0874_2–DB-0903"                                                                                                  
+##  [3] "03 Brienne Collection letterlocking data: Images folder 04/16, DB-0988–DB-1109_03"                                                                                                 
+##  [4] "03 Brienne Collection letterlocking data: Images folder 06/16, DB-1241_02–DB-1339_06"                                                                                              
+##  [5] "03 Brienne Collection letterlocking data: Images folder 08/16, DB-1455_02–DB-1564_01"                                                                                              
+##  [6] "03 Brienne Collection letterlocking data: Images folder 12/16, DB-1868–DB-1963_03"                                                                                                 
+##  [7] "03 Brienne Collection letterlocking data: Images folder 14/16, DB-2064_01–2155_03"                                                                                                 
+##  [8] "07 Letterlocking Categories and Formats Chart"                                                                                                                                     
+##  [9] "10 Foldable: Launch Little Book of Locks (UH6089), with Categories and Formats Chart. Letterlocking Instructional Resources"                                                       
+## [10] "10 Million International Dyadic Events"                                                                                                                                            
+## [11] "1479 data points of covid19 policy response times"                                                                                                                                 
+## [12] "3D Dust map from Green et al. (2015)"                                                                                                                                              
+## [13] "3D dust map from Green et al. (2017)"                                                                                                                                              
+## [14] "3D dust map from Green et al. (2019)"                                                                                                                                              
+## [15] "A 1D Lyman-alpha Profile Camera for Plasma Edge Neutral Studies  on the DIII-D Tokamak"                                                                                            
+## [16] "A Comparative Analysis of Brazil's Foreign Policy Drivers Towards the USA: Comment on Amorim Neto (2011)"                                                                          
+## [17] "A Critique of Dyadic Design"                                                                                                                                                       
+## [18] "A Framework to Quantify the Signs of Abandonment in Online Digital Humanities Projects"                                                                                            
+## [19] "A Lexicial Index of Electoral Democracy"                                                                                                                                           
+## [20] "A Replication of ‘The long-run impact of foreign aid in 36 African countries: Insights from multivariate time series analysis’ (Oxford Bulletin of Statistics and Economics, 2014)"</code></pre>
 <p>Once datasets and files are identified, it is easy to download and use them directly in R. See the <a href="C-download.html">“Data Download” vignette</a> for details.</p>
   </div>
 
