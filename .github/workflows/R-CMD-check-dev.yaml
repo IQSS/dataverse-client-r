@@ -14,7 +14,7 @@ on:
 name: R-CMD-check-dev
 
 jobs:
-  R-CMD-check:
+  R-CMD-check-dev:
     runs-on: ubuntu-18.04
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -29,5 +29,5 @@ jobs:
       - name: Check
         run: |
           options(crayon.enabled = TRUE)
-          rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
+          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
