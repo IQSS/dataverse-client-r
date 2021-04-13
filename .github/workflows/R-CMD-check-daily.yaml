@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: "0 7 3 * 0" # Run every morning at 3:07am
 
-name: R-CMD-check
+name: R-CMD-check-daily
 
 jobs:
   R-CMD-check:
