@@ -1,5 +1,3 @@
-context("Data Access API")
-
 # See https://demo.dataverse.org/dataverse/dataverse-client-r
 # https://doi.org/10.70122/FK2/HXJVJU
 

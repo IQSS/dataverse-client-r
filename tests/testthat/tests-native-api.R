@@ -1,11 +1,7 @@
-context("Native API (authenticated functions)")
-
-test_that("placeholder", {
-    expect_true(TRUE)
+test_that("Native API (authenticated functions)", {
+  expect_true(TRUE)
 })
 
-context("Native API (unauthenticated functions)")
-
-test_that("placeholder", {
-    expect_true(TRUE)
+test_that("Native API (unauthenticated functions)", {
+  expect_true(TRUE)
 })

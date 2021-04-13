@@ -1,13 +1,11 @@
-context("Search API")
-
 test_that("simple search query", {
   testthat::skip_on_cran()
   expect_true(is.data.frame(dataverse_search("Gary King", key = "", server = "dataverse.harvard.edu")))
 })
 
 test_that("named argument search", {
-  testthat::skip_if_offline("dataverse.harvard.edu")
-    expect_true(is.data.frame(dataverse_search(author = "Gary King", title = "Ecological Inference", key = "", server = "dataverse.harvard.edu")))
+  testthat::skip_on_cran()
+  expect_true(is.data.frame(dataverse_search(author = "Gary King", title = "Ecological Inference", key = "", server = "dataverse.harvard.edu")))
 })
 
 test_that("simple search w/type argument", {
