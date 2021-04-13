@@ -4,9 +4,10 @@ R Client for Dataverse Repositories
 [![CRAN
 Version](https://www.r-pkg.org/badges/version/dataverse)](https://cran.r-project.org/package=dataverse)
 ![Downloads](https://cranlogs.r-pkg.org/badges/dataverse)
-[![R-CMD-check](https://github.com/IQSS/dataverse-client-r/workflows/R-CMD-check/badge.svg)](https://github.com/IQSS/dataverse-client-r/actions)
-[![Travis-CI Build
-Status](https://travis-ci.org/IQSS/dataverse-client-r.png?branch=master)](https://travis-ci.org/IQSS/dataverse-client-r)
+
+[![R-CMD-check-thorough](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-thorough.yaml/badge.svg?branch=master)](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-thorough.yaml)
+[![R-CMD-check-daily](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-daily.yaml/badge.svg?branch=master)](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-daily.yaml)
+[![R-CMD-check-dev](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-dev.yaml/badge.svg)](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-dev.yaml)
 [![codecov.io](https://codecov.io/github/IQSS/dataverse-client-r/coverage.svg?branch=master)](https://codecov.io/github/IQSS/dataverse-client-r?branch=master)
 
 [![Dataverse Project
@@ -107,7 +108,7 @@ nlsw <-
     ## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.
 
     ## 
-    ## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────
+    ## -- Column specification ------------------------------------------------------------------------------------------------
     ## cols(
     ##   idcode = col_double(),
     ##   age = col_double(),

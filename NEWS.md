@@ -1,10 +1,20 @@
-# CHANGES in dataverse 0.3.8
+# CHANGES in dataverse 0.4.0 (2021-04-14 CRAN)
+
+Core Features
+
 * Adapt to Dataverse 5.4.1 (#94 @kuriwaki)
+
+Testing
+
 * Doesn't rely on CRAN for daily tests of API functions (#96)
 * Upgrade testthat to 3.0 edition (#97)
-* Move to GitHub Actions (#98)
+* Move to GitHub Actions, and away from Travis-CI.  (#98)  Three GitHub Actions are defined for testing: 
+  * thorough testing related to PRs and the main branch,
+  * straight-forward tests for each push to the dev branch, and
+  * straight-forward tests run daily at 3am
 
 # CHANGES in dataverse 0.3.3
+
 * More verbose error messages returned on httr failure. (#31 @EdJeeOnGithub)
 
 # CHANGES in dataverse 0.3.1
@@ -12,7 +22,7 @@
 * Avoids tests in R Check if the dataverse server is not available (#77)
 * Avoids potential mixup of dataset ordering within a retrieved dataverse (#83)
 
-# CHANGES in dataverse 0.3.0 (2021-01-17, CRAN)
+# CHANGES in dataverse 0.3.0 (2021-01-17 CRAN)
 
 New Methods
 
@@ -28,7 +38,7 @@ Small updates
 * Fix getting multiple files by id in `get_file()` (#47 @adam3smith)
 * Temporary files created by `get_file()` are automatically deleted.
 
-# CHANGES dataverse 0.2.1 (2018-03-05)
+# CHANGES dataverse 0.2.1 (2018-03-05 CRAN)
 
 * Export `initiate_sword_dataset()`. (h/t Justin de Benedictis-Kessner)
 * Pass `key`, `server`, and `...` arguments to internal `get_dataverse()` and `get_dataset()` calls.
