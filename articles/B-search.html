@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>2. Data Search and Discovery</h1>
             
-            <h4 class="date">2021-04-13</h4>
+            <h4 class="date">2021-04-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/iqss/dataverse-client-r/blob/master/vignettes/B-search.Rmd"><code>vignettes/B-search.Rmd</code></a></small>
       <div class="hidden name"><code>B-search.Rmd</code></div>
@@ -144,7 +144,7 @@
 <p>More complicated searches can specify metadata fields like <code>title</code> and restrict results to a specific <code>type</code> of Dataverse object (a “dataverse”, “dataset”, or “file”):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ei</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span>author <span class="op">=</span> <span class="st">"Gary King"</span>, title <span class="op">=</span> <span class="st">"Ecological Inference"</span>, type <span class="op">=</span> <span class="st">"dataset"</span>, per_page <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></code></pre></div>
-<pre><code>## 20 of 1221 results retrieved</code></pre>
+<pre><code>## 20 of 1222 results retrieved</code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># fields returned</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">ei</span><span class="op">)</span>

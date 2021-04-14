@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Get dataset — get_dataset" />
-<meta property="og:description" content="Retrieve a Dataverse dataset or its metadata" />
+<meta property="og:description" content="Retrieve a Dataverse dataset metadata" />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -135,7 +135,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Retrieve a Dataverse dataset or its metadata</p>
+    <p>Retrieve a Dataverse dataset metadata</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_dataset</span><span class='op'>(</span>
@@ -215,34 +215,24 @@ you to retrieve just a specific block of metadata, such as citation information.
 <code>get_dataset</code>. The difference is that this returns only a list of
 &#8220;dataverse_dataset&#8221; objects, whereas <code>get_dataset</code> returns
 metadata and a data.frame of files (rather than a list of file objects).</p>
+<p>To download actual datafiles, see <code><a href='get_file.html'>get_file</a></code> or <code><a href='get_dataframe_by_name.html'>get_dataframe_by_name</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='create_dataset.html'>create_dataset</a></code>, <code><a href='create_dataset.html'>update_dataset</a></code>, <code><a href='delete_dataset.html'>delete_dataset</a></code>, <code><a href='publish_dataset.html'>publish_dataset</a></code>, <code>dataset_files</code>, <code>dataset_metadata</code></p></div>
+    <div class='dont-index'><p><code><a href='get_file.html'>get_file</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># https://demo.dataverse.org/dataverse/dataverse-client-r</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv</a></span><span class='op'>(</span><span class='st'>"DATAVERSE_SERVER"</span> <span class='op'>=</span> <span class='st'>"demo.dataverse.org"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv</a></span><span class='op'>(</span><span class='st'>"DATAVERSE_KEY"</span>    <span class='op'>=</span> <span class='st'>"c7208dd2-6ec5-469a-bec5-f57e164888d4"</span><span class='op'>)</span>
 
-<span class='co'># Download file from: https://demo.dataverse.org/file.xhtml?fileId=769385</span>
-<span class='va'>dv</span>       <span class='op'>&lt;-</span> <span class='fu'><a href='get_dataverse.html'>get_dataverse</a></span><span class='op'>(</span><span class='st'>"dataverse-client-r"</span><span class='op'>)</span>
-<span class='va'>contents</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_dataverse.html'>dataverse_contents</a></span><span class='op'>(</span><span class='va'>dv</span><span class='op'>)</span>
+<span class='co'># download file from:</span>
+<span class='va'>dv</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_dataverse.html'>get_dataverse</a></span><span class='op'>(</span><span class='st'>"dataverse-client-r"</span><span class='op'>)</span>
+<span class='va'>contents</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_dataverse.html'>dataverse_contents</a></span><span class='op'>(</span><span class='va'>dv</span><span class='op'>)</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
 
-<span class='fu'>dataset_files</span><span class='op'>(</span><span class='va'>contents</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>            <span class='co'># Dataset contains 2 files</span>
-<span class='fu'>dataset_metadata</span><span class='op'>(</span><span class='va'>contents</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>         <span class='co'># Easier to query later</span>
+<span class='fu'>dataset_files</span><span class='op'>(</span><span class='va'>contents</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
+<span class='fu'>get_dataset</span><span class='op'>(</span><span class='va'>contents</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
+<span class='fu'>dataset_metadata</span><span class='op'>(</span><span class='va'>contents</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
 
-<span class='va'>set</span>      <span class='op'>&lt;-</span> <span class='fu'>get_dataset</span><span class='op'>(</span><span class='va'>contents</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>  <span class='co'># 1st dataset w/n dataverse</span>
-<span class='va'>f</span>        <span class='op'>&lt;-</span> <span class='fu'><a href='get_file.html'>get_file</a></span><span class='op'>(</span><span class='va'>set</span><span class='op'>$</span><span class='va'>files</span><span class='op'>$</span><span class='va'>id</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span>   <span class='co'># 2nd file w/n dataset</span>
-
-<span class='co'># Check the *binary* representation of the file.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span>
-
-<span class='co'># Examine the plain-text representation.</span>
-<span class='va'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span>fileext <span class='op'>=</span> <span class='st'>"svg"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/readBin.html'>writeBin</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span><span class='op'>(</span><span class='va'>f</span><span class='op'>)</span>, <span class='va'>tmp</span><span class='op'>)</span>
-<span class='va'>svg_lines</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></span><span class='op'>(</span><span class='va'>tmp</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>svg_lines</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>

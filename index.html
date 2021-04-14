@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -93,6 +93,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#r-client-for-dataverse-repositories" class="anchor"></a>R Client for Dataverse Repositories</h1></div>
 
+<p><a href="https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-thorough.yaml"><img src="https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-thorough.yaml/badge.svg?branch=master" alt="R-CMD-check-thorough"></a> <a href="https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-daily.yaml"><img src="https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-daily.yaml/badge.svg?branch=master" alt="R-CMD-check-daily"></a> <a href="https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-dev.yaml"><img src="https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-dev.yaml/badge.svg" alt="R-CMD-check-dev"></a> <a href="https://codecov.io/github/IQSS/dataverse-client-r?branch=master"><img src="https://codecov.io/github/IQSS/dataverse-client-r/coverage.svg?branch=master" alt="codecov.io"></a></p>
 <p><a href="https://dataverse.org"><img src="https://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png" alt="Dataverse Project logo"></a></p>
 <p>The <strong>dataverse</strong> package provides access to <a href="https://dataverse.org/">Dataverse</a> APIs (versions 4+), enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow. <strong>dataverse</strong> is the next-generation iteration of <a href="https://cran.r-project.org/package=dvn">the <strong>dvn</strong> package</a>, which works with Dataverse 3 (“Dataverse Network”) applications. <strong>dataverse</strong> includes numerous improvements for data search, download, and deposit.</p>
 <div id="getting-started" class="section level3">
@@ -142,7 +143,7 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="co">## </span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">## -- Column specification ------------------------------------------------------------------------------------------------</span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">## cols(</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">##   idcode = col_double(),</span></span>
 <span id="cb5-7"><a href="#cb5-7"></a><span class="co">##   age = col_double(),</span></span>
@@ -297,8 +298,6 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=dataverse"><img src="https://www.r-pkg.org/badges/version/dataverse" alt="CRAN Version"></a></li>
-<li><a href="https://travis-ci.org/IQSS/dataverse-client-r"><img src="https://travis-ci.org/IQSS/dataverse-client-r.png?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://codecov.io/github/IQSS/dataverse-client-r?branch=master"><img src="https://codecov.io/github/IQSS/dataverse-client-r/coverage.svg?branch=master" alt="codecov.io"></a></li>
 </ul>
 </div>
 </div>

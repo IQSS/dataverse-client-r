@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -192,34 +192,22 @@ or globally using <code><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.set
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>get_dataverse</code> function retrieves basic information about a Dataverse from a Dataverse server. To see the contents of the Dataverse, use <code>dataverse_contents</code> instead. Contents might include one or more &#8220;datasets&#8221; and/or further Dataverses that themselves contain Dataverses and/or datasets. To view the file contents of a single Dataset, use <code><a href='get_dataset.html'>get_dataset</a></code>.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>To manage Dataverses:
-<code><a href='create_dataverse.html'>create_dataverse</a></code>,
-<code><a href='delete_dataverse.html'>delete_dataverse</a></code>,
-<code><a href='publish_dataverse.html'>publish_dataverse</a></code>,
-<code>dataverse_contents</code>;</p>
-<p>To get datasets:
-<code><a href='get_dataset.html'>get_dataset</a></code>;</p>
-<p>To search for Dataverses, datasets, or files:
-<code><a href='dataverse_search.html'>dataverse_search</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># view the root dataverse for a server</span>
-<span class='fu'>get_dataverse</span><span class='op'>(</span><span class='st'>":root"</span><span class='op'>)</span>
-<span class='fu'>dataverse_contents</span><span class='op'>(</span><span class='st'>":root"</span><span class='op'>)</span>
+<span class='co'># https://demo.dataverse.org/dataverse/dataverse-client-r</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv</a></span><span class='op'>(</span><span class='st'>"DATAVERSE_SERVER"</span> <span class='op'>=</span> <span class='st'>"demo.dataverse.org"</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv</a></span><span class='op'>(</span><span class='st'>"DATAVERSE_SERVER"</span> <span class='op'>=</span> <span class='st'>"dataverse.harvard.edu"</span><span class='op'>)</span>
 <span class='co'># download file from:</span>
-<span class='co'># https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI</span>
-<span class='va'>dv</span> <span class='op'>&lt;-</span> <span class='fu'>get_dataverse</span><span class='op'>(</span><span class='st'>"monogan"</span><span class='op'>)</span>
-<span class='op'>(</span><span class='va'>contents</span> <span class='op'>&lt;-</span> <span class='fu'>dataverse_contents</span><span class='op'>(</span><span class='va'>dv</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>dv</span> <span class='op'>&lt;-</span> <span class='fu'>get_dataverse</span><span class='op'>(</span><span class='st'>"dataverse-client-r"</span><span class='op'>)</span>
 
 <span class='co'># get a dataset from the dataverse</span>
-<span class='va'>d1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_dataset.html'>get_dataset</a></span><span class='op'>(</span><span class='va'>contents</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
-<span class='va'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_file.html'>get_file</a></span><span class='op'>(</span><span class='va'>d1</span><span class='op'>$</span><span class='va'>files</span><span class='op'>$</span><span class='va'>id</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>)</span>
+<span class='op'>(</span><span class='va'>d1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_dataset.html'>get_dataset</a></span><span class='op'>(</span><span class='fu'>dataverse_contents</span><span class='op'>(</span><span class='va'>dv</span><span class='op'>)</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># download a file using the metadata</span>
+<span class='fu'><a href='get_dataframe_by_name.html'>get_dataframe_by_name</a></span><span class='op'>(</span><span class='st'>"roster-bulls-1996.tab"</span>, <span class='va'>d1</span><span class='op'>$</span><span class='va'>datasetPersistentId</span><span class='op'>)</span>
 <span class='op'>}</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
