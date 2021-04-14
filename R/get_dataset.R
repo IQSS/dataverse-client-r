@@ -1,6 +1,6 @@
 #' @rdname get_dataset
 #' @title Get dataset
-#' @description Retrieve a Dataverse dataset or its metadata
+#' @description Retrieve a Dataverse dataset metadata
 #'
 #' @details
 #' \code{get_dataset} retrieves details about a Dataverse dataset.
@@ -14,6 +14,8 @@
 #' \dQuote{dataverse_dataset} objects, whereas \code{\link{get_dataset}} returns
 #' metadata and a data.frame of files (rather than a list of file objects).
 #'
+#' To download actual datafiles, see \code{\link{get_file}} or \code{\link{get_dataframe_by_name}}.
+#'
 #' @template ds
 #' @template version
 #' @template envvars
@@ -21,30 +23,19 @@
 #' @return A list of class \dQuote{dataverse_dataset} or a list of a form dependent on the specific metadata block retrieved. \code{dataset_files} returns a list of objects of class \dQuote{dataverse_file}.
 #' @examples
 #' \dontrun{
+#' # https://demo.dataverse.org/dataverse/dataverse-client-r
 #' Sys.setenv("DATAVERSE_SERVER" = "demo.dataverse.org")
-#' Sys.setenv("DATAVERSE_KEY"    = "c7208dd2-6ec5-469a-bec5-f57e164888d4")
 #'
-#' # Download file from: https://demo.dataverse.org/file.xhtml?fileId=769385
-#' dv       <- get_dataverse("dataverse-client-r")
-#' contents <- dataverse_contents(dv)
+#' # download file from:
+#' dv <- get_dataverse("dataverse-client-r")
+#' contents <- dataverse_contents(dv)[[1]]
 #'
-#' dataset_files(contents[[1]])            # Dataset contains 2 files
-#' dataset_metadata(contents[[1]])         # Easier to query later
+#' dataset_files(contents[[1]])
+#' get_dataset(contents[[1]])
+#' dataset_metadata(contents[[1]])
 #'
-#' set      <- get_dataset(contents[[1]])  # 1st dataset w/n dataverse
-#' f        <- get_file(set$files$id[2])   # 2nd file w/n dataset
-#'
-#' # Check the *binary* representation of the file.
-#' length(f)
-#' head(f)
-#'
-#' # Examine the plain-text representation.
-#' tmp <- tempfile(fileext = "svg")
-#' writeBin(as.vector(f), tmp)
-#' svg_lines <- readLines(tmp)
-#' head(svg_lines)
 #' }
-#' @seealso \code{\link{create_dataset}}, \code{\link{update_dataset}}, \code{\link{delete_dataset}}, \code{\link{publish_dataset}}, \code{\link{dataset_files}}, \code{\link{dataset_metadata}}
+#' @seealso \code{\link{get_file}}
 #' @export
 get_dataset <- function(
   dataset,

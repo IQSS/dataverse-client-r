@@ -1,7 +1,8 @@
 # See https://demo.dataverse.org/dataverse/dataverse-client-r
 
 test_that("dataverse root", {
-  testthat::skip_if_offline("demo.dataverse.org")
+  # testthat::skip_if_offline("demo.dataverse.org")
+  testthat::skip_on_cran()
   expected <- retrieve_info_dataverse("expected-dataverse-root.yml")
 
   # The code below can be encapsulated in a separate function, if many dataverses are tested.
@@ -15,7 +16,8 @@ test_that("dataverse root", {
 })
 
 test_that("dataverse for 'dataverse-client-r'", {
-  testthat::skip_if_offline("demo.dataverse.org")
+  # testthat::skip_if_offline("demo.dataverse.org")
+  testthat::skip_on_cran()
   expected <- retrieve_info_dataverse("expected-dataverse.yml")
 
   # The code below can be encapsulated in a separate function, if many dataverses are tested.

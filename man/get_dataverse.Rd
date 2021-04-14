@@ -50,31 +50,17 @@ Retrieve details of a Dataverse
 }
 \examples{
 \dontrun{
-# view the root dataverse for a server
-get_dataverse(":root")
-dataverse_contents(":root")
+# https://demo.dataverse.org/dataverse/dataverse-client-r
+Sys.setenv("DATAVERSE_SERVER" = "demo.dataverse.org")
 
-Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 # download file from:
-# https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ARKOTI
-dv <- get_dataverse("monogan")
-(contents <- dataverse_contents(dv))
+dv <- get_dataverse("dataverse-client-r")
 
 # get a dataset from the dataverse
-d1 <- get_dataset(contents[[1]])
-f <- get_file(d1$files$id[3])
-}
-}
-\seealso{
-To manage Dataverses:
-\code{\link{create_dataverse}},
-\code{\link{delete_dataverse}},
-\code{\link{publish_dataverse}},
-\code{\link{dataverse_contents}};
+(d1 <- get_dataset(dataverse_contents(dv)[[1]]))
 
-To get datasets:
-\code{\link{get_dataset}};
+# download a file using the metadata
+get_dataframe_by_name("roster-bulls-1996.tab", d1$datasetPersistentId)
+}
 
-To search for Dataverses, datasets, or files:
-\code{\link{dataverse_search}}
 }

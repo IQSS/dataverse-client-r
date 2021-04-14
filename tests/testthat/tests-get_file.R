@@ -1,10 +1,9 @@
-context("Data Access API")
-
 # See https://demo.dataverse.org/dataverse/dataverse-client-r
 # https://doi.org/10.70122/FK2/HXJVJU
 
 test_that("download tab from DOI and filename", {
-  testthat::skip_if_offline("demo.dataverse.org")
+  # testthat::skip_if_offline("demo.dataverse.org")
+  testthat::skip_on_cran()
   actual <- get_file(
     file = "roster-bulls-1996.tab",
     dataset = "doi:10.70122/FK2/HXJVJU"
@@ -14,7 +13,8 @@ test_that("download tab from DOI and filename", {
 })
 
 test_that("download tab from file id", {
-  testthat::skip_if_offline("demo.dataverse.org")
+  # testthat::skip_if_offline("demo.dataverse.org")
+  testthat::skip_on_cran()
   actual <- get_file(
     file = 1734005L
   )
@@ -23,7 +23,8 @@ test_that("download tab from file id", {
 })
 
 test_that("download multiple files with file id - no folder", {
-  testthat::skip_if_offline("demo.dataverse.org")
+  # testthat::skip_if_offline("demo.dataverse.org")
+  testthat::skip_on_cran()
   # file_ids <- get_dataset("doi:10.70122/FK2/LZAJEQ", server = "demo.dataverse.org")[['files']]$id
   file_ids <- get_dataset("doi:10.70122/FK2/HXJVJU", server = "demo.dataverse.org")[['files']]$id
   actual <- get_file(
@@ -37,10 +38,10 @@ test_that("download multiple files with file id - no folder", {
 })
 
 test_that("download multiple files with file id - with folders", {
-  testthat::skip_if_offline("demo.dataverse.org")
-  # file_ids <- get_dataset("doi:10.70122/FK2/V54HGA", server = "demo.dataverse.org")[['files']]$id
+  # testthat::skip_if_offline("demo.dataverse.org")
+  testthat::skip_on_cran()
   file_ids <- get_dataset("doi:10.70122/FK2/HXJVJU", server = "demo.dataverse.org")[['files']]$id
-  actual <- get_file(file_ids, format="original", server = "demo.dataverse.org")
+  actual <- get_file(file_ids, format = "original", server = "demo.dataverse.org")
   expect_true(length(actual) == 2) # two files in the dataset
   expect_true(is.raw(actual[[2]]))
   expect_true(object.size(actual[[2]]) > 70) # Should be >70 B
