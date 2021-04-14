@@ -1,7 +1,3 @@
-context("SWORD API")
-
-# use demo server: demo.dataverse.org
-
-test_that("placeholder", {
+test_that("SWORD API", {
     expect_true(TRUE)
 })

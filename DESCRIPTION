@@ -1,5 +1,5 @@
 Package: dataverse
-Version: 0.3.7
+Version: 0.4.0
 Title: Client for Dataverse 4+ Repositories
 Authors@R:
    c(person(given = "Will", 
@@ -61,3 +61,4 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
+Config/testthat/edition: 3
