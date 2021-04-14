@@ -50,28 +50,17 @@ Retrieve details of a Dataverse
 }
 \examples{
 \dontrun{
-# download file from:
 # https://demo.dataverse.org/dataverse/dataverse-client-r
 Sys.setenv("DATAVERSE_SERVER" = "demo.dataverse.org")
+
 # download file from:
 dv <- get_dataverse("dataverse-client-r")
-(contents <- dataverse_contents(dv))
 
 # get a dataset from the dataverse
-d1 <- get_dataset(contents[[1]])
-f <- get_file(d1$files$id[1])
-}
-}
-\seealso{
-To manage Dataverses:
-\code{\link{create_dataverse}},
-\code{\link{delete_dataverse}},
-\code{\link{publish_dataverse}},
-\code{\link{dataverse_contents}};
+(d1 <- get_dataset(dataverse_contents(dv)[[1]]))
 
-To get datasets:
-\code{\link{get_dataset}};
+# download a file using the metadata
+get_dataframe_by_name("roster-bulls-1996.tab", d1$datasetPersistentId)
+}
 
-To search for Dataverses, datasets, or files:
-\code{\link{dataverse_search}}
 }
