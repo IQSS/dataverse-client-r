@@ -50,6 +50,7 @@ test_that("download multiple files with file id - with folders", {
 
 # Informative error message (PR #30)
 test_that("More informative error message when file does not exist", {
+  testthat::skip_on_cran()
   # wrong server
   expect_error(get_file(2972336, server = "demo.dataverse.org"),
                regexp = "API endpoint does not exist on this server")
