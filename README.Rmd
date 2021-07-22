@@ -193,3 +193,8 @@ For more extensive features of updating and maintaining data, see [pyDataverse](
 Other dataverse clients include [pyDataverse](https://pydataverse.readthedocs.io/en/latest/) for Python and the [Java client](https://github.com/IQSS/dataverse-client-java). 
 
 Users interested in downloading metadata from archives other than Dataverse may be interested in Kurt Hornik's [OAIHarvester](https://cran.r-project.org/package=OAIHarvester) and Scott Chamberlain's [oai](https://cran.r-project.org/package=oai), which offer metadata download from any web repository that is compliant with the [Open Archives Initiative](http://www.openarchives.org/) standards. Additionally, [rdryad](https://cran.r-project.org/package=rdryad) uses OAIHarvester to interface with [Dryad](https://datadryad.org/stash). The [rfigshare](https://cran.r-project.org/package=rfigshare) package works in a similar spirit to **dataverse** with <https://figshare.com/>.
+
+
+### More Information
+
+A 2021 talk demonstrating the Dataverse package is available at <https://www.youtube.com/watch?v=-J-eiPnmoNE>.

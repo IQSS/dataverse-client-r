@@ -107,27 +107,15 @@ nlsw <-
 
     ## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.
 
+    ## Rows: 2246 Columns: 17
+
+    ## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────
+    ## Delimiter: "\t"
+    ## dbl (17): idcode, age, race, married, never_married, grade, collgrad, south, smsa, c_city, industry, occupation, uni...
+
     ## 
-    ## -- Column specification ------------------------------------------------------------------------------------------------
-    ## cols(
-    ##   idcode = col_double(),
-    ##   age = col_double(),
-    ##   race = col_double(),
-    ##   married = col_double(),
-    ##   never_married = col_double(),
-    ##   grade = col_double(),
-    ##   collgrad = col_double(),
-    ##   south = col_double(),
-    ##   smsa = col_double(),
-    ##   c_city = col_double(),
-    ##   industry = col_double(),
-    ##   occupation = col_double(),
-    ##   union = col_double(),
-    ##   wage = col_double(),
-    ##   hours = col_double(),
-    ##   ttl_exp = col_double(),
-    ##   tenure = col_double()
-    ## )
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 which by default reads in the ingested file (not the original dta) by
 the
@@ -280,3 +268,8 @@ Additionally, [rdryad](https://cran.r-project.org/package=rdryad) uses
 OAIHarvester to interface with [Dryad](https://datadryad.org/stash). The
 [rfigshare](https://cran.r-project.org/package=rfigshare) package works
 in a similar spirit to **dataverse** with <https://figshare.com/>.
+
+### More Information
+
+A 2021 talk demonstrating the Dataverse package is available at
+<https://www.youtube.com/watch?v=-J-eiPnmoNE>.
