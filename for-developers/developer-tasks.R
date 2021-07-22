@@ -21,6 +21,9 @@ devtools::run_examples(); # dev.off() # This overwrites the NAMESPACE file too
 test_results_checked <- devtools::test()
 # testthat::test_dir("./tests/")
 
+View(urlchecker::url_check())
+urlchecker::url_update()
+
 # lintr::lint_package()
 lintr::lint("R/add_dataset_file.R")
 # devtools::check(force_suggests = FALSE)
