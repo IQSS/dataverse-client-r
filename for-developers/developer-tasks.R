@@ -19,6 +19,7 @@ gp
 
 devtools::run_examples(); # dev.off() # This overwrites the NAMESPACE file too
 test_results_checked <- devtools::test()
+test_results_checked <- devtools::test(filter = "get_dataframe_*")
 # testthat::test_dir("./tests/")
 
 View(urlchecker::url_check())
