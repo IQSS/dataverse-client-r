@@ -47,3 +47,13 @@ metadata file.
 \description{
 Retrieve a ddi metadata file
 }
+\examples{
+
+\dontrun{
+ ddi_raw <- get_file_metadata(file = "nlsw88.tab",
+                              dataset = "10.70122/FK2/PPIAXE",
+                              server = "demo.dataverse.org")
+ xml2::read_xml(ddi_raw)
+}
+
+}

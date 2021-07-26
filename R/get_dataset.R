@@ -20,7 +20,9 @@
 #' @template version
 #' @template envvars
 #' @template dots
-#' @return A list of class \dQuote{dataverse_dataset} or a list of a form dependent on the specific metadata block retrieved. \code{dataset_files} returns a list of objects of class \dQuote{dataverse_file}.
+#' @return A list of class \dQuote{dataverse_dataset} or a list of a form dependent
+#'  on the specific metadata block retrieved. \code{dataset_files} returns a list of
+#'  objects of class \dQuote{dataverse_file}.
 #' @examples
 #' \dontrun{
 #' # https://demo.dataverse.org/dataverse/dataverse-client-r

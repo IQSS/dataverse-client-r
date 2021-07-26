@@ -67,6 +67,11 @@ or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")
 \item{filedoi}{A DOI for a single file (not the entire dataset), of the form
 \code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}}
 }
+\value{
+A R object that is returned by the default or user-supplied function
+\code{.f} argument. For example, if \code{.f = readr::read_tsv()}, the function will
+return a dataframe as read in by \code{readr::read_tsv()}.
+}
 \description{
 Use \code{get_dataframe_by_name} if you know the name of the datafile and the DOI
 of the dataset. Use \code{get_dataframe_by_doi} if you know the DOI of the datafile

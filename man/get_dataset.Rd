@@ -55,7 +55,9 @@ or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")
 \item{block}{A character string specifying a metadata block to retrieve. By default this is \dQuote{citation}. Other values may be available, depending on the dataset, such as \dQuote{geospatial} or \dQuote{socialscience}.}
 }
 \value{
-A list of class \dQuote{dataverse_dataset} or a list of a form dependent on the specific metadata block retrieved. \code{dataset_files} returns a list of objects of class \dQuote{dataverse_file}.
+A list of class \dQuote{dataverse_dataset} or a list of a form dependent
+on the specific metadata block retrieved. \code{dataset_files} returns a list of
+objects of class \dQuote{dataverse_file}.
 }
 \description{
 Retrieve a Dataverse dataset metadata

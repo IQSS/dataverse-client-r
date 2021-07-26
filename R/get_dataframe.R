@@ -20,6 +20,10 @@
 #'
 #' @inheritDotParams get_file
 #'
+#' @return A R object that is returned by the default or user-supplied function
+#'  `.f` argument. For example, if `.f = readr::read_tsv()`, the function will
+#'  return a dataframe as read in by `readr::read_tsv()`.
+#'
 #' @examples
 #' \dontrun{
 #' # Retrieve data.frame from dataverse DOI and file name
