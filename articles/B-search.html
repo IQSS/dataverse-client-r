@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.8.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.9</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>2. Data Search and Discovery</h1>
             
-            <h4 class="date">2021-07-01</h4>
+            <h4 class="date">2021-07-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/iqss/dataverse-client-r/blob/master/vignettes/B-search.Rmd"><code>vignettes/B-search.Rmd</code></a></small>
       <div class="hidden name"><code>B-search.Rmd</code></div>
@@ -104,7 +104,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://iqss.github.io/dataverse-client-r/">"dataverse"</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"Gary King"</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<pre><code>## 10 of 1514 results retrieved</code></pre>
+<pre><code>## 10 of 1519 results retrieved</code></pre>
 <pre><code>##                                                                                                                   name
 ## 1                                                                            004_informal_food_retail_Nigeria_2018.tab
 ## 2                                                                                00698McArthur-King-BoxCoverSheets.pdf
@@ -119,7 +119,7 @@
 <p>The results are paginated, so users can rely upon the <code>per_page</code> and <code>start</code> argument to requested subsequent pages of results. We’ll start at 6 and to show that we retrieve the last five results from the previous query plus 15 more (due to <code>per_page = 20</code>):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"Gary King"</span>, start <span class="op">=</span> <span class="fl">6</span>, per_page <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<pre><code>## 20 of 1514 results retrieved</code></pre>
+<pre><code>## 20 of 1519 results retrieved</code></pre>
 <pre><code>##                                                                                                                           name
 ## 1                                            03 Brienne Collection letterlocking data: Images folder 04/16, DB-0988–DB-1109_03
 ## 2                                         03 Brienne Collection letterlocking data: Images folder 06/16, DB-1241_02–DB-1339_06
@@ -144,7 +144,7 @@
 <p>More complicated searches can specify metadata fields like <code>title</code> and restrict results to a specific <code>type</code> of Dataverse object (a “dataverse”, “dataset”, or “file”):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ei</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span>author <span class="op">=</span> <span class="st">"Gary King"</span>, title <span class="op">=</span> <span class="st">"Ecological Inference"</span>, type <span class="op">=</span> <span class="st">"dataset"</span>, per_page <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></code></pre></div>
-<pre><code>## 20 of 1358 results retrieved</code></pre>
+<pre><code>## 20 of 1367 results retrieved</code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># fields returned</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">ei</span><span class="op">)</span>
@@ -189,7 +189,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Will Beasley, Thomas J. Leeper, Shiro Kuriwaki, Philip Durbin, Sebastian Karcher.</p>
+  <p>Developed by Shiro Kuriwaki, Will Beasley, Thomas J. Leeper, Philip Durbin, Sebastian Karcher.</p>
 </div>
 
 <div class="pkgdown">

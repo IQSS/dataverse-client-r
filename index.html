@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.8.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.9</span>
       </span>
     </div>
 
@@ -142,27 +142,15 @@
   <span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">## </span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">## -- Column specification ------------------------------------------------------------------------------------------------</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">## cols(</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">##   idcode = col_double(),</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">##   age = col_double(),</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">##   race = col_double(),</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">##   married = col_double(),</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">##   never_married = col_double(),</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">##   grade = col_double(),</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">##   collgrad = col_double(),</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">##   south = col_double(),</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="co">##   smsa = col_double(),</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="co">##   c_city = col_double(),</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="co">##   industry = col_double(),</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="co">##   occupation = col_double(),</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co">##   union = col_double(),</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="co">##   wage = col_double(),</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="co">##   hours = col_double(),</span></span>
-<span id="cb5-21"><a href="#cb5-21"></a><span class="co">##   ttl_exp = col_double(),</span></span>
-<span id="cb5-22"><a href="#cb5-22"></a><span class="co">##   tenure = col_double()</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a><span class="co">## )</span></span></code></pre></div>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">## Rows: 2246 Columns: 17</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">## Delimiter: "\t"</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">## dbl (17): idcode, age, race, married, never_married, grade, collgrad, south, smsa, c_city, industry, occupation, uni...</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">## </span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">## ℹ Use `spec()` to retrieve the full column specification for this data.</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span></code></pre></div>
 <p>which by default reads in the ingested file (not the original dta) by the <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr::read_tsv</code></a> function.</p>
 <p>Alternatively, we can download the same file by specifying the filename and the DOI of the “dataset” (in Dataverse, a collection of files is called a dataset).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -199,7 +187,7 @@
 <div id="data-archiving" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data-archiving" class="anchor"></a>Data Archiving</h3>
-<p>Dataverse provides two - basically unrelated - workflows for managing (adding, documenting, and publishing) datasets. The first is built on <a href="http://swordapp.org/sword-v2/">SWORD v2.0</a>. This means that to create a new dataset listing, you will have to first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:</p>
+<p>Dataverse provides two - basically unrelated - workflows for managing (adding, documenting, and publishing) datasets. The first is built on <a href="https://swordapp.org/sword-v2/">SWORD v2.0</a>. This means that to create a new dataset listing, you will have to first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># After setting appropriate dataverse server and environment, obtain SWORD</span>
 <span class="co"># service doc</span>
@@ -255,6 +243,11 @@
 <p>Other dataverse clients include <a href="https://pydataverse.readthedocs.io/en/latest/">pyDataverse</a> for Python and the <a href="https://github.com/IQSS/dataverse-client-java">Java client</a>.</p>
 <p>Users interested in downloading metadata from archives other than Dataverse may be interested in Kurt Hornik’s <a href="https://cran.r-project.org/package=OAIHarvester">OAIHarvester</a> and Scott Chamberlain’s <a href="https://cran.r-project.org/package=oai">oai</a>, which offer metadata download from any web repository that is compliant with the <a href="http://www.openarchives.org/">Open Archives Initiative</a> standards. Additionally, <a href="https://cran.r-project.org/package=rdryad">rdryad</a> uses OAIHarvester to interface with <a href="https://datadryad.org/stash">Dryad</a>. The <a href="https://cran.r-project.org/package=rfigshare">rfigshare</a> package works in a similar spirit to <strong>dataverse</strong> with <a href="https://figshare.com/" class="uri">https://figshare.com/</a>.</p>
 </div>
+<div id="more-information" class="section level3">
+<h3 class="hasAnchor">
+<a href="#more-information" class="anchor"></a>More Information</h3>
+<p>A 2021 talk demonstrating the Dataverse package is available at <a href="https://www.youtube.com/watch?v=-J-eiPnmoNE" class="uri">https://www.youtube.com/watch?v=-J-eiPnmoNE</a>.</p>
+</div>
 </div>
   </div>
 
@@ -285,9 +278,9 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Will Beasley <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5613-5006" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Shiro Kuriwaki <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5687-2647" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Will Beasley <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5613-5006" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Thomas J. Leeper <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-4097-6326" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Shiro Kuriwaki <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5687-2647" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Philip Durbin <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-9528-9470" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Sebastian Karcher <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-8249-7388" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li><a href="authors.html">All authors...</a></li>
@@ -305,7 +298,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Will Beasley, Thomas J. Leeper, Shiro Kuriwaki, Philip Durbin, Sebastian Karcher.</p>
+  <p>Developed by Shiro Kuriwaki, Will Beasley, Thomas J. Leeper, Philip Durbin, Sebastian Karcher.</p>
 </div>
 
 <div class="pkgdown">

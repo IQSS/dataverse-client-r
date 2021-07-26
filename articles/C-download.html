@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.8.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.9</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>3. Data Download</h1>
             
-            <h4 class="date">2021-07-01</h4>
+            <h4 class="date">2021-07-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/iqss/dataverse-client-r/blob/master/vignettes/C-download.Rmd"><code>vignettes/C-download.Rmd</code></a></small>
       <div class="hidden name"><code>C-download.Rmd</code></div>
@@ -107,6 +107,7 @@
 <p>We will download these files and examine them directly in R using the <strong>dataverse</strong> package. To begin, we need to loading the package and using the <code><a href="../reference/get_dataset.html">get_dataset()</a></code> function to retrieve some basic metadata about the dataset:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://iqss.github.io/dataverse-client-r/">"dataverse"</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tibble.tidyverse.org/">"tibble"</a></span><span class="op">)</span> <span class="co"># to see dataframes in tidyverse-form</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></code></pre></div>
 <p>The <code><a href="../reference/get_dataset.html">get_dataset()</a></code> function lists all of the files in the dataset along with a considerable amount of metadata about each. (Recall that in Dataverse, <code>dataset</code> is a collection of files, not a single file.) We can see a quick glance at these files using:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -133,23 +134,17 @@
   <span class="st">"comprehensiveJapanEnergy.tab"</span>,
   <span class="st">"10.7910/DVN/ARKOTI"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.</code></pre>
+<pre><code>## Rows: 60 Columns: 10</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────
+## Delimiter: "\t"
+## chr (1): date
+## dbl (9): time, dummy, temp, temp2, all, large, house, kepco, tepco</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────
-## cols(
-##   time = col_double(),
-##   date = col_character(),
-##   dummy = col_double(),
-##   temp = col_double(),
-##   temp2 = col_double(),
-##   all = col_double(),
-##   large = col_double(),
-##   house = col_double(),
-##   kepco = col_double(),
-##   tepco = col_double()
-## )</code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">energy</span><span class="op">)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 10
+<pre><code>## # A tibble: 6 × 10
 ##    time date  dummy  temp temp2      all    large    house    kepco    tepco
 ##   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1     1 8-Jan     0   5.9  34.8 95792389 35194957 26190714 13357735 26960899
@@ -159,7 +154,7 @@
 ## 5     5 8-May     0  18.5 342.  82742929 35417089 17923760 11589061 22848737
 ## 6     6 8-Jun     0  21.3 454.  82180013 36692291 15205229 11360771 22487441</code></pre>
 <p>These <code>get_dataframe_*</code> functions, introduced in v0.3.0, directly read in the data into a R environment through whatever R function supplied by <code>.f</code>. The default of the <code>get_dataframe_*</code> functions is to read in such data by <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_tsv()</a></code>. The <code>.f</code> function can be modified to modify the read-in settings. For example, the following modification is a base-R equivalent to read in the ingested data.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
 <span class="va">energy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_dataframe_by_name.html">get_dataframe_by_name</a></span><span class="op">(</span>
   <span class="st">"comprehensiveJapanEnergy.tab"</span>,
@@ -179,23 +174,23 @@
 <h2 class="hasAnchor">
 <a href="#retrieving-custom-data-fromats-rds-stata-spss" class="anchor"></a>Retrieving Custom Data Fromats (RDS, Stata, SPSS)</h2>
 <p>If a file is displayed on dataverse as a <code>.tab</code> file like the survey data by <a href="https://doi.org/10.7910/DVN/ARKOTI/A8YRMP">Alvarez et al. (2013)</a>, it is likely that Dataverse <a href="https://guides.dataverse.org/en/latest/user/tabulardataingest/index.html">ingested</a> the file to a plain-text, tab-delimited format.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">argentina_tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_dataframe_by_name.html">get_dataframe_by_name</a></span><span class="op">(</span>
   <span class="st">"alpl2013.tab"</span>,
   <span class="st">"10.7910/DVN/ARKOTI"</span><span class="op">)</span></code></pre></div>
 <p>However, ingested files may not retain important dataset attributes. For example, Stata and SPSS datasets encode value labels on to numeric values. Factor variables in R dataframes encode levels, not only labels. A plain-text ingested file will discard such information. For example, the <code>polling_place</code> variable in this data is only given by numbers, although the original data labelled these numbers with informative values.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">argentina_tab</span><span class="op">$</span><span class="va">polling_place</span><span class="op">)</span></code></pre></div>
 <pre><code>##  num [1:1475] 31 31 31 31 31 31 31 31 31 31 ...</code></pre>
 <p>When ingesting, Dataverse retains a <code>original</code> version that retains these attributes but may not be readable in some platforms. The <code>get_dataframe_*</code> functions have an argument that can be set to <code>original = TRUE</code>. In this case we know that <code>alpl2013.tab</code> was originally a Stata dta file, so we can run:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">argentina_dta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_dataframe_by_name.html">get_dataframe_by_name</a></span><span class="op">(</span>
   <span class="st">"alpl2013.tab"</span>,
   <span class="st">"10.7910/DVN/ARKOTI"</span>,
   original <span class="op">=</span> <span class="cn">TRUE</span>,
   .f <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="va"><a href="https://haven.tidyverse.org/reference/read_dta.html">read_dta</a></span><span class="op">)</span></code></pre></div>
 <p>Now we see that labels are read in through <code>haven</code>’s labelled variables class:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">argentina_dta</span><span class="op">$</span><span class="va">polling_place</span><span class="op">)</span></code></pre></div>
 <pre><code>##  dbl+lbl [1:1475] 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 3...
 ##  @ label       : chr "polling_place"
@@ -210,7 +205,7 @@
 <h2 class="hasAnchor">
 <a href="#retrieving-scripts-and-other-files" class="anchor"></a>Retrieving Scripts and other files</h2>
 <p>If the file you want to retrieve is not data, you may want to use the more primitive function, <code>get_file</code>, which gets the file data as a raw binary file. See the help page examples of <code><a href="../reference/get_file.html">get_file()</a></code> that use the <code><a href="https://rdrr.io/r/base/readBin.html">base::writeBin()</a></code> function for details on how to write and read these binary files instead.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">code3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_file.html">get_file</a></span><span class="op">(</span><span class="st">"chapter03.R"</span>, <span class="st">"doi:10.7910/DVN/ARKOTI"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/readBin.html">writeBin</a></span><span class="op">(</span><span class="va">code3</span>, <span class="st">"chapter03.R"</span><span class="op">)</span></code></pre></div>
 </div>
@@ -227,7 +222,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Will Beasley, Thomas J. Leeper, Shiro Kuriwaki, Philip Durbin, Sebastian Karcher.</p>
+  <p>Developed by Shiro Kuriwaki, Will Beasley, Thomas J. Leeper, Philip Durbin, Sebastian Karcher.</p>
 </div>
 
 <div class="pkgdown">
