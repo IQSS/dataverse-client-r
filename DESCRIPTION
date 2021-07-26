@@ -1,10 +1,15 @@
 Package: dataverse
-Version: 0.3.8.9000
+Version: 0.3.9
 Title: Client for Dataverse 4+ Repositories
 Authors@R:
-   c(person(given = "Will", 
+   c(person(given = "Shiro", 
+            family = "Kuriwaki",
+            role = c("aut", "cre"),
+            email = "shirokuriwaki@gmail.com",
+            comment = c(ORCID = "0000-0002-5687-2647")),
+     person(given = "Will", 
             family = "Beasley",
-            role=c("aut", "cre"),
+            role=c("aut"),
             email="wibeasley@hotmail.com",
             comment = c(ORCID = "0000-0002-5613-5006")),
      person(given = "Thomas J.", 
@@ -12,11 +17,6 @@ Authors@R:
             role = c("aut"),
             email = "thosjleeper@gmail.com",
             comment = c(ORCID = "0000-0003-4097-6326")),
-     person(given = "Shiro", 
-            family = "Kuriwaki",
-            role = c("aut"),
-            email = "shirokuriwaki@gmail.com",
-            comment = c(ORCID = "0000-0002-5687-2647")),
      person(given = "Philip", 
             family = "Durbin",
             role = c("aut"),
@@ -49,6 +49,7 @@ Suggests:
     purrr,
     rmarkdown,
     testthat,
+    tibble,
     yaml
 Description: Provides access to Dataverse APIs <https://dataverse.org/> (versions 4-5),
     enabling data search, retrieval, and deposit. For Dataverse versions <= 3.0,

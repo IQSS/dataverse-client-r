@@ -7,9 +7,9 @@ citHeader("To cite package 'dataverse' in publications use:")
       entry="Manual",
 		  title = "dataverse: R Client for Dataverse 4+ Repositories",
 		  author = personList(
-		      as.person(c("Will Beasley",
-		                "Shiro Kuriwaki",
-		                "Thomas J. Leeper"))),
+		      as.person(c("Shiro Kuriwaki",
+		                  "Will Beasley",
+		                  "Thomas J. Leeper"))),
 		  year = year,
 		  note = vers,
 		  textVersion =

@@ -1,3 +1,7 @@
+# CHANGES in dataverse 0.3.9
+
+* Change maintainer to @kuriwaki
+
 # CHANGES in dataverse 0.3.8 (2021-04-14 CRAN)
 
 Core Features

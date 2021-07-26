@@ -22,3 +22,4 @@ man-roxygen/*
 ^cran-comments\.md$
 ^CRAN-RELEASE$
 ^\.github$
+rhub-checks
