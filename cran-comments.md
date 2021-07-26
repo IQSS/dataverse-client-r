@@ -2,29 +2,32 @@ Description
 -----------------------------------------------
 
 The `dataverse` package was archived on 2021-04-21 after we could not attend 
-to a failing test in time. Shiro Kuriwaki will be maintainer for this new
-submission (for 0.3.9 and going forward), as the automatic `NOTE` will flag. 
-We communicated this to the CRAN team 2021-07-18.  
-The previous maintainer, Will Beasley, will continue to contribute to the package as author. 
+to a failing test in time. This is a submission to effectively revive the package.
 
-The nature of the test failure was that the APIs were relying on a nightly CRAN build.
-After a few unreliable connections after many successful tests, some of the 
-servers eventually returned an error. After Brian Ripley's latest instructions, 
-we have decided we shouldn't rely  on nightly CRAN builds for testing the package's interactions with servers, even if the servers are reachable.  
-All those tests are now skipped on CRAN
-(with `testthat::skip_on_cran()`) and instead will run on nightly 
-GitHub Actions builds.
+Shiro Kuriwaki will be maintainer for this new submission (for 0.3.9 and going 
+forward), as the automatic `NOTE` will flag.  We communicated this to the CRAN 
+team on 2021-07-18. The previous maintainer, Will Beasley, will continue to 
+contribute to the package as author. 
+
+The nature of the test failure was that the APIs were relying on a nightly CRAN 
+build. After a few unreliable connections after many successful tests, some of the 
+servers eventually returned an error. After Brian Ripley's instructions,  we 
+decided we shouldn't rely  on nightly CRAN builds for testing the package's 
+interactions with servers, even if the servers are reachable. All those tests 
+are now skipped on CRAN (with `testthat::skip_on_cran()`) and instead will run on 
+nightly GitHub Actions builds.
 
 
-Thank you for taking the time to review the submission, and please tell me if 
-there's something else I should do for CRAN.  -Shiro Kuriwaki
+Thank you for taking the time to review the submission.
+
+- Shiro Kuriwaki
 
 
 Test environments
 -----------------------------------------------
 
-1. [win-builder](https://win-builder.r-project.org/vt7EiD90tJZd), development version (`devtools::check_win_devel()`)
-2. [R-hub]().
+1. [win-builder](https://win-builder.r-project.org/cBi2U5y9gKOq), development version (`devtools::check_win_devel()`)
+2. [R-hub](https://builder.r-hub.io/status/dataverse_0.3.9.tar.gz-82f7f1a52ace42ba9f913863a5223946).
 3. [GitHub Actions](https://github.com/IQSS/dataverse-client-r/actions)
   * os: macOS-latest    , r: 'release'
   * os: windows-latest  , r: 'devel'
