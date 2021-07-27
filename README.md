@@ -72,15 +72,6 @@ Dataverse can be used by setting:
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 ```
 
-Note: The package attempts to compensate for any malformed values,
-though.
-
-Currently, the package wraps the data management features of the
-Dataverse API. Functions for other API features - related to user
-management and permissions - are not currently exported in the package
-(but are drafted in the [source
-code](https://github.com/IQSS/dataverse-client-r)).
-
 ### Data Download
 
 The dataverse package provides multiple interfaces to obtain data into
@@ -249,8 +240,15 @@ its metadata with `update_dataset()` or file contents using
 `update_dataset_file()` and then republish a new version using
 `publish_dataset()`.
 
-For more extensive features of updating and maintaining data, see
+### Limitations
+
+The R client is current stable for data search and download. For more
+extensive features of *uploading* and maintaining data, see
 [pyDataverse](https://pydataverse.readthedocs.io/en/latest/).
+
+Currently, functions related to user management and permissions - are
+not currently exported in the package (but are drafted in the source
+code).
 
 ### Related Software
 
