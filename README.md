@@ -63,14 +63,25 @@ where `examplekey12345` should be replace with your own key.
 Because [there are many Dataverse
 installations](https://dataverse.org/), all functions in the R client
 require specifying what server installation you are interacting with.
-This can be set by default with an environment variable,
-`DATAVERSE_SERVER`. This should be the Dataverse server, without the
-“https” prefix or the “/api” URL path, etc. For example, the Harvard
-Dataverse can be used by setting:
+There are multiple ways to specify the server:
+
+1.  Set the `server` argument in each function. e.g.,
+    `server = "dataverse.harvard.edu"` in the `get_dataframe_by_name()`
+    function.
+
+2.  Set the environment variable, `DATAVERSE_SERVER`, in the script to
+    be used throughout the session. e.g.,
 
 ``` r
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 ```
+
+3.  Hard-code a default server in your own environment. Direct your
+    `.Renviron` file directly or open it by `usethis::edit_r_environ()`.
+    Then enter `DATAVERSE_SERVER = "dataverse.harvard.edu"`.
+
+In all cases, values should be the Dataverse server, without the “https”
+prefix or the “/api” URL path, etc.
 
 ### Data Download
 
