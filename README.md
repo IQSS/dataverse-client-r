@@ -17,10 +17,6 @@ The **dataverse** package provides access to
 [Dataverse](https://dataverse.org/) APIs (versions 4+), enabling data
 search, retrieval, and deposit, thus allowing R users to integrate
 public data sharing into the reproducible research workflow.
-**dataverse** is the next-generation iteration of [the **dvn**
-package](https://cran.r-project.org/package=dvn), which works with
-Dataverse 3 (“Dataverse Network”) applications. **dataverse** includes
-numerous improvements for data search, download, and deposit.
 
 ### Getting Started
 
@@ -40,23 +36,27 @@ remotes::install_github("iqss/dataverse-client-r")
 
 #### Keys
 
-Some features of the Dataverse API are public and require no
+Many features of the Dataverse API are public and require no
 authentication. This means in many cases you can search for and retrieve
-data without a Dataverse account for that a specific Dataverse
-installation. But, other features require a Dataverse account for the
-specific server installation of the Dataverse software, and an API key
-linked to that account. Instructions for obtaining an account and
-setting up an API key are available in the [Dataverse User
+data without a Dataverse account or API key – you wil not need to worry
+about this.
+
+For features that require a Dataverse account for the specific server
+installation of the Dataverse software, and an API key linked to that
+account. Instructions for obtaining an account and setting up an API key
+are available in the [Dataverse User
 Guide](https://guides.dataverse.org/en/latest/user/account.html). (Note:
 if your key is compromised, it can be regenerated to preserve security.)
 Once you have an API key, this should be stored as an environment
-variable called `DATAVERSE_KEY`. It can be set within R using:
+variable called `DATAVERSE_KEY`. It can be set as a default by adding
 
 ``` r
-Sys.setenv("DATAVERSE_KEY" = "examplekey12345")
+DATAVERSE_KEY="examplekey12345"
 ```
 
-where `examplekey12345` should be replace with your own key.
+in your .Renviron file, where `examplekey12345` should be replace with
+your own key. The environment file can be opened by
+`usethis::edit_r_environ()`.
 
 #### Server
 
@@ -263,9 +263,15 @@ code).
 
 ### Related Software
 
-Other dataverse clients include
+**dataverse** is the next-generation iteration of the now removed
+**dvn** package, which works with Dataverse 3 (“Dataverse Network”)
+applications.
+
+Dataverse clients in other programming languages include
 [pyDataverse](https://pydataverse.readthedocs.io/en/latest/) for Python
 and the [Java client](https://github.com/IQSS/dataverse-client-java).
+For more information, see [the Dataverse API
+page](https://guides.dataverse.org/en/5.5/api/client-libraries.html#r).
 
 Users interested in downloading metadata from archives other than
 Dataverse may be interested in Kurt Hornik’s
