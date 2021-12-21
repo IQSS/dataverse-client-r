@@ -43,7 +43,6 @@ Imports:
     xml2
 Suggests:
     covr,
-    foreign,
     haven,
     knitr,
     purrr,
