@@ -26,15 +26,14 @@ get_dataframe_by_doi(filedoi, .f = NULL, original = FALSE, ...)
 for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
 \dQuote{dataverse_dataset} obtained by \code{dataverse_contents()}.}
 
-\item{.f}{The function to used for reading in the raw dataset. This user
+\item{.f}{The function to used for reading in the raw dataset. The user
 must choose the appropriate function: for example if the target is a .rds
-file, then \code{.f} should be \code{readRDS} or \code{readr::read_rds}.}
+file, then \code{.f} should be \code{readRDS} or \code{readr::read_rds}. It can be a custom
+function defined by the user. See examples for details.}
 
-\item{original}{A logical, defaulting to TRUE. Whether to read the ingested,
+\item{original}{A logical, defaulting to \code{TRUE}. Whether to read the ingested,
 archival version of the datafile if one exists. The archival versions are tab-delimited
-\code{.tab} files so if \code{original = FALSE}, \code{.f} is set to \code{readr::read_tsv}.
-If functions to read the original version is available, then \code{original = TRUE}
-with a specified \code{.f} is better.}
+\code{.tab} files so if \code{original = FALSE}, \code{.f} is set to \code{readr::read_tsv}.}
 
 \item{...}{
   Arguments passed on to \code{\link[=get_file]{get_file}}
@@ -73,14 +72,23 @@ A R object that is returned by the default or user-supplied function
 return a dataframe as read in by \code{readr::read_tsv()}.
 }
 \description{
+Download dataverse file as a dataframe
+}
+\details{
+Reads in the Dataverse file into the R environment with any
+user-specified function, such as \code{read.csv} or \code{readr} functions.
+
 Use \code{get_dataframe_by_name} if you know the name of the datafile and the DOI
 of the dataset. Use \code{get_dataframe_by_doi} if you know the DOI of the datafile
 itself. Use \code{get_dataframe_by_id} if you know the numeric ID of the
-datafile.
+datafile. For files that are not datasets, the more generic \code{get_file} that
+downloads the content as a binary is simpler.
 }
 \examples{
 \dontrun{
-# Retrieve data.frame from dataverse DOI and file name
+# 1. For files originally in plain-text (.csv, .tsv), we recommend
+# retreiving data.frame from dataverse DOI and file name, or the file's DOI.
+
 df_tab <-
   get_dataframe_by_name(
     filename = "roster-bulls-1996.tab",
@@ -88,24 +96,17 @@ df_tab <-
     server   = "demo.dataverse.org"
   )
 
-# Retrieve the same file from file DOI
 df_tab <-
   get_dataframe_by_doi(
     filedoi      = "10.70122/FK2/HXJVJU/SA3Z2V",
     server       = "demo.dataverse.org"
   )
 
-# Retrieve ingested file originally a Stata dta
-df_from_stata_ingested <-
-  get_dataframe_by_name(
-    filename   = "nlsw88.tab",
-    dataset    = "doi:10.70122/FK2/PPIAXE",
-    server     = "demo.dataverse.org"
-  )
+# 2. For files where Dataverse's ingest loses information (Stata .dta, SPSS .sav)
+# or cannot be ingested (R .rds), we recommend
+# specifying `original = TRUE` and specifying a read-in function in .f.
 
-# To use the original file version, or for non-ingested data,
-# please specify `original = TRUE` and specify a function in .f.
-
+# Rds files are not ingested so original = TRUE and .f is required.
 if (requireNamespace("readr", quietly = TRUE)) {
   df_from_rds_original <-
     get_dataframe_by_name(
@@ -117,7 +118,8 @@ if (requireNamespace("readr", quietly = TRUE)) {
     )
 }
 
-# Get Stata file as original
+# Stata dta files lose attributes such as value labels upon ingest so
+# reading the original version by a Stata reader such as `haven` is recommended.
 if (requireNamespace("haven", quietly = TRUE)) {
   df_stata_original <-
     get_dataframe_by_name(
@@ -129,14 +131,31 @@ if (requireNamespace("haven", quietly = TRUE)) {
     )
 }
 
-# Stata file as ingested file (less information than original)
-df_stata_ingested <-
-  get_dataframe_by_name(
-    filename   = "nlsw88.tab",
-    dataset    = "doi:10.70122/FK2/PPIAXE",
-    server     = "demo.dataverse.org"
- )
+# 3. RData files are read in by `base::load()` but cannot be assigned to an
+# object name. The following shows two possible ways to read in such files.
 
+# First, without relying on `get_dataframe_*`, write as a binary file:
+as_binary <- get_file_by_doi(
+ filedoi = "doi:10.70122/FK2/PPIAXE/5VPXKE",
+ server = "demo.dataverse.org")
+
+temp <- tempdir()
+writeBin(as_binary, path(temp, "county.RData"))
+load(path(temp, "county.RData"))
+
+If you are certain each RData contains only one object, one could define a custom
+custom function used in https://stackoverflow.com/a/34926943
+load_object <- function(file) {
+  tmp <- new.env()
+  load(file = file, envir = tmp)
+  tmp[[ls(tmp)[1]]]
+}
+
+as_rda <- get_dataframe_by_doi(
+  filedoi = "doi:10.70122/FK2/PPIAXE/5VPXKE",
+  server = "demo.dataverse.org",
+  .f = load_object,
+  original = TRUE)
 }
 
 }
