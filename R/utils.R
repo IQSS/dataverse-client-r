@@ -101,7 +101,8 @@ is_ingested <-
   function(
     fileid,
     key     = Sys.getenv("DATAVERSE_KEY"),
-    server  = Sys.getenv("DATAVERSE_SERVER")
+    server  = Sys.getenv("DATAVERSE_SERVER"),
+    ...
   ) {
     ping_metadata <- tryCatch(
       {
