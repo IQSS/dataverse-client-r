@@ -4,8 +4,8 @@
 #'
 #' @description Download Dataverse File(s). `get_file_*`
 #' functions return a raw binary file, which cannot be readily analyzed in R.
-#' To use the objects as dataframes, see the `get_dataset_*` functions at
-#' \link{get_dataset} instead.
+#' To use the objects as dataframes, see the `get_dataframe_*` functions at
+#' \link{get_dataframe} instead.
 #'
 #' @details This function provides access to data files from a Dataverse entry.
 #' `get_file` is a general wrapper,
@@ -63,22 +63,20 @@
 #' f3 <- get_file(d3$files$id[1], server = "demo.dataverse.org")
 #'
 #' # 4. Retrieve multiple raw data in list
-#' f4_vec <- get_dataset(
+#' f4_meta <- get_dataset(
 #'   "doi:10.70122/FK2/PPIAXE",
 #'   server = "demo.dataverse.org"
-#' )$files$id
+#' )
 #'
-#' f4 <- get_file(f4_vec, server = "demo.dataverse.org")
-#' length(f4)
+#' f4 <- get_file(f4_meta$files$id, server = "demo.dataverse.org")
+#' names(f4) <- f4_meta$files$label
 #'
-#' # Write binary files
-#' # (see `get_dataframe_by_name` to load in environment)
+#' # Write binary files. To load into R environment, use get_dataframe_by_name()
 #' # The appropriate file extension needs to be assigned by the user.
-#' writeBin(f1, "nlsw88.dta")
-#' writeBin(f2, "nlsw88.dta")
 #'
-#' writeBin(f4[[1]], "nlsw88.rds") # originally a rds file
-#' writeBin(f4[[2]], "nlsw88.dta") # originally a dta file
+#' writeBin(f1, "nlsw88.dta") # .tab extension but save as dta
+#' writeBin(f4[["nlsw88_rds-export.rds"]], "nlsw88.rds") # originally a rds file
+#' writeBin(f4[["nlsw88.tab"]], "nlsw88.dta") # originally a dta file
 #' }
 #'
 #' @export
