@@ -76,7 +76,7 @@ get_file_by_id <- function(
 
     # If not bundle, request single file in non-bundle format ----
     u <- paste0(api_url(server), u_part, fileid)
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
+    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, httr::progress(type = "down"), ...)
 
     httr::stop_for_status(r, task = httr::content(r)$message)
     httr::content(r, as = "raw")
