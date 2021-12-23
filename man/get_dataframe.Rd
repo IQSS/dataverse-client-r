@@ -55,10 +55,13 @@ extract a subset of the data.}
 is not specified, functions calling authenticated API endpoints will fail.
 Keys can be specified atomically or globally using
 \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
-    \item{\code{server}}{A character string specifying a Dataverse server. There are
-multiple Dataverse installations, but the defaults is to use the Harvard
-Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
-or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
+    \item{\code{server}}{A character string specifying a Dataverse server.
+Multiple Dataverse installations exist, with \code{"dataverse.harvard.edu"} being the
+most major. The server can be defined each time within a function, or it can
+be set as a default via an environment variable. To set a default, run
+\code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")}
+or add \verb{DATAVERSE_SERVER = "dataverse.harvard.edu} in one's \code{.Renviron}
+file (\code{usethis::edit_r_environ()}), with the appropriate domain as its value.}
   }}
 
 \item{fileid}{A numeric ID internally used for \code{get_file_by_id}}

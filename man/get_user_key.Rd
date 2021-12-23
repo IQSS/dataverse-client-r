@@ -11,11 +11,22 @@ get_user_key(user, password, server = Sys.getenv("DATAVERSE_SERVER"), ...)
 
 \item{password}{A character vector specifying the password for this user.}
 
-\item{server}{A character string specifying a Dataverse server. There are multiple Dataverse installations, but the defaults is to use the Harvard Dataverse. This can be modified atomically or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
+\item{server}{A character string specifying a Dataverse server.
+Multiple Dataverse installations exist, with \code{"dataverse.harvard.edu"} being the
+most major. The server can be defined each time within a function, or it can
+be set as a default via an environment variable. To set a default, run
+\code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")}
+or add \verb{DATAVERSE_SERVER = "dataverse.harvard.edu} in one's \code{.Renviron}
+file (\code{usethis::edit_r_environ()}), with the appropriate domain as its value.}
 
 \item{...}{Additional arguments passed to an HTTP request function, such as
 \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
 \code{\link[httr]{DELETE}}.}
+
+\item{key}{A character string specifying a Dataverse server API key. If one
+is not specified, functions calling authenticated API endpoints will fail.
+Keys can be specified atomically or globally using
+\code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 }
 \value{
 A list.
@@ -24,7 +35,10 @@ A list.
 Get a user's API key
 }
 \details{
-Use a Dataverse server's username and password login to obtain an API key for the user. This can be used if one does not yet have an API key, or desires to reset the key. This function does not require an API \code{key} argument to authenticate, but \code{server} must still be specified.
+Use a Dataverse server's username and password login to obtain an
+API key for the user. This can be used if one does not yet have an API key,
+or desires to reset the key. This function does not require an API \code{key}
+argument to authenticate, but \code{server} must still be specified.
 }
 \examples{
 \dontrun{
