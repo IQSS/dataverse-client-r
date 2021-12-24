@@ -1,6 +1,7 @@
 #' @rdname get_dataset
-#' @title Get dataset
-#' @description Retrieve a Dataverse dataset metadata
+#' @title Get dataset metadata
+#' @description Retrieve metadata. To actually download a data file,
+#'  see \code{\link{get_file}} or \code{\link{get_dataframe_by_name}}.
 #'
 #' @details
 #' \code{get_dataset} retrieves details about a Dataverse dataset.
@@ -14,13 +15,14 @@
 #' \dQuote{dataverse_dataset} objects, whereas \code{\link{get_dataset}} returns
 #' metadata and a data.frame of files (rather than a list of file objects).
 #'
-#' To download actual datafiles, see \code{\link{get_file}} or \code{\link{get_dataframe_by_name}}.
 #'
 #' @template ds
 #' @template version
 #' @template envvars
 #' @template dots
-#' @return A list of class \dQuote{dataverse_dataset} or a list of a form dependent on the specific metadata block retrieved. \code{dataset_files} returns a list of objects of class \dQuote{dataverse_file}.
+#' @return A list of class \dQuote{dataverse_dataset} or a list of a form dependent
+#'  on the specific metadata block retrieved. \code{dataset_files} returns a list of
+#'  objects of class \dQuote{dataverse_file}.
 #' @examples
 #' \dontrun{
 #' # https://demo.dataverse.org/dataverse/dataverse-client-r
@@ -34,6 +36,7 @@
 #' get_dataset(contents[[1]])
 #' dataset_metadata(contents[[1]])
 #'
+#' Sys.unsetenv("DATAVERSE_SERVER")
 #' }
 #' @seealso \code{\link{get_file}}
 #' @export
@@ -50,13 +53,16 @@ get_dataset <- function(
   } else {
     u <- paste0(api_url(server), "datasets/", dataset)
   }
+  browser()
   r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
   httr::stop_for_status(r, task = httr::content(r)$message)
   parse_dataset(httr::content(r, as = "text", encoding = "UTF-8"))
 }
 
 #' @rdname get_dataset
-#' @param block A character string specifying a metadata block to retrieve. By default this is \dQuote{citation}. Other values may be available, depending on the dataset, such as \dQuote{geospatial} or \dQuote{socialscience}.
+#' @param block A character string specifying a metadata block to retrieve.
+#'  By default this is \dQuote{citation}. Other values may be available, depending
+#'  on the dataset, such as \dQuote{geospatial} or \dQuote{socialscience}.
 #'
 #' @export
 dataset_metadata <- function(

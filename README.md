@@ -17,10 +17,6 @@ The **dataverse** package provides access to
 [Dataverse](https://dataverse.org/) APIs (versions 4+), enabling data
 search, retrieval, and deposit, thus allowing R users to integrate
 public data sharing into the reproducible research workflow.
-**dataverse** is the next-generation iteration of [the **dvn**
-package](https://cran.r-project.org/package=dvn), which works with
-Dataverse 3 (“Dataverse Network”) applications. **dataverse** includes
-numerous improvements for data search, download, and deposit.
 
 ### Getting Started
 
@@ -40,46 +36,52 @@ remotes::install_github("iqss/dataverse-client-r")
 
 #### Keys
 
-Some features of the Dataverse API are public and require no
+Many features of the Dataverse API are public and require no
 authentication. This means in many cases you can search for and retrieve
-data without a Dataverse account for that a specific Dataverse
-installation. But, other features require a Dataverse account for the
-specific server installation of the Dataverse software, and an API key
-linked to that account. Instructions for obtaining an account and
-setting up an API key are available in the [Dataverse User
+data without a Dataverse account or API key – you wil not need to worry
+about this.
+
+For features that require a Dataverse account for the specific server
+installation of the Dataverse software, and an API key linked to that
+account. Instructions for obtaining an account and setting up an API key
+are available in the [Dataverse User
 Guide](https://guides.dataverse.org/en/latest/user/account.html). (Note:
 if your key is compromised, it can be regenerated to preserve security.)
 Once you have an API key, this should be stored as an environment
-variable called `DATAVERSE_KEY`. It can be set within R using:
+variable called `DATAVERSE_KEY`. It can be set as a default by adding
 
 ``` r
-Sys.setenv("DATAVERSE_KEY" = "examplekey12345")
+DATAVERSE_KEY="examplekey12345"
 ```
 
-where `examplekey12345` should be replace with your own key.
+in your .Renviron file, where `examplekey12345` should be replace with
+your own key. The environment file can be opened by
+`usethis::edit_r_environ()`.
 
 #### Server
 
 Because [there are many Dataverse
 installations](https://dataverse.org/), all functions in the R client
 require specifying what server installation you are interacting with.
-This can be set by default with an environment variable,
-`DATAVERSE_SERVER`. This should be the Dataverse server, without the
-“https” prefix or the “/api” URL path, etc. For example, the Harvard
-Dataverse can be used by setting:
+There are multiple ways to specify the server:
+
+1.  Set the `server` argument in each function. e.g.,
+    `server = "dataverse.harvard.edu"` in the `get_dataframe_by_name()`
+    function.
+
+2.  Set the environment variable, `DATAVERSE_SERVER`, in the script to
+    be used throughout the session. e.g.,
 
 ``` r
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 ```
 
-Note: The package attempts to compensate for any malformed values,
-though.
+3.  Hard-code a default server in your own environment. Direct your
+    `.Renviron` file directly or open it by `usethis::edit_r_environ()`.
+    Then enter `DATAVERSE_SERVER = "dataverse.harvard.edu"`.
 
-Currently, the package wraps the data management features of the
-Dataverse API. Functions for other API features - related to user
-management and permissions - are not currently exported in the package
-(but are drafted in the [source
-code](https://github.com/IQSS/dataverse-client-r)).
+In all cases, values should be the Dataverse server, without the “https”
+prefix or the “/api” URL path, etc.
 
 ### Data Download
 
@@ -187,10 +189,10 @@ attr(nlsw_original$race, "labels") # original dta has value labels
 
 Dataverse provides two - basically unrelated - workflows for managing
 (adding, documenting, and publishing) datasets. The first is built on
-[SWORD v2.0](https://swordapp.org/sword-v2/). This means that to create
-a new dataset listing, you will have to first initialize a dataset entry
-with some metadata, add one or more files to the dataset, and then
-publish it. This looks something like the following:
+[SWORD](https://sword.cottagelabs.com/) (v2.0). This means that to
+create a new dataset listing, you will have to first initialize a
+dataset entry with some metadata, add one or more files to the dataset,
+and then publish it. This looks something like the following:
 
 ``` r
 # After setting appropriate dataverse server and environment, obtain SWORD
@@ -249,14 +251,27 @@ its metadata with `update_dataset()` or file contents using
 `update_dataset_file()` and then republish a new version using
 `publish_dataset()`.
 
-For more extensive features of updating and maintaining data, see
+### Limitations
+
+The R client is current stable for data search and download. For more
+extensive features of *uploading* and maintaining data, see
 [pyDataverse](https://pydataverse.readthedocs.io/en/latest/).
+
+Currently, functions related to user management and permissions - are
+not currently exported in the package (but are drafted in the source
+code).
 
 ### Related Software
 
-Other dataverse clients include
+**dataverse** is the next-generation iteration of the now removed
+**dvn** package, which works with Dataverse 3 (“Dataverse Network”)
+applications.
+
+Dataverse clients in other programming languages include
 [pyDataverse](https://pydataverse.readthedocs.io/en/latest/) for Python
 and the [Java client](https://github.com/IQSS/dataverse-client-java).
+For more information, see [the Dataverse API
+page](https://guides.dataverse.org/en/5.5/api/client-libraries.html#r).
 
 Users interested in downloading metadata from archives other than
 Dataverse may be interested in Kurt Hornik’s

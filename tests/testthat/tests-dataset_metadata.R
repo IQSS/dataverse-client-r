@@ -9,9 +9,9 @@ test_that("check metadata format", {
   ds_index  <- which(sapply(contents, function(x) x$identifier) == "FK2/HXJVJU")
   actual    <- dataset_metadata(contents[[ds_index]])
 
-  expect_length(actual, 2L)
-  expect_equal(actual[[1]], "Citation Metadata")
-  expect_s3_class(actual[[2]], "data.frame")
+  expect_equal(actual[["displayName"]], "Citation Metadata")
+  expect_equal(actual[["name"]], "citation")
+  expect_s3_class(actual[["fields"]], "data.frame")
 })
 
 test_that("check versions format", {
