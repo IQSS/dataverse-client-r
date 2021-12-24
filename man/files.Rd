@@ -5,7 +5,7 @@
 \alias{get_file_by_name}
 \alias{get_file_by_id}
 \alias{get_file_by_doi}
-\title{Download dataverse file as a raw binary}
+\title{Download Dataverse file as a raw binary}
 \usage{
 get_file(
   file,
@@ -35,6 +35,7 @@ get_file_by_id(
   format = c("original", "bundle"),
   vars = NULL,
   original = TRUE,
+  progress = FALSE,
   key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"),
   ...
@@ -100,6 +101,8 @@ nlsw88.tab, use the ingested version.)}
 
 \item{fileid}{A numeric ID internally used for \code{get_file_by_id}}
 
+\item{progress}{Whether to show a progress bar of the download. Defaults to \code{FALSE}.}
+
 \item{filedoi}{A DOI for a single file (not the entire dataset), of the form
 \code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}}
 }
@@ -113,7 +116,7 @@ function.  To load datasets into the R environment dataframe, see
 Download Dataverse File(s). \verb{get_file_*}
 functions return a raw binary file, which cannot be readily analyzed in R.
 To use the objects as dataframes, see the \verb{get_dataframe_*} functions at
-\link{get_dataframe} instead.
+\code{?get_dataframe} instead.
 }
 \details{
 This function provides access to data files from a Dataverse entry.

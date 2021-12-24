@@ -26,6 +26,8 @@ create_user <- function(password, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 #'  argument to authenticate, but \code{server} must still be specified.
 #' @param user A character vector specifying a Dataverse server username.
 #' @param password A character vector specifying the password for this user.
+#' @param key A access key if needed
+#' @param ... Other arguments passed to `httr::GET`
 #'
 #' @template envvars
 #' @template dots

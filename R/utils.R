@@ -85,18 +85,20 @@ get_fileid.dataverse_file <- function(x, ...) {
 #' Identify if file is an ingested file
 #'
 #' @param fileid A numeric fileid or file-specific DOI
+#' @param ... Arguments passed on to `get_file` (no effect here)
 #' @template envvars
 #'
-# @examples
-# # https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/X5MUPQ/T0KKUZ
-# # nlsw88.tab
-# is_ingested(fileid = "doi:10.70122/FK2/X5MUPQ/T0KKUZ",
-#             server = "demo.dataverse.org")
-#
-# # nlsw88_rds-export.rds
-# is_ingested(fileid = "doi:10.70122/FK2/PPIAXE/SUCFNI",
-#             server = "demo.dataverse.org")
-#
+#' @examples
+#' \dontrun{
+#' # https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/X5MUPQ/T0KKUZ
+#' # nlsw88.tab
+#' is_ingested(fileid = "doi:10.70122/FK2/X5MUPQ/T0KKUZ",
+#'             server = "demo.dataverse.org")
+#'
+#' # nlsw88_rds-export.rds
+#' is_ingested(fileid = "doi:10.70122/FK2/PPIAXE/SUCFNI",
+#'             server = "demo.dataverse.org")
+#'}
 is_ingested <-
   function(
     fileid,
