@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://iqss.github.io/dataverse-client-r/404.html</loc>
+  </url>
+  <url>
+    <loc>https://iqss.github.io/dataverse-client-r/ISSUE_TEMPLATE.html</loc>
+  </url>
+  <url>
+    <loc>https://iqss.github.io/dataverse-client-r/PULL_REQUEST_TEMPLATE.html</loc>
+  </url>
+  <url>
+    <loc>https://iqss.github.io/dataverse-client-r/articles/A-introduction.html</loc>
+  </url>
+  <url>
+    <loc>https://iqss.github.io/dataverse-client-r/articles/B-search.html</loc>
+  </url>
+  <url>
+    <loc>https://iqss.github.io/dataverse-client-r/articles/C-download.html</loc>
+  </url>
+  <url>
+    <loc>https://iqss.github.io/dataverse-client-r/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://iqss.github.io/dataverse-client-r/authors.html</loc>
+  </url>
+  <url>
     <loc>https://iqss.github.io/dataverse-client-r/index.html</loc>
+  </url>
+  <url>
+    <loc>https://iqss.github.io/dataverse-client-r/news/index.html</loc>
   </url>
   <url>
     <loc>https://iqss.github.io/dataverse-client-r/reference/add_dataset_file.html</loc>
@@ -67,6 +94,9 @@
     <loc>https://iqss.github.io/dataverse-client-r/reference/get_user_key.html</loc>
   </url>
   <url>
+    <loc>https://iqss.github.io/dataverse-client-r/reference/index.html</loc>
+  </url>
+  <url>
     <loc>https://iqss.github.io/dataverse-client-r/reference/initiate_sword_dataset.html</loc>
   </url>
   <url>
@@ -89,14 +119,5 @@
   </url>
   <url>
     <loc>https://iqss.github.io/dataverse-client-r/reference/set_dataverse_metadata.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/articles/A-introduction.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/articles/B-search.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/articles/C-download.html</loc>
   </url>
 </urlset>
