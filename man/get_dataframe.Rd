@@ -154,8 +154,9 @@ load_object <- function(file) {
   tmp[[ls(tmp)[1]]]
 }
 
-as_rda <- get_dataframe_by_doi(
-  filedoi = "doi:10.70122/FK2/PPIAXE/5VPXKE",
+# https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/PPIAXE/X2FC5V
+as_rda <- get_dataframe_by_id(
+  file = 1939003,
   server = "demo.dataverse.org",
   .f = load_object,
   original = TRUE)

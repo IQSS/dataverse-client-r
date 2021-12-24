@@ -43,3 +43,23 @@ test_that("roster-by-id", {
 
   expect_equal(actual, expected_file)
 })
+
+test_that("load-rdata", {
+  # testthat::skip_if_offline("demo.dataverse.org")
+  testthat::skip_on_cran()
+
+  # https://stackoverflow.com/a/34926943
+  f_load_rda <- function(file) {
+    tmp <- new.env()
+    load(file = file, envir = tmp)
+    tmp[[ls(tmp)[1]]]
+  }
+
+  from_rda <- get_dataframe_by_id(
+    file = 1939003,
+    server = "demo.dataverse.org",
+    .f = f_load_rda,
+    original = TRUE)
+
+  expect_s3_class(from_rda, "tbl")
+})
