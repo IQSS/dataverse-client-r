@@ -4,7 +4,7 @@
 #' available, download the original version instead of the ingested? If there was
 #' no ingested version, is set to NA. Note in `get_dataframe_*`,
 #' `original` is set to FALSE by default. Either can be changed.
-#' @param fileid A numeric ID internally used for `get_file_by_id`
+#' @param fileid A numeric ID internally used for `get_file_by_id`. Can be a vector for multiple files.
 #' @param progress Whether to show a progress bar of the download. Defaults to `FALSE`.
 #'
 #' @export
@@ -93,7 +93,8 @@ get_file_by_id <- function(
 
 #' @rdname files
 #' @param filedoi A DOI for a single file (not the entire dataset), of the form
-#'  `"10.70122/FK2/PPIAXE/MHDB0O"` or `"doi:10.70122/FK2/PPIAXE/MHDB0O"`
+#'  `"10.70122/FK2/PPIAXE/MHDB0O"` or `"doi:10.70122/FK2/PPIAXE/MHDB0O"`.
+#'  Can be a vector for multiple files.
 #'
 #' @export
 get_file_by_doi <- function(

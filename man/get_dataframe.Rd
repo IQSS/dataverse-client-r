@@ -20,7 +20,7 @@ get_dataframe_by_doi(filedoi, .f = NULL, original = FALSE, ...)
 }
 \arguments{
 \item{filename}{The name of the file of interest, with file extension, for example
-\code{"roster-bulls-1996.tab"}.}
+\code{"roster-bulls-1996.tab"}. Can be a vector for multiple files.}
 
 \item{dataset}{A character specifying a persistent identification ID for a dataset,
 for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
@@ -42,7 +42,8 @@ archival version of the datafile if one exists. The archival versions are tab-de
 specifying file identifiers; or, if used with the prefix \code{"doi:"}, a
 character with the file-specific DOI; or, if used without the prefix, a
 filename accompanied by a dataset DOI in the \code{dataset} argument, or an object of
-class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
+class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
+Can be a vector for multiple files.}
     \item{\code{format}}{A character string specifying a file format for download.
 by default, this is \dQuote{original} (the original file format). If \code{NULL},
 no query is added, so ingested files are returned in their ingested TSV form.
@@ -64,20 +65,19 @@ or add \verb{DATAVERSE_SERVER = "dataverse.harvard.edu} in one's \code{.Renviron
 file (\code{usethis::edit_r_environ()}), with the appropriate domain as its value.}
   }}
 
-\item{fileid}{A numeric ID internally used for \code{get_file_by_id}}
+\item{fileid}{A numeric ID internally used for \code{get_file_by_id}. Can be a vector for multiple files.}
 
 \item{filedoi}{A DOI for a single file (not the entire dataset), of the form
-\code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}}
+\code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}.
+Can be a vector for multiple files.}
 }
 \value{
 A R object that is returned by the default or user-supplied function
 \code{.f} argument. For example, if \code{.f = readr::read_tsv()}, the function will
-return a dataframe as read in by \code{readr::read_tsv()}.
+return a dataframe as read in by \code{readr::read_tsv()}. If the file identifier
+is a vector, it will return a list where each slot corresponds to elements of the vector.
 }
 \description{
-Download dataverse file as a dataframe
-}
-\details{
 Reads in the Dataverse file into the R environment with any
 user-specified function, such as \code{read.csv} or \code{readr} functions.
 

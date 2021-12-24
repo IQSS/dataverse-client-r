@@ -18,7 +18,8 @@ get_file_metadata(
 specifying file identifiers; or, if used with the prefix \code{"doi:"}, a
 character with the file-specific DOI; or, if used without the prefix, a
 filename accompanied by a dataset DOI in the \code{dataset} argument, or an object of
-class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
+class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
+Can be a vector for multiple files.}
 
 \item{dataset}{A character specifying a persistent identification ID for a dataset,
 for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class

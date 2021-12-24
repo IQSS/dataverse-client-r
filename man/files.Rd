@@ -57,7 +57,8 @@ get_file_by_doi(
 specifying file identifiers; or, if used with the prefix \code{"doi:"}, a
 character with the file-specific DOI; or, if used without the prefix, a
 filename accompanied by a dataset DOI in the \code{dataset} argument, or an object of
-class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
+class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.
+Can be a vector for multiple files.}
 
 \item{dataset}{A character specifying a persistent identification ID for a dataset,
 for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
@@ -99,12 +100,13 @@ no ingested version, is set to NA. Note in \verb{get_dataframe_*},
 (for example, if nlsw88.dta was the original but is displayed as the ingested
 nlsw88.tab, use the ingested version.)}
 
-\item{fileid}{A numeric ID internally used for \code{get_file_by_id}}
+\item{fileid}{A numeric ID internally used for \code{get_file_by_id}. Can be a vector for multiple files.}
 
 \item{progress}{Whether to show a progress bar of the download. Defaults to \code{FALSE}.}
 
 \item{filedoi}{A DOI for a single file (not the entire dataset), of the form
-\code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}}
+\code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}.
+Can be a vector for multiple files.}
 }
 \value{
 \code{get_file} returns a raw vector (or list of raw vectors,
