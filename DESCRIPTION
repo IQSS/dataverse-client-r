@@ -1,5 +1,5 @@
 Package: dataverse
-Version: 0.3.9.9000
+Version: 0.3.10
 Title: Client for Dataverse 4+ Repositories
 Authors@R:
    c(person(given = "Shiro", 
@@ -43,7 +43,6 @@ Imports:
     xml2
 Suggests:
     covr,
-    foreign,
     haven,
     knitr,
     purrr,
@@ -59,6 +58,6 @@ URL: https://iqss.github.io/dataverse-client-r/, https://dataverse.org/, https:/
 BugReports: https://github.com/iqss/dataverse-client-r/issues
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3

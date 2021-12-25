@@ -4,7 +4,7 @@
 \alias{get_dataset}
 \alias{dataset_metadata}
 \alias{dataset_files}
-\title{Get dataset}
+\title{Get dataset metadata}
 \usage{
 get_dataset(
   dataset,
@@ -43,16 +43,21 @@ is not specified, functions calling authenticated API endpoints will fail.
 Keys can be specified atomically or globally using
 \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 
-\item{server}{A character string specifying a Dataverse server. There are
-multiple Dataverse installations, but the defaults is to use the Harvard
-Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
-or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
+\item{server}{A character string specifying a Dataverse server.
+Multiple Dataverse installations exist, with \code{"dataverse.harvard.edu"} being the
+most major. The server can be defined each time within a function, or it can
+be set as a default via an environment variable. To set a default, run
+\code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")}
+or add \verb{DATAVERSE_SERVER = "dataverse.harvard.edu} in one's \code{.Renviron}
+file (\code{usethis::edit_r_environ()}), with the appropriate domain as its value.}
 
 \item{...}{Additional arguments passed to an HTTP request function, such as
 \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
 \code{\link[httr]{DELETE}}.}
 
-\item{block}{A character string specifying a metadata block to retrieve. By default this is \dQuote{citation}. Other values may be available, depending on the dataset, such as \dQuote{geospatial} or \dQuote{socialscience}.}
+\item{block}{A character string specifying a metadata block to retrieve.
+By default this is \dQuote{citation}. Other values may be available, depending
+on the dataset, such as \dQuote{geospatial} or \dQuote{socialscience}.}
 }
 \value{
 A list of class \dQuote{dataverse_dataset} or a list of a form dependent
@@ -60,7 +65,8 @@ on the specific metadata block retrieved. \code{dataset_files} returns a list of
 objects of class \dQuote{dataverse_file}.
 }
 \description{
-Retrieve a Dataverse dataset metadata
+Retrieve metadata. To actually download a data file,
+see \code{\link{get_file}} or \code{\link{get_dataframe_by_name}}.
 }
 \details{
 \code{get_dataset} retrieves details about a Dataverse dataset.
@@ -73,8 +79,6 @@ you to retrieve just a specific block of metadata, such as citation information.
 \code{\link{get_dataset}}. The difference is that this returns only a list of
 \dQuote{dataverse_dataset} objects, whereas \code{\link{get_dataset}} returns
 metadata and a data.frame of files (rather than a list of file objects).
-
-To download actual datafiles, see \code{\link{get_file}} or \code{\link{get_dataframe_by_name}}.
 }
 \examples{
 \dontrun{
@@ -89,6 +93,7 @@ dataset_files(contents[[1]])
 get_dataset(contents[[1]])
 dataset_metadata(contents[[1]])
 
+Sys.unsetenv("DATAVERSE_SERVER")
 }
 }
 \seealso{

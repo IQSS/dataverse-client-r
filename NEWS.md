@@ -1,5 +1,11 @@
 # dataverse (development version)
 
+# CHANGES in dataverse 0.3.10
+
+* Add progress bar for all downloads (#108)
+* Minor documentation improvements (#64, #107)
+* No longer relies on `foreign` (#34)
+
 # CHANGES in dataverse 0.3.9
 
 * Change maintainer to @kuriwaki

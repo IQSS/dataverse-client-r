@@ -7,7 +7,8 @@
 is_ingested(
   fileid,
   key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER")
+  server = Sys.getenv("DATAVERSE_SERVER"),
+  ...
 )
 }
 \arguments{
@@ -18,11 +19,28 @@ is not specified, functions calling authenticated API endpoints will fail.
 Keys can be specified atomically or globally using
 \code{Sys.setenv("DATAVERSE_KEY" = "examplekey")}.}
 
-\item{server}{A character string specifying a Dataverse server. There are
-multiple Dataverse installations, but the defaults is to use the Harvard
-Dataverse (\code{server = "dataverse.harvard.edu"}). This can be modified atomically
-or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
+\item{server}{A character string specifying a Dataverse server.
+Multiple Dataverse installations exist, with \code{"dataverse.harvard.edu"} being the
+most major. The server can be defined each time within a function, or it can
+be set as a default via an environment variable. To set a default, run
+\code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")}
+or add \verb{DATAVERSE_SERVER = "dataverse.harvard.edu} in one's \code{.Renviron}
+file (\code{usethis::edit_r_environ()}), with the appropriate domain as its value.}
+
+\item{...}{Arguments passed on to \code{get_file} (no effect here)}
 }
 \description{
 Identify if file is an ingested file
+}
+\examples{
+\dontrun{
+# https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/X5MUPQ/T0KKUZ
+# nlsw88.tab
+is_ingested(fileid = "doi:10.70122/FK2/X5MUPQ/T0KKUZ",
+            server = "demo.dataverse.org")
+
+# nlsw88_rds-export.rds
+is_ingested(fileid = "doi:10.70122/FK2/PPIAXE/SUCFNI",
+            server = "demo.dataverse.org")
+}
 }

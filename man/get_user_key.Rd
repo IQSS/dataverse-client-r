@@ -11,7 +11,7 @@ get_user_key(user, password, server = Sys.getenv("DATAVERSE_SERVER"), ...)
 
 \item{password}{A character vector specifying the password for this user.}
 
-\item{server}{A character string specifying a Dataverse server. There are multiple Dataverse installations, but the defaults is to use the Harvard Dataverse. This can be modified atomically or globally using \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.example.com")}.}
+\item{server}{The Dataverse instance. See \code{get_file}.}
 
 \item{...}{Additional arguments passed to an HTTP request function, such as
 \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
@@ -24,10 +24,14 @@ A list.
 Get a user's API key
 }
 \details{
-Use a Dataverse server's username and password login to obtain an API key for the user. This can be used if one does not yet have an API key, or desires to reset the key. This function does not require an API \code{key} argument to authenticate, but \code{server} must still be specified.
+Use a Dataverse server's username and password login to obtain an
+API key for the user. This can be used if one does not yet have an API key,
+or desires to reset the key. This function does not require an API \code{key}
+argument to authenticate, but \code{server} must still be specified.
 }
 \examples{
 \dontrun{
-get_user_key("username", "password")
+ # Replace Username and password with personal login
+ get_user_key("username", "password", server = "dataverse.harvard.edu")
 }
 }
