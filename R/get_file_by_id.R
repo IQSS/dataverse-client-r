@@ -79,10 +79,10 @@ get_file_by_id <- function(
     # If not bundle, request single file in non-bundle format ----
     u <- paste0(api_url(server), u_part, fileid)
 
-    if (!progress)
+    if (isFALSE(progress))
       r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
 
-    if (progress)
+    if (isTRUE(progress))
       r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, httr::progress(type = "down"), ...)
 
 
