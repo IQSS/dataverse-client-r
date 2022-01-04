@@ -6,7 +6,7 @@ dataverseContacts:
   displayOrder: 0
   contactEmail: wibeasley@hotmail.com
 permissionRoot: yes
-description: Dataverse for testing [dataverse-client-r](https://github.com/IQSS/dataverse-client-r)
+description: Dataverse for testing <a href="https://github.com/IQSS/dataverse-client-r">dataverse-client-r</a>
 dataverseType: RESEARCHERS
 ownerId: 1
 creationDate: '2020-01-02T09:18:06Z'

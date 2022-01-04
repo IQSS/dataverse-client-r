@@ -48,12 +48,13 @@ test_that("dataverse for 'dataverse-client-r'", {
             "National Longitudinal Study of Young Women - Example Dataset"
           ),
           id = c(
+            "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/V14QR6",
             "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/HXJVJU",
             "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/PPIAXE"
           )
         ),
         class = "data.frame",
-        row.names = 1:2
+        row.names = 1:3
       )),
       class = "dataverse_dataset_list"
     )

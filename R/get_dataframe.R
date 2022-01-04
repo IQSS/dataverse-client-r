@@ -1,7 +1,7 @@
 #' Download dataverse file as a dataframe
 #'
 #'
-#' @details Reads in the Dataverse file into the R environment with any
+#' @description Reads in the Dataverse file into the R environment with any
 #'  user-specified function, such as `read.csv` or `readr` functions.
 #'
 #'  Use `get_dataframe_by_name` if you know the name of the datafile and the DOI
@@ -13,7 +13,7 @@
 #' @rdname get_dataframe
 #'
 #' @param filename The name of the file of interest, with file extension, for example
-#' `"roster-bulls-1996.tab"`.
+#' `"roster-bulls-1996.tab"`. Can be a vector for multiple files.
 #' @param .f The function to used for reading in the raw dataset. The user
 #'  must choose the appropriate function: for example if the target is a .rds
 #'  file, then `.f` should be `readRDS` or `readr::read_rds`. It can be a custom
@@ -27,7 +27,9 @@
 #'
 #' @return A R object that is returned by the default or user-supplied function
 #'  `.f` argument. For example, if `.f = readr::read_tsv()`, the function will
-#'  return a dataframe as read in by `readr::read_tsv()`.
+#'  return a dataframe as read in by `readr::read_tsv()`. If the file identifier
+#'  is a vector, it will return a list where each slot corresponds to elements of the vector.
+#'
 #'
 #' @examples
 #' \dontrun{
