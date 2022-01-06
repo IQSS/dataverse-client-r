@@ -44,10 +44,10 @@ get_file_by_id <- function(
     }
 
     # ping get_file_metadata to see if file is ingested
-    is_ingested <- is_ingested(fileid, server = server)
+    ingested <- is_ingested(fileid, server = server)
 
     # update archival if not specified
-    if (isFALSE(is_ingested))
+    if (isFALSE(ingested))
       original <- NA
 
     # create query -----
@@ -58,11 +58,11 @@ get_file_by_id <- function(
     # format only matters in ingested datasets,
     # For non-ingested files (rds/docx), we need to NOT specify a format
     # also for bundle, only change url
-    if (is_ingested & format != "bundle")
+    if (ingested & format != "bundle")
       query$format <- match.arg(format)
 
     # if the original is not desired, we need to NOT specify a format
-    if (is_ingested & (isFALSE(original) || is.na(original) || is.null(original)))
+    if (ingested & (isFALSE(original) || is.na(original) || is.null(original)))
       query$format <- NULL
 
     # part of URL depending on DOI, bundle, or file
