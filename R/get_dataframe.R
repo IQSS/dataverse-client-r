@@ -132,10 +132,6 @@ get_dataframe_by_id <- function(
   # if not ingested, then whether to take the original is not relevant.
   ingested <- is_ingested(fileid, ...)
 
-  if (isFALSE(ingested)) {
-    original <- NA
-  }
-
   if (is.null(.f) & isTRUE(ingested) & isFALSE(original)) {
     message("Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.\n")
     .f <- readr::read_tsv
