@@ -31,8 +31,9 @@ must choose the appropriate function: for example if the target is a .rds
 file, then \code{.f} should be \code{readRDS} or \code{readr::read_rds}. It can be a custom
 function defined by the user. See examples for details.}
 
-\item{original}{A logical, defaulting to \code{TRUE}. Whether to read the ingested,
-archival version of the datafile if one exists. The archival versions are tab-delimited
+\item{original}{A logical, whether to read the ingested,
+archival version of the datafile if one exists. If \code{TRUE}, users should supply
+a function to use to read in the original. The archival versions are tab-delimited
 \code{.tab} files so if \code{original = FALSE}, \code{.f} is set to \code{readr::read_tsv}.}
 
 \item{...}{

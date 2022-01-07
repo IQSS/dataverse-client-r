@@ -19,8 +19,9 @@
 #'  file, then `.f` should be `readRDS` or `readr::read_rds`. It can be a custom
 #'  function defined by the user. See examples for details.
 #'
-#' @param original A logical, defaulting to `TRUE`. Whether to read the ingested,
-#' archival version of the datafile if one exists. The archival versions are tab-delimited
+#' @param original A logical, whether to read the ingested,
+#' archival version of the datafile if one exists. If `TRUE`, users should supply
+#' a function to use to read in the original. The archival versions are tab-delimited
 #' `.tab` files so if `original = FALSE`, `.f` is set to `readr::read_tsv`.
 #'
 #' @inheritDotParams get_file
