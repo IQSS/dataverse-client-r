@@ -106,13 +106,13 @@ is_ingested <-
     server  = Sys.getenv("DATAVERSE_SERVER"),
     ...
   ) {
-    ping_metadata <- tryCatch(
-      {
-        get_file_metadata(fileid, key = key, server = server)
-      },
-      error = function(e) e
-    )
-    !inherits(ping_metadata, "error") # if error, not ingested
+    file_info <- suppressMessages(dataverse_search(fileid = fileid, server = server, key = key, ...))
+
+    if (nrow(file_info) > 1)
+      warning("More than 1 file found for `is_ingested`, search may be unreliable.")
+
+    # if UNF (https://guides.dataverse.org/en/latest/developers/unf/index.html) is not null, it is ingested
+    (!is.null(file_info$unf[1]) & !is.na(file_info$unf[1]))
 }
 
 
