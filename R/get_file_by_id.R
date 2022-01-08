@@ -46,6 +46,11 @@ get_file_by_id <- function(
     # ping get_file_metadata to see if file is ingested
     ingested <- is_ingested(fileid, server = server)
 
+    # update archival if not specified
+    if (isFALSE(ingested))
+      original <- NA
+
+
     # create query -----
     query <- list()
     if (!is.null(vars))
@@ -62,9 +67,9 @@ get_file_by_id <- function(
     if (ingested & format != "bundle")
       query$format <- match.arg(format)
 
-    # for when ingest fails (https://github.com/IQSS/dataverse-client-r/issues/113)
-    if (isTRUE(original) & format == "original")
-      query$format <- format
+    # # for when ingest fails (https://github.com/IQSS/dataverse-client-r/issues/113)
+    # if (isTRUE(original) & format == "original")
+    #   query$format <- format
 
     # part of URL depending on DOI, bundle, or file
     if (use_persistent_id) {
