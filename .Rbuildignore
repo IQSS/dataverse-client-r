@@ -23,3 +23,4 @@ man-roxygen/*
 ^CRAN-RELEASE$
 ^\.github$
 rhub-checks
+/Untitled.+\.R$

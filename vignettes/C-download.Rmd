@@ -19,6 +19,21 @@ This vignette shows how to download data from Dataverse using the dataverse pack
 
 The Dataverse entry for this study is persistently retrievable by a "Digital Object Identifier (DOI)": https://doi.org/10.7910/DVN/ARKOTI and the citation on the Dataverse Page includes a "[Universal Numeric Fingerprint (UNF)](https://guides.dataverse.org/en/latest/developers/unf/index.html)": `UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==`, which provides a versioned, multi-file hash for the entire study, which contains 32 files.
 
+The following examples will draw from the Harvard Dataverse, so it is convenient to set this as a default environment variable. 
+
+```{r}
+Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
+```
+
+This is equivalent to setting `server = "dataverse.harvard.edu"` in every `dataverse` function each time. Note that if you set an environment variable like the above, that is necessary to make your code reproducible.
+
+For downloading a public dataset, no API Key is needed.
+
+```{r}
+Sys.setenv("DATAVERSE_KEY" = "")
+```
+
+
 
 ## Retrieving Metadata
 
@@ -27,7 +42,6 @@ We will download these files and examine them directly in R using the **datavers
 ```{r}
 library("dataverse")
 library("tibble") # to see dataframes in tidyverse-form
-Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 ```
 
 The `get_dataset()` function lists all of the files in the dataset along with a considerable amount of metadata about each. (Recall that in Dataverse, `dataset` is a collection of files, not a single file.)  We can see a quick glance at these files using:

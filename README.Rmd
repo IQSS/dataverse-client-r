@@ -40,7 +40,7 @@ remotes::install_github("iqss/dataverse-client-r")
 library("dataverse")
 ```
 
-#### Keys
+#### API Access Keys
 
 Many features of the Dataverse API are public and require no authentication. This means in many cases you can search for and retrieve data without a Dataverse account or API key -- you wil not need to worry about this. 
 
@@ -65,9 +65,9 @@ Because [there are many Dataverse installations](https://dataverse.org/), all fu
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 ```
 
-3. Hard-code a default server in your own environment.  Direct your `.Renviron` file directly or open it by `usethis::edit_r_environ()`. Then enter `DATAVERSE_SERVER = "dataverse.harvard.edu"`.
+3. Hard-code a default server in your own environment.  Direct your `.Renviron` file directly or open it by `usethis::edit_r_environ()`. Then enter `DATAVERSE_SERVER = "dataverse.harvard.edu"`. However, doing this may make your scripts not replicable to other people who do not have access to the environment.
 
-In all cases, values should be the Dataverse server, without the "https" prefix or the "/api" URL path, etc. 
+In all cases, values should be the Dataverse server, without the "https" prefix or the "/api" URL path.
 
 ### Data Download
 

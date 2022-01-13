@@ -24,7 +24,7 @@ test_that("roster-by-doi", {
 
   actual <-
     get_dataframe_by_doi(
-      filedoi  = expected_ds$roster$dataFile$persistentId, # A value like "doi:10.70122/FK2/HXJVJU/SA3Z2V",
+      filedoi  = expected_ds$roster$dataFile$persistentId # A value like "doi:10.70122/FK2/HXJVJU/SA3Z2V",
     )
 
   expect_equal(actual, expected_file)
@@ -38,7 +38,7 @@ test_that("roster-by-id", {
 
   actual <-
     get_dataframe_by_id(
-      fileid   = expected_ds$roster$dataFile$id, # A value like 1734005
+      fileid   = expected_ds$roster$dataFile$id # A value like 1734005
     )
 
   expect_equal(actual, expected_file)

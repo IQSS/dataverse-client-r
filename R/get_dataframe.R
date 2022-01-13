@@ -19,8 +19,9 @@
 #'  file, then `.f` should be `readRDS` or `readr::read_rds`. It can be a custom
 #'  function defined by the user. See examples for details.
 #'
-#' @param original A logical, defaulting to `TRUE`. Whether to read the ingested,
-#' archival version of the datafile if one exists. The archival versions are tab-delimited
+#' @param original A logical, whether to read the ingested,
+#' archival version of the datafile if one exists. If `TRUE`, users should supply
+#' a function to use to read in the original. The archival versions are tab-delimited
 #' `.tab` files so if `original = FALSE`, `.f` is set to `readr::read_tsv`.
 #'
 #' @inheritDotParams get_file
@@ -90,8 +91,8 @@
 #' writeBin(as_binary, path(temp, "county.RData"))
 #' load(path(temp, "county.RData"))
 #'
-#' If you are certain each RData contains only one object, one could define a custom
-#' custom function used in https://stackoverflow.com/a/34926943
+#' # If you are certain each RData contains only one object, one could define a
+#' # custom function used in https://stackoverflow.com/a/34926943
 #' load_object <- function(file) {
 #'   tmp <- new.env()
 #'   load(file = file, envir = tmp)
@@ -131,6 +132,7 @@ get_dataframe_by_id <- function(
 
   # if not ingested, then whether to take the original is not relevant.
   ingested <- is_ingested(fileid, ...)
+
 
   if (isFALSE(ingested)) {
     original <- NA

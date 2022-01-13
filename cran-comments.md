@@ -1,26 +1,19 @@
 Description
 -----------------------------------------------
 
-The `dataverse` package was archived on 2021-04-21 after we could not attend 
-to a failing test in time. This is a submission to effectively revive the package.
+This version updates an expired API token for testing purposes, which started
+causing errors and prompted a email from the CRAN Team on 2021-12-31.
 
-Shiro Kuriwaki will be maintainer for this new submission (for 0.3.9 and going 
-forward), as the automatic `NOTE` will flag.  We communicated this to the CRAN 
-team on 2021-07-18. The previous maintainer, Will Beasley, will continue to 
-contribute to the package as author. 
 
-The nature of the test failure was that the APIs were relying on a nightly CRAN 
-build. After a few unreliable connections after many successful tests, some of the 
-servers eventually returned an error. After Brian Ripley's instructions,  we 
-decided we shouldn't rely  on nightly CRAN builds for testing the package's 
-interactions with servers, even if the servers are reachable. All those tests 
-are now skipped on CRAN (with `testthat::skip_on_cran()`) and instead will run on 
-nightly GitHub Actions builds.
+Because daily tests for the full download is done separately on Github Actions,
+this test is not relevant as much for CRAN, so we updated the token and
+also skipped the check if on CRAN tests.  We also closed 8 issues and feature
+extensions recorded on Github.
 
 
 Thank you for taking the time to review the submission.
 
-- Shiro Kuriwaki
+Shiro Kuriwaki
 
 
 Test environments
@@ -40,6 +33,5 @@ Test environments
 R CMD check results
 -----------------------------------------------
 
-* One NOTE for a new maintainer. 
 * No ERRORs, WARNINGs on any builds.
 * In the past, there has been a note about possibly misspelled words "APIs" and "Dataverse".  If they appear on your machines, both spellings are intentional.
