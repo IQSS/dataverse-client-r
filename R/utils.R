@@ -125,6 +125,9 @@ is_ingested <- function(
     file_info <- suppressMessages(dataverse_search(filePersistentId = x_query, type = "file", server = server, key = key, ...))
   }
 
+  if (length(file_info) == 0) {
+    stop("File information not found on Dataverse API")
+  }
   if (nrow(file_info) > 1)
     warning("More than 1 file found for `is_ingested`, search may be unreliable.")
 
