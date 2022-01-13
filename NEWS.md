@@ -4,6 +4,7 @@
 
 * Add progress bar for all downloads (#108)
 * Minor documentation improvements (#64, #107)
+* Faster method for detecting ingest (#113) and robustness to ingested files without a metadata file due to errors (#80)
 * No longer relies on `foreign` (#34)
 
 # CHANGES in dataverse 0.3.9
