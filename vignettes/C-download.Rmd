@@ -92,8 +92,7 @@ head(energy)
 ## Retrieving Custom Data Fromats (RDS, Stata, SPSS)
 
 
-If a file is displayed on dataverse as a `.tab` file like the survey data by [Alvarez et al. (2013)](https://doi.org/10.7910/DVN/ARKOTI/A8YRMP), it is likely that Dataverse [inge
-sted](https://guides.dataverse.org/en/latest/user/tabulardataingest/index.html) the file to a plain-text, tab-delimited format.
+If a file is displayed on dataverse as a `.tab` file like the survey data by [Alvarez et al. (2013)](https://doi.org/10.7910/DVN/ARKOTI/A8YRMP), it is likely that Dataverse [ingested](https://guides.dataverse.org/en/latest/user/tabulardataingest/index.html) the file to a plain-text, tab-delimited format.
 
 ```{r,  message=FALSE}
 argentina_tab <- get_dataframe_by_name(
