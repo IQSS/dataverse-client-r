@@ -26,6 +26,9 @@ be set as a default via an environment variable. To set a default, run
 or add \verb{DATAVERSE_SERVER = "dataverse.harvard.edu} in one's \code{.Renviron}
 file (\code{usethis::edit_r_environ()}), with the appropriate domain as its value.}
 }
+\value{
+number of bytes as a numeric
+}
 \description{
 Get File size of file
 }

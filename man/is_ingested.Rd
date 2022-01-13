@@ -29,6 +29,9 @@ file (\code{usethis::edit_r_environ()}), with the appropriate domain as its valu
 
 \item{...}{Arguments passed on to \code{get_file} (no effect here)}
 }
+\value{
+Length-1 logical, \code{TRUE} if it is ingested and \code{FALSE} otherwise
+}
 \description{
 Identify if file is an ingested file
 }
