@@ -51,7 +51,7 @@ get_file_by_id <- function(
     # if progress = NULL, determine progress by size
     if (is.null(progress)) {
       bytesize <- get_filesize(fileid, server = server, key = key)
-      if (bytesize > 1e8) {
+      if (isTRUE(bytesize > 1e8)) {
         progress <- TRUE
       } else {
         progress <- FALSE
