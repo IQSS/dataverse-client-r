@@ -118,11 +118,11 @@ is_ingested <- function(
 
   if (is_number) {
     x_query <- paste0("datafile_", x)
-    file_info <- suppressMessages(dataverse_search(id = x_query, type = "file", server = server, key = key, ...))
+    file_info <- suppressMessages(dataverse_search(id = x_query, type = "file", server = server, key = key))
   } else {
     # expect doi
     x_query <- paste0("\"", x, "\"")
-    file_info <- suppressMessages(dataverse_search(filePersistentId = x_query, type = "file", server = server, key = key, ...))
+    file_info <- suppressMessages(dataverse_search(filePersistentId = x_query, type = "file", server = server, key = key))
   }
 
   if (length(file_info) == 0) {
