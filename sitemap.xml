@@ -91,6 +91,9 @@
     <loc>https://iqss.github.io/dataverse-client-r/reference/get_file_metadata.html</loc>
   </url>
   <url>
+    <loc>https://iqss.github.io/dataverse-client-r/reference/get_filesize.html</loc>
+  </url>
+  <url>
     <loc>https://iqss.github.io/dataverse-client-r/reference/get_user_key.html</loc>
   </url>
   <url>

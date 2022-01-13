@@ -103,7 +103,7 @@ To use the objects as dataframes, see the <code>get_dataframe_*</code> functions
   format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"original"</span>, <span class="st">"bundle"</span><span class="op">)</span>,
   vars <span class="op">=</span> <span class="cn">NULL</span>,
   original <span class="op">=</span> <span class="cn">TRUE</span>,
-  progress <span class="op">=</span> <span class="cn">FALSE</span>,
+  progress <span class="op">=</span> <span class="cn">NULL</span>,
   key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,
   server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,
   <span class="va">...</span>
@@ -173,7 +173,9 @@ nlsw88.tab, use the ingested version.)</p></dd>
 <dt>fileid</dt>
 <dd><p>A numeric ID internally used for <code>get_file_by_id</code>. Can be a vector for multiple files.</p></dd>
 <dt>progress</dt>
-<dd><p>Whether to show a progress bar of the download. Defaults to <code>FALSE</code>.</p></dd>
+<dd><p>Whether to show a progress bar of the download.
+If not specified, will be set to <code>TRUE</code> for a file larger than 100MB. To fix
+a value, set <code>FALSE</code> or <code>TRUE</code>.</p></dd>
 <dt>filedoi</dt>
 <dd><p>A DOI for a single file (not the entire dataset), of the form
 <code>"10.70122/FK2/PPIAXE/MHDB0O"</code> or <code>"doi:10.70122/FK2/PPIAXE/MHDB0O"</code>.

@@ -70,7 +70,7 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">is_ingested</span><span class="op">(</span>
-  <span class="va">fileid</span>,
+  <span class="va">x</span>,
   key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,
   server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,
   <span class="va">...</span>
@@ -79,7 +79,7 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>fileid</dt>
+    <dl><dt>x</dt>
 <dd><p>A numeric fileid or file-specific DOI</p></dd>
 <dt>key</dt>
 <dd><p>A character string specifying a Dataverse server API key. If one
@@ -97,17 +97,25 @@ file (<code>usethis::edit_r_environ()</code>), with the appropriate domain as it
 <dt>...</dt>
 <dd><p>Arguments passed on to <code>get_file</code> (no effect here)</p></dd>
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    <p>Length-1 logical, <code>TRUE</code> if it is ingested and <code>FALSE</code> otherwise</p>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/X5MUPQ/T0KKUZ</span></span>
+<span class="r-in"><span class="co"># https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/PPIAXE</span></span>
 <span class="r-in"><span class="co"># nlsw88.tab</span></span>
-<span class="r-in"><span class="fu">is_ingested</span><span class="op">(</span>fileid <span class="op">=</span> <span class="st">"doi:10.70122/FK2/X5MUPQ/T0KKUZ"</span>,</span>
+<span class="r-in"><span class="fu">is_ingested</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"doi:10.70122/FK2/PPIAXE/MHDB0O"</span>,</span>
+<span class="r-in">            server <span class="op">=</span> <span class="st">"demo.dataverse.org"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">is_ingested</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1734017</span>,</span>
 <span class="r-in">            server <span class="op">=</span> <span class="st">"demo.dataverse.org"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># nlsw88_rds-export.rds</span></span>
-<span class="r-in"><span class="fu">is_ingested</span><span class="op">(</span>fileid <span class="op">=</span> <span class="st">"doi:10.70122/FK2/PPIAXE/SUCFNI"</span>,</span>
+<span class="r-in"><span class="fu">is_ingested</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"doi:10.70122/FK2/PPIAXE/SUCFNI"</span>,</span>
+<span class="r-in">            server <span class="op">=</span> <span class="st">"demo.dataverse.org"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">is_ingested</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1734016</span>,</span>
 <span class="r-in">            server <span class="op">=</span> <span class="st">"demo.dataverse.org"</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
