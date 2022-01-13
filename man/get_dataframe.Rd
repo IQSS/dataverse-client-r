@@ -147,8 +147,8 @@ temp <- tempdir()
 writeBin(as_binary, path(temp, "county.RData"))
 load(path(temp, "county.RData"))
 
-If you are certain each RData contains only one object, one could define a custom
-custom function used in https://stackoverflow.com/a/34926943
+# If you are certain each RData contains only one object, one could define a
+# custom function used in https://stackoverflow.com/a/34926943
 load_object <- function(file) {
   tmp <- new.env()
   load(file = file, envir = tmp)
