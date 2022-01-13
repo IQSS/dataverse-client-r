@@ -19,10 +19,18 @@ This vignette shows how to download data from Dataverse using the dataverse pack
 
 The Dataverse entry for this study is persistently retrievable by a "Digital Object Identifier (DOI)": https://doi.org/10.7910/DVN/ARKOTI and the citation on the Dataverse Page includes a "[Universal Numeric Fingerprint (UNF)](https://guides.dataverse.org/en/latest/developers/unf/index.html)": `UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==`, which provides a versioned, multi-file hash for the entire study, which contains 32 files.
 
-The following examples will draw from the Harvard Dataverse, so it is convenient to set this as a default environment variable.
+The following examples will draw from the Harvard Dataverse, so it is convenient to set this as a default environment variable. 
 
 ```{r}
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
+```
+
+This is equivalent to setting `server = "dataverse.harvard.edu"` in every `dataverse` function each time. Note that if you set an environment variable like the above, that is necessary to make your code reproducible.
+
+For downloading a public dataset, no API Key is needed.
+
+```{r}
+Sys.setenv("DATAVERSE_KEY" = "")
 ```
 
 
