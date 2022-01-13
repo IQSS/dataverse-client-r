@@ -50,26 +50,22 @@ get_file_by_id <- function(
     if (isFALSE(ingested))
       original <- NA
 
-
     # create query -----
     query <- list()
+
+    # variables
     if (!is.null(vars))
       query$vars <- paste0(vars, collapse = ",")
 
     # format only matters in ingested datasets,
-    # For non-ingested files (rds/docx), we need to NOT specify a format
-
-    # if the original is not desired, we need to NOT specify a format
-    if (ingested & (isFALSE(original) || is.na(original) || is.null(original)))
-      query$format <- NULL
-
+    # For non-ingested files (e.g. rds/docx), we need to NOT specify a format
     # also for bundle, only change url
     if (ingested & format != "bundle")
       query$format <- match.arg(format)
 
-    # # for when ingest fails (https://github.com/IQSS/dataverse-client-r/issues/113)
-    # if (isTRUE(original) & format == "original")
-    #   query$format <- format
+    # if the original is not desired, we need to NOT specify a format
+    if (ingested & (isFALSE(original) || is.na(original) || is.null(original)))
+      query$format <- NULL
 
     # part of URL depending on DOI, bundle, or file
     if (use_persistent_id) {
