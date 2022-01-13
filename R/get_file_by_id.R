@@ -44,7 +44,7 @@ get_file_by_id <- function(
     }
 
     # ping get_file_metadata to see if file is ingested
-    ingested <- is_ingested(fileid, server = server)
+    ingested <- is_ingested(fileid, server = server, key = key)
 
     # update archival if not specified
     if (isFALSE(ingested))
