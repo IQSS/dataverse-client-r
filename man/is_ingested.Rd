@@ -5,14 +5,14 @@
 \title{Identify if file is an ingested file}
 \usage{
 is_ingested(
-  fileid,
+  x,
   key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"),
   ...
 )
 }
 \arguments{
-\item{fileid}{A numeric fileid or file-specific DOI}
+\item{x}{A numeric fileid or file-specific DOI}
 
 \item{key}{A character string specifying a Dataverse server API key. If one
 is not specified, functions calling authenticated API endpoints will fail.
@@ -34,13 +34,17 @@ Identify if file is an ingested file
 }
 \examples{
 \dontrun{
-# https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/X5MUPQ/T0KKUZ
+# https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/PPIAXE
 # nlsw88.tab
-is_ingested(fileid = "doi:10.70122/FK2/X5MUPQ/T0KKUZ",
+is_ingested(x = "doi:10.70122/FK2/PPIAXE/MHDB0O",
+            server = "demo.dataverse.org")
+is_ingested(x = 1734017,
             server = "demo.dataverse.org")
 
 # nlsw88_rds-export.rds
-is_ingested(fileid = "doi:10.70122/FK2/PPIAXE/SUCFNI",
+is_ingested(x = "doi:10.70122/FK2/PPIAXE/SUCFNI",
+            server = "demo.dataverse.org")
+is_ingested(x = 1734016,
             server = "demo.dataverse.org")
 }
 }
