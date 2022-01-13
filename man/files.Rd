@@ -35,7 +35,7 @@ get_file_by_id(
   format = c("original", "bundle"),
   vars = NULL,
   original = TRUE,
-  progress = FALSE,
+  progress = NULL,
   key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"),
   ...
@@ -102,7 +102,9 @@ nlsw88.tab, use the ingested version.)}
 
 \item{fileid}{A numeric ID internally used for \code{get_file_by_id}. Can be a vector for multiple files.}
 
-\item{progress}{Whether to show a progress bar of the download. Defaults to \code{FALSE}.}
+\item{progress}{Whether to show a progress bar of the download.
+If not specified, will be set to \code{TRUE} for a file larger than 100MB. To fix
+a value, set \code{FALSE} or \code{TRUE}.}
 
 \item{filedoi}{A DOI for a single file (not the entire dataset), of the form
 \code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}.

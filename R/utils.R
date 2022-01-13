@@ -92,7 +92,7 @@ is_ingested <- function(x, ...) {
 #' @param x A numeric fileid or file-specific DOI
 #' @param ... Arguments passed on to `get_file` (no effect here)
 #' @template envvars
-#'
+#' @return Length-1 logical, `TRUE` if it is ingested and `FALSE` otherwise
 #' @examples
 #' \dontrun{
 #' # https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/PPIAXE
@@ -132,11 +132,40 @@ is_ingested <- function(
     warning("More than 1 file found for `is_ingested`, search may be unreliable.")
 
   # if UNF (https://guides.dataverse.org/en/latest/developers/unf/index.html) is not null, it is ingested
-  (!is.null(file_info$unf[1]) && !is.na(file_info$unf[1]))
+  return(!is.null(file_info$unf[1]) && !is.na(file_info$unf[1]))
 }
 
 
+#' Get File size of file
+#'
+#' @param x A numeric fileid or file-specific DOI
+#' @template envvars
+#' @return number of bytes as a numeric
+#' @keywords internal
+get_filesize <- function(
+  x,
+  key = Sys.getenv("DATAVERSE_KEY"),
+  server  = Sys.getenv("DATAVERSE_SERVER")) {
 
+    is_number <- is.numeric(x)
+
+    if (is_number) {
+      x_query <- paste0("datafile_", x)
+      file_info <- suppressMessages(dataverse_search(id = x_query, type = "file", server = server, key = key))
+    } else {
+      # expect doi
+      x_query <- paste0("\"", x, "\"")
+      file_info <- suppressMessages(dataverse_search(filePersistentId = x_query, type = "file", server = server, key = key))
+    }
+
+    if (length(file_info) == 0) {
+      stop("File information not found on Dataverse API")
+    }
+    if (nrow(file_info) > 1)
+      warning("More than 1 file found for `is_ingested`, search may be unreliable.")
+
+    return(file_info$size_in_bytes)
+}
 
 # other functions
 prepend_doi <- function(dataset) {

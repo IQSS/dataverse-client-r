@@ -5,7 +5,9 @@
 #' no ingested version, is set to NA. Note in `get_dataframe_*`,
 #' `original` is set to FALSE by default. Either can be changed.
 #' @param fileid A numeric ID internally used for `get_file_by_id`. Can be a vector for multiple files.
-#' @param progress Whether to show a progress bar of the download. Defaults to `FALSE`.
+#' @param progress Whether to show a progress bar of the download.
+#'   If not specified, will be set to `TRUE` for a file larger than 100MB. To fix
+#'   a value, set `FALSE` or `TRUE`.
 #'
 #' @export
 get_file_by_id <- function(
@@ -14,7 +16,7 @@ get_file_by_id <- function(
   format          = c("original", "bundle"),
   vars            = NULL,
   original        = TRUE,
-  progress        = FALSE,
+  progress        = NULL,
   key             = Sys.getenv("DATAVERSE_KEY"),
   server          = Sys.getenv("DATAVERSE_SERVER"),
   ...
@@ -45,6 +47,16 @@ get_file_by_id <- function(
 
     # ping get_file_metadata to see if file is ingested
     ingested <- is_ingested(fileid, server = server, key = key)
+
+    # if progress = NULL, determine progress by size
+    if (is.null(progress)) {
+      bytesize <- get_filesize(fileid, server = server, key = key)
+      if (bytesize > 1e8) {
+        progress <- TRUE
+      } else {
+        progress <- FALSE
+      }
+    }
 
     # update archival if not specified
     if (isFALSE(ingested))
