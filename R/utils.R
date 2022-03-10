@@ -117,8 +117,7 @@ is_ingested <- function(
   is_number <- is.numeric(x)
 
   if (is_number) {
-    x_query <- paste0("datafile_", x)
-    file_info <- suppressMessages(dataverse_search(id = x_query, type = "file", server = server, key = key))
+    file_info <- suppressMessages(dataverse_search(entityId = x, type = "file", server = server, key = key))
   } else {
     # expect doi
     x_query <- paste0("\"", x, "\"")

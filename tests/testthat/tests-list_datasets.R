@@ -44,11 +44,12 @@ test_that("dataverse for 'dataverse-client-r'", {
         dataverseHasBeenReleased = "true",
         datasets = structure(list(
           title = c(
+            "Permanent draft dataset for testing",
             "Basketball - Example Dataset",
             "National Longitudinal Study of Young Women - Example Dataset"
           ),
           id = c(
-            "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/V14QR6",
+            "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/4XHVAP",
             "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/HXJVJU",
             "https://demo.dataverse.org/dvn/api/data-deposit/v1.1/swordv2/edit/study/doi:10.70122/FK2/PPIAXE"
           )
