@@ -15,7 +15,7 @@ options(width = 120)
 knitr::opts_chunk$set(results = "hold")
 ```
 
-This vignette shows how to download data from Dataverse using the dataverse package. We'll focus on a Dataverse repository that contains supplemental files for [*Political Analysis Using R*](https://www.springer.com/gb/book/9783319234458), which is stored at Harvard's Dataverse Server <https://dataverse.harvard.edu>.
+This vignette shows how to download data from Dataverse using the dataverse package. We'll focus on a Dataverse repository that contains supplemental files for the book _Political Analysis Using R_ (2015), which is stored at Harvard's Dataverse Server (<https://dataverse.harvard.edu>).
 
 The Dataverse entry for this study is persistently retrievable by a "Digital Object Identifier (DOI)": https://doi.org/10.7910/DVN/ARKOTI and the citation on the Dataverse Page includes a "[Universal Numeric Fingerprint (UNF)](https://guides.dataverse.org/en/latest/developers/unf/index.html)": `UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==`, which provides a versioned, multi-file hash for the entire study, which contains 32 files.
 
