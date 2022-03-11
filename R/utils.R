@@ -83,10 +83,6 @@ get_fileid.dataverse_file <- function(x, ...) {
 
 
 # Ingested
-is_ingested <- function(x, ...) {
-  UseMethod('is_ingested', x)
-}
-
 #' Identify if file is an ingested file
 #'
 #' @param x A numeric fileid or file-specific DOI
@@ -149,8 +145,7 @@ get_filesize <- function(
     is_number <- is.numeric(x)
 
     if (is_number) {
-      x_query <- paste0("datafile_", x)
-      file_info <- suppressMessages(dataverse_search(id = x_query, type = "file", server = server, key = key))
+      file_info <- suppressMessages(dataverse_search(entityId = x, type = "file", server = server, key = key))
     } else {
       # expect doi
       x_query <- paste0("\"", x, "\"")
