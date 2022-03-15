@@ -25,42 +25,22 @@ The following examples will draw from the Harvard Dataverse, so it is convenient
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 ```
 
-This is equivalent to setting `server = "dataverse.harvard.edu"` in every `dataverse` function each time. Note that if you set an environment variable like the above, that is necessary to make your code reproducible.
+This is equivalent to setting `server = "dataverse.harvard.edu"` in every `dataverse` function each time. Note that if you set an environment variable like the above, that operation is necessary to make your code reproducible on a different machine.
 
-For downloading a public dataset, no API Key is needed.
+For downloading a public dataset, _no API Key is needed_.
 
 
+## Retrieving Plain-Text Data
 
-## Retrieving Metadata
-
-We will download these files and examine them directly in R using the **dataverse** package. To begin, we may want to retrieve some basic metadata about the dataset:
+We will download public data files and examine them directly in R using the **dataverse** package. 
 
 ```{r}
 library("dataverse")
 library("tibble") # to see dataframes in tidyverse-form
 ```
 
-The `get_dataset()` function lists all of the files in the dataset along with a considerable amount of metadata about each. (Recall that in Dataverse, `dataset` is a collection of files, not a single file.)  We can see a quick glance at these files using:
 
-```r
-dataset <- get_dataset("doi:10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu")
-dataset$files[c("filename", "contentType")]
-```
-
-This shows that there are indeed 32 files, a mix of .R code files and tab- and comma-separated data files.
-
-You can also retrieve more extensive metadata using `dataset_metadata()`:
-
-```{r}
-str(dataset_metadata("10.7910/DVN/ARKOTI"), 2)
-```
-
-
-
-
-## Retrieving Plain-Text Data
-
-Now we'll get the corresponding data files. First, we retrieve a plain-text file like this dataset on electricity consumption by [Wakiyama et al. (2014)](https://doi.org/10.7910/DVN/ARKOTI/GN1MRT). Taking the file name and dataset DOI from this entry,
+First, we retrieve a plain-text file like this dataset on electricity consumption by [Wakiyama et al. (2014)](https://doi.org/10.7910/DVN/ARKOTI/GN1MRT). Taking the file name and dataset DOI from this entry,
 
 ```{r, messages=FALSE}
 energy <- get_dataframe_by_name(
@@ -84,6 +64,7 @@ energy <- get_dataframe_by_name(
 
 head(energy)
 ```
+
 
 
 
@@ -129,10 +110,25 @@ Users should pick `.f` and `original` based on their existing knowledge of the f
 
 There are two more ways to read in a dataframe other than `get_dataframe_by_name()`. `get_dataframe_by_doi()` takes in a file-specific DOI if Dataverse contains one such as <https://doi.org/10.7910/DVN/ARKOTI/IJPVOI>. This removes the necessity for users to set the `dataset` argument. `get_dataframe_by_id()` takes a numeric Dataverse identification number. This identifier is an internal number and is not prominently featured in the interface.
 
+In addition to visual inspection, we can compare the UNF signatures for each dataset against what is reported by Dataverse to confirm that we received the correct files. 
 
-In addition to visual inspection, we can compare the UNF signatures for each dataset against what is reported by Dataverse to confirm that we received the correct files. (See the [UNF package](https://cran.r-project.org/package=UNF) and `unf` function).
+## Retrieving Metadata
 
+We may also want to retrieve some basic metadata about the dataset. The `get_dataset()` function lists all of the files in the dataset along with a considerable amount of metadata about each. (Recall that in Dataverse, `dataset` is a collection of files, not a single file.)  We can see a quick glance at these files using:
 
+```r
+dataset <- get_dataset("doi:10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu")
+dataset$files[c("filename", "contentType")]
+```
+
+This shows that there are indeed 32 files, a mix of .R code files and tab- and comma-separated data files.
+
+You can also retrieve more extensive metadata using `dataset_metadata()`:
+
+```{r}
+str(dataset_metadata("10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu"), 
+    max.level = 2)
+```
 
 ## Retrieving Scripts and other files
 
