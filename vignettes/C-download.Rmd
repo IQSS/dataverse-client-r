@@ -42,12 +42,21 @@ library("tibble") # to see dataframes in tidyverse-form
 
 First, we retrieve a plain-text file like this dataset on electricity consumption by [Wakiyama et al. (2014)](https://doi.org/10.7910/DVN/ARKOTI/GN1MRT). Taking the file name and dataset DOI from this entry,
 
-```{r, messages=FALSE}
+```{r, echo=FALSE, message=FALSE,include=FALSE}
 energy <- get_dataframe_by_name(
   filename = "comprehensiveJapanEnergy.tab",
   dataset = "10.7910/DVN/ARKOTI", 
   server = "dataverse.harvard.edu")
+```
 
+```{r, eval=FALSE}
+energy <- get_dataframe_by_name(
+  filename = "comprehensiveJapanEnergy.tab",
+  dataset = "10.7910/DVN/ARKOTI", 
+  server = "dataverse.harvard.edu")
+```
+
+```{r}
 head(energy)
 ```
 
@@ -66,6 +75,7 @@ head(energy)
 ```
 
 
+The dataverse package can also download datasets that are _drafts_ (i.e. versions not released publicly), as long as the user of the dataset provides their appropriate DATAVERSE_KEY. Note that users may need to modify the metadata of a datafile, such as adding a descriptive label, for the data downloading to work properly in this case. 
 
 
 ## Retrieving Custom Data Fromats (RDS, Stata, SPSS)
@@ -108,7 +118,10 @@ str(argentina_dta$polling_place)
 
 Users should pick `.f` and `original` based on their existing knowledge of the file. If the original file is a `.sav` SPSS file, `.f` can be `haven::read_sav`. If it is a `.Rds` file, use `readRDS` or `readr::read_rds`. In fact, because the raw data is read in as a binary, there is no limitation to the file types `get_dataframe_*` can read in, as far as the dataverse package is concerned.
 
-There are two more ways to read in a dataframe other than `get_dataframe_by_name()`. `get_dataframe_by_doi()` takes in a file-specific DOI if Dataverse contains one such as <https://doi.org/10.7910/DVN/ARKOTI/IJPVOI>. This removes the necessity for users to set the `dataset` argument. `get_dataframe_by_id()` takes a numeric Dataverse identification number. This identifier is an internal number and is not prominently featured in the interface.
+There are two more ways to read in a dataframe other than `get_dataframe_by_name()`. 
+
+* `get_dataframe_by_doi()` takes in a file-specific DOI if Dataverse contains one such as <https://doi.org/10.7910/DVN/ARKOTI/IJPVOI>. This removes the necessity for users to set the `dataset` argument. 
+* `get_dataframe_by_id()` takes a numeric Dataverse identification number. This identifier is an internal number and is not prominently featured in the interface.
 
 In addition to visual inspection, we can compare the UNF signatures for each dataset against what is reported by Dataverse to confirm that we received the correct files. 
 
@@ -130,7 +143,7 @@ str(dataset_metadata("10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu"),
     max.level = 2)
 ```
 
-## Retrieving Scripts and other files
+## Retrieving Scripts and Other Files
 
 If the file you want to retrieve is not data, you may want to use the  more primitive function, `get_file`, which gets the file data as a raw binary file. See the help page examples of `get_file()` that use the `base::writeBin()` function for details on how to write and read these binary files instead.
 
