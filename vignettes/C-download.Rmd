@@ -29,15 +29,11 @@ This is equivalent to setting `server = "dataverse.harvard.edu"` in every `datav
 
 For downloading a public dataset, no API Key is needed.
 
-```{r}
-Sys.setenv("DATAVERSE_KEY" = "")
-```
-
 
 
 ## Retrieving Metadata
 
-We will download these files and examine them directly in R using the **dataverse** package. To begin, we need to loading the package and using the `get_dataset()` function to retrieve some basic metadata about the dataset:
+We will download these files and examine them directly in R using the **dataverse** package. To begin, we may want to retrieve some basic metadata about the dataset:
 
 ```{r}
 library("dataverse")
@@ -47,7 +43,7 @@ library("tibble") # to see dataframes in tidyverse-form
 The `get_dataset()` function lists all of the files in the dataset along with a considerable amount of metadata about each. (Recall that in Dataverse, `dataset` is a collection of files, not a single file.)  We can see a quick glance at these files using:
 
 ```r
-dataset <- get_dataset("doi:10.7910/DVN/ARKOTI")
+dataset <- get_dataset("doi:10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu")
 dataset$files[c("filename", "contentType")]
 ```
 
@@ -68,8 +64,9 @@ Now we'll get the corresponding data files. First, we retrieve a plain-text file
 
 ```{r, messages=FALSE}
 energy <- get_dataframe_by_name(
-  "comprehensiveJapanEnergy.tab",
-  "10.7910/DVN/ARKOTI")
+  filename = "comprehensiveJapanEnergy.tab",
+  dataset = "10.7910/DVN/ARKOTI", 
+  server = "dataverse.harvard.edu")
 
 head(energy)
 ```
@@ -80,8 +77,9 @@ These `get_dataframe_*` functions, introduced in v0.3.0, directly read in the da
 ```{r}
 library(readr)
 energy <- get_dataframe_by_name(
-  "comprehensiveJapanEnergy.tab",
-  "10.7910/DVN/ARKOTI",
+  filename = "comprehensiveJapanEnergy.tab",
+  dataset = "10.7910/DVN/ARKOTI", 
+  server = "dataverse.harvard.edu",
   .f = function(x) read.delim(x, sep = "\t"))
 
 head(energy)
@@ -96,8 +94,9 @@ If a file is displayed on dataverse as a `.tab` file like the survey data by [Al
 
 ```{r,  message=FALSE}
 argentina_tab <- get_dataframe_by_name(
-  "alpl2013.tab",
-  "10.7910/DVN/ARKOTI")
+  filename = "alpl2013.tab",
+  dataset = "10.7910/DVN/ARKOTI",
+  server = "dataverse.harvard.edu")
 ```
 
 
@@ -111,8 +110,9 @@ When ingesting, Dataverse retains a `original` version that retains these attrib
 
 ```{r}
 argentina_dta <- get_dataframe_by_name(
-  "alpl2013.tab",
-  "10.7910/DVN/ARKOTI",
+  filename = "alpl2013.tab",
+  dataset = "10.7910/DVN/ARKOTI",
+  server = "dataverse.harvard.edu",
   original = TRUE,
   .f = haven::read_dta)
 ```
@@ -139,6 +139,6 @@ In addition to visual inspection, we can compare the UNF signatures for each dat
 If the file you want to retrieve is not data, you may want to use the  more primitive function, `get_file`, which gets the file data as a raw binary file. See the help page examples of `get_file()` that use the `base::writeBin()` function for details on how to write and read these binary files instead.
 
 ```{r, eval = FALSE}
-code3 <- get_file("chapter03.R", "doi:10.7910/DVN/ARKOTI")
+code3 <- get_file("chapter03.R", "doi:10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu")
 writeBin(code3, "chapter03.R")
 ```
