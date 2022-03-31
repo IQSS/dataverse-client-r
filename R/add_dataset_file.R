@@ -45,7 +45,7 @@ function(file,
          ...) {
     dataset <- dataset_id(dataset, key = key, server = server, ...)
 
-    bod2 <- list()
+    bod2 <- list(forceReplace = force)
     if (!is.null(description)) {
         bod2$description <- description
     }
