@@ -34,7 +34,7 @@ install.packages("dataverse")
 remotes::install_github("iqss/dataverse-client-r")
 ```
 
-#### Keys
+#### API Access Keys
 
 Many features of the Dataverse API are public and require no
 authentication. This means in many cases you can search for and retrieve
@@ -78,10 +78,12 @@ Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 
 3.  Hard-code a default server in your own environment. Direct your
     `.Renviron` file directly or open it by `usethis::edit_r_environ()`.
-    Then enter `DATAVERSE_SERVER = "dataverse.harvard.edu"`.
+    Then enter `DATAVERSE_SERVER = "dataverse.harvard.edu"`. However,
+    doing this may make your scripts not replicable to other people who
+    do not have access to the environment.
 
 In all cases, values should be the Dataverse server, without the “https”
-prefix or the “/api” URL path, etc.
+prefix or the “/api” URL path.
 
 ### Data Download
 
@@ -110,11 +112,9 @@ nlsw <-
     ## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.
 
     ## Rows: 2246 Columns: 17
-
     ## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────
     ## Delimiter: "\t"
     ## dbl (17): idcode, age, race, married, never_married, grade, collgrad, south, smsa, c_city, industry, occupation, uni...
-
     ## 
     ## ℹ Use `spec()` to retrieve the full column specification for this data.
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -188,11 +188,35 @@ attr(nlsw_original$race, "labels") # original dta has value labels
 ### Data Archiving
 
 Dataverse provides two - basically unrelated - workflows for managing
-(adding, documenting, and publishing) datasets. The first is built on
-[SWORD](https://sword.cottagelabs.com/) (v2.0). This means that to
-create a new dataset listing, you will have to first initialize a
-dataset entry with some metadata, add one or more files to the dataset,
-and then publish it. This looks something like the following:
+(adding, documenting, and publishing) datasets. The first workflow is
+called the “native” API and uses `create_dataset` to make an empty
+dataset and adds files by `add_dataset_file` by taking a path to a
+dataset that is located in your local. Through the native API it is
+possible to update a dataset by modifying its metadata with
+`update_dataset()` or file contents using `update_dataset_file()` and
+then republish a new version using `publish_dataset()`.
+
+``` r
+# create the dataset. e/g/ 
+ds <- create_dataset("mydataverse") # pick a name of dataset
+
+# add files
+tmp <- tempfile() # In this example, we write to a temporary destiation
+write.csv(iris, file = tmp)
+add_dataset_file(file = tmp, dataset = ds)
+
+# publish dataset
+publish_dataset(ds)
+
+# dataset will now be published
+get_dataverse("mydataverse")
+```
+
+The second is built on [SWORD](https://sword.cottagelabs.com/) (v2.0).
+This means that to create a new dataset listing, you will have to first
+initialize a dataset entry with some metadata, add one or more files to
+the dataset, and then publish it. This looks something like the
+following:
 
 ``` r
 # After setting appropriate dataverse server and environment, obtain SWORD
@@ -226,30 +250,6 @@ publish_sword_dataset(ds)
 # dataset will now be published
 list_datasets("<mydataverse>")
 ```
-
-The second workflow is called the “native” API and is similar but uses
-slightly different functions:
-
-``` r
-# create the dataset
-ds <- create_dataset("mydataverse")
-
-# add files
-tmp <- tempfile()
-write.csv(iris, file = tmp)
-f <- add_dataset_file(file = tmp, dataset = ds)
-
-# publish dataset
-publish_dataset(ds)
-
-# dataset will now be published
-get_dataverse("mydataverse")
-```
-
-Through the native API it is possible to update a dataset by modifying
-its metadata with `update_dataset()` or file contents using
-`update_dataset_file()` and then republish a new version using
-`publish_dataset()`.
 
 ### Limitations
 
