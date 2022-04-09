@@ -11,14 +11,14 @@ test_that("download tab from DOI and filename", {
   files     <- actual$files
   expected_dv <- retrieve_info_dataverse("expected-dataverse.yml")
 
-  expect_length(actual                      , 16L)
+  expect_length(actual                      , 15L)
   expect_equal(actual$id                    , 182158L)
   expect_equal(actual$datasetId             , 1734004L)
   expect_equal(actual$datasetPersistentId   , "doi:10.70122/FK2/HXJVJU")
   expect_equal(actual$storageIdentifier     , "file://10.70122/FK2/HXJVJU")
   expect_equal(actual$versionState          , "RELEASED")
   expect_equal(actual$UNF                   , "UNF:6:hrleySyT6vzwEih3+nhp8A==")
-  expect_equal(actual$license               , "CC0")
+  expect_equal(actual$license$name          , "CC0 1.0")
 
   expect_equal(nrow(files)                  , 2L)
   expect_equal(ncol(files)                  , 22L)
