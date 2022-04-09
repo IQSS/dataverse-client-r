@@ -26,7 +26,7 @@ update_dataset_file(
 )
 }
 \arguments{
-\item{file}{A character string}
+\item{file}{A character string for the location path of the file to be uploaded.}
 
 \item{dataset}{A character specifying a persistent identification ID for a dataset,
 for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
@@ -51,39 +51,53 @@ file (\code{usethis::edit_r_environ()}), with the appropriate domain as its valu
 \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
 \code{\link[httr]{DELETE}}.}
 
-\item{id}{An integer specifying a file identifier; or, if \code{doi} is specified, a character string specifying a file name within the DOI-identified dataset; or an object of class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
+\item{id}{An integer specifying a file identifier; or, if \code{doi} is specified,
+a character string specifying a file name within the DOI-identified dataset; or an
+object of class \dQuote{dataverse_file} as returned by \code{\link{dataset_files}}.}
 
-\item{force}{A logical indicating whether to force the update even if the file types differ. Default is \code{TRUE}.}
+\item{force}{A logical indicating whether to force the update even if the file
+types differ. Default is \code{TRUE}.}
 }
 \value{
-\code{add_dataset_file} returns the new file ID.
+\code{add_dataset_file} returns the new file ID. It also uploads the file
+to the dataset.
 }
 \description{
-Add or update a file in a dataset
+Add or update a file in a dataset. For most applications, this
+is the recommended function to upload your own local datasets to an
+existing Dataverse dataset. Uploading requires a Dataverse API Key in the \code{key}
+variable.
 }
 \details{
-From Dataverse v4.6.1, the \dQuote{native} API provides endpoints to add and update files without going through the SWORD workflow. To use SWORD instead, see \code{\link{add_file}}. \code{add_dataset_file} adds a new file to a specified dataset.
+From Dataverse v4.6.1, the \dQuote{native} API provides endpoints to add and
+update files without going through the SWORD workflow. To use SWORD instead,
+see \code{\link{add_file}}. \code{add_dataset_file} adds a new file to a specified dataset.
 
-\code{update_dataset_file} can be used to replace/update a published file. Note that it only works on published files, so unpublished drafts cannot be updated - the dataset must first either be published (\code{\link{publish_dataset}}) or deleted (\code{\link{delete_dataset}}).
+\code{update_dataset_file} can be used to replace/update a published file.
+Note that it only works on published files, so unpublished drafts cannot be updated -
+the dataset must first either be published (\code{\link{publish_dataset}}) or
+deleted (\code{\link{delete_dataset}}).
 }
 \examples{
 \dontrun{
 meta <- list()
 ds <- create_dataset("mydataverse", body = meta)
 
+
+# Upload RDS dataset saved to local
 saveRDS(mtcars, tmp <- tempfile(fileext = ".rds"))
 f <- add_dataset_file(tmp, dataset = ds, description = "mtcars")
 
-# publish dataset
+# Publish dataset
 publish_dataset(ds)
 
-# update file and republish
+# Update file and republish
 saveRDS(iris, tmp)
 update_dataset_file(tmp, dataset = ds, id = f,
                     description = "Actually iris")
 publish_dataset(ds)
 
-# cleanup
+# Cleanup
 unlink(tmp)
 delete_dataset(ds)
 }
