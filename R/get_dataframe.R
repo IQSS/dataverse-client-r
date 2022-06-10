@@ -10,6 +10,9 @@
 #'  datafile. For files that are not datasets, the more generic `get_file` that
 #'  downloads the content as a binary is simpler.
 #'
+#'  The function can read datasets that are unpublished and are still drafts,
+#'  as long as the entry has a UNF. See the download vignette for details.
+#'
 #' @rdname get_dataframe
 #'
 #' @param filename The name of the file of interest, with file extension, for example

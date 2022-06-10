@@ -87,6 +87,9 @@ of the dataset. Use \code{get_dataframe_by_doi} if you know the DOI of the dataf
 itself. Use \code{get_dataframe_by_id} if you know the numeric ID of the
 datafile. For files that are not datasets, the more generic \code{get_file} that
 downloads the content as a binary is simpler.
+
+The function can read datasets that are unpublished and are still drafts,
+as long as the entry has a UNF. See the download vignette for details.
 }
 \examples{
 \dontrun{
