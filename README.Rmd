@@ -133,7 +133,9 @@ attr(nlsw_original$race, "labels") # original dta has value labels
 
 
 
-### Data Archiving
+### Data Upload and Archiving
+
+**Note**: _There are known issues to using to dataverse creation and dataset addition functionalities listed here. `add_dataset_file()` appears stable as of again as of v0.3.11. One possible workaround is to mix the two workflows described above (See e.g. this [comment](https://github.com/IQSS/dataverse-client-r/issues/82#issuecomment-1094623268))._  
 
 Dataverse provides two - basically unrelated - workflows for managing (adding, documenting, and publishing) datasets. The first workflow is called the "native" API and uses `create_dataset` to make an empty dataset and adds files by `add_dataset_file` by taking a path to a dataset that is located in your local. Through the native API it is possible to update a dataset by modifying its metadata with `update_dataset()` or file contents using `update_dataset_file()` and then republish a new version using `publish_dataset()`.
 
@@ -193,9 +195,9 @@ list_datasets("<mydataverse>")
 
 ### Limitations
 
-The R client is current stable for data search and download. For more extensive features of _uploading_ and maintaining data, see [pyDataverse](https://pydataverse.readthedocs.io/en/latest/).
+The R client is current stable for data search and download. For more extensive features of _uploading_ and maintaining data, see the issues reported in the Github repository.  You may need to use alternative methods, such as working on the Dataverse GUI directly or using  [pyDataverse](https://pydataverse.readthedocs.io/en/latest/).
 
-Currently, functions related to user management and permissions - are not currently exported in the package (but are drafted in the source code).
+Functions related to user management and permissions are currently not exported in the package (but are drafted in the source code).
 
 
 
