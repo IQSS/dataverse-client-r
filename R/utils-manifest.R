@@ -1,4 +1,4 @@
-retrieve_manifest <- function ( ) {
+retrieve_manifest <- function() {
   # Refresh col_types with: OuhscMunge::readr_spec_aligned(path)
   path  <- system.file("manifest-testing.csv", package = "dataverse")
   col_types <- readr::cols_only(
@@ -11,7 +11,7 @@ retrieve_manifest <- function ( ) {
   )
   readr::read_csv(path, col_types = col_types)
 }
-# retrieve_manifest()
+
 
 retrieve_file_expected <- function (subdataverse, file_name) {
   path <- system.file(file.path(subdataverse, file_name), package = "dataverse")
@@ -28,20 +28,15 @@ retrieve_file_expected <- function (subdataverse, file_name) {
 
   readr::read_file(path)
 }
+
+retrieve_info_dataverse <- function(path) {
+  yaml::read_yaml(system.file(path, package = "dataverse"))
+}
+
+retrieve_info_dataset <- function(path) {
+  yaml::read_yaml(system.file(path, package = "dataverse"))
+}
+
 # retrieve_file_expected("dataset-basketball/original", "roster-bulls-1996.csv")
-
-retrieve_info_dataverse <- function (path) {
-  yaml::read_yaml(system.file(path, package = "dataverse"))
-}
-# retrieve_info_dataverse("expected-dataverse.yml")
-
-retrieve_info_dataset <- function (path) {
-  yaml::read_yaml(system.file(path, package = "dataverse"))
-}
 # retrieve_info_dataset("dataset-basketball/expected-metadata.yml")
-
-# compare_data_frame <- function (d_actual, d_expected) {
-#
-#   # Compare cell contents
-#   testthat::expect_equal(d_actual, d_expected)
-# }
+# retrieve_info_dataverse("expected-dataverse.yml")

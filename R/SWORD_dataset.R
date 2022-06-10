@@ -149,7 +149,7 @@ publish_sword_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), se
         u <- dataset$links[["edit"]]
     } else if (inherits(dataset, "dataset_statement")) {
         dataset <- prepend_doi(dataset$id)
-        u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit/study/", dataset)
+        u <- paste0(api_url(server, prefix = "dvn/api/"), "data-deposit/v1.1/swordv2/edit/study/", dataset)
     } else if (is.character(dataset) && grepl("^http", dataset)) {
         if (grepl("edit/study/", dataset)) {
             u <- dataset
@@ -158,7 +158,7 @@ publish_sword_dataset <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), se
         }
     } else {
         dataset <- prepend_doi(dataset)
-        u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit/study/", dataset)
+        u <- paste0(api_url(server, prefix = "dvn/api/"), "data-deposit/v1.1/swordv2/edit/study/", dataset)
     }
 
     r <- httr::POST(u, httr::authenticate(key, ""), httr::add_headers("In-Progress" = "false"), ...)

@@ -10,7 +10,7 @@ if (!requireNamespace("yaml", quietly = TRUE)) {
   key     <- Sys.getenv("DATAVERSE_KEY")
 
   if (server == "" | key == "") {
-    config  <- yaml::read_yaml(system.file("constants.yml", package="dataverse"))
+    config  <- yaml::read_yaml(system.file("constants.yml", package = "dataverse"))
     # config  <- yaml::read_yaml("inst/constants.yml")
 
     Sys.setenv("DATAVERSE_SERVER" = config$server)

@@ -108,7 +108,7 @@
 #' }
 #'
 #' @export
-get_dataframe_by_name <- function (
+get_dataframe_by_name <- function(
   filename,
   dataset       = NULL,
   .f            = NULL,
@@ -159,7 +159,7 @@ get_dataframe_by_id <- function(
 #' @rdname get_dataframe
 #' @inheritParams get_file_by_doi
 #' @export
-get_dataframe_by_doi <- function (
+get_dataframe_by_doi <- function(
   filedoi,
   .f            = NULL,
   original      = FALSE,
@@ -174,9 +174,8 @@ get_dataframe_by_doi <- function (
 #' Write to temp and apply function
 #'
 #' @keywords internal
-get_dataframe_internal <- function (raw, filename, .f) {
-  tryCatch(
-    {
+get_dataframe_internal <- function(raw, filename, .f) {
+  tryCatch({
       tmp <- tempfile(filename)
       writeBin(raw, tmp)
       do.call(.f, list(tmp))

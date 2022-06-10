@@ -53,4 +53,3 @@ get_file_metadata <-
     out <- httr::content(r, as = "text", encoding = "UTF-8")
     return(out)
   }
-

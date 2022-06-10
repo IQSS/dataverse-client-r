@@ -14,7 +14,7 @@ dataverse_id.dataverse <- function(x, ...) {
 
 # dataset_id method
 dataset_id <- function(x, ...) {
-  UseMethod('dataset_id', x)
+  UseMethod("dataset_id", x)
 }
 dataset_id.default <- function(x, ...) {
   x
@@ -34,7 +34,7 @@ dataset_id.dataverse_dataset <- function(x, ...) {
 
 # get fileid from a dataset DOI or dataset ID
 get_fileid <- function(x, ...) {
-  UseMethod('get_fileid', x)
+  UseMethod("get_fileid", x)
 }
 
 get_fileid.numeric <- function(x, file, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
