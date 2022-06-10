@@ -34,6 +34,6 @@ devtools::check( # Equivalent of R-hub
   remote    = TRUE,
   incoming  = TRUE
 )
-# devtools::check_rhub(email="shirokuriwaki@gmail.com", env_vars=c(R_COMPILE_AND_INSTALL_PACKAGES = "always"))
+# devtools::check_rhub(email = "shirokuriwaki@gmail.com", env_vars = c(R_COMPILE_AND_INSTALL_PACKAGES = "always"))
 # devtools::check_win_devel() # CRAN submission policies encourage the development version
 # devtools::release(check=FALSE) # Careful, the last question ultimately uploads it to CRAN, where you can't delete/reverse your decision.
