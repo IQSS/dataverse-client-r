@@ -66,7 +66,7 @@ get_dataframe_by_name()
 
 The most practical of these is likely `get_dataframe_by_name()` which imports the object directly as a dataframe. `get_file()` is more primitive, and calls a raw vector. 
 
-Recall that, because _datasets_ in Dataverse are a collection of files rather than a single csv file, for example, the `get_dataset()` funtion does not return data but rather information about a Dataverse dataset.
+Recall that, because _datasets_ in Dataverse are a collection of files rather than a single csv file, for example, the `get_dataset()` function does not return data but rather information about a Dataverse dataset.
 
 The [download vignette](C-download.html) describes this functionality in more detail. 
 

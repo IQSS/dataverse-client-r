@@ -38,7 +38,7 @@ remotes::install_github("iqss/dataverse-client-r")
 
 Many features of the Dataverse API are public and require no
 authentication. This means in many cases you can search for and retrieve
-data without a Dataverse account or API key – you wil not need to worry
+data without a Dataverse account or API key – you will not need to worry
 about this.
 
 For features that require a Dataverse account for the specific server
