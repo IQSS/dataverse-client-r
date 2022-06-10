@@ -75,7 +75,7 @@ head(energy)
 ```
 
 
-The dataverse package can also download datasets that are _drafts_ (i.e. versions not released publicly), as long as the user of the dataset provides their appropriate DATAVERSE_KEY. Note that users may need to modify the metadata of a datafile, such as adding a descriptive label, for the data downloading to work properly in this case. 
+The dataverse package can also download datasets that are _drafts_ (i.e. versions not released publicly), as long as the user of the dataset provides their appropriate DATAVERSE_KEY. Users may need to modify the metadata of a datafile, such as adding a descriptive label, for the data downloading to work properly in this case. This is because the the file identifier UNF, which the read function relies on, may only appear after metadata has been added.
 
 
 ## Retrieving Custom Data Fromats (RDS, Stata, SPSS)
