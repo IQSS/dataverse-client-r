@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.11</span>
       </span>
     </div>
 
@@ -45,7 +45,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -104,9 +104,9 @@
 <span class="co"># install.packages("remotes")</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"iqss/dataverse-client-r"</span><span class="op">)</span></code></pre></div>
 <div class="section level4">
-<h4 id="keys">Keys<a class="anchor" aria-label="anchor" href="#keys"></a>
+<h4 id="api-access-keys">API Access Keys<a class="anchor" aria-label="anchor" href="#api-access-keys"></a>
 </h4>
-<p>Many features of the Dataverse API are public and require no authentication. This means in many cases you can search for and retrieve data without a Dataverse account or API key – you wil not need to worry about this.</p>
+<p>Many features of the Dataverse API are public and require no authentication. This means in many cases you can search for and retrieve data without a Dataverse account or API key – you will not need to worry about this.</p>
 <p>For features that require a Dataverse account for the specific server installation of the Dataverse software, and an API key linked to that account. Instructions for obtaining an account and setting up an API key are available in the <a href="https://guides.dataverse.org/en/latest/user/account.html" class="external-link">Dataverse User Guide</a>. (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called <code>DATAVERSE_KEY</code>. It can be set as a default by adding</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">DATAVERSE_KEY</span><span class="op">=</span><span class="st">"examplekey12345"</span></code></pre></div>
@@ -122,10 +122,8 @@
 </ol>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></code></pre></div>
-<ol start="3" style="list-style-type: decimal">
-<li>Hard-code a default server in your own environment. Direct your <code>.Renviron</code> file directly or open it by <code>usethis::edit_r_environ()</code>. Then enter <code>DATAVERSE_SERVER = "dataverse.harvard.edu"</code>.</li>
-</ol>
-<p>In all cases, values should be the Dataverse server, without the “https” prefix or the “/api” URL path, etc.</p>
+<ol start="3" style="list-style-type: decimal"><li>Hard-code a default server in your own environment. Direct your <code>.Renviron</code> file directly or open it by <code>usethis::edit_r_environ()</code>. Then enter <code>DATAVERSE_SERVER = "dataverse.harvard.edu"</code>. However, doing this may make your scripts not replicable to other people who do not have access to the environment.</li></ol>
+<p>In all cases, values should be the Dataverse server, without the “https” prefix or the “/api” URL path.</p>
 </div>
 </div>
 <div class="section level3">
@@ -146,14 +144,12 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="co">## Rows: 2246 Columns: 17</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">## Delimiter: "\t"</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">## dbl (17): idcode, age, race, married, never_married, grade, collgrad, south, smsa, c_city, industry, occupation, uni...</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">## </span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">## ℹ Use `spec()` to retrieve the full column specification for this data.</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span></code></pre></div>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">## Delimiter: "\t"</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">## dbl (17): idcode, age, race, married, never_married, grade, collgrad, south, smsa, c_city, industry, occupation, uni...</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">## </span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">## ℹ Use `spec()` to retrieve the full column specification for this data.</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span></code></pre></div>
 <p>which by default reads in the ingested file (not the original dta) by the <a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link"><code>readr::read_tsv</code></a> function.</p>
 <p>Alternatively, we can download the same file by specifying the filename and the DOI of the “dataset” (in Dataverse, a collection of files is called a dataset).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -188,10 +184,26 @@
 </div>
 </div>
 <div class="section level3">
-<h3 id="data-archiving">Data Archiving<a class="anchor" aria-label="anchor" href="#data-archiving"></a>
+<h3 id="data-upload-and-archiving">Data Upload and Archiving<a class="anchor" aria-label="anchor" href="#data-upload-and-archiving"></a>
 </h3>
-<p>Dataverse provides two - basically unrelated - workflows for managing (adding, documenting, and publishing) datasets. The first is built on <a href="https://sword.cottagelabs.com/" class="external-link">SWORD</a> (v2.0). This means that to create a new dataset listing, you will have to first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:</p>
+<p><strong>Note</strong>: <em>There are known issues to using to dataverse creation and dataset addition functionalities listed here. <code><a href="reference/add_dataset_file.html">add_dataset_file()</a></code> appears stable as of again as of v0.3.11. One possible workaround is to mix the two workflows described above (See e.g. this <a href="https://github.com/IQSS/dataverse-client-r/issues/82#issuecomment-1094623268" class="external-link">comment</a>).</em></p>
+<p>Dataverse provides two - basically unrelated - workflows for managing (adding, documenting, and publishing) datasets. The first workflow is called the “native” API and uses <code>create_dataset</code> to make an empty dataset and adds files by <code>add_dataset_file</code> by taking a path to a dataset that is located in your local. Through the native API it is possible to update a dataset by modifying its metadata with <code><a href="reference/create_dataset.html">update_dataset()</a></code> or file contents using <code><a href="reference/add_dataset_file.html">update_dataset_file()</a></code> and then republish a new version using <code><a href="reference/publish_dataset.html">publish_dataset()</a></code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create the dataset. e/g/ </span>
+<span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/create_dataset.html">create_dataset</a></span><span class="op">(</span><span class="st">"mydataverse"</span><span class="op">)</span> <span class="co"># pick a name of dataset</span>
+
+<span class="co"># add files</span>
+<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># In this example, we write to a temporary destiation</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="va">tmp</span><span class="op">)</span>
+<span class="fu"><a href="reference/add_dataset_file.html">add_dataset_file</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">tmp</span>, dataset <span class="op">=</span> <span class="va">ds</span><span class="op">)</span>
+
+<span class="co"># publish dataset</span>
+<span class="fu"><a href="reference/publish_dataset.html">publish_dataset</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span>
+
+<span class="co"># dataset will now be published</span>
+<span class="fu"><a href="reference/get_dataverse.html">get_dataverse</a></span><span class="op">(</span><span class="st">"mydataverse"</span><span class="op">)</span></code></pre></div>
+<p>The second is built on <a href="https://sword.cottagelabs.com/" class="external-link">SWORD</a> (v2.0). This means that to create a new dataset listing, you will have to first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># After setting appropriate dataverse server and environment, obtain SWORD</span>
 <span class="co"># service doc</span>
 <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/service_document.html">service_document</a></span><span class="op">(</span><span class="op">)</span>
@@ -222,28 +234,12 @@
 
 <span class="co"># dataset will now be published</span>
 <span class="fu"><a href="reference/list_datasets.html">list_datasets</a></span><span class="op">(</span><span class="st">"&lt;mydataverse&gt;"</span><span class="op">)</span></code></pre></div>
-<p>The second workflow is called the “native” API and is similar but uses slightly different functions:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create the dataset</span>
-<span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/create_dataset.html">create_dataset</a></span><span class="op">(</span><span class="st">"mydataverse"</span><span class="op">)</span>
-
-<span class="co"># add files</span>
-<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="va">tmp</span><span class="op">)</span>
-<span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/add_dataset_file.html">add_dataset_file</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">tmp</span>, dataset <span class="op">=</span> <span class="va">ds</span><span class="op">)</span>
-
-<span class="co"># publish dataset</span>
-<span class="fu"><a href="reference/publish_dataset.html">publish_dataset</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span>
-
-<span class="co"># dataset will now be published</span>
-<span class="fu"><a href="reference/get_dataverse.html">get_dataverse</a></span><span class="op">(</span><span class="st">"mydataverse"</span><span class="op">)</span></code></pre></div>
-<p>Through the native API it is possible to update a dataset by modifying its metadata with <code><a href="reference/create_dataset.html">update_dataset()</a></code> or file contents using <code><a href="reference/add_dataset_file.html">update_dataset_file()</a></code> and then republish a new version using <code><a href="reference/publish_dataset.html">publish_dataset()</a></code>.</p>
 </div>
 <div class="section level3">
 <h3 id="limitations">Limitations<a class="anchor" aria-label="anchor" href="#limitations"></a>
 </h3>
-<p>The R client is current stable for data search and download. For more extensive features of <em>uploading</em> and maintaining data, see <a href="https://pydataverse.readthedocs.io/en/latest/" class="external-link">pyDataverse</a>.</p>
-<p>Currently, functions related to user management and permissions - are not currently exported in the package (but are drafted in the source code).</p>
+<p>The R client is current stable for data search and download. For more extensive features of <em>uploading</em> and maintaining data, see the issues reported in the Github repository. You may need to use alternative methods, such as working on the Dataverse GUI directly or using <a href="https://pydataverse.readthedocs.io/en/latest/" class="external-link">pyDataverse</a>.</p>
+<p>Functions related to user management and permissions are currently not exported in the package (but are drafted in the source code).</p>
 </div>
 <div class="section level3">
 <h3 id="related-software">Related Software<a class="anchor" aria-label="anchor" href="#related-software"></a>
@@ -315,7 +311,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>

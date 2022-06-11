@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.11</span>
       </span>
     </div>
 
@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -63,9 +63,12 @@
       <small>Source: <a href="https://github.com/iqss/dataverse-client-r/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2"><h2 class="page-header" data-toc-text="development version" id="dataverse-development-version">dataverse (development version)<a class="anchor" aria-label="anchor" href="#dataverse-development-version"></a></h2></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="development version" id="dataverse-development-version">dataverse (development version)<a class="anchor" aria-label="anchor" href="#dataverse-development-version"></a></h2>
-</div>
+<h2 class="page-header" data-toc-text="0.3.11" id="changes-in-dataverse-0311">CHANGES in dataverse 0.3.11<small>2022-06-11</small><a class="anchor" aria-label="anchor" href="#changes-in-dataverse-0311"></a></h2>
+<ul><li>Allow for downloading from draft datasets (<a href="https://github.com/iqss/dataverse-client-r/issues/115" class="external-link">#115</a>, <a href="https://github.com/Danny-dK" class="external-link">@Danny-dK</a>)</li>
+<li>Fix add dataset bug introduced in a recent version (<a href="https://github.com/iqss/dataverse-client-r/issues/116" class="external-link">#116</a>)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.10" id="changes-in-dataverse-0310">CHANGES in dataverse 0.3.10<small>2022-01-13</small><a class="anchor" aria-label="anchor" href="#changes-in-dataverse-0310"></a></h2>
 <ul><li>Add progress bar for all downloads (<a href="https://github.com/iqss/dataverse-client-r/issues/108" class="external-link">#108</a>)</li>
@@ -75,25 +78,21 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.9" id="changes-in-dataverse-039">CHANGES in dataverse 0.3.9<small>2021-07-26</small><a class="anchor" aria-label="anchor" href="#changes-in-dataverse-039"></a></h2>
-<ul><li>Change maintainer to <a href="https://github.com/kuriwaki" class="external-link">@kuriwaki</a></li>
-</ul></div>
+<ul><li>Change maintainer to <a href="https://github.com/kuriwaki" class="external-link">@kuriwaki</a></li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.8" id="changes-in-dataverse-038-2021-04-14-cran">CHANGES in dataverse 0.3.8 (2021-04-14 CRAN)<small>2021-04-14</small><a class="anchor" aria-label="anchor" href="#changes-in-dataverse-038-2021-04-14-cran"></a></h2>
 <p>Core Features</p>
-<ul><li>Adapt to Dataverse 5.4.1 (<a href="https://github.com/iqss/dataverse-client-r/issues/94" class="external-link">#94</a> <a href="https://github.com/kuriwaki" class="external-link">@kuriwaki</a>)</li>
-</ul><p>Testing</p>
+<ul><li>Adapt to Dataverse 5.4.1 (<a href="https://github.com/iqss/dataverse-client-r/issues/94" class="external-link">#94</a> <a href="https://github.com/kuriwaki" class="external-link">@kuriwaki</a>)</li></ul><p>Testing</p>
 <ul><li>Doesn’t rely on CRAN for daily tests of API functions (<a href="https://github.com/iqss/dataverse-client-r/issues/96" class="external-link">#96</a>)</li>
 <li>Upgrade testthat to 3.0 edition (<a href="https://github.com/iqss/dataverse-client-r/issues/97" class="external-link">#97</a>)</li>
-<li>Move to GitHub Actions, and away from Travis-CI. (<a href="https://github.com/iqss/dataverse-client-r/issues/98" class="external-link">#98</a>) Three GitHub Actions are defined for testing:
-<ul><li>thorough testing related to PRs and the main branch,</li>
+<li>Move to GitHub Actions, and away from Travis-CI. (<a href="https://github.com/iqss/dataverse-client-r/issues/98" class="external-link">#98</a>) Three GitHub Actions are defined for testing:<ul><li>thorough testing related to PRs and the main branch,</li>
 <li>straight-forward tests for each push to the dev branch, and</li>
 <li>straight-forward tests run daily at 3am</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.3" id="changes-in-dataverse-033">CHANGES in dataverse 0.3.3<a class="anchor" aria-label="anchor" href="#changes-in-dataverse-033"></a></h2>
-<ul><li>More verbose error messages returned on httr failure. (<a href="https://github.com/iqss/dataverse-client-r/issues/31" class="external-link">#31</a> <a href="https://github.com/EdJeeOnGithub" class="external-link">@EdJeeOnGithub</a>)</li>
-</ul></div>
+<ul><li>More verbose error messages returned on httr failure. (<a href="https://github.com/iqss/dataverse-client-r/issues/31" class="external-link">#31</a> <a href="https://github.com/EdJeeOnGithub" class="external-link">@EdJeeOnGithub</a>)</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.1" id="changes-in-dataverse-031">CHANGES in dataverse 0.3.1<a class="anchor" aria-label="anchor" href="#changes-in-dataverse-031"></a></h2>
 <ul><li>Avoids tests in R Check if the dataverse server is not available (<a href="https://github.com/iqss/dataverse-client-r/issues/77" class="external-link">#77</a>)</li>
@@ -102,8 +101,7 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.0" id="changes-in-dataverse-030-2021-01-17-cran">CHANGES in dataverse 0.3.0 (2021-01-17 CRAN)<small>2021-01-19</small><a class="anchor" aria-label="anchor" href="#changes-in-dataverse-030-2021-01-17-cran"></a></h2>
 <p>New Methods</p>
-<ul><li>Add new <code>get_dataframe_*()</code> methods (<a href="https://github.com/iqss/dataverse-client-r/issues/48" class="external-link">#48</a>, <a href="https://github.com/iqss/dataverse-client-r/issues/66" class="external-link">#66</a>)</li>
-</ul><p>Small updates</p>
+<ul><li>Add new <code>get_dataframe_*()</code> methods (<a href="https://github.com/iqss/dataverse-client-r/issues/48" class="external-link">#48</a>, <a href="https://github.com/iqss/dataverse-client-r/issues/66" class="external-link">#66</a>)</li></ul><p>Small updates</p>
 <ul><li>Make filter queries (fq) work in <code>dataverse_search</code> (<a href="https://github.com/iqss/dataverse-client-r/issues/36" class="external-link">#36</a> <a href="https://github.com/adam3smith" class="external-link">@adam3smith</a>)</li>
 <li>Update maintainer to Will Beasley (<a href="mailto:wibeasley@hotmail.com" class="email">wibeasley@hotmail.com</a>) (<a href="https://github.com/iqss/dataverse-client-r/issues/38" class="external-link">#38</a>)</li>
 <li>More robust file retrieval (<a href="https://github.com/iqss/dataverse-client-r/issues/39" class="external-link">#39</a> <a href="https://github.com/kuriwaki" class="external-link">@kuriwaki</a>)</li>
@@ -123,8 +121,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.24" id="changes-in-dataverse-0124-2017-06-15-cran-v020">CHANGES in dataverse 0.1.24 (2017-06-15, CRAN v0.2.0)<a class="anchor" aria-label="anchor" href="#changes-in-dataverse-0124-2017-06-15-cran-v020"></a></h2>
-<ul><li>Added an <code><a href="../reference/add_dataset_file.html">update_dataset_file()</a></code> function and improved associated documentation. (<a href="https://github.com/iqss/dataverse-client-r/issues/10" class="external-link">#10</a>)</li>
-</ul></div>
+<ul><li>Added an <code><a href="../reference/add_dataset_file.html">update_dataset_file()</a></code> function and improved associated documentation. (<a href="https://github.com/iqss/dataverse-client-r/issues/10" class="external-link">#10</a>)</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.23" id="changes-in-dataverse-0123">CHANGES in dataverse 0.1.23<a class="anchor" aria-label="anchor" href="#changes-in-dataverse-0123"></a></h2>
 <ul><li>Added a provisional <code><a href="../reference/add_dataset_file.html">add_dataset_file()</a></code> function. (<a href="https://github.com/iqss/dataverse-client-r/issues/10" class="external-link">#10</a>)</li>
@@ -146,8 +143,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.21" id="changes-in-dataverse-0121">CHANGES in dataverse 0.1.21<a class="anchor" aria-label="anchor" href="#changes-in-dataverse-0121"></a></h2>
-<ul><li>Update README.</li>
-</ul></div>
+<ul><li>Update README.</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.20" id="changes-in-dataverse-0120">CHANGES in dataverse 0.1.20<a class="anchor" aria-label="anchor" href="#changes-in-dataverse-0120"></a></h2>
 <ul><li>Update roxygen.</li>
@@ -156,12 +152,10 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.18" id="changes-in-dataverse-0118">CHANGES in dataverse 0.1.18<a class="anchor" aria-label="anchor" href="#changes-in-dataverse-0118"></a></h2>
-<ul><li>Fixed a bug in <code>api_url()</code> related to parsing of the Dataverse server URL that was affected by an API change in <strong>urltools</strong>. (h/t John Little)</li>
-</ul></div>
+<ul><li>Fixed a bug in <code>api_url()</code> related to parsing of the Dataverse server URL that was affected by an API change in <strong>urltools</strong>. (h/t John Little)</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.1" id="changes-in-dataverse-011">CHANGES in dataverse 0.1.1<a class="anchor" aria-label="anchor" href="#changes-in-dataverse-011"></a></h2>
-<ul><li>Initial commit</li>
-</ul></div>
+<ul><li>Initial commit</li></ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -176,7 +170,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>

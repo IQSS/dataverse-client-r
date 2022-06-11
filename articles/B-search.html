@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.11</span>
       </span>
     </div>
 
@@ -43,7 +43,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>2. Data Search and Discovery</h1>
             
-            <h4 data-toc-skip class="date">2022-01-17</h4>
+            <h4 data-toc-skip class="date">2022-06-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/iqss/dataverse-client-r/blob/HEAD/vignettes/B-search.Rmd" class="external-link"><code>vignettes/B-search.Rmd</code></a></small>
       <div class="hidden name"><code>B-search.Rmd</code></div>
@@ -100,7 +100,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://iqss.github.io/dataverse-client-r/">"dataverse"</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"Gary King"</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">## 10 of 1557 results retrieved</span></code></pre>
+<pre><code><span class="co">## 10 of 1590 results retrieved</span></code></pre>
 <pre><code><span class="co">##                                                                                                                   name</span>
 <span class="co">## 1                                                                            004_informal_food_retail_Nigeria_2018.tab</span>
 <span class="co">## 2                                                                                00698McArthur-King-BoxCoverSheets.pdf</span>
@@ -115,7 +115,7 @@
 <p>The results are paginated, so users can rely upon the <code>per_page</code> and <code>start</code> argument to requested subsequent pages of results. We’ll start at 6 and to show that we retrieve the last five results from the previous query plus 15 more (due to <code>per_page = 20</code>):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"Gary King"</span>, start <span class="op">=</span> <span class="fl">6</span>, per_page <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">## 20 of 1557 results retrieved</span></code></pre>
+<pre><code><span class="co">## 20 of 1590 results retrieved</span></code></pre>
 <pre><code><span class="co">##                                                                                                                           name</span>
 <span class="co">## 1                                             03 Brienne Collection letterlocking data: Images folder 02/16, DB-0874_2–DB-0903</span>
 <span class="co">## 2                                            03 Brienne Collection letterlocking data: Images folder 04/16, DB-0988–DB-1109_03</span>
@@ -124,23 +124,23 @@
 <span class="co">## 5                                            03 Brienne Collection letterlocking data: Images folder 12/16, DB-1868–DB-1963_03</span>
 <span class="co">## 6                                            03 Brienne Collection letterlocking data: Images folder 14/16, DB-2064_01–2155_03</span>
 <span class="co">## 7                                                                                                       03 Spiral-lock figures</span>
-<span class="co">## 8                                                                                07 Letterlocking Categories and Formats Chart</span>
-<span class="co">## 9                                                                                                             077_mod1_s2m.tab</span>
-<span class="co">## 10 10 Foldable: Launch Little Book of Locks (UH6089), with Categories and Formats Chart. Letterlocking Instructional Resources</span>
-<span class="co">## 11                                                                                      10 Million International Dyadic Events</span>
-<span class="co">## 12                                                                     12070002_Wolfville T and Kings Subd D SC 2016-92640.pdf</span>
-<span class="co">## 13                                                                                     12070005-Kings Subd C SC 2016-92640.pdf</span>
-<span class="co">## 14                                                                           1479 data points of covid19 policy response times</span>
-<span class="co">## 15                                                             1998 Jewish Community Study of the Coachella Valley, California</span>
-<span class="co">## 16                                                                                               2002 State Legislative Survey</span>
-<span class="co">## 17                                                                          2007 White Sands Dune Field lidar topographic data</span>
-<span class="co">## 18                                                                          2008 White Sands Dune Field lidar topographic data</span>
-<span class="co">## 19                                                                                                         2012 STATA Data.tab</span>
-<span class="co">## 20                                                                                                                2012pres.tab</span></code></pre>
+<span class="co">## 8                                                                                                 03_scaledBayesianFactors.tab</span>
+<span class="co">## 9                                                                                07 Letterlocking Categories and Formats Chart</span>
+<span class="co">## 10                                                                                                            077_mod1_s2m.tab</span>
+<span class="co">## 11                                                                              0micron Decrease 66% in the danger of Covid-19</span>
+<span class="co">## 12 10 Foldable: Launch Little Book of Locks (UH6089), with Categories and Formats Chart. Letterlocking Instructional Resources</span>
+<span class="co">## 13                                                                                      10 Million International Dyadic Events</span>
+<span class="co">## 14                                                                     12070002_Wolfville T and Kings Subd D SC 2016-92640.pdf</span>
+<span class="co">## 15                                                                                     12070005-Kings Subd C SC 2016-92640.pdf</span>
+<span class="co">## 16                                                                           1479 data points of covid19 policy response times</span>
+<span class="co">## 17                                                             1998 Jewish Community Study of the Coachella Valley, California</span>
+<span class="co">## 18                                                                                               2002 State Legislative Survey</span>
+<span class="co">## 19                                                                          2007 White Sands Dune Field lidar topographic data</span>
+<span class="co">## 20                                                                          2008 White Sands Dune Field lidar topographic data</span></code></pre>
 <p>More complicated searches can specify metadata fields like <code>title</code> and restrict results to a specific <code>type</code> of Dataverse object (a “dataverse”, “dataset”, or “file”):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ei</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span>author <span class="op">=</span> <span class="st">"Gary King"</span>, title <span class="op">=</span> <span class="st">"Ecological Inference"</span>, type <span class="op">=</span> <span class="st">"dataset"</span>, per_page <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## 20 of 1415 results retrieved</span></code></pre>
+<pre><code><span class="co">## 20 of 1454 results retrieved</span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># fields returned</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ei</span><span class="op">)</span>
@@ -190,7 +190,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
