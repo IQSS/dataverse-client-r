@@ -25,52 +25,38 @@ The following examples will draw from the Harvard Dataverse, so it is convenient
 Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
 ```
 
-This is equivalent to setting `server = "dataverse.harvard.edu"` in every `dataverse` function each time. Note that if you set an environment variable like the above, that is necessary to make your code reproducible.
+This is equivalent to setting `server = "dataverse.harvard.edu"` in every `dataverse` function each time. Note that if you set an environment variable like the above, that operation is necessary to make your code reproducible on a different machine.
 
-For downloading a public dataset, no API Key is needed.
-
-```{r}
-Sys.setenv("DATAVERSE_KEY" = "")
-```
+For downloading a public dataset, _no API Key is needed_.
 
 
+## Retrieving Plain-Text Data
 
-## Retrieving Metadata
-
-We will download these files and examine them directly in R using the **dataverse** package. To begin, we need to loading the package and using the `get_dataset()` function to retrieve some basic metadata about the dataset:
+We will download public data files and examine them directly in R using the **dataverse** package. 
 
 ```{r}
 library("dataverse")
 library("tibble") # to see dataframes in tidyverse-form
 ```
 
-The `get_dataset()` function lists all of the files in the dataset along with a considerable amount of metadata about each. (Recall that in Dataverse, `dataset` is a collection of files, not a single file.)  We can see a quick glance at these files using:
 
-```r
-dataset <- get_dataset("doi:10.7910/DVN/ARKOTI")
-dataset$files[c("filename", "contentType")]
+First, we retrieve a plain-text file like this dataset on electricity consumption by [Wakiyama et al. (2014)](https://doi.org/10.7910/DVN/ARKOTI/GN1MRT). Taking the file name and dataset DOI from this entry,
+
+```{r, echo=FALSE, message=FALSE,include=FALSE}
+energy <- get_dataframe_by_name(
+  filename = "comprehensiveJapanEnergy.tab",
+  dataset = "10.7910/DVN/ARKOTI", 
+  server = "dataverse.harvard.edu")
 ```
 
-This shows that there are indeed 32 files, a mix of .R code files and tab- and comma-separated data files.
-
-You can also retrieve more extensive metadata using `dataset_metadata()`:
+```{r, eval=FALSE}
+energy <- get_dataframe_by_name(
+  filename = "comprehensiveJapanEnergy.tab",
+  dataset = "10.7910/DVN/ARKOTI", 
+  server = "dataverse.harvard.edu")
+```
 
 ```{r}
-str(dataset_metadata("10.7910/DVN/ARKOTI"), 2)
-```
-
-
-
-
-## Retrieving Plain-Text Data
-
-Now we'll get the corresponding data files. First, we retrieve a plain-text file like this dataset on electricity consumption by [Wakiyama et al. (2014)](https://doi.org/10.7910/DVN/ARKOTI/GN1MRT). Taking the file name and dataset DOI from this entry,
-
-```{r, messages=FALSE}
-energy <- get_dataframe_by_name(
-  "comprehensiveJapanEnergy.tab",
-  "10.7910/DVN/ARKOTI")
-
 head(energy)
 ```
 
@@ -80,24 +66,28 @@ These `get_dataframe_*` functions, introduced in v0.3.0, directly read in the da
 ```{r}
 library(readr)
 energy <- get_dataframe_by_name(
-  "comprehensiveJapanEnergy.tab",
-  "10.7910/DVN/ARKOTI",
+  filename = "comprehensiveJapanEnergy.tab",
+  dataset = "10.7910/DVN/ARKOTI", 
+  server = "dataverse.harvard.edu",
   .f = function(x) read.delim(x, sep = "\t"))
 
 head(energy)
 ```
 
 
+The dataverse package can also download datasets that are _drafts_ (i.e. versions not released publicly), as long as the user of the dataset provides their appropriate DATAVERSE_KEY. Users may need to modify the metadata of a datafile, such as adding a descriptive label, for the data downloading to work properly in this case. This is because the the file identifier UNF, which the read function relies on, may only appear after metadata has been added.
 
-## Retrieving Custom Data Fromats (RDS, Stata, SPSS)
+
+## Retrieving Custom Data Formats (RDS, Stata, SPSS)
 
 
 If a file is displayed on dataverse as a `.tab` file like the survey data by [Alvarez et al. (2013)](https://doi.org/10.7910/DVN/ARKOTI/A8YRMP), it is likely that Dataverse [ingested](https://guides.dataverse.org/en/latest/user/tabulardataingest/index.html) the file to a plain-text, tab-delimited format.
 
 ```{r,  message=FALSE}
 argentina_tab <- get_dataframe_by_name(
-  "alpl2013.tab",
-  "10.7910/DVN/ARKOTI")
+  filename = "alpl2013.tab",
+  dataset = "10.7910/DVN/ARKOTI",
+  server = "dataverse.harvard.edu")
 ```
 
 
@@ -111,8 +101,9 @@ When ingesting, Dataverse retains a `original` version that retains these attrib
 
 ```{r}
 argentina_dta <- get_dataframe_by_name(
-  "alpl2013.tab",
-  "10.7910/DVN/ARKOTI",
+  filename = "alpl2013.tab",
+  dataset = "10.7910/DVN/ARKOTI",
+  server = "dataverse.harvard.edu",
   original = TRUE,
   .f = haven::read_dta)
 ```
@@ -127,18 +118,36 @@ str(argentina_dta$polling_place)
 
 Users should pick `.f` and `original` based on their existing knowledge of the file. If the original file is a `.sav` SPSS file, `.f` can be `haven::read_sav`. If it is a `.Rds` file, use `readRDS` or `readr::read_rds`. In fact, because the raw data is read in as a binary, there is no limitation to the file types `get_dataframe_*` can read in, as far as the dataverse package is concerned.
 
-There are two more ways to read in a dataframe other than `get_dataframe_by_name()`. `get_dataframe_by_doi()` takes in a file-specific DOI if Dataverse contains one such as <https://doi.org/10.7910/DVN/ARKOTI/IJPVOI>. This removes the necessity for users to set the `dataset` argument. `get_dataframe_by_id()` takes a numeric Dataverse identification number. This identifier is an internal number and is not prominently featured in the interface.
+There are two more ways to read in a dataframe other than `get_dataframe_by_name()`. 
 
+* `get_dataframe_by_doi()` takes in a file-specific DOI if Dataverse contains one such as <https://doi.org/10.7910/DVN/ARKOTI/IJPVOI>. This removes the necessity for users to set the `dataset` argument. 
+* `get_dataframe_by_id()` takes a numeric Dataverse identification number. This identifier is an internal number and is not prominently featured in the interface.
 
-In addition to visual inspection, we can compare the UNF signatures for each dataset against what is reported by Dataverse to confirm that we received the correct files. (See the [UNF package](https://cran.r-project.org/package=UNF) and `unf` function).
+In addition to visual inspection, we can compare the UNF signatures for each dataset against what is reported by Dataverse to confirm that we received the correct files. 
 
+## Retrieving Metadata
 
+We may also want to retrieve some basic metadata about the dataset. The `get_dataset()` function lists all of the files in the dataset along with a considerable amount of metadata about each. (Recall that in Dataverse, `dataset` is a collection of files, not a single file.)  We can see a quick glance at these files using:
 
-## Retrieving Scripts and other files
+```r
+dataset <- get_dataset("doi:10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu")
+dataset$files[c("filename", "contentType")]
+```
+
+This shows that there are indeed 32 files, a mix of .R code files and tab- and comma-separated data files.
+
+You can also retrieve more extensive metadata using `dataset_metadata()`:
+
+```{r}
+str(dataset_metadata("10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu"), 
+    max.level = 2)
+```
+
+## Retrieving Scripts and Other Files
 
 If the file you want to retrieve is not data, you may want to use the  more primitive function, `get_file`, which gets the file data as a raw binary file. See the help page examples of `get_file()` that use the `base::writeBin()` function for details on how to write and read these binary files instead.
 
 ```{r, eval = FALSE}
-code3 <- get_file("chapter03.R", "doi:10.7910/DVN/ARKOTI")
+code3 <- get_file("chapter03.R", "doi:10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu")
 writeBin(code3, "chapter03.R")
 ```

@@ -70,7 +70,7 @@ add_file <- function(dataset, file, key = Sys.getenv("DATAVERSE_KEY"), server = 
         u <- dataset$links[["edit-media"]]
     } else if (inherits(dataset, "dataset_statement")) {
         dataset <- prepend_doi(dataset$id)
-        u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit-media/study/", dataset)
+        u <- paste0(api_url(server, prefix = "dvn/api/"), "data-deposit/v1.1/swordv2/edit-media/study/", dataset)
     } else if (is.character(dataset) && grepl("^http", dataset)) {
         if (grepl("edit-media/study/", dataset)) {
             u <- dataset
@@ -79,7 +79,7 @@ add_file <- function(dataset, file, key = Sys.getenv("DATAVERSE_KEY"), server = 
         }
     } else {
         dataset <- prepend_doi(dataset)
-        u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit/study/", dataset)
+        u <- paste0(api_url(server, prefix = "dvn/api/"), "data-deposit/v1.1/swordv2/edit/study/", dataset)
     }
 
     # file can be: a character vector of file names, a data.frame, or a list of R objects

@@ -11,7 +11,7 @@ print.dataset_atom <- function(x, ...) {
     invisible(x)
 }
 
-parse_atom <- function(xml){
+parse_atom <- function(xml) {
     xmllist <- xml2::as_list(xml2::read_xml(xml))
     links <- lapply(xmllist[names(xmllist) == "link"], attr, "href")
     names(links) <- unlist(lapply(xmllist[names(xmllist) == "link"], attr, "rel"))

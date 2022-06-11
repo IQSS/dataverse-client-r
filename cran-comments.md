@@ -1,15 +1,7 @@
 Description
 -----------------------------------------------
 
-This version updates an expired API token for testing purposes, which started
-causing errors and prompted a email from the CRAN Team on 2021-12-31.
-
-
-Because daily tests for the full download is done separately on Github Actions,
-this test is not relevant as much for CRAN, so we updated the token and
-also skipped the check if on CRAN tests.  We also closed 8 issues and feature
-extensions recorded on Github.
-
+This version fixes two bugs in data upload and improves documentation based on user feedback from the repository.
 
 Thank you for taking the time to review the submission.
 
@@ -19,15 +11,15 @@ Shiro Kuriwaki
 Test environments
 -----------------------------------------------
 
-1. [win-builder](https://win-builder.r-project.org/cBi2U5y9gKOq), development version (`devtools::check_win_devel()`)
-2. [R-hub](https://builder.r-hub.io/status/dataverse_0.3.9.tar.gz-82f7f1a52ace42ba9f913863a5223946).
+1. [win-builder](https://win-builder.r-project.org/mLWollyoFa6t), development version (`devtools::check_win_devel()`)
+2. [R-hub](https://builder.r-hub.io/status/dataverse_0.3.11.tar.gz-e5f0dad4f4234733a623accfe12a4273).
 3. [GitHub Actions](https://github.com/IQSS/dataverse-client-r/actions)
   * os: macOS-latest    , r: 'release'
   * os: windows-latest  , r: 'devel'
   * os: windows-latest  , r: 'release'
   * os: ubuntu-latest   , r: 'devel'
   * os: ubuntu-latest   , r: 'release'
-4. Local macOS, R 4.0.4
+4. Local macOS, R 4.1.2
 
 
 R CMD check results

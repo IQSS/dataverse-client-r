@@ -10,6 +10,9 @@
 #'  datafile. For files that are not datasets, the more generic `get_file` that
 #'  downloads the content as a binary is simpler.
 #'
+#'  The function can read datasets that are unpublished and are still drafts,
+#'  as long as the entry has a UNF. See the download vignette for details.
+#'
 #' @rdname get_dataframe
 #'
 #' @param filename The name of the file of interest, with file extension, for example
@@ -108,7 +111,7 @@
 #' }
 #'
 #' @export
-get_dataframe_by_name <- function (
+get_dataframe_by_name <- function(
   filename,
   dataset       = NULL,
   .f            = NULL,
@@ -159,7 +162,7 @@ get_dataframe_by_id <- function(
 #' @rdname get_dataframe
 #' @inheritParams get_file_by_doi
 #' @export
-get_dataframe_by_doi <- function (
+get_dataframe_by_doi <- function(
   filedoi,
   .f            = NULL,
   original      = FALSE,
@@ -174,9 +177,8 @@ get_dataframe_by_doi <- function (
 #' Write to temp and apply function
 #'
 #' @keywords internal
-get_dataframe_internal <- function (raw, filename, .f) {
-  tryCatch(
-    {
+get_dataframe_internal <- function(raw, filename, .f) {
+  tryCatch({
       tmp <- tempfile(filename)
       writeBin(raw, tmp)
       do.call(.f, list(tmp))

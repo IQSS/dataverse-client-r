@@ -143,7 +143,7 @@ get_file <- function(
 #' nlsw88.tab, use the ingested version.)
 #'
 #' @export
-get_file_by_name <- function (
+get_file_by_name <- function(
   filename,
   dataset,
   format        = c("original", "bundle"),

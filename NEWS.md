@@ -1,5 +1,11 @@
 # dataverse (development version)
 
+
+# CHANGES in dataverse 0.3.11
+
+* Allow for downloading from draft datasets (#115, @Danny-dK)
+* Fix add dataset bug introduced in a recent version (#116)
+
 # CHANGES in dataverse 0.3.10
 
 * Add progress bar for all downloads (#108)
