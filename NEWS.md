@@ -5,6 +5,7 @@
 
 * Allow for downloading from draft datasets (#115, @Danny-dK)
 * Fix add dataset bug introduced in a recent version (#116)
+* Update token for 0.3.11.1 (#123)
 
 # CHANGES in dataverse 0.3.10
 
