@@ -23,7 +23,6 @@ test_that("dataverse for 'dataverse-client-r'", {
       publisher = "Demo Dataverse",
       publicationDate = "2020-12-29",
       storageIdentifier = "file://10.70122/FK2/HXJVJU",
-      metadataLanguage = "undefined",
       type = "dataset"
     ),
     class = "dataverse_dataset"
