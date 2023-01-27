@@ -60,6 +60,12 @@ jobs:
         with:
           upload-snapshots: true
 
+      - name: Install pak and query dependencies
+        run: |
+          install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
+          saveRDS(pak::pkg_deps("local::.", dependencies = TRUE), ".github/r-depends.rds")
+        shell: Rscript {0}
+      
       - uses: r-lib/actions/setup-pandoc@v2
 
       - name: Restore R package cache
