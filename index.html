@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.13</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
 <div class="section level1">
 <div class="page-header"><h1 id="r-client-for-dataverse-repositories">R Client for Dataverse Repositories<a class="anchor" aria-label="anchor" href="#r-client-for-dataverse-repositories"></a>
 </h1></div>
-
+<p><a href="https://cran.r-project.org/package=dataverse" class="external-link"><img src="https://www.r-pkg.org/badges/version/dataverse" alt="CRAN Version"></a> <img src="https://cranlogs.r-pkg.org/badges/dataverse" alt="Downloads"></p>
 <p><a href="https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-thorough.yaml" class="external-link"><img src="https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-thorough.yaml/badge.svg?branch=master" alt="R-CMD-check-thorough"></a> <a href="https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-daily.yaml" class="external-link"><img src="https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-daily.yaml/badge.svg?branch=master" alt="R-CMD-check-daily"></a> <a href="https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-dev.yaml" class="external-link"><img src="https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-dev.yaml/badge.svg" alt="R-CMD-check-dev"></a> <a href="https://codecov.io/github/IQSS/dataverse-client-r?branch=master" class="external-link"><img src="https://codecov.io/github/IQSS/dataverse-client-r/coverage.svg?branch=master" alt="codecov.io"></a></p>
 <p><a href="https://dataverse.org" class="external-link"><img src="https://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png" alt="Dataverse Project logo"></a></p>
 <p>The <strong>dataverse</strong> package provides access to <a href="https://dataverse.org/" class="external-link">Dataverse</a> APIs (versions 4+), enabling data search, retrieval, and deposit, thus allowing R users to integrate public data sharing into the reproducible research workflow.</p>
@@ -97,20 +97,20 @@
 </h3>
 <p>You can find a stable release on <a href="https://cran.r-project.org/package=dataverse" class="external-link">CRAN</a>, or install the latest development version from <a href="https://github.com/iqss/dataverse-client-r/" class="external-link">GitHub</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Install from CRAN</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"dataverse"</span><span class="op">)</span>
-
-<span class="co"># Install from GitHub</span>
-<span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"iqss/dataverse-client-r"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Install from CRAN</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"dataverse"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Install from GitHub</span></span>
+<span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"iqss/dataverse-client-r"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="api-access-keys">API Access Keys<a class="anchor" aria-label="anchor" href="#api-access-keys"></a>
 </h4>
 <p>Many features of the Dataverse API are public and require no authentication. This means in many cases you can search for and retrieve data without a Dataverse account or API key – you will not need to worry about this.</p>
 <p>For features that require a Dataverse account for the specific server installation of the Dataverse software, and an API key linked to that account. Instructions for obtaining an account and setting up an API key are available in the <a href="https://guides.dataverse.org/en/latest/user/account.html" class="external-link">Dataverse User Guide</a>. (Note: if your key is compromised, it can be regenerated to preserve security.) Once you have an API key, this should be stored as an environment variable called <code>DATAVERSE_KEY</code>. It can be set as a default by adding</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">DATAVERSE_KEY</span><span class="op">=</span><span class="st">"examplekey12345"</span></code></pre></div>
-<p>in your .Renviron file, where <code>examplekey12345</code> should be replace with your own key. The environment file can be opened by <code>usethis::edit_r_environ()</code>.</p>
+<code class="sourceCode R"><span><span class="va">DATAVERSE_KEY</span><span class="op">=</span><span class="st">"examplekey12345"</span></span></code></pre></div>
+<p>in your .Renviron file, where <code>examplekey12345</code> should be replace with your own key. The environment file can be opened by <code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>.</p>
 </div>
 <div class="section level4">
 <h4 id="server">Server<a class="anchor" aria-label="anchor" href="#server"></a>
@@ -121,8 +121,8 @@
 <li><p>Set the environment variable, <code>DATAVERSE_SERVER</code>, in the script to be used throughout the session. e.g.,</p></li>
 </ol>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></code></pre></div>
-<ol start="3" style="list-style-type: decimal"><li>Hard-code a default server in your own environment. Direct your <code>.Renviron</code> file directly or open it by <code>usethis::edit_r_environ()</code>. Then enter <code>DATAVERSE_SERVER = "dataverse.harvard.edu"</code>. However, doing this may make your scripts not replicable to other people who do not have access to the environment.</li></ol>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></span></code></pre></div>
+<ol start="3" style="list-style-type: decimal"><li>Hard-code a default server in your own environment. Direct your <code>.Renviron</code> file directly or open it by <code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>. Then enter <code>DATAVERSE_SERVER = "dataverse.harvard.edu"</code>. However, doing this may make your scripts not replicable to other people who do not have access to the environment.</li></ol>
 <p>In all cases, values should be the Dataverse server, without the “https” prefix or the “/api” URL path.</p>
 </div>
 </div>
@@ -136,11 +136,11 @@
 <p>Use the <code>get_dataframe_*()</code> functions, depending on the input you have. For example, we will read a survey dataset on Dataverse, <a href="https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.70122/FK2/PPIAXE" class="external-link">nlsw88.dta</a> (<code>doi:10.70122/FK2/PPKHI1/ZYATZZ</code>), originally in Stata dta form.</p>
 <p>With a file DOI, we can use the <code>get_dataframe_by_doi</code> function:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nlsw</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="reference/get_dataframe.html">get_dataframe_by_doi</a></span><span class="op">(</span>
-    filedoi     <span class="op">=</span> <span class="st">"10.70122/FK2/PPIAXE/MHDB0O"</span>,
-    server      <span class="op">=</span> <span class="st">"demo.dataverse.org"</span>
-  <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">nlsw</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="reference/get_dataframe.html">get_dataframe_by_doi</a></span><span class="op">(</span></span>
+<span>    filedoi     <span class="op">=</span> <span class="st">"10.70122/FK2/PPIAXE/MHDB0O"</span>,</span>
+<span>    server      <span class="op">=</span> <span class="st">"demo.dataverse.org"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">## Downloading ingested version of data with readr::read_tsv. To download the original version and remove this message, set original = TRUE.</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="co">## Rows: 2246 Columns: 17</span></span>
@@ -153,32 +153,32 @@
 <p>which by default reads in the ingested file (not the original dta) by the <a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link"><code>readr::read_tsv</code></a> function.</p>
 <p>Alternatively, we can download the same file by specifying the filename and the DOI of the “dataset” (in Dataverse, a collection of files is called a dataset).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nlsw_tsv</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="reference/get_dataframe.html">get_dataframe_by_name</a></span><span class="op">(</span>
-    filename  <span class="op">=</span> <span class="st">"nlsw88.tab"</span>,
-    dataset   <span class="op">=</span> <span class="st">"10.70122/FK2/PPIAXE"</span>,
-    server    <span class="op">=</span> <span class="st">"demo.dataverse.org"</span>
-  <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">nlsw_tsv</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="reference/get_dataframe.html">get_dataframe_by_name</a></span><span class="op">(</span></span>
+<span>    filename  <span class="op">=</span> <span class="st">"nlsw88.tab"</span>,</span>
+<span>    dataset   <span class="op">=</span> <span class="st">"10.70122/FK2/PPIAXE"</span>,</span>
+<span>    server    <span class="op">=</span> <span class="st">"demo.dataverse.org"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p>Now, Dataverse often translates rectangular data into an ingested, or “archival” version, which is application-neutral and easily-readable. <code>read_dataframe_*()</code> defaults to taking this ingested version rather than using the original, through the argument <code>original = FALSE</code>.</p>
 <p>This default is safe because you may not have the proprietary software that was originally used. On the other hand, the data may have lost information in the process of the ingestation.</p>
 <p>Instead, to read the same file but its original version, specify <code>original = TRUE</code> and set an <code>.f</code> argument. In this case, we know that <code>nlsw88.tab</code> is a Stata <code>.dta</code> dataset, so we will use the <code><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">haven::read_dta</a></code> function.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nlsw_original</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="reference/get_dataframe.html">get_dataframe_by_name</a></span><span class="op">(</span>
-    filename    <span class="op">=</span> <span class="st">"nlsw88.tab"</span>,
-    dataset     <span class="op">=</span> <span class="st">"10.70122/FK2/PPIAXE"</span>,
-    .f          <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="va"><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">read_dta</a></span>,
-    original    <span class="op">=</span> <span class="cn">TRUE</span>,
-    server      <span class="op">=</span> <span class="st">"demo.dataverse.org"</span>
-  <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">nlsw_original</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="reference/get_dataframe.html">get_dataframe_by_name</a></span><span class="op">(</span></span>
+<span>    filename    <span class="op">=</span> <span class="st">"nlsw88.tab"</span>,</span>
+<span>    dataset     <span class="op">=</span> <span class="st">"10.70122/FK2/PPIAXE"</span>,</span>
+<span>    .f          <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="va"><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">read_dta</a></span>,</span>
+<span>    original    <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    server      <span class="op">=</span> <span class="st">"demo.dataverse.org"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p>Note that even though the file prefix is “.tab”, we use <code><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">haven::read_dta</a></code>.</p>
 <p>Of course, when the dataset is not ingested (such as a Rds file), users would always need to specify an <code>.f</code> argument for the specific file.</p>
 <p>Note the difference between <code>nls_tsv</code> and <code>nls_original</code>. <code>nls_original</code> preserves the data attributes like value labels, whereas <code>nls_tsv</code> has dropped this or left this in file metadata.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">nlsw_tsv</span><span class="op">$</span><span class="va">race</span><span class="op">)</span> <span class="co"># tab ingested version only has numeric data</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">nlsw_tsv</span><span class="op">$</span><span class="va">race</span><span class="op">)</span> <span class="co"># tab ingested version only has numeric data</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">## [1] "numeric"</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">nlsw_original</span><span class="op">$</span><span class="va">race</span>, <span class="st">"labels"</span><span class="op">)</span> <span class="co"># original dta has value labels</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">nlsw_original</span><span class="op">$</span><span class="va">race</span>, <span class="st">"labels"</span><span class="op">)</span> <span class="co"># original dta has value labels</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## white black other </span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co">##     1     2     3</span></span></code></pre></div>
 </div>
@@ -189,51 +189,51 @@
 <p><strong>Note</strong>: <em>There are known issues to using to dataverse creation and dataset addition functionalities listed here. <code><a href="reference/add_dataset_file.html">add_dataset_file()</a></code> appears stable as of again as of v0.3.11. One possible workaround is to mix the two workflows described above (See e.g. this <a href="https://github.com/IQSS/dataverse-client-r/issues/82#issuecomment-1094623268" class="external-link">comment</a>).</em></p>
 <p>Dataverse provides two - basically unrelated - workflows for managing (adding, documenting, and publishing) datasets. The first workflow is called the “native” API and uses <code>create_dataset</code> to make an empty dataset and adds files by <code>add_dataset_file</code> by taking a path to a dataset that is located in your local. Through the native API it is possible to update a dataset by modifying its metadata with <code><a href="reference/create_dataset.html">update_dataset()</a></code> or file contents using <code><a href="reference/add_dataset_file.html">update_dataset_file()</a></code> and then republish a new version using <code><a href="reference/publish_dataset.html">publish_dataset()</a></code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create the dataset. e/g/ </span>
-<span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/create_dataset.html">create_dataset</a></span><span class="op">(</span><span class="st">"mydataverse"</span><span class="op">)</span> <span class="co"># pick a name of dataset</span>
-
-<span class="co"># add files</span>
-<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># In this example, we write to a temporary destiation</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="va">tmp</span><span class="op">)</span>
-<span class="fu"><a href="reference/add_dataset_file.html">add_dataset_file</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">tmp</span>, dataset <span class="op">=</span> <span class="va">ds</span><span class="op">)</span>
-
-<span class="co"># publish dataset</span>
-<span class="fu"><a href="reference/publish_dataset.html">publish_dataset</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span>
-
-<span class="co"># dataset will now be published</span>
-<span class="fu"><a href="reference/get_dataverse.html">get_dataverse</a></span><span class="op">(</span><span class="st">"mydataverse"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># create the dataset. e/g/ </span></span>
+<span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/create_dataset.html">create_dataset</a></span><span class="op">(</span><span class="st">"mydataverse"</span><span class="op">)</span> <span class="co"># pick a name of dataset</span></span>
+<span></span>
+<span><span class="co"># add files</span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># In this example, we write to a temporary destiation</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="va">tmp</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/add_dataset_file.html">add_dataset_file</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">tmp</span>, dataset <span class="op">=</span> <span class="va">ds</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># publish dataset</span></span>
+<span><span class="fu"><a href="reference/publish_dataset.html">publish_dataset</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># dataset will now be published</span></span>
+<span><span class="fu"><a href="reference/get_dataverse.html">get_dataverse</a></span><span class="op">(</span><span class="st">"mydataverse"</span><span class="op">)</span></span></code></pre></div>
 <p>The second is built on <a href="https://sword.cottagelabs.com/" class="external-link">SWORD</a> (v2.0). This means that to create a new dataset listing, you will have to first initialize a dataset entry with some metadata, add one or more files to the dataset, and then publish it. This looks something like the following:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># After setting appropriate dataverse server and environment, obtain SWORD</span>
-<span class="co"># service doc</span>
-<span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/service_document.html">service_document</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co"># create a list of metadata for a file</span>
-<span class="va">metadat</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-    title       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"My-Study_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">'%Y-%m-%d_%H:%M'</span><span class="op">)</span><span class="op">)</span>,
-    creator     <span class="op">=</span> <span class="st">"Doe, John"</span>,
-    description <span class="op">=</span> <span class="st">"An example study"</span>
-  <span class="op">)</span>
-
-<span class="co"># create the dataset, where "mydataverse" is to be replaced by the name </span>
-<span class="co"># of the already-created dataverse as shown in the URL</span>
-<span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/initiate_sword_dataset.html">initiate_sword_dataset</a></span><span class="op">(</span><span class="st">"&lt;mydataverse&gt;"</span>, body <span class="op">=</span> <span class="va">metadat</span><span class="op">)</span>
-
-<span class="co"># add files to dataset</span>
-<span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="st">"iris.csv"</span><span class="op">)</span>
-
-<span class="co"># Search the initiated dataset and give a DOI and version of the dataverse as an identifier</span>
-<span class="va">mydoi</span> <span class="op">&lt;-</span> <span class="st">"doi:10.70122/FK2/BMZPJZ&amp;version=DRAFT"</span>
-
-<span class="co"># add dataset</span>
-<span class="fu"><a href="reference/add_dataset_file.html">add_dataset_file</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"iris.csv"</span>, dataset <span class="op">=</span> <span class="va">mydoi</span><span class="op">)</span>
-
-<span class="co"># publish new dataset</span>
-<span class="fu"><a href="reference/publish_sword_dataset.html">publish_sword_dataset</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span>
-
-<span class="co"># dataset will now be published</span>
-<span class="fu"><a href="reference/list_datasets.html">list_datasets</a></span><span class="op">(</span><span class="st">"&lt;mydataverse&gt;"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># After setting appropriate dataverse server and environment, obtain SWORD</span></span>
+<span><span class="co"># service doc</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/service_document.html">service_document</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create a list of metadata for a file</span></span>
+<span><span class="va">metadat</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    title       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"My-Study_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">'%Y-%m-%d_%H:%M'</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    creator     <span class="op">=</span> <span class="st">"Doe, John"</span>,</span>
+<span>    description <span class="op">=</span> <span class="st">"An example study"</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create the dataset, where "mydataverse" is to be replaced by the name </span></span>
+<span><span class="co"># of the already-created dataverse as shown in the URL</span></span>
+<span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/initiate_sword_dataset.html">initiate_sword_dataset</a></span><span class="op">(</span><span class="st">"&lt;mydataverse&gt;"</span>, body <span class="op">=</span> <span class="va">metadat</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># add files to dataset</span></span>
+<span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">write_csv</a></span><span class="op">(</span><span class="va">iris</span>, file <span class="op">=</span> <span class="st">"iris.csv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Search the initiated dataset and give a DOI and version of the dataverse as an identifier</span></span>
+<span><span class="va">mydoi</span> <span class="op">&lt;-</span> <span class="st">"doi:10.70122/FK2/BMZPJZ&amp;version=DRAFT"</span></span>
+<span></span>
+<span><span class="co"># add dataset</span></span>
+<span><span class="fu"><a href="reference/add_dataset_file.html">add_dataset_file</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"iris.csv"</span>, dataset <span class="op">=</span> <span class="va">mydoi</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># publish new dataset</span></span>
+<span><span class="fu"><a href="reference/publish_sword_dataset.html">publish_sword_dataset</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># dataset will now be published</span></span>
+<span><span class="fu"><a href="reference/list_datasets.html">list_datasets</a></span><span class="op">(</span><span class="st">"&lt;mydataverse&gt;"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="limitations">Limitations<a class="anchor" aria-label="anchor" href="#limitations"></a>
@@ -293,12 +293,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=dataverse" class="external-link"><img src="https://www.r-pkg.org/badges/version/dataverse" alt="CRAN Version"></a></li>
-</ul>
-</div>
+
 
   </div>
 </div>
@@ -311,7 +306,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.13</span>
       </span>
     </div>
 
@@ -69,51 +69,73 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">dataverse_search</span><span class="op">(</span>
-  <span class="va">...</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dataverse"</span>, <span class="st">"dataset"</span>, <span class="st">"file"</span><span class="op">)</span>,
-  subtree <span class="op">=</span> <span class="cn">NULL</span>,
-  sort <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"date"</span><span class="op">)</span>,
-  order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"asc"</span>, <span class="st">"desc"</span><span class="op">)</span>,
-  per_page <span class="op">=</span> <span class="fl">10</span>,
-  start <span class="op">=</span> <span class="cn">NULL</span>,
-  show_relevance <span class="op">=</span> <span class="cn">FALSE</span>,
-  show_facets <span class="op">=</span> <span class="cn">FALSE</span>,
-  fq <span class="op">=</span> <span class="cn">NULL</span>,
-  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,
-  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  http_opts <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dataverse_search</span><span class="op">(</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dataverse"</span>, <span class="st">"dataset"</span>, <span class="st">"file"</span><span class="op">)</span>,</span>
+<span>  subtree <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sort <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"date"</span><span class="op">)</span>,</span>
+<span>  order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"asc"</span>, <span class="st">"desc"</span><span class="op">)</span>,</span>
+<span>  per_page <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  start <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  show_relevance <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show_facets <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  fq <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,</span>
+<span>  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  http_opts <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>...</dt>
 <dd><p>A length-one character vector specifying a search query, a named character vector of search arguments, or a sequence of named character arguments. The specific fields available may vary by server installation.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>A character vector specifying one or more of “dataverse”, “dataset”, and “file”, which is used to restrict the search results. By default, all three types of objects are searched for.</p></dd>
+
+
 <dt>subtree</dt>
 <dd><p>Currently ignored.</p></dd>
+
+
 <dt>sort</dt>
 <dd><p>A character vector specifying whether to sort results by “name” or “date”.</p></dd>
+
+
 <dt>order</dt>
 <dd><p>A character vector specifying either “asc” or “desc” results order.</p></dd>
+
+
 <dt>per_page</dt>
 <dd><p>An integer specifying the page size of results.</p></dd>
+
+
 <dt>start</dt>
 <dd><p>An integer specifying used for pagination.</p></dd>
+
+
 <dt>show_relevance</dt>
 <dd><p>A logical indicating whether or not to show details of which fields were matched by the query</p></dd>
+
+
 <dt>show_facets</dt>
 <dd><p>A logical indicating whether or not to show facets that can be operated on by the <code>fq</code> parameter</p></dd>
+
+
 <dt>fq</dt>
 <dd><p>See API documentation.</p></dd>
+
+
 <dt>key</dt>
 <dd><p>A character string specifying a Dataverse server API key. If one
 is not specified, functions calling authenticated API endpoints will fail.
 Keys can be specified atomically or globally using
 <code>Sys.setenv("DATAVERSE_KEY" = "examplekey")</code>.</p></dd>
+
+
 <dt>server</dt>
 <dd><p>A character string specifying a Dataverse server.
 Multiple Dataverse installations exist, with <code>"dataverse.harvard.edu"</code> being the
@@ -121,17 +143,26 @@ most major. The server can be defined each time within a function, or it can
 be set as a default via an environment variable. To set a default, run
 <code>Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")</code>
 or add <code>DATAVERSE_SERVER = "dataverse.harvard.edu</code> in one's <code>.Renviron</code>
-file (<code>usethis::edit_r_environ()</code>), with the appropriate domain as its value.</p></dd>
+file (<code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>), with the appropriate domain as its value.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>A logical indicating whether to display information about the search query (default is <code>TRUE</code>).</p></dd>
+
+
 <dt>http_opts</dt>
 <dd><p>Currently ignored.</p></dd>
+
+
 <dt>dataverse</dt>
 <dd><p>A character string specifying a Dataverse name or an object of class “dataverse”.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list.</p>
+    
+
+<p>A list.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -144,17 +175,17 @@ file (<code>usethis::edit_r_environ()</code>), with the appropriate domain as it
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># simple string search</span></span>
-<span class="r-in"><span class="fu">dataverse_search</span><span class="op">(</span><span class="st">"Gary King"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># search using named arguments</span></span>
-<span class="r-in"><span class="fu">dataverse_search</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>author <span class="op">=</span> <span class="st">"Gary King"</span>, title <span class="op">=</span> <span class="st">"Ecological Inference"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">dataverse_search</span><span class="op">(</span>author <span class="op">=</span> <span class="st">"Gary King"</span>, title <span class="op">=</span> <span class="st">"Ecological Inference"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># search only for datasets</span></span>
-<span class="r-in"><span class="fu">dataverse_search</span><span class="op">(</span>author <span class="op">=</span> <span class="st">"Gary King"</span>, type <span class="op">=</span> <span class="st">"dataset"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># simple string search</span></span></span>
+<span class="r-in"><span><span class="fu">dataverse_search</span><span class="op">(</span><span class="st">"Gary King"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># search using named arguments</span></span></span>
+<span class="r-in"><span><span class="fu">dataverse_search</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>author <span class="op">=</span> <span class="st">"Gary King"</span>, title <span class="op">=</span> <span class="st">"Ecological Inference"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">dataverse_search</span><span class="op">(</span>author <span class="op">=</span> <span class="st">"Gary King"</span>, title <span class="op">=</span> <span class="st">"Ecological Inference"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># search only for datasets</span></span></span>
+<span class="r-in"><span><span class="fu">dataverse_search</span><span class="op">(</span>author <span class="op">=</span> <span class="st">"Gary King"</span>, type <span class="op">=</span> <span class="st">"dataset"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -169,7 +200,7 @@ file (<code>usethis::edit_r_environ()</code>), with the appropriate domain as it
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -18,7 +18,7 @@ see get_file or get_dataframe_by_name."><!-- mathjax --><script src="https://cdn
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.13</span>
       </span>
     </div>
 
@@ -71,30 +71,30 @@ see <code><a href="files.html">get_file</a></code> or <code><a href="get_datafra
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_dataset</span><span class="op">(</span>
-  <span class="va">dataset</span>,
-  version <span class="op">=</span> <span class="st">":latest"</span>,
-  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,
-  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">dataset_metadata</span><span class="op">(</span>
-  <span class="va">dataset</span>,
-  version <span class="op">=</span> <span class="st">":latest"</span>,
-  block <span class="op">=</span> <span class="st">"citation"</span>,
-  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,
-  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">dataset_files</span><span class="op">(</span>
-  <span class="va">dataset</span>,
-  version <span class="op">=</span> <span class="st">":latest"</span>,
-  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,
-  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_dataset</span><span class="op">(</span></span>
+<span>  <span class="va">dataset</span>,</span>
+<span>  version <span class="op">=</span> <span class="st">":latest"</span>,</span>
+<span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,</span>
+<span>  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">dataset_metadata</span><span class="op">(</span></span>
+<span>  <span class="va">dataset</span>,</span>
+<span>  version <span class="op">=</span> <span class="st">":latest"</span>,</span>
+<span>  block <span class="op">=</span> <span class="st">"citation"</span>,</span>
+<span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,</span>
+<span>  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">dataset_files</span><span class="op">(</span></span>
+<span>  <span class="va">dataset</span>,</span>
+<span>  version <span class="op">=</span> <span class="st">":latest"</span>,</span>
+<span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,</span>
+<span>  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -103,13 +103,19 @@ see <code><a href="files.html">get_file</a></code> or <code><a href="get_datafra
 <dd><p>A character specifying a persistent identification ID for a dataset,
 for example <code>"doi:10.70122/FK2/HXJVJU"</code>. Alternatively, an object of class
 “dataverse_dataset” obtained by <code><a href="get_dataverse.html">dataverse_contents()</a></code>.</p></dd>
+
+
 <dt>version</dt>
 <dd><p>A character string specifying a version of the dataset. This can be one of “:draft” (the current draft), “:latest” (the latest draft, if it exists, or the latest published version), “:latest-published” (the latest published version, ignoring any draft), or “x.y” (where <samp>x</samp> is a major version and <samp>y</samp> is a minor version; the <samp>.y</samp> can be omitted to obtain a major version). In lieu of this, a dataset's version-specific identification number can be used for the <code>dataset</code> argument.</p></dd>
+
+
 <dt>key</dt>
 <dd><p>A character string specifying a Dataverse server API key. If one
 is not specified, functions calling authenticated API endpoints will fail.
 Keys can be specified atomically or globally using
 <code>Sys.setenv("DATAVERSE_KEY" = "examplekey")</code>.</p></dd>
+
+
 <dt>server</dt>
 <dd><p>A character string specifying a Dataverse server.
 Multiple Dataverse installations exist, with <code>"dataverse.harvard.edu"</code> being the
@@ -117,19 +123,26 @@ most major. The server can be defined each time within a function, or it can
 be set as a default via an environment variable. To set a default, run
 <code>Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")</code>
 or add <code>DATAVERSE_SERVER = "dataverse.harvard.edu</code> in one's <code>.Renviron</code>
-file (<code>usethis::edit_r_environ()</code>), with the appropriate domain as its value.</p></dd>
+file (<code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>), with the appropriate domain as its value.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments passed to an HTTP request function, such as
 <code><a href="https://httr.r-lib.org/reference/GET.html" class="external-link">GET</a></code>, <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">POST</a></code>, or
 <code><a href="https://httr.r-lib.org/reference/DELETE.html" class="external-link">DELETE</a></code>.</p></dd>
+
+
 <dt>block</dt>
 <dd><p>A character string specifying a metadata block to retrieve.
 By default this is “citation”. Other values may be available, depending
 on the dataset, such as “geospatial” or “socialscience”.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of class “dataverse_dataset” or a list of a form dependent
+    
+
+<p>A list of class “dataverse_dataset” or a list of a form dependent
 on the specific metadata block retrieved. <code>dataset_files</code> returns a list of
 objects of class “dataverse_file”.</p>
     </div>
@@ -151,20 +164,20 @@ metadata and a data.frame of files (rather than a list of file objects).</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># https://demo.dataverse.org/dataverse/dataverse-client-r</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"demo.dataverse.org"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># download file from:</span></span>
-<span class="r-in"><span class="va">dv</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_dataverse.html">get_dataverse</a></span><span class="op">(</span><span class="st">"dataverse-client-r"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">contents</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_dataverse.html">dataverse_contents</a></span><span class="op">(</span><span class="va">dv</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">dataset_files</span><span class="op">(</span><span class="va">contents</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">get_dataset</span><span class="op">(</span><span class="va">contents</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">dataset_metadata</span><span class="op">(</span><span class="va">contents</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.unsetenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># https://demo.dataverse.org/dataverse/dataverse-client-r</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"demo.dataverse.org"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># download file from:</span></span></span>
+<span class="r-in"><span><span class="va">dv</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_dataverse.html">get_dataverse</a></span><span class="op">(</span><span class="st">"dataverse-client-r"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">contents</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_dataverse.html">dataverse_contents</a></span><span class="op">(</span><span class="va">dv</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">dataset_files</span><span class="op">(</span><span class="va">contents</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">get_dataset</span><span class="op">(</span><span class="va">contents</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">dataset_metadata</span><span class="op">(</span><span class="va">contents</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.unsetenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -179,7 +192,7 @@ metadata and a data.frame of files (rather than a list of file objects).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

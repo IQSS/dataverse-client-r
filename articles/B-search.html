@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.13</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>2. Data Search and Discovery</h1>
             
-            <h4 data-toc-skip class="date">2022-06-11</h4>
+            <h4 data-toc-skip class="date">2023-03-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/iqss/dataverse-client-r/blob/HEAD/vignettes/B-search.Rmd" class="external-link"><code>vignettes/B-search.Rmd</code></a></small>
       <div class="hidden name"><code>B-search.Rmd</code></div>
@@ -97,81 +97,81 @@
     
 <p>Searching for data within Dataverse is quite easy using the <code><a href="../reference/dataverse_search.html">dataverse_search()</a></code> function. The simplest searches simply consist of a query string:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://iqss.github.io/dataverse-client-r/">"dataverse"</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"Gary King"</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">## 10 of 1590 results retrieved</span></code></pre>
-<pre><code><span class="co">##                                                                                                                   name</span>
-<span class="co">## 1                                                                            004_informal_food_retail_Nigeria_2018.tab</span>
-<span class="co">## 2                                                                                00698McArthur-King-BoxCoverSheets.pdf</span>
-<span class="co">## 3                                                                               00698McArthur-King-MemoOfAgreement.pdf</span>
-<span class="co">## 4                                                                              00698McArthur-King-StudyDescription.pdf</span>
-<span class="co">## 5  01 ReadMe Unlocking history through automated virtual unfolding of sealed documents imaged by X-ray microtomography</span>
-<span class="co">## 6                                           01_ReadMe_The_Spiral_Locked_Letters_of_Elizabeth_I_and_Mary_Queen_of_Scots</span>
-<span class="co">## 7                                     03 Brienne Collection letterlocking data: Images folder 02/16, DB-0874_2–DB-0903</span>
-<span class="co">## 8                                    03 Brienne Collection letterlocking data: Images folder 04/16, DB-0988–DB-1109_03</span>
-<span class="co">## 9                                 03 Brienne Collection letterlocking data: Images folder 06/16, DB-1241_02–DB-1339_06</span>
-<span class="co">## 10                                03 Brienne Collection letterlocking data: Images folder 08/16, DB-1455_02–DB-1564_01</span></code></pre>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://iqss.github.io/dataverse-client-r/">"dataverse"</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"Gary King"</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">## 10 of 3676 results retrieved</span></span></code></pre>
+<pre><code><span><span class="co">##                                                                                                                   name</span></span>
+<span><span class="co">## 1                                                                            004_informal_food_retail_Nigeria_2018.tab</span></span>
+<span><span class="co">## 2                                                                                00698McArthur-King-BoxCoverSheets.pdf</span></span>
+<span><span class="co">## 3                                                                               00698McArthur-King-MemoOfAgreement.pdf</span></span>
+<span><span class="co">## 4                                                                              00698McArthur-King-StudyDescription.pdf</span></span>
+<span><span class="co">## 5  01 ReadMe Unlocking history through automated virtual unfolding of sealed documents imaged by X-ray microtomography</span></span>
+<span><span class="co">## 6                                           01_ReadMe_The_Spiral_Locked_Letters_of_Elizabeth_I_and_Mary_Queen_of_Scots</span></span>
+<span><span class="co">## 7                                     03 Brienne Collection letterlocking data: Images folder 02/16, DB-0874_2–DB-0903</span></span>
+<span><span class="co">## 8                                    03 Brienne Collection letterlocking data: Images folder 04/16, DB-0988–DB-1109_03</span></span>
+<span><span class="co">## 9                                 03 Brienne Collection letterlocking data: Images folder 06/16, DB-1241_02–DB-1339_06</span></span>
+<span><span class="co">## 10                                03 Brienne Collection letterlocking data: Images folder 08/16, DB-1455_02–DB-1564_01</span></span></code></pre>
 <p>The results are paginated, so users can rely upon the <code>per_page</code> and <code>start</code> argument to requested subsequent pages of results. We’ll start at 6 and to show that we retrieve the last five results from the previous query plus 15 more (due to <code>per_page = 20</code>):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"Gary King"</span>, start <span class="op">=</span> <span class="fl">6</span>, per_page <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">## 20 of 1590 results retrieved</span></code></pre>
-<pre><code><span class="co">##                                                                                                                           name</span>
-<span class="co">## 1                                             03 Brienne Collection letterlocking data: Images folder 02/16, DB-0874_2–DB-0903</span>
-<span class="co">## 2                                            03 Brienne Collection letterlocking data: Images folder 04/16, DB-0988–DB-1109_03</span>
-<span class="co">## 3                                         03 Brienne Collection letterlocking data: Images folder 06/16, DB-1241_02–DB-1339_06</span>
-<span class="co">## 4                                         03 Brienne Collection letterlocking data: Images folder 08/16, DB-1455_02–DB-1564_01</span>
-<span class="co">## 5                                            03 Brienne Collection letterlocking data: Images folder 12/16, DB-1868–DB-1963_03</span>
-<span class="co">## 6                                            03 Brienne Collection letterlocking data: Images folder 14/16, DB-2064_01–2155_03</span>
-<span class="co">## 7                                                                                                       03 Spiral-lock figures</span>
-<span class="co">## 8                                                                                                 03_scaledBayesianFactors.tab</span>
-<span class="co">## 9                                                                                07 Letterlocking Categories and Formats Chart</span>
-<span class="co">## 10                                                                                                            077_mod1_s2m.tab</span>
-<span class="co">## 11                                                                              0micron Decrease 66% in the danger of Covid-19</span>
-<span class="co">## 12 10 Foldable: Launch Little Book of Locks (UH6089), with Categories and Formats Chart. Letterlocking Instructional Resources</span>
-<span class="co">## 13                                                                                      10 Million International Dyadic Events</span>
-<span class="co">## 14                                                                     12070002_Wolfville T and Kings Subd D SC 2016-92640.pdf</span>
-<span class="co">## 15                                                                                     12070005-Kings Subd C SC 2016-92640.pdf</span>
-<span class="co">## 16                                                                           1479 data points of covid19 policy response times</span>
-<span class="co">## 17                                                             1998 Jewish Community Study of the Coachella Valley, California</span>
-<span class="co">## 18                                                                                               2002 State Legislative Survey</span>
-<span class="co">## 19                                                                          2007 White Sands Dune Field lidar topographic data</span>
-<span class="co">## 20                                                                          2008 White Sands Dune Field lidar topographic data</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span><span class="st">"Gary King"</span>, start <span class="op">=</span> <span class="fl">6</span>, per_page <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">## 20 of 3676 results retrieved</span></span></code></pre>
+<pre><code><span><span class="co">##                                                                                                                           name</span></span>
+<span><span class="co">## 1                                             03 Brienne Collection letterlocking data: Images folder 02/16, DB-0874_2–DB-0903</span></span>
+<span><span class="co">## 2                                            03 Brienne Collection letterlocking data: Images folder 04/16, DB-0988–DB-1109_03</span></span>
+<span><span class="co">## 3                                         03 Brienne Collection letterlocking data: Images folder 06/16, DB-1241_02–DB-1339_06</span></span>
+<span><span class="co">## 4                                         03 Brienne Collection letterlocking data: Images folder 08/16, DB-1455_02–DB-1564_01</span></span>
+<span><span class="co">## 5                                            03 Brienne Collection letterlocking data: Images folder 12/16, DB-1868–DB-1963_03</span></span>
+<span><span class="co">## 6                                            03 Brienne Collection letterlocking data: Images folder 14/16, DB-2064_01–2155_03</span></span>
+<span><span class="co">## 7                                                                                                       03 Spiral-lock figures</span></span>
+<span><span class="co">## 8                                                                                                 03_scaledBayesianFactors.tab</span></span>
+<span><span class="co">## 9                                                                                07 Letterlocking Categories and Formats Chart</span></span>
+<span><span class="co">## 10                                                                                                            077_mod1_s2m.tab</span></span>
+<span><span class="co">## 11 10 Foldable: Launch Little Book of Locks (UH6089), with Categories and Formats Chart. Letterlocking Instructional Resources</span></span>
+<span><span class="co">## 12                                                                                      10 Million International Dyadic Events</span></span>
+<span><span class="co">## 13                                                                     12070002_Wolfville T and Kings Subd D SC 2016-92640.pdf</span></span>
+<span><span class="co">## 14                                                                                     12070005-Kings Subd C SC 2016-92640.pdf</span></span>
+<span><span class="co">## 15                                                                           1479 data points of covid19 policy response times</span></span>
+<span><span class="co">## 16                                                             1998 Jewish Community Study of the Coachella Valley, California</span></span>
+<span><span class="co">## 17                                                                                               2002 State Legislative Survey</span></span>
+<span><span class="co">## 18                                                                          2007 White Sands Dune Field lidar topographic data</span></span>
+<span><span class="co">## 19                                                                          2008 White Sands Dune Field lidar topographic data</span></span>
+<span><span class="co">## 20                                                                                                         2012 STATA Data.tab</span></span></code></pre>
 <p>More complicated searches can specify metadata fields like <code>title</code> and restrict results to a specific <code>type</code> of Dataverse object (a “dataverse”, “dataset”, or “file”):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ei</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span>author <span class="op">=</span> <span class="st">"Gary King"</span>, title <span class="op">=</span> <span class="st">"Ecological Inference"</span>, type <span class="op">=</span> <span class="st">"dataset"</span>, per_page <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## 20 of 1454 results retrieved</span></code></pre>
+<code class="sourceCode R"><span><span class="va">ei</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dataverse_search.html">dataverse_search</a></span><span class="op">(</span>author <span class="op">=</span> <span class="st">"Gary King"</span>, title <span class="op">=</span> <span class="st">"Ecological Inference"</span>, type <span class="op">=</span> <span class="st">"dataset"</span>, per_page <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 20 of 1557 results retrieved</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># fields returned</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ei</span><span class="op">)</span>
-<span class="co"># names of datasets</span>
-<span class="va">ei</span><span class="op">$</span><span class="va">name</span></code></pre></div>
-<pre><code><span class="co">##  [1] "name"                    "type"                    "url"                     "global_id"              </span>
-<span class="co">##  [5] "description"             "published_at"            "publisher"               "citationHtml"           </span>
-<span class="co">##  [9] "identifier_of_dataverse" "name_of_dataverse"       "citation"                "storageIdentifier"      </span>
-<span class="co">## [13] "keywords"                "subjects"                "fileCount"               "versionId"              </span>
-<span class="co">## [17] "versionState"            "majorVersion"            "minorVersion"            "createdAt"              </span>
-<span class="co">## [21] "updatedAt"               "contacts"                "authors"                 "publications"           </span>
-<span class="co">##  [1] "01 ReadMe Unlocking history through automated virtual unfolding of sealed documents imaged by X-ray microtomography"        </span>
-<span class="co">##  [2] "01_ReadMe_The_Spiral_Locked_Letters_of_Elizabeth_I_and_Mary_Queen_of_Scots"                                                 </span>
-<span class="co">##  [3] "03 Brienne Collection letterlocking data: Images folder 02/16, DB-0874_2–DB-0903"                                           </span>
-<span class="co">##  [4] "03 Brienne Collection letterlocking data: Images folder 04/16, DB-0988–DB-1109_03"                                          </span>
-<span class="co">##  [5] "03 Brienne Collection letterlocking data: Images folder 06/16, DB-1241_02–DB-1339_06"                                       </span>
-<span class="co">##  [6] "03 Brienne Collection letterlocking data: Images folder 08/16, DB-1455_02–DB-1564_01"                                       </span>
-<span class="co">##  [7] "03 Brienne Collection letterlocking data: Images folder 12/16, DB-1868–DB-1963_03"                                          </span>
-<span class="co">##  [8] "03 Brienne Collection letterlocking data: Images folder 14/16, DB-2064_01–2155_03"                                          </span>
-<span class="co">##  [9] "03 Spiral-lock figures"                                                                                                     </span>
-<span class="co">## [10] "07 Letterlocking Categories and Formats Chart"                                                                              </span>
-<span class="co">## [11] "10 Foldable: Launch Little Book of Locks (UH6089), with Categories and Formats Chart. Letterlocking Instructional Resources"</span>
-<span class="co">## [12] "10 Million International Dyadic Events"                                                                                     </span>
-<span class="co">## [13] "1479 data points of covid19 policy response times"                                                                          </span>
-<span class="co">## [14] "2016 Census of Population: ADA and DA Maps for Kings County Nova Scotia"                                                    </span>
-<span class="co">## [15] "3D Dust map from Green et al. (2015)"                                                                                       </span>
-<span class="co">## [16] "3D dust map from Green et al. (2017)"                                                                                       </span>
-<span class="co">## [17] "3D dust map from Green et al. (2019)"                                                                                       </span>
-<span class="co">## [18] "A 1D Lyman-alpha Profile Camera for Plasma Edge Neutral Studies  on the DIII-D Tokamak"                                     </span>
-<span class="co">## [19] "A Comparative Analysis of Brazil's Foreign Policy Drivers Towards the USA: Comment on Amorim Neto (2011)"                   </span>
-<span class="co">## [20] "A Critique of Dyadic Design"</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># fields returned</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ei</span><span class="op">)</span></span>
+<span><span class="co"># names of datasets</span></span>
+<span><span class="va">ei</span><span class="op">$</span><span class="va">name</span></span></code></pre></div>
+<pre><code><span><span class="co">##  [1] "name"                    "type"                    "url"                     "global_id"              </span></span>
+<span><span class="co">##  [5] "description"             "published_at"            "publisher"               "citationHtml"           </span></span>
+<span><span class="co">##  [9] "identifier_of_dataverse" "name_of_dataverse"       "citation"                "storageIdentifier"      </span></span>
+<span><span class="co">## [13] "keywords"                "subjects"                "fileCount"               "versionId"              </span></span>
+<span><span class="co">## [17] "versionState"            "majorVersion"            "minorVersion"            "createdAt"              </span></span>
+<span><span class="co">## [21] "updatedAt"               "contacts"                "authors"                 "publications"           </span></span>
+<span><span class="co">##  [1] "01 ReadMe Unlocking history through automated virtual unfolding of sealed documents imaged by X-ray microtomography"        </span></span>
+<span><span class="co">##  [2] "01_ReadMe_The_Spiral_Locked_Letters_of_Elizabeth_I_and_Mary_Queen_of_Scots"                                                 </span></span>
+<span><span class="co">##  [3] "03 Brienne Collection letterlocking data: Images folder 02/16, DB-0874_2–DB-0903"                                           </span></span>
+<span><span class="co">##  [4] "03 Brienne Collection letterlocking data: Images folder 04/16, DB-0988–DB-1109_03"                                          </span></span>
+<span><span class="co">##  [5] "03 Brienne Collection letterlocking data: Images folder 06/16, DB-1241_02–DB-1339_06"                                       </span></span>
+<span><span class="co">##  [6] "03 Brienne Collection letterlocking data: Images folder 08/16, DB-1455_02–DB-1564_01"                                       </span></span>
+<span><span class="co">##  [7] "03 Brienne Collection letterlocking data: Images folder 12/16, DB-1868–DB-1963_03"                                          </span></span>
+<span><span class="co">##  [8] "03 Brienne Collection letterlocking data: Images folder 14/16, DB-2064_01–2155_03"                                          </span></span>
+<span><span class="co">##  [9] "03 Spiral-lock figures"                                                                                                     </span></span>
+<span><span class="co">## [10] "07 Letterlocking Categories and Formats Chart"                                                                              </span></span>
+<span><span class="co">## [11] "10 Foldable: Launch Little Book of Locks (UH6089), with Categories and Formats Chart. Letterlocking Instructional Resources"</span></span>
+<span><span class="co">## [12] "10 Million International Dyadic Events"                                                                                     </span></span>
+<span><span class="co">## [13] "1479 data points of covid19 policy response times"                                                                          </span></span>
+<span><span class="co">## [14] "2016 Census of Population: ADA and DA Maps for Kings County Nova Scotia"                                                    </span></span>
+<span><span class="co">## [15] "3D Dust map from Green et al. (2015)"                                                                                       </span></span>
+<span><span class="co">## [16] "3D dust map from Green et al. (2017)"                                                                                       </span></span>
+<span><span class="co">## [17] "3D dust map from Green et al. (2019)"                                                                                       </span></span>
+<span><span class="co">## [18] "A 1D Lyman-alpha Profile Camera for Plasma Edge Neutral Studies  on the DIII-D Tokamak"                                     </span></span>
+<span><span class="co">## [19] "A Comparative Analysis of Brazil's Foreign Policy Drivers Towards the USA: Comment on Amorim Neto (2011)"                   </span></span>
+<span><span class="co">## [20] "A Critique of Dyadic Design"</span></span></code></pre>
 <p>Once datasets and files are identified, it is easy to download and use them directly in R. See the <a href="C-download.html">“Data Download” vignette</a> for details.</p>
   </div>
 
@@ -190,7 +190,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

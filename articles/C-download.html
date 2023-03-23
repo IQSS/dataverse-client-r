@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.13</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>3. Data Download</h1>
             
-            <h4 data-toc-skip class="date">2022-06-11</h4>
+            <h4 data-toc-skip class="date">2023-03-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/iqss/dataverse-client-r/blob/HEAD/vignettes/C-download.Rmd" class="external-link"><code>vignettes/C-download.Rmd</code></a></small>
       <div class="hidden name"><code>C-download.Rmd</code></div>
@@ -99,7 +99,7 @@
 <p>The Dataverse entry for this study is persistently retrievable by a “Digital Object Identifier (DOI)”: <a href="https://doi.org/10.7910/DVN/ARKOTI" class="external-link uri">https://doi.org/10.7910/DVN/ARKOTI</a> and the citation on the Dataverse Page includes a “<a href="https://guides.dataverse.org/en/latest/developers/unf/index.html" class="external-link">Universal Numeric Fingerprint (UNF)</a>”: <code>UNF:6:+itU9hcUJ8I9E0Kqv8HWHg==</code>, which provides a versioned, multi-file hash for the entire study, which contains 32 files.</p>
 <p>The following examples will draw from the Harvard Dataverse, so it is convenient to set this as a default environment variable.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span> <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></span></code></pre></div>
 <p>This is equivalent to setting <code>server = "dataverse.harvard.edu"</code> in every <code>dataverse</code> function each time. Note that if you set an environment variable like the above, that operation is necessary to make your code reproducible on a different machine.</p>
 <p>For downloading a public dataset, <em>no API Key is needed</em>.</p>
 <div class="section level2">
@@ -107,42 +107,42 @@
 </h2>
 <p>We will download public data files and examine them directly in R using the <strong>dataverse</strong> package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://iqss.github.io/dataverse-client-r/">"dataverse"</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://tibble.tidyverse.org/" class="external-link">"tibble"</a></span><span class="op">)</span> <span class="co"># to see dataframes in tidyverse-form</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://iqss.github.io/dataverse-client-r/">"dataverse"</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://tibble.tidyverse.org/" class="external-link">"tibble"</a></span><span class="op">)</span> <span class="co"># to see dataframes in tidyverse-form</span></span></code></pre></div>
 <p>First, we retrieve a plain-text file like this dataset on electricity consumption by <a href="https://doi.org/10.7910/DVN/ARKOTI/GN1MRT" class="external-link">Wakiyama et al. (2014)</a>. Taking the file name and dataset DOI from this entry,</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">energy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_dataframe.html">get_dataframe_by_name</a></span><span class="op">(</span>
-  filename <span class="op">=</span> <span class="st">"comprehensiveJapanEnergy.tab"</span>,
-  dataset <span class="op">=</span> <span class="st">"10.7910/DVN/ARKOTI"</span>, 
-  server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">energy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_dataframe.html">get_dataframe_by_name</a></span><span class="op">(</span></span>
+<span>  filename <span class="op">=</span> <span class="st">"comprehensiveJapanEnergy.tab"</span>,</span>
+<span>  dataset <span class="op">=</span> <span class="st">"10.7910/DVN/ARKOTI"</span>, </span>
+<span>  server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">energy</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 6 × 10</span></span>
-<span class="co">##    time date  dummy  temp temp2      all    large    house    kepco    tepco</span>
-<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span>     1 8-Jan     0   5.9  34.8 95<span style="text-decoration: underline;">792</span>389 35<span style="text-decoration: underline;">194</span>957 26<span style="text-decoration: underline;">190</span>714 13<span style="text-decoration: underline;">357</span>735 26<span style="text-decoration: underline;">960</span>899</span>
-<span class="co">## <span style="color: #BCBCBC;">2</span>     2 8-Feb     0   5.5  30.3 95<span style="text-decoration: underline;">156</span>901 35<span style="text-decoration: underline;">322</span>031 24<span style="text-decoration: underline;">224</span>097 13<span style="text-decoration: underline;">315</span>027 27<span style="text-decoration: underline;">189</span>705</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span>     3 8-Mar     0  10.7 114.  91<span style="text-decoration: underline;">034</span>047 36<span style="text-decoration: underline;">474</span>192 21<span style="text-decoration: underline;">391</span>965 12<span style="text-decoration: underline;">805</span>831 24<span style="text-decoration: underline;">495</span>519</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span>     4 8-Apr     0  14.7 216.  84<span style="text-decoration: underline;">087</span>552 34<span style="text-decoration: underline;">949</span>622 18<span style="text-decoration: underline;">494</span>473 11<span style="text-decoration: underline;">494</span>328 23<span style="text-decoration: underline;">540</span>356</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>     5 8-May     0  18.5 342.  82<span style="text-decoration: underline;">742</span>929 35<span style="text-decoration: underline;">417</span>089 17<span style="text-decoration: underline;">923</span>760 11<span style="text-decoration: underline;">589</span>061 22<span style="text-decoration: underline;">848</span>737</span>
-<span class="co">## <span style="color: #BCBCBC;">6</span>     6 8-Jun     0  21.3 454.  82<span style="text-decoration: underline;">180</span>013 36<span style="text-decoration: underline;">692</span>291 15<span style="text-decoration: underline;">205</span>229 11<span style="text-decoration: underline;">360</span>771 22<span style="text-decoration: underline;">487</span>441</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">energy</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 10</span></span></span>
+<span><span class="co">##    time date  dummy  temp temp2      all    large    house    kepco    tepco</span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>     1 8-Jan     0   5.9  34.8 95<span style="text-decoration: underline;">792</span>389 35<span style="text-decoration: underline;">194</span>957 26<span style="text-decoration: underline;">190</span>714 13<span style="text-decoration: underline;">357</span>735 26<span style="text-decoration: underline;">960</span>899</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>     2 8-Feb     0   5.5  30.3 95<span style="text-decoration: underline;">156</span>901 35<span style="text-decoration: underline;">322</span>031 24<span style="text-decoration: underline;">224</span>097 13<span style="text-decoration: underline;">315</span>027 27<span style="text-decoration: underline;">189</span>705</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span>     3 8-Mar     0  10.7 114.  91<span style="text-decoration: underline;">034</span>047 36<span style="text-decoration: underline;">474</span>192 21<span style="text-decoration: underline;">391</span>965 12<span style="text-decoration: underline;">805</span>831 24<span style="text-decoration: underline;">495</span>519</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span>     4 8-Apr     0  14.7 216.  84<span style="text-decoration: underline;">087</span>552 34<span style="text-decoration: underline;">949</span>622 18<span style="text-decoration: underline;">494</span>473 11<span style="text-decoration: underline;">494</span>328 23<span style="text-decoration: underline;">540</span>356</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span>     5 8-May     0  18.5 342.  82<span style="text-decoration: underline;">742</span>929 35<span style="text-decoration: underline;">417</span>089 17<span style="text-decoration: underline;">923</span>760 11<span style="text-decoration: underline;">589</span>061 22<span style="text-decoration: underline;">848</span>737</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">6</span>     6 8-Jun     0  21.3 454.  82<span style="text-decoration: underline;">180</span>013 36<span style="text-decoration: underline;">692</span>291 15<span style="text-decoration: underline;">205</span>229 11<span style="text-decoration: underline;">360</span>771 22<span style="text-decoration: underline;">487</span>441</span></span></code></pre>
 <p>These <code>get_dataframe_*</code> functions, introduced in v0.3.0, directly read in the data into a R environment through whatever R function supplied by <code>.f</code>. The default of the <code>get_dataframe_*</code> functions is to read in such data by <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_tsv()</a></code>. The <code>.f</code> function can be modified to modify the read-in settings. For example, the following modification is a base-R equivalent to read in the ingested data.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span>
-<span class="va">energy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_dataframe.html">get_dataframe_by_name</a></span><span class="op">(</span>
-  filename <span class="op">=</span> <span class="st">"comprehensiveJapanEnergy.tab"</span>,
-  dataset <span class="op">=</span> <span class="st">"10.7910/DVN/ARKOTI"</span>, 
-  server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span>,
-  .f <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span><span class="va">x</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">energy</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##   time  date dummy temp temp2      all    large    house    kepco    tepco</span>
-<span class="co">## 1    1 8-Jan     0  5.9  34.8 95792389 35194957 26190714 13357735 26960899</span>
-<span class="co">## 2    2 8-Feb     0  5.5  30.3 95156901 35322031 24224097 13315027 27189705</span>
-<span class="co">## 3    3 8-Mar     0 10.7 114.5 91034047 36474192 21391965 12805831 24495519</span>
-<span class="co">## 4    4 8-Apr     0 14.7 216.1 84087552 34949622 18494473 11494328 23540356</span>
-<span class="co">## 5    5 8-May     0 18.5 342.3 82742929 35417089 17923760 11589061 22848737</span>
-<span class="co">## 6    6 8-Jun     0 21.3 453.7 82180013 36692291 15205229 11360771 22487441</span></code></pre>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span></span>
+<span><span class="va">energy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_dataframe.html">get_dataframe_by_name</a></span><span class="op">(</span></span>
+<span>  filename <span class="op">=</span> <span class="st">"comprehensiveJapanEnergy.tab"</span>,</span>
+<span>  dataset <span class="op">=</span> <span class="st">"10.7910/DVN/ARKOTI"</span>, </span>
+<span>  server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span>,</span>
+<span>  .f <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span><span class="va">x</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">energy</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##   time  date dummy temp temp2      all    large    house    kepco    tepco</span></span>
+<span><span class="co">## 1    1 8-Jan     0  5.9  34.8 95792389 35194957 26190714 13357735 26960899</span></span>
+<span><span class="co">## 2    2 8-Feb     0  5.5  30.3 95156901 35322031 24224097 13315027 27189705</span></span>
+<span><span class="co">## 3    3 8-Mar     0 10.7 114.5 91034047 36474192 21391965 12805831 24495519</span></span>
+<span><span class="co">## 4    4 8-Apr     0 14.7 216.1 84087552 34949622 18494473 11494328 23540356</span></span>
+<span><span class="co">## 5    5 8-May     0 18.5 342.3 82742929 35417089 17923760 11589061 22848737</span></span>
+<span><span class="co">## 6    6 8-Jun     0 21.3 453.7 82180013 36692291 15205229 11360771 22487441</span></span></code></pre>
 <p>The dataverse package can also download datasets that are <em>drafts</em> (i.e. versions not released publicly), as long as the user of the dataset provides their appropriate DATAVERSE_KEY. Users may need to modify the metadata of a datafile, such as adding a descriptive label, for the data downloading to work properly in this case. This is because the the file identifier UNF, which the read function relies on, may only appear after metadata has been added.</p>
 </div>
 <div class="section level2">
@@ -150,30 +150,30 @@
 </h2>
 <p>If a file is displayed on dataverse as a <code>.tab</code> file like the survey data by <a href="https://doi.org/10.7910/DVN/ARKOTI/A8YRMP" class="external-link">Alvarez et al. (2013)</a>, it is likely that Dataverse <a href="https://guides.dataverse.org/en/latest/user/tabulardataingest/index.html" class="external-link">ingested</a> the file to a plain-text, tab-delimited format.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">argentina_tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_dataframe.html">get_dataframe_by_name</a></span><span class="op">(</span>
-  filename <span class="op">=</span> <span class="st">"alpl2013.tab"</span>,
-  dataset <span class="op">=</span> <span class="st">"10.7910/DVN/ARKOTI"</span>,
-  server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">argentina_tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_dataframe.html">get_dataframe_by_name</a></span><span class="op">(</span></span>
+<span>  filename <span class="op">=</span> <span class="st">"alpl2013.tab"</span>,</span>
+<span>  dataset <span class="op">=</span> <span class="st">"10.7910/DVN/ARKOTI"</span>,</span>
+<span>  server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></span></code></pre></div>
 <p>However, ingested files may not retain important dataset attributes. For example, Stata and SPSS datasets encode value labels on to numeric values. Factor variables in R dataframes encode levels, not only labels. A plain-text ingested file will discard such information. For example, the <code>polling_place</code> variable in this data is only given by numbers, although the original data labelled these numbers with informative values.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">argentina_tab</span><span class="op">$</span><span class="va">polling_place</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##  num [1:1475] 31 31 31 31 31 31 31 31 31 31 ...</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">argentina_tab</span><span class="op">$</span><span class="va">polling_place</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##  num [1:1475] 31 31 31 31 31 31 31 31 31 31 ...</span></span></code></pre>
 <p>When ingesting, Dataverse retains a <code>original</code> version that retains these attributes but may not be readable in some platforms. The <code>get_dataframe_*</code> functions have an argument that can be set to <code>original = TRUE</code>. In this case we know that <code>alpl2013.tab</code> was originally a Stata dta file, so we can run:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">argentina_dta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_dataframe.html">get_dataframe_by_name</a></span><span class="op">(</span>
-  filename <span class="op">=</span> <span class="st">"alpl2013.tab"</span>,
-  dataset <span class="op">=</span> <span class="st">"10.7910/DVN/ARKOTI"</span>,
-  server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span>,
-  original <span class="op">=</span> <span class="cn">TRUE</span>,
-  .f <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="va"><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">read_dta</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">argentina_dta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_dataframe.html">get_dataframe_by_name</a></span><span class="op">(</span></span>
+<span>  filename <span class="op">=</span> <span class="st">"alpl2013.tab"</span>,</span>
+<span>  dataset <span class="op">=</span> <span class="st">"10.7910/DVN/ARKOTI"</span>,</span>
+<span>  server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span>,</span>
+<span>  original <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  .f <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="va"><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">read_dta</a></span><span class="op">)</span></span></code></pre></div>
 <p>Now we see that labels are read in through <code>haven</code>’s labelled variables class:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">argentina_dta</span><span class="op">$</span><span class="va">polling_place</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##  dbl+lbl [1:1475] 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 3...</span>
-<span class="co">##  @ label       : chr "polling_place"</span>
-<span class="co">##  @ format.stata: chr "%9.0g"</span>
-<span class="co">##  @ labels      : Named num [1:37] 1 2 3 4 5 6 7 8 9 10 ...</span>
-<span class="co">##   ..- attr(*, "names")= chr [1:37] "E.E.T." "Escuela Juan Bautista Alberdi" "Escuela Juan Carlos DÃ¡valos" "Escuela Bernardino de Rivadavia" ...</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">argentina_dta</span><span class="op">$</span><span class="va">polling_place</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##  dbl+lbl [1:1475] 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 3...</span></span>
+<span><span class="co">##  @ label       : chr "polling_place"</span></span>
+<span><span class="co">##  @ format.stata: chr "%9.0g"</span></span>
+<span><span class="co">##  @ labels      : Named num [1:37] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">##   ..- attr(*, "names")= chr [1:37] "E.E.T." "Escuela Juan Bautista Alberdi" "Escuela Juan Carlos DÃ¡valos" "Escuela Bernardino de Rivadavia" ...</span></span></code></pre>
 <p>Users should pick <code>.f</code> and <code>original</code> based on their existing knowledge of the file. If the original file is a <code>.sav</code> SPSS file, <code>.f</code> can be <code><a href="https://haven.tidyverse.org/reference/read_spss.html" class="external-link">haven::read_sav</a></code>. If it is a <code>.Rds</code> file, use <code>readRDS</code> or <code><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">readr::read_rds</a></code>. In fact, because the raw data is read in as a binary, there is no limitation to the file types <code>get_dataframe_*</code> can read in, as far as the dataverse package is concerned.</p>
 <p>There are two more ways to read in a dataframe other than <code><a href="../reference/get_dataframe.html">get_dataframe_by_name()</a></code>.</p>
 <ul>
@@ -189,29 +189,29 @@
 </h2>
 <p>We may also want to retrieve some basic metadata about the dataset. The <code><a href="../reference/get_dataset.html">get_dataset()</a></code> function lists all of the files in the dataset along with a considerable amount of metadata about each. (Recall that in Dataverse, <code>dataset</code> is a collection of files, not a single file.) We can see a quick glance at these files using:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_dataset.html">get_dataset</a></span><span class="op">(</span><span class="st">"doi:10.7910/DVN/ARKOTI"</span>, server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span>
-<span class="va">dataset</span><span class="op">$</span><span class="va">files</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"filename"</span>, <span class="st">"contentType"</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_dataset.html">get_dataset</a></span><span class="op">(</span><span class="st">"doi:10.7910/DVN/ARKOTI"</span>, server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></span>
+<span><span class="va">dataset</span><span class="op">$</span><span class="va">files</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"filename"</span>, <span class="st">"contentType"</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <p>This shows that there are indeed 32 files, a mix of .R code files and tab- and comma-separated data files.</p>
 <p>You can also retrieve more extensive metadata using <code><a href="../reference/get_dataset.html">dataset_metadata()</a></code>:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_dataset.html">dataset_metadata</a></span><span class="op">(</span><span class="st">"10.7910/DVN/ARKOTI"</span>, server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span>, 
-    max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## List of 3</span>
-<span class="co">##  $ displayName: chr "Citation Metadata"</span>
-<span class="co">##  $ name       : chr "citation"</span>
-<span class="co">##  $ fields     :'data.frame': 7 obs. of  4 variables:</span>
-<span class="co">##   ..$ typeName : chr [1:7] "title" "author" "datasetContact" "dsDescription" ...</span>
-<span class="co">##   ..$ multiple : logi [1:7] FALSE TRUE TRUE TRUE TRUE FALSE ...</span>
-<span class="co">##   ..$ typeClass: chr [1:7] "primitive" "compound" "compound" "compound" ...</span>
-<span class="co">##   ..$ value    :List of 7</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_dataset.html">dataset_metadata</a></span><span class="op">(</span><span class="st">"10.7910/DVN/ARKOTI"</span>, server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span>, </span>
+<span>    max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## List of 3</span></span>
+<span><span class="co">##  $ displayName: chr "Citation Metadata"</span></span>
+<span><span class="co">##  $ name       : chr "citation"</span></span>
+<span><span class="co">##  $ fields     :'data.frame': 7 obs. of  4 variables:</span></span>
+<span><span class="co">##   ..$ typeName : chr [1:7] "title" "author" "datasetContact" "dsDescription" ...</span></span>
+<span><span class="co">##   ..$ multiple : logi [1:7] FALSE TRUE TRUE TRUE TRUE FALSE ...</span></span>
+<span><span class="co">##   ..$ typeClass: chr [1:7] "primitive" "compound" "compound" "compound" ...</span></span>
+<span><span class="co">##   ..$ value    :List of 7</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="retrieving-scripts-and-other-files">Retrieving Scripts and Other Files<a class="anchor" aria-label="anchor" href="#retrieving-scripts-and-other-files"></a>
 </h2>
 <p>If the file you want to retrieve is not data, you may want to use the more primitive function, <code>get_file</code>, which gets the file data as a raw binary file. See the help page examples of <code><a href="../reference/files.html">get_file()</a></code> that use the <code><a href="https://rdrr.io/r/base/readBin.html" class="external-link">base::writeBin()</a></code> function for details on how to write and read these binary files instead.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">code3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/files.html">get_file</a></span><span class="op">(</span><span class="st">"chapter03.R"</span>, <span class="st">"doi:10.7910/DVN/ARKOTI"</span>, server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/readBin.html" class="external-link">writeBin</a></span><span class="op">(</span><span class="va">code3</span>, <span class="st">"chapter03.R"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">code3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/files.html">get_file</a></span><span class="op">(</span><span class="st">"chapter03.R"</span>, <span class="st">"doi:10.7910/DVN/ARKOTI"</span>, server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readBin.html" class="external-link">writeBin</a></span><span class="op">(</span><span class="va">code3</span>, <span class="st">"chapter03.R"</span><span class="op">)</span></span></code></pre></div>
 </div>
   </div>
 
@@ -232,7 +232,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

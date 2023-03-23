@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.13</span>
       </span>
     </div>
 
@@ -69,25 +69,34 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_user_key</span><span class="op">(</span><span class="va">user</span>, <span class="va">password</span>, server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_user_key</span><span class="op">(</span><span class="va">user</span>, <span class="va">password</span>, server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>user</dt>
 <dd><p>A character vector specifying a Dataverse server username.</p></dd>
+
+
 <dt>password</dt>
 <dd><p>A character vector specifying the password for this user.</p></dd>
+
+
 <dt>server</dt>
 <dd><p>The Dataverse instance. See <code>get_file</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments passed to an HTTP request function, such as
 <code><a href="https://httr.r-lib.org/reference/GET.html" class="external-link">GET</a></code>, <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">POST</a></code>, or
 <code><a href="https://httr.r-lib.org/reference/DELETE.html" class="external-link">DELETE</a></code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list.</p>
+    
+
+<p>A list.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -99,10 +108,10 @@ argument to authenticate, but <code>server</code> must still be specified.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"> <span class="co"># Replace Username and password with personal login</span></span>
-<span class="r-in"> <span class="fu">get_user_key</span><span class="op">(</span><span class="st">"username"</span>, <span class="st">"password"</span>, server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span> <span class="co"># Replace Username and password with personal login</span></span></span>
+<span class="r-in"><span> <span class="fu">get_user_key</span><span class="op">(</span><span class="st">"username"</span>, <span class="st">"password"</span>, server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -117,7 +126,7 @@ argument to authenticate, but <code>server</code> must still be specified.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

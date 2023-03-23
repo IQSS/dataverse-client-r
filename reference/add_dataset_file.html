@@ -20,7 +20,7 @@ variable."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/m
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.13</span>
       </span>
     </div>
 
@@ -75,42 +75,50 @@ variable.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">add_dataset_file</span><span class="op">(</span>
-  <span class="va">file</span>,
-  <span class="va">dataset</span>,
-  description <span class="op">=</span> <span class="cn">NULL</span>,
-  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,
-  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">update_dataset_file</span><span class="op">(</span>
-  <span class="va">file</span>,
-  dataset <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">id</span>,
-  description <span class="op">=</span> <span class="cn">NULL</span>,
-  force <span class="op">=</span> <span class="cn">TRUE</span>,
-  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,
-  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_dataset_file</span><span class="op">(</span></span>
+<span>  <span class="va">file</span>,</span>
+<span>  <span class="va">dataset</span>,</span>
+<span>  description <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,</span>
+<span>  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">update_dataset_file</span><span class="op">(</span></span>
+<span>  <span class="va">file</span>,</span>
+<span>  dataset <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">id</span>,</span>
+<span>  description <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  force <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,</span>
+<span>  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>file</dt>
 <dd><p>A character string for the location path of the file to be uploaded.</p></dd>
+
+
 <dt>dataset</dt>
 <dd><p>A character specifying a persistent identification ID for a dataset,
 for example <code>"doi:10.70122/FK2/HXJVJU"</code>. Alternatively, an object of class
 “dataverse_dataset” obtained by <code><a href="get_dataverse.html">dataverse_contents()</a></code>.</p></dd>
+
+
 <dt>description</dt>
 <dd><p>Optionally, a character string providing a description of the file.</p></dd>
+
+
 <dt>key</dt>
 <dd><p>A character string specifying a Dataverse server API key. If one
 is not specified, functions calling authenticated API endpoints will fail.
 Keys can be specified atomically or globally using
 <code>Sys.setenv("DATAVERSE_KEY" = "examplekey")</code>.</p></dd>
+
+
 <dt>server</dt>
 <dd><p>A character string specifying a Dataverse server.
 Multiple Dataverse installations exist, with <code>"dataverse.harvard.edu"</code> being the
@@ -118,22 +126,31 @@ most major. The server can be defined each time within a function, or it can
 be set as a default via an environment variable. To set a default, run
 <code>Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")</code>
 or add <code>DATAVERSE_SERVER = "dataverse.harvard.edu</code> in one's <code>.Renviron</code>
-file (<code>usethis::edit_r_environ()</code>), with the appropriate domain as its value.</p></dd>
+file (<code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>), with the appropriate domain as its value.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments passed to an HTTP request function, such as
 <code><a href="https://httr.r-lib.org/reference/GET.html" class="external-link">GET</a></code>, <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">POST</a></code>, or
 <code><a href="https://httr.r-lib.org/reference/DELETE.html" class="external-link">DELETE</a></code>.</p></dd>
+
+
 <dt>id</dt>
 <dd><p>An integer specifying a file identifier; or, if <code>doi</code> is specified,
 a character string specifying a file name within the DOI-identified dataset; or an
 object of class “dataverse_file” as returned by <code><a href="get_dataset.html">dataset_files</a></code>.</p></dd>
+
+
 <dt>force</dt>
 <dd><p>A logical indicating whether to force the update even if the file
 types differ. Default is <code>TRUE</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>add_dataset_file</code> returns the new file ID. It also uploads the file
+    
+
+<p><code>add_dataset_file</code> returns the new file ID. It also uploads the file
 to the dataset.</p>
     </div>
     <div id="details">
@@ -153,28 +170,28 @@ deleted (<code><a href="delete_dataset.html">delete_dataset</a></code>).</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_dataset.html">create_dataset</a></span><span class="op">(</span><span class="st">"mydataverse"</span>, body <span class="op">=</span> <span class="va">meta</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Upload RDS dataset saved to local</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".rds"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu">add_dataset_file</span><span class="op">(</span><span class="va">tmp</span>, dataset <span class="op">=</span> <span class="va">ds</span>, description <span class="op">=</span> <span class="st">"mtcars"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Publish dataset</span></span>
-<span class="r-in"><span class="fu"><a href="publish_dataset.html">publish_dataset</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Update file and republish</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">tmp</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">update_dataset_file</span><span class="op">(</span><span class="va">tmp</span>, dataset <span class="op">=</span> <span class="va">ds</span>, id <span class="op">=</span> <span class="va">f</span>,</span>
-<span class="r-in">                    description <span class="op">=</span> <span class="st">"Actually iris"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="publish_dataset.html">publish_dataset</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Cleanup</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="delete_dataset.html">delete_dataset</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_dataset.html">create_dataset</a></span><span class="op">(</span><span class="st">"mydataverse"</span>, body <span class="op">=</span> <span class="va">meta</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Upload RDS dataset saved to local</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".rds"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu">add_dataset_file</span><span class="op">(</span><span class="va">tmp</span>, dataset <span class="op">=</span> <span class="va">ds</span>, description <span class="op">=</span> <span class="st">"mtcars"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Publish dataset</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="publish_dataset.html">publish_dataset</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Update file and republish</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">tmp</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">update_dataset_file</span><span class="op">(</span><span class="va">tmp</span>, dataset <span class="op">=</span> <span class="va">ds</span>, id <span class="op">=</span> <span class="va">f</span>,</span></span>
+<span class="r-in"><span>                    description <span class="op">=</span> <span class="st">"Actually iris"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="publish_dataset.html">publish_dataset</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Cleanup</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="delete_dataset.html">delete_dataset</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -189,7 +206,7 @@ deleted (<code><a href="delete_dataset.html">delete_dataset</a></code>).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

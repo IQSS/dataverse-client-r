@@ -25,7 +25,7 @@ as long as the entry has a UNF. See the download vignette for details."><!-- mat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.13</span>
       </span>
     </div>
 
@@ -85,17 +85,17 @@ as long as the entry has a UNF. See the download vignette for details.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_dataframe_by_name</span><span class="op">(</span>
-  <span class="va">filename</span>,
-  dataset <span class="op">=</span> <span class="cn">NULL</span>,
-  .f <span class="op">=</span> <span class="cn">NULL</span>,
-  original <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">get_dataframe_by_id</span><span class="op">(</span><span class="va">fileid</span>, .f <span class="op">=</span> <span class="cn">NULL</span>, original <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">get_dataframe_by_doi</span><span class="op">(</span><span class="va">filedoi</span>, .f <span class="op">=</span> <span class="cn">NULL</span>, original <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_dataframe_by_name</span><span class="op">(</span></span>
+<span>  <span class="va">filename</span>,</span>
+<span>  dataset <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .f <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  original <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">get_dataframe_by_id</span><span class="op">(</span><span class="va">fileid</span>, .f <span class="op">=</span> <span class="cn">NULL</span>, original <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">get_dataframe_by_doi</span><span class="op">(</span><span class="va">filedoi</span>, .f <span class="op">=</span> <span class="cn">NULL</span>, original <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -103,20 +103,28 @@ as long as the entry has a UNF. See the download vignette for details.</p>
     <dl><dt>filename</dt>
 <dd><p>The name of the file of interest, with file extension, for example
 <code>"roster-bulls-1996.tab"</code>. Can be a vector for multiple files.</p></dd>
+
+
 <dt>dataset</dt>
 <dd><p>A character specifying a persistent identification ID for a dataset,
 for example <code>"doi:10.70122/FK2/HXJVJU"</code>. Alternatively, an object of class
 “dataverse_dataset” obtained by <code><a href="get_dataverse.html">dataverse_contents()</a></code>.</p></dd>
+
+
 <dt>.f</dt>
 <dd><p>The function to used for reading in the raw dataset. The user
 must choose the appropriate function: for example if the target is a .rds
 file, then <code>.f</code> should be <code>readRDS</code> or <code><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">readr::read_rds</a></code>. It can be a custom
 function defined by the user. See examples for details.</p></dd>
+
+
 <dt>original</dt>
 <dd><p>A logical, whether to read the ingested,
 archival version of the datafile if one exists. If <code>TRUE</code>, users should supply
 a function to use to read in the original. The archival versions are tab-delimited
 <code>.tab</code> files so if <code>original = FALSE</code>, <code>.f</code> is set to <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_tsv</a></code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed on to <code><a href="files.html">get_file</a></code></p><dl><dt><code>file</code></dt>
 <dd><p>An integer specifying a file identifier; or a vector of integers
@@ -151,20 +159,27 @@ most major. The server can be defined each time within a function, or it can
 be set as a default via an environment variable. To set a default, run
 <code>Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")</code>
 or add <code>DATAVERSE_SERVER = "dataverse.harvard.edu</code> in one's <code>.Renviron</code>
-file (<code>usethis::edit_r_environ()</code>), with the appropriate domain as its value.</p></dd>
+file (<code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>), with the appropriate domain as its value.</p></dd>
 
   
 </dl></dd>
+
+
 <dt>fileid</dt>
 <dd><p>A numeric ID internally used for <code>get_file_by_id</code>. Can be a vector for multiple files.</p></dd>
+
+
 <dt>filedoi</dt>
 <dd><p>A DOI for a single file (not the entire dataset), of the form
 <code>"10.70122/FK2/PPIAXE/MHDB0O"</code> or <code>"doi:10.70122/FK2/PPIAXE/MHDB0O"</code>.
 Can be a vector for multiple files.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A R object that is returned by the default or user-supplied function
+    
+
+<p>A R object that is returned by the default or user-supplied function
 <code>.f</code> argument. For example, if <code>.f = readr::read_tsv()</code>, the function will
 return a dataframe as read in by <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_tsv()</a></code>. If the file identifier
 is a vector, it will return a list where each slot corresponds to elements of the vector.</p>
@@ -172,80 +187,80 @@ is a vector, it will return a list where each slot corresponds to elements of th
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># 1. For files originally in plain-text (.csv, .tsv), we recommend</span></span>
-<span class="r-in"><span class="co"># retreiving data.frame from dataverse DOI and file name, or the file's DOI.</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df_tab</span> <span class="op">&lt;-</span></span>
-<span class="r-in">  <span class="fu">get_dataframe_by_name</span><span class="op">(</span></span>
-<span class="r-in">    filename <span class="op">=</span> <span class="st">"roster-bulls-1996.tab"</span>,</span>
-<span class="r-in">    dataset  <span class="op">=</span> <span class="st">"doi:10.70122/FK2/HXJVJU"</span>,</span>
-<span class="r-in">    server   <span class="op">=</span> <span class="st">"demo.dataverse.org"</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">df_tab</span> <span class="op">&lt;-</span></span>
-<span class="r-in">  <span class="fu">get_dataframe_by_doi</span><span class="op">(</span></span>
-<span class="r-in">    filedoi      <span class="op">=</span> <span class="st">"10.70122/FK2/HXJVJU/SA3Z2V"</span>,</span>
-<span class="r-in">    server       <span class="op">=</span> <span class="st">"demo.dataverse.org"</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># 2. For files where Dataverse's ingest loses information (Stata .dta, SPSS .sav)</span></span>
-<span class="r-in"><span class="co"># or cannot be ingested (R .rds), we recommend</span></span>
-<span class="r-in"><span class="co"># specifying `original = TRUE` and specifying a read-in function in .f.</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Rds files are not ingested so original = TRUE and .f is required.</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"readr"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">df_from_rds_original</span> <span class="op">&lt;-</span></span>
-<span class="r-in">    <span class="fu">get_dataframe_by_name</span><span class="op">(</span></span>
-<span class="r-in">      filename   <span class="op">=</span> <span class="st">"nlsw88_rds-export.rds"</span>,</span>
-<span class="r-in">      dataset    <span class="op">=</span> <span class="st">"doi:10.70122/FK2/PPIAXE"</span>,</span>
-<span class="r-in">      server     <span class="op">=</span> <span class="st">"demo.dataverse.org"</span>,</span>
-<span class="r-in">      original   <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">      .f         <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="va"><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">read_rds</a></span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Stata dta files lose attributes such as value labels upon ingest so</span></span>
-<span class="r-in"><span class="co"># reading the original version by a Stata reader such as `haven` is recommended.</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"haven"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">df_stata_original</span> <span class="op">&lt;-</span></span>
-<span class="r-in">    <span class="fu">get_dataframe_by_name</span><span class="op">(</span></span>
-<span class="r-in">      filename   <span class="op">=</span> <span class="st">"nlsw88.tab"</span>,</span>
-<span class="r-in">      dataset    <span class="op">=</span> <span class="st">"doi:10.70122/FK2/PPIAXE"</span>,</span>
-<span class="r-in">      server     <span class="op">=</span> <span class="st">"demo.dataverse.org"</span>,</span>
-<span class="r-in">      original   <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">      .f         <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="va"><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">read_dta</a></span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># 3. RData files are read in by `base::load()` but cannot be assigned to an</span></span>
-<span class="r-in"><span class="co"># object name. The following shows two possible ways to read in such files.</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># First, without relying on `get_dataframe_*`, write as a binary file:</span></span>
-<span class="r-in"><span class="va">as_binary</span> <span class="op">&lt;-</span> <span class="fu"><a href="files.html">get_file_by_doi</a></span><span class="op">(</span></span>
-<span class="r-in"> filedoi <span class="op">=</span> <span class="st">"doi:10.70122/FK2/PPIAXE/5VPXKE"</span>,</span>
-<span class="r-in"> server <span class="op">=</span> <span class="st">"demo.dataverse.org"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/readBin.html" class="external-link">writeBin</a></span><span class="op">(</span><span class="va">as_binary</span>, <span class="fu">path</span><span class="op">(</span><span class="va">temp</span>, <span class="st">"county.RData"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="fu">path</span><span class="op">(</span><span class="va">temp</span>, <span class="st">"county.RData"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># If you are certain each RData contains only one object, one could define a</span></span>
-<span class="r-in"><span class="co"># custom function used in https://stackoverflow.com/a/34926943</span></span>
-<span class="r-in"><span class="va">load_object</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">file</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html" class="external-link">new.env</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">file</span>, envir <span class="op">=</span> <span class="va">tmp</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">tmp</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">]</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/PPIAXE/X2FC5V</span></span>
-<span class="r-in"><span class="va">as_rda</span> <span class="op">&lt;-</span> <span class="fu">get_dataframe_by_id</span><span class="op">(</span></span>
-<span class="r-in">  file <span class="op">=</span> <span class="fl">1939003</span>,</span>
-<span class="r-in">  server <span class="op">=</span> <span class="st">"demo.dataverse.org"</span>,</span>
-<span class="r-in">  .f <span class="op">=</span> <span class="va">load_object</span>,</span>
-<span class="r-in">  original <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># 1. For files originally in plain-text (.csv, .tsv), we recommend</span></span></span>
+<span class="r-in"><span><span class="co"># retreiving data.frame from dataverse DOI and file name, or the file's DOI.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df_tab</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">get_dataframe_by_name</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    filename <span class="op">=</span> <span class="st">"roster-bulls-1996.tab"</span>,</span></span>
+<span class="r-in"><span>    dataset  <span class="op">=</span> <span class="st">"doi:10.70122/FK2/HXJVJU"</span>,</span></span>
+<span class="r-in"><span>    server   <span class="op">=</span> <span class="st">"demo.dataverse.org"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">df_tab</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu">get_dataframe_by_doi</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    filedoi      <span class="op">=</span> <span class="st">"10.70122/FK2/HXJVJU/SA3Z2V"</span>,</span></span>
+<span class="r-in"><span>    server       <span class="op">=</span> <span class="st">"demo.dataverse.org"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># 2. For files where Dataverse's ingest loses information (Stata .dta, SPSS .sav)</span></span></span>
+<span class="r-in"><span><span class="co"># or cannot be ingested (R .rds), we recommend</span></span></span>
+<span class="r-in"><span><span class="co"># specifying `original = TRUE` and specifying a read-in function in .f.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Rds files are not ingested so original = TRUE and .f is required.</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"readr"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">df_from_rds_original</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>    <span class="fu">get_dataframe_by_name</span><span class="op">(</span></span></span>
+<span class="r-in"><span>      filename   <span class="op">=</span> <span class="st">"nlsw88_rds-export.rds"</span>,</span></span>
+<span class="r-in"><span>      dataset    <span class="op">=</span> <span class="st">"doi:10.70122/FK2/PPIAXE"</span>,</span></span>
+<span class="r-in"><span>      server     <span class="op">=</span> <span class="st">"demo.dataverse.org"</span>,</span></span>
+<span class="r-in"><span>      original   <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>      .f         <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="va"><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">read_rds</a></span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Stata dta files lose attributes such as value labels upon ingest so</span></span></span>
+<span class="r-in"><span><span class="co"># reading the original version by a Stata reader such as `haven` is recommended.</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"haven"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">df_stata_original</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>    <span class="fu">get_dataframe_by_name</span><span class="op">(</span></span></span>
+<span class="r-in"><span>      filename   <span class="op">=</span> <span class="st">"nlsw88.tab"</span>,</span></span>
+<span class="r-in"><span>      dataset    <span class="op">=</span> <span class="st">"doi:10.70122/FK2/PPIAXE"</span>,</span></span>
+<span class="r-in"><span>      server     <span class="op">=</span> <span class="st">"demo.dataverse.org"</span>,</span></span>
+<span class="r-in"><span>      original   <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>      .f         <span class="op">=</span> <span class="fu">haven</span><span class="fu">::</span><span class="va"><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">read_dta</a></span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># 3. RData files are read in by `base::load()` but cannot be assigned to an</span></span></span>
+<span class="r-in"><span><span class="co"># object name. The following shows two possible ways to read in such files.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># First, without relying on `get_dataframe_*`, write as a binary file:</span></span></span>
+<span class="r-in"><span><span class="va">as_binary</span> <span class="op">&lt;-</span> <span class="fu"><a href="files.html">get_file_by_doi</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span> filedoi <span class="op">=</span> <span class="st">"doi:10.70122/FK2/PPIAXE/5VPXKE"</span>,</span></span>
+<span class="r-in"><span> server <span class="op">=</span> <span class="st">"demo.dataverse.org"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/readBin.html" class="external-link">writeBin</a></span><span class="op">(</span><span class="va">as_binary</span>, <span class="fu">path</span><span class="op">(</span><span class="va">temp</span>, <span class="st">"county.RData"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="fu">path</span><span class="op">(</span><span class="va">temp</span>, <span class="st">"county.RData"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># If you are certain each RData contains only one object, one could define a</span></span></span>
+<span class="r-in"><span><span class="co"># custom function used in https://stackoverflow.com/a/34926943</span></span></span>
+<span class="r-in"><span><span class="va">load_object</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">file</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html" class="external-link">new.env</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">file</span>, envir <span class="op">=</span> <span class="va">tmp</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">tmp</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># https://demo.dataverse.org/file.xhtml?persistentId=doi:10.70122/FK2/PPIAXE/X2FC5V</span></span></span>
+<span class="r-in"><span><span class="va">as_rda</span> <span class="op">&lt;-</span> <span class="fu">get_dataframe_by_id</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  file <span class="op">=</span> <span class="fl">1939003</span>,</span></span>
+<span class="r-in"><span>  server <span class="op">=</span> <span class="st">"demo.dataverse.org"</span>,</span></span>
+<span class="r-in"><span>  .f <span class="op">=</span> <span class="va">load_object</span>,</span></span>
+<span class="r-in"><span>  original <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -260,7 +275,7 @@ is a vector, it will return a list where each slot corresponds to elements of th
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
