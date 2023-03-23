@@ -1,4 +1,5 @@
 library("testthat")
+library("devtools")
 library("dataverse")
 
 if (!requireNamespace("yaml", quietly = TRUE)) {
@@ -19,7 +20,7 @@ if (!requireNamespace("yaml", quietly = TRUE)) {
     # To better identify the source of problems, check if the token is expired.
     #   This check *should* be unnecessary on CRAN, since not CRAN tests should
     #   try to access any server.
-    if (Sys.getenv("NOT_CRAN") %in% c("", "true")) {
+    if (identical(Sys.getenv("NOT_CRAN"), "true")) {
       if (as.Date(config$api_token_expiration) < Sys.Date()) {
         stop(
           "The API token expired on `",

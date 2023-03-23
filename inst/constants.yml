@@ -1,4 +1,4 @@
 server: "demo.dataverse.org"
-api_token: "93d896da-0dd2-40f6-913e-8e8385f37b88" # readonly
-api_token_expiration: "2023-01-01"
-api_token_username: "dataverse-client-r-readonly"
+api_token: "c0d39fb3-ac48-4db7-9781-390073440495"
+api_token_expiration: "2024-03-22"
+api_token_name: "shirokuriwaki"

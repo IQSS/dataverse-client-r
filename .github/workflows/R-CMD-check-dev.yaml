@@ -15,20 +15,14 @@ name: R-CMD-check-dev
 
 jobs:
   R-CMD-check-dev:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@v1
-      - uses: r-lib/actions/setup-pandoc@master
-
-      - name: Query dependencies
-        run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
-        shell: Rscript {0}
+      - uses: actions/checkout@v3
+      - uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-r-dependencies@v2
+      - uses: r-lib/actions/setup-pandoc@v2
 
       - name: Cache R packages
         if: runner.os != 'Windows'
@@ -46,13 +40,6 @@ jobs:
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
-
-      - name: Install dependencies
-        run: |
-          install.packages(c("remotes", "rcmdcheck"))
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("covr")
-        shell: Rscript {0}
 
       - name: Check
         run: |
