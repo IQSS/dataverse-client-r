@@ -1,19 +1,16 @@
 citHeader("To cite package 'dataverse' in publications use:")
 
- year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
- vers <- paste("R package version", meta$Version)
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
+vers <- paste("R package version", meta$Version)
 
- citEntry(
-      entry="Manual",
-		  title = "dataverse: R Client for Dataverse 4+ Repositories",
-		  author = personList(
-		      as.person(c("Shiro Kuriwaki",
-		                  "Will Beasley",
-		                  "Thomas J. Leeper"))),
-		  year = year,
-		  note = vers,
-		  textVersion =
-		  paste("Will Beasley, Shiro Kuriwaki, Thomas J. Leeper et al. (",
-				year,
-				"). dataverse: R Client for Dataverse 4+ Repositories. ",
-				vers, ".", sep=""))
+bibentry(
+ bibtype = "Manual",
+ title = "dataverse: R Client for Dataverse 4+ Repositories",
+ author = c("Shiro Kuriwaki", "Will Beasley", "Thomas J. Leeper"),
+ year = year,
+ note = vers,
+ textVersion = paste("Shiro Kuriwaki, Will Beasley, Thomas J. Leeper et al. (",
+  year,
+  "). dataverse: R Client for Dataverse 4+ Repositories. ",
+  vers, ".",
+  sep = ""))
