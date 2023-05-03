@@ -50,7 +50,7 @@ For features that require a Dataverse account for the specific server installati
 DATAVERSE_KEY="examplekey12345"
 ```
 
-in your .Renviron file, where `examplekey12345` should be replace with your own key.  The environment file can be opened by `usethis::edit_r_environ()`.
+in your .Renviron file, where `examplekey12345` should be replaced with your own key.  The environment file can be opened by `usethis::edit_r_environ()`.
 
 
 #### Server
