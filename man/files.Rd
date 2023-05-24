@@ -36,6 +36,7 @@ get_file_by_id(
   vars = NULL,
   original = TRUE,
   progress = NULL,
+  return_url = FALSE,
   key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"),
   ...
@@ -105,6 +106,8 @@ nlsw88.tab, use the ingested version.)}
 \item{progress}{Whether to show a progress bar of the download.
 If not specified, will be set to \code{TRUE} for a file larger than 100MB. To fix
 a value, set \code{FALSE} or \code{TRUE}.}
+
+\item{return_url}{Instead of downloading the file, just return the download link.}
 
 \item{filedoi}{A DOI for a single file (not the entire dataset), of the form
 \code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}.

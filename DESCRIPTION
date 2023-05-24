@@ -59,6 +59,6 @@ URL: https://iqss.github.io/dataverse-client-r/, https://dataverse.org/, https:/
 BugReports: https://github.com/iqss/dataverse-client-r/issues
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
