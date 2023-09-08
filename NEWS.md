@@ -1,5 +1,9 @@
 # dataverse
 
+# 0.3.13.9999
+
+* Improve recommendation for rdata loading (#107)
+
 # CHANGES in dataverse 0.3.12 and 0.3.13
 
 * Update expired token (#123)

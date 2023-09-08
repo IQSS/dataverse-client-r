@@ -48,18 +48,11 @@ test_that("load-rdata", {
   # testthat::skip_if_offline("demo.dataverse.org")
   testthat::skip_on_cran()
 
-  # https://stackoverflow.com/a/34926943
-  f_load_rda <- function(file) {
-    tmp <- new.env()
-    load(file = file, envir = tmp)
-    tmp[[ls(tmp)[1]]]
-  }
-
-  from_rda <- get_dataframe_by_id(
+  get_dataframe_by_id(
     file = 1939003,
     server = "demo.dataverse.org",
-    .f = f_load_rda,
-    original = TRUE)
+    original = TRUE,
+    .f = function(x) load(x, envir = .GlobalEnv))
 
-  expect_s3_class(from_rda, "tbl")
+  expect_s3_class(nlsw88, "tbl")
 })
