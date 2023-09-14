@@ -121,6 +121,7 @@ get_file_by_doi <- function(
   format          = c("original", "bundle"),
   vars            = NULL,
   original        = TRUE,
+  return_url      = FALSE,
   key             = Sys.getenv("DATAVERSE_KEY"),
   server          = Sys.getenv("DATAVERSE_SERVER"),
   ...
@@ -133,6 +134,7 @@ get_file_by_doi <- function(
     key         = key,
     server      = server,
     original    = original,
+    return_url  = return_url,
     ...
   )
 }

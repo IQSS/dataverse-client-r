@@ -64,6 +64,7 @@ be set as a default via an environment variable. To set a default, run
 \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")}
 or add \verb{DATAVERSE_SERVER = "dataverse.harvard.edu} in one's \code{.Renviron}
 file (\code{usethis::edit_r_environ()}), with the appropriate domain as its value.}
+    \item{\code{return_url}}{Instead of downloading the file, just return the download link.}
   }}
 
 \item{fileid}{A numeric ID internally used for \code{get_file_by_id}. Can be a vector for multiple files.}
