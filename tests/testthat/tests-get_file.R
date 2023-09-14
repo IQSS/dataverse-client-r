@@ -54,3 +54,11 @@ test_that("More informative error message when file does not exist", {
   # wrong server
   expect_error(get_file(2972336, server = "demo.dataverse.org"), regexp = "API")
 })
+
+# Informative error message (PR #30)
+test_that("Return just URL", {
+  testthat::skip_on_cran()
+  expect_equal(get_file(c(1734005, 1734006), format = "original", server = "demo.dataverse.org", return_url = TRUE),
+               list("https://demo.dataverse.org/api/access/datafile/1734005",
+                    "https://demo.dataverse.org/api/access/datafile/1734006"))
+})

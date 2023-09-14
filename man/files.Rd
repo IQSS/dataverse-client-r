@@ -12,6 +12,7 @@ get_file(
   dataset = NULL,
   format = c("original", "bundle"),
   vars = NULL,
+  return_url = FALSE,
   key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"),
   original = TRUE,
@@ -23,6 +24,7 @@ get_file_by_name(
   dataset,
   format = c("original", "bundle"),
   vars = NULL,
+  return_url = FALSE,
   key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"),
   original = TRUE,
@@ -36,6 +38,7 @@ get_file_by_id(
   vars = NULL,
   original = TRUE,
   progress = NULL,
+  return_url = FALSE,
   key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"),
   ...
@@ -47,6 +50,7 @@ get_file_by_doi(
   format = c("original", "bundle"),
   vars = NULL,
   original = TRUE,
+  return_url = FALSE,
   key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"),
   ...
@@ -73,6 +77,8 @@ See \url{https://guides.dataverse.org/en/latest/api/dataaccess.html} for details
 
 \item{vars}{A character vector specifying one or more variable names, used to
 extract a subset of the data.}
+
+\item{return_url}{Instead of downloading the file, just return the download link.}
 
 \item{key}{A character string specifying a Dataverse server API key. If one
 is not specified, functions calling authenticated API endpoints will fail.
