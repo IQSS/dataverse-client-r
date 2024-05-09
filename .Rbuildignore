@@ -6,6 +6,7 @@ man-roxygen/*
 ^README\.Rmd$
 ^README\.html$
 ^CONTRIBUTING\.md$
+tests/.*_ghaction.R
 ^vignettes/figure$
 ^vignettes/figure/.+$
 \.Rmd2$
