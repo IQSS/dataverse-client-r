@@ -1,5 +1,5 @@
 # See https://demo.dataverse.org/dataverse/dataverse-client-r
-# https://doi.org/10.70122/FK2/HXJVJU
+# https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.70122/FK2/HXJVJU
 
 test_that("download tab from DOI and filename", {
   # testthat::skip_if_offline("demo.dataverse.org")
@@ -11,7 +11,7 @@ test_that("download tab from DOI and filename", {
   files     <- actual$files
   expected_dv <- retrieve_info_dataverse("expected-dataverse.yml")
 
-  expect_length(actual                      , 15L)
+  expect_length(actual                      , 17L)
   expect_equal(actual$id                    , 182158L)
   expect_equal(actual$datasetId             , 1734004L)
   expect_equal(actual$datasetPersistentId   , "doi:10.70122/FK2/HXJVJU")
@@ -21,7 +21,7 @@ test_that("download tab from DOI and filename", {
   expect_equal(actual$license$name          , "CC0 1.0")
 
   expect_equal(nrow(files)                  , 2L)
-  expect_equal(ncol(files)                  , 22L)
+  expect_equal(ncol(files)                  , 26L)
 
   expect_setequal(files$label            , c("roster-bulls-1996.tab", "vector-basketball.svg"))
   expect_setequal(files$restricted       , c(FALSE, FALSE))
