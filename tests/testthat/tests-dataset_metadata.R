@@ -1,5 +1,5 @@
 # See https://demo.dataverse.org/dataverse/dataverse-client-r
-# https://doi.org/10.70122/FK2/HXJVJU
+# https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.70122/FK2/HXJVJU
 
 test_that("check metadata format", {
   # testthat::skip_if_offline("demo.dataverse.org")
@@ -22,6 +22,6 @@ test_that("check versions format", {
   ds_index  <- which(sapply(contents, function(x) x$identifier) == "FK2/HXJVJU")
   actual    <- dataset_versions(contents[[ds_index]])
 
-  expect_length(actual[[1]], 15L)
+  expect_length(actual[[1]], 17L)
   expect_s3_class(actual[[2]], "dataverse_dataset_version")
 })
