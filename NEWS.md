@@ -1,7 +1,8 @@
 # dataverse
 
-# 0.3.13.9999
+# CHANGES in dataverse 0.3.14
 
+* `get_file_by_*()` can now return the download URL to be used in external functions or programs, useful for large files (#128)
 * Improve recommendation for rdata loading (#107)
 
 # CHANGES in dataverse 0.3.12 and 0.3.13

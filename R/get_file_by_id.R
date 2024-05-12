@@ -8,6 +8,7 @@
 #' @param progress Whether to show a progress bar of the download.
 #'   If not specified, will be set to `TRUE` for a file larger than 100MB. To fix
 #'   a value, set `FALSE` or `TRUE`.
+#' @param return_url Instead of downloading the file, just return the download link.
 #'
 #' @export
 get_file_by_id <- function(
@@ -17,6 +18,7 @@ get_file_by_id <- function(
   vars            = NULL,
   original        = TRUE,
   progress        = NULL,
+  return_url      = FALSE,
   key             = Sys.getenv("DATAVERSE_KEY"),
   server          = Sys.getenv("DATAVERSE_SERVER"),
   ...
@@ -92,7 +94,9 @@ get_file_by_id <- function(
 
     # If not bundle, request single file in non-bundle format ----
     u <- paste0(api_url(server), u_part, fileid)
-
+    if (return_url) {
+      return(httr::modify_url(u, query = query))
+    }
     if (isFALSE(progress))
       r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
 
@@ -117,6 +121,7 @@ get_file_by_doi <- function(
   format          = c("original", "bundle"),
   vars            = NULL,
   original        = TRUE,
+  return_url      = FALSE,
   key             = Sys.getenv("DATAVERSE_KEY"),
   server          = Sys.getenv("DATAVERSE_SERVER"),
   ...
@@ -129,6 +134,7 @@ get_file_by_doi <- function(
     key         = key,
     server      = server,
     original    = original,
+    return_url  = return_url,
     ...
   )
 }

@@ -85,6 +85,7 @@ get_file <- function(
   dataset       = NULL,
   format        = c("original", "bundle"),
   vars          = NULL,
+  return_url    = FALSE,
   key           = Sys.getenv("DATAVERSE_KEY"),
   server        = Sys.getenv("DATAVERSE_SERVER"),
   original      = TRUE,
@@ -124,6 +125,7 @@ get_file <- function(
         key         = key,
         server      = server,
         original    = original,
+        return_url  = return_url,
         ...
       )
     }
@@ -141,6 +143,7 @@ get_file <- function(
 #' @param filename Filename of the dataset, with file extension as shown in Dataverse
 #' (for example, if nlsw88.dta was the original but is displayed as the ingested
 #' nlsw88.tab, use the ingested version.)
+#' @param return_url Instead of downloading the file, just return the download link.
 #'
 #' @export
 get_file_by_name <- function(
@@ -148,6 +151,7 @@ get_file_by_name <- function(
   dataset,
   format        = c("original", "bundle"),
   vars          = NULL,
+  return_url    = FALSE,
   key           = Sys.getenv("DATAVERSE_KEY"),
   server        = Sys.getenv("DATAVERSE_SERVER"),
   original      = TRUE,
@@ -171,6 +175,7 @@ get_file_by_name <- function(
     key         = key,
     server      = server,
     original    = original,
+    return_url  = return_url,
     ...
   )
 }
