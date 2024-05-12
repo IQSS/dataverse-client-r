@@ -15,5 +15,5 @@ test_that("Return just URL", {
       dataset  = "10.70122/FK2/PPIAXE",
       server   = "demo.dataverse.org"
     ),
-    expected = "httpshttps://demo.dataverse.org/api/access/datafile/1734017?format=original")
+    expected = "https://demo.dataverse.org/api/access/datafile/1734017?format=original")
 })
