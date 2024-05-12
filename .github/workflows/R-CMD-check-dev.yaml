@@ -42,6 +42,8 @@ jobs:
         shell: Rscript {0}
 
       - name: Test live dataverse (vignette)
+        with:
+          extra-packages: any::pkgdown, local::.
         run: |
           source("tests/B-search_ghaction.R")
           source("tests/C-download_ghaction.R")
