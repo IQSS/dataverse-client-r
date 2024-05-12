@@ -26,8 +26,6 @@ jobs:
         with:
           cache: "always"
 
-      - uses: r-lib/actions/setup-pandoc@v2
-
       - name: Cache R packages
         if: runner.os != 'Windows'
         uses: actions/cache@v3
@@ -42,11 +40,12 @@ jobs:
           rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "error", check_dir = "check")
         shell: Rscript {0}
 
-      - name: Test live dataverse (vignette)
+      - name: Test live dataverse in vignettes
         run: |
           devtools::load_all()
           source("tests/B-search_ghaction.R")
           source("tests/C-download_ghaction.R")
+          TESTERROR
         shell: Rscript {0}
 
       - name: Test coverage
