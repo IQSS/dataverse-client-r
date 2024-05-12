@@ -95,7 +95,7 @@ get_file_by_id <- function(
     # If not bundle, request single file in non-bundle format ----
     u <- paste0(api_url(server), u_part, fileid)
     if (return_url) {
-      return(u)
+      return(httr::modify_url(u, query = query))
     }
     if (isFALSE(progress))
       r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
