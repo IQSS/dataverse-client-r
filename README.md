@@ -5,10 +5,10 @@ R Client for Dataverse Repositories
 Version](https://www.r-pkg.org/badges/version/dataverse)](https://cran.r-project.org/package=dataverse)
 ![Downloads](https://cranlogs.r-pkg.org/badges/dataverse)
 
-[![R-CMD-check-thorough](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-thorough.yaml/badge.svg?branch=master)](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-thorough.yaml)
-[![R-CMD-check-daily](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-daily.yaml/badge.svg?branch=master)](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-daily.yaml)
+[![R-CMD-check-thorough](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-thorough.yaml/badge.svg?branch=main)](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-thorough.yaml)
+[![R-CMD-check-daily](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-daily.yaml/badge.svg?branch=main)](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-daily.yaml)
 [![R-CMD-check-dev](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-dev.yaml/badge.svg)](https://github.com/IQSS/dataverse-client-r/actions/workflows/R-CMD-check-dev.yaml)
-[![codecov.io](https://codecov.io/github/IQSS/dataverse-client-r/coverage.svg?branch=master)](https://codecov.io/github/IQSS/dataverse-client-r?branch=master)
+[![codecov.io](https://codecov.io/github/IQSS/dataverse-client-r/coverage.svg?branch=main)](https://app.codecov.io/github/IQSS/dataverse-client-r?branch=main)
 
 [![Dataverse Project
 logo](https://dataverse.org/files/dataverseorg/files/dataverse_project_logo-hp.png)](https://dataverse.org)
@@ -54,7 +54,7 @@ variable called `DATAVERSE_KEY`. It can be set as a default by adding
 DATAVERSE_KEY="examplekey12345"
 ```
 
-in your .Renviron file, where `examplekey12345` should be replace with
+in your .Renviron file, where `examplekey12345` should be replaced with
 your own key. The environment file can be opened by
 `usethis::edit_r_environ()`.
 
@@ -285,9 +285,10 @@ Dataverse may be interested in Kurt Hornik’s
 [OAIHarvester](https://cran.r-project.org/package=OAIHarvester) and
 Scott Chamberlain’s [oai](https://cran.r-project.org/package=oai), which
 offer metadata download from any web repository that is compliant with
-the [Open Archives Initiative](http://www.openarchives.org/) standards.
-Additionally, [rdryad](https://cran.r-project.org/package=rdryad) uses
-OAIHarvester to interface with [Dryad](https://datadryad.org/stash). The
+the [Open Archives Initiative](https://www.openarchives.org:443/)
+standards. Additionally,
+[rdryad](https://cran.r-project.org/package=rdryad) uses OAIHarvester to
+interface with [Dryad](https://datadryad.org/stash). The
 [rfigshare](https://cran.r-project.org/package=rfigshare) package works
 in a similar spirit to **dataverse** with <https://figshare.com/>.
 
