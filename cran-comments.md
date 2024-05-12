@@ -1,7 +1,7 @@
 Description
 -----------------------------------------------
 
-This version fixes an outdated token error reported on March 2023. No other changes were made.
+This version removes remote resources from vignette per CRAN policy, and makes several other usability improvements. 
 
 Shiro Kuriwaki
 
