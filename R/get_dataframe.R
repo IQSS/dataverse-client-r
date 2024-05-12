@@ -149,7 +149,7 @@ get_dataframe_by_id <- function(
   }
 
   # READ raw data
-  raw <- get_file(file = fileid, original = original, ...)
+  raw <- get_file(file = fileid, original = original, return_url = FALSE, ...)
 
   # save to temp and then read it in with supplied function
   if (!is.null(.f)) {
