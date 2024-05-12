@@ -39,7 +39,7 @@ get_url <- function(
     ...) {
 
   get_file(
-    fileid      = prepend_doi(filedoi),
+    fileid      = file,
     dataset     = dataset,
     format      = format,
     key         = key,
@@ -109,6 +109,7 @@ get_url_by_doi <- function(
     server      = Sys.getenv("DATAVERSE_SERVER"),
     original    = TRUE,
     ...) {
+
   format <- match.arg(format)
   get_file_by_doi(
     filedoi,
