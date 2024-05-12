@@ -43,8 +43,9 @@ jobs:
 
       - name: Test live dataverse (vignette)
         run: |
-          Rscript -e "tests/B-search_ghaction.R"
-          Rscript -e "tests/C_download_ghaction.R"
+          source("tests/B-search_ghaction.R")
+          source("tests/C-download_ghaction.R")
+        shell: Rscript {0}
 
       - name: Test coverage
         run: covr::codecov()
