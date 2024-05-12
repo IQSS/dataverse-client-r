@@ -113,7 +113,7 @@ get_url_by_name(
 )
 # https://demo.dataverse.org/api/access/datafile/1734017?format=original
 
-For ingested, tab-delimited files
+# For ingested, tab-delimited files
 get_url_by_name(
   filename = "nlsw88.tab",
   dataset  = "10.70122/FK2/PPIAXE",
