@@ -78,7 +78,8 @@ See \url{https://guides.dataverse.org/en/latest/api/dataaccess.html} for details
 \item{vars}{A character vector specifying one or more variable names, used to
 extract a subset of the data.}
 
-\item{return_url}{Instead of downloading the file, just return the download link.}
+\item{return_url}{Instead of downloading the file, return the URL for download.
+Defaults to \code{FALSE}.}
 
 \item{key}{A character string specifying a Dataverse server API key. If one
 is not specified, functions calling authenticated API endpoints will fail.

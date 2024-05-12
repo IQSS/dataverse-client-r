@@ -8,7 +8,8 @@
 #' @param progress Whether to show a progress bar of the download.
 #'   If not specified, will be set to `TRUE` for a file larger than 100MB. To fix
 #'   a value, set `FALSE` or `TRUE`.
-#' @param return_url Instead of downloading the file, just return the download link.
+#' @param return_url Instead of downloading the file, return the URL for download.
+#'  Defaults to `FALSE`.
 #'
 #' @export
 get_file_by_id <- function(

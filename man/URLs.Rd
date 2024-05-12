@@ -99,9 +99,18 @@ nlsw88.tab, use the ingested version.)}
 \code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}.
 Can be a vector for multiple files.}
 }
+\value{
+A string or a list of strings that are URLs.
+}
 \description{
-Get URL. \verb{get_url_*} functions return a download URL as a string
-that can be then used in outside functions such as \code{curl::curl_download()}.
+Get URL of associated file. \verb{get_url_*} functions return a URL as
+a string. This can be then used in other functions such as \code{curl::curl_download()}.
+}
+\details{
+This function does not download the associated data.
+In contrast, \code{get_dataframe()} downloads the requested file to a tempfile, and then uses R
+to read it. And \code{get_file(.., return_url = FALSE)} reads the binary file into
+R's memory with \code{httr::GET()}. \code{get_url()} simply return the URL for download.
 }
 \examples{
 \dontrun{

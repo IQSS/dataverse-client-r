@@ -143,7 +143,6 @@ get_file <- function(
 #' @param filename Filename of the dataset, with file extension as shown in Dataverse
 #' (for example, if nlsw88.dta was the original but is displayed as the ingested
 #' nlsw88.tab, use the ingested version.)
-#' @param return_url Instead of downloading the file, just return the download link.
 #'
 #' @export
 get_file_by_name <- function(
