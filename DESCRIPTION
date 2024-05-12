@@ -35,7 +35,7 @@ Authors@R:
             role = "ctb"),
      person(given = "Johannes", 
             family = "Gruber",
-            role = c("aut"),
+            role = c("ctb"),
             email = "JohannesB.Gruber@gmail.com",
             comment = c(ORCID = "0000-0001-9177-1772")))
 Imports:
