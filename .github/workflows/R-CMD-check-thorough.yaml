@@ -50,8 +50,8 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
 
       - uses: r-lib/actions/setup-r-dependencies@v2
-          with:
-            cache: "always"
+        with:
+          cache: "always"
       - uses: r-lib/actions/setup-pandoc@v2
 
       - name: Restore R package cache
