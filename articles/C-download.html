@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>3. Data Download • dataverse</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/sandstone/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.14</span>
       </span>
     </div>
 
@@ -86,7 +86,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>3. Data Download</h1>
             
-            <h4 data-toc-skip class="date">2023-03-23</h4>
+            <h4 data-toc-skip class="date">2024-05-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/iqss/dataverse-client-r/blob/HEAD/vignettes/C-download.Rmd" class="external-link"><code>vignettes/C-download.Rmd</code></a></small>
       <div class="hidden name"><code>C-download.Rmd</code></div>
@@ -117,15 +117,16 @@
 <span>  server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">energy</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 10</span></span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## # A tibble: 6 × 10</span></span>
 <span><span class="co">##    time date  dummy  temp temp2      all    large    house    kepco    tepco</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>     1 8-Jan     0   5.9  34.8 95<span style="text-decoration: underline;">792</span>389 35<span style="text-decoration: underline;">194</span>957 26<span style="text-decoration: underline;">190</span>714 13<span style="text-decoration: underline;">357</span>735 26<span style="text-decoration: underline;">960</span>899</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>     2 8-Feb     0   5.5  30.3 95<span style="text-decoration: underline;">156</span>901 35<span style="text-decoration: underline;">322</span>031 24<span style="text-decoration: underline;">224</span>097 13<span style="text-decoration: underline;">315</span>027 27<span style="text-decoration: underline;">189</span>705</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>     3 8-Mar     0  10.7 114.  91<span style="text-decoration: underline;">034</span>047 36<span style="text-decoration: underline;">474</span>192 21<span style="text-decoration: underline;">391</span>965 12<span style="text-decoration: underline;">805</span>831 24<span style="text-decoration: underline;">495</span>519</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span>     4 8-Apr     0  14.7 216.  84<span style="text-decoration: underline;">087</span>552 34<span style="text-decoration: underline;">949</span>622 18<span style="text-decoration: underline;">494</span>473 11<span style="text-decoration: underline;">494</span>328 23<span style="text-decoration: underline;">540</span>356</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span>     5 8-May     0  18.5 342.  82<span style="text-decoration: underline;">742</span>929 35<span style="text-decoration: underline;">417</span>089 17<span style="text-decoration: underline;">923</span>760 11<span style="text-decoration: underline;">589</span>061 22<span style="text-decoration: underline;">848</span>737</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">6</span>     6 8-Jun     0  21.3 454.  82<span style="text-decoration: underline;">180</span>013 36<span style="text-decoration: underline;">692</span>291 15<span style="text-decoration: underline;">205</span>229 11<span style="text-decoration: underline;">360</span>771 22<span style="text-decoration: underline;">487</span>441</span></span></code></pre>
+<span><span class="co">##   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span><span class="co">## 1     1 8-Jan     0   5.9  34.8 95792389 35194957 26190714 13357735 26960899</span></span>
+<span><span class="co">## 2     2 8-Feb     0   5.5  30.3 95156901 35322031 24224097 13315027 27189705</span></span>
+<span><span class="co">## 3     3 8-Mar     0  10.7 114.  91034047 36474192 21391965 12805831 24495519</span></span>
+<span><span class="co">## 4     4 8-Apr     0  14.7 216.  84087552 34949622 18494473 11494328 23540356</span></span>
+<span><span class="co">## 5     5 8-May     0  18.5 342.  82742929 35417089 17923760 11589061 22848737</span></span>
+<span><span class="co">## 6     6 8-Jun     0  21.3 454.  82180013 36692291 15205229 11360771 22487441</span></span></code></pre></div>
 <p>These <code>get_dataframe_*</code> functions, introduced in v0.3.0, directly read in the data into a R environment through whatever R function supplied by <code>.f</code>. The default of the <code>get_dataframe_*</code> functions is to read in such data by <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_tsv()</a></code>. The <code>.f</code> function can be modified to modify the read-in settings. For example, the following modification is a base-R equivalent to read in the ingested data.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span></span>
@@ -136,13 +137,14 @@
 <span>  .f <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.delim</a></span><span class="op">(</span><span class="va">x</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">energy</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##   time  date dummy temp temp2      all    large    house    kepco    tepco</span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##   time  date dummy temp temp2      all    large    house    kepco    tepco</span></span>
 <span><span class="co">## 1    1 8-Jan     0  5.9  34.8 95792389 35194957 26190714 13357735 26960899</span></span>
 <span><span class="co">## 2    2 8-Feb     0  5.5  30.3 95156901 35322031 24224097 13315027 27189705</span></span>
 <span><span class="co">## 3    3 8-Mar     0 10.7 114.5 91034047 36474192 21391965 12805831 24495519</span></span>
 <span><span class="co">## 4    4 8-Apr     0 14.7 216.1 84087552 34949622 18494473 11494328 23540356</span></span>
 <span><span class="co">## 5    5 8-May     0 18.5 342.3 82742929 35417089 17923760 11589061 22848737</span></span>
-<span><span class="co">## 6    6 8-Jun     0 21.3 453.7 82180013 36692291 15205229 11360771 22487441</span></span></code></pre>
+<span><span class="co">## 6    6 8-Jun     0 21.3 453.7 82180013 36692291 15205229 11360771 22487441</span></span></code></pre></div>
 <p>The dataverse package can also download datasets that are <em>drafts</em> (i.e. versions not released publicly), as long as the user of the dataset provides their appropriate DATAVERSE_KEY. Users may need to modify the metadata of a datafile, such as adding a descriptive label, for the data downloading to work properly in this case. This is because the the file identifier UNF, which the read function relies on, may only appear after metadata has been added.</p>
 </div>
 <div class="section level2">
@@ -157,7 +159,8 @@
 <p>However, ingested files may not retain important dataset attributes. For example, Stata and SPSS datasets encode value labels on to numeric values. Factor variables in R dataframes encode levels, not only labels. A plain-text ingested file will discard such information. For example, the <code>polling_place</code> variable in this data is only given by numbers, although the original data labelled these numbers with informative values.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">argentina_tab</span><span class="op">$</span><span class="va">polling_place</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##  num [1:1475] 31 31 31 31 31 31 31 31 31 31 ...</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## num [1:1475] 31 31 31 31 31 31 31 31 31 31 ...</span></span></code></pre></div>
 <p>When ingesting, Dataverse retains a <code>original</code> version that retains these attributes but may not be readable in some platforms. The <code>get_dataframe_*</code> functions have an argument that can be set to <code>original = TRUE</code>. In this case we know that <code>alpl2013.tab</code> was originally a Stata dta file, so we can run:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">argentina_dta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_dataframe.html">get_dataframe_by_name</a></span><span class="op">(</span></span>
@@ -169,11 +172,12 @@
 <p>Now we see that labels are read in through <code>haven</code>’s labelled variables class:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">argentina_dta</span><span class="op">$</span><span class="va">polling_place</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##  dbl+lbl [1:1475] 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 3...</span></span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">##  dbl+lbl [1:1475] 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 3...</span></span>
 <span><span class="co">##  @ label       : chr "polling_place"</span></span>
 <span><span class="co">##  @ format.stata: chr "%9.0g"</span></span>
 <span><span class="co">##  @ labels      : Named num [1:37] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">##   ..- attr(*, "names")= chr [1:37] "E.E.T." "Escuela Juan Bautista Alberdi" "Escuela Juan Carlos DÃ¡valos" "Escuela Bernardino de Rivadavia" ...</span></span></code></pre>
+<span><span class="co">##   ..- attr(*, "names")= chr [1:37] "E.E.T." "Escuela Juan Bautista Alberdi" "Escuela Juan Carlos DÃ¡valos" "Escuela Bernardino de Rivadavia" ...</span></span></code></pre></div>
 <p>Users should pick <code>.f</code> and <code>original</code> based on their existing knowledge of the file. If the original file is a <code>.sav</code> SPSS file, <code>.f</code> can be <code><a href="https://haven.tidyverse.org/reference/read_spss.html" class="external-link">haven::read_sav</a></code>. If it is a <code>.Rds</code> file, use <code>readRDS</code> or <code><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">readr::read_rds</a></code>. In fact, because the raw data is read in as a binary, there is no limitation to the file types <code>get_dataframe_*</code> can read in, as far as the dataverse package is concerned.</p>
 <p>There are two more ways to read in a dataframe other than <code><a href="../reference/get_dataframe.html">get_dataframe_by_name()</a></code>.</p>
 <ul>
@@ -196,14 +200,15 @@
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_dataset.html">dataset_metadata</a></span><span class="op">(</span><span class="st">"10.7910/DVN/ARKOTI"</span>, server <span class="op">=</span> <span class="st">"dataverse.harvard.edu"</span><span class="op">)</span>, </span>
 <span>    max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## List of 3</span></span>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## List of 3</span></span>
 <span><span class="co">##  $ displayName: chr "Citation Metadata"</span></span>
 <span><span class="co">##  $ name       : chr "citation"</span></span>
 <span><span class="co">##  $ fields     :'data.frame': 7 obs. of  4 variables:</span></span>
 <span><span class="co">##   ..$ typeName : chr [1:7] "title" "author" "datasetContact" "dsDescription" ...</span></span>
 <span><span class="co">##   ..$ multiple : logi [1:7] FALSE TRUE TRUE TRUE TRUE FALSE ...</span></span>
 <span><span class="co">##   ..$ typeClass: chr [1:7] "primitive" "compound" "compound" "compound" ...</span></span>
-<span><span class="co">##   ..$ value    :List of 7</span></span></code></pre>
+<span><span class="co">##   ..$ value    :List of 7</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="retrieving-scripts-and-other-files">Retrieving Scripts and Other Files<a class="anchor" aria-label="anchor" href="#retrieving-scripts-and-other-files"></a>
@@ -232,7 +237,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>
