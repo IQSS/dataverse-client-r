@@ -1,5 +1,5 @@
 # See https://demo.dataverse.org/dataverse/dataverse-client-r
-# https://doi.org/10.70122/FK2/HXJVJU
+# https://demo.dataverse.org/dataset.xhtml?persistentId=doi:10.70122/FK2/HXJVJU
 
 test_that("get file metadata from DOI and filename", {
   # testthat::skip_if_offline("demo.dataverse.org")

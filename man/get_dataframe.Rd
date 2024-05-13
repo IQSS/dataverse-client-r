@@ -64,6 +64,8 @@ be set as a default via an environment variable. To set a default, run
 \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")}
 or add \verb{DATAVERSE_SERVER = "dataverse.harvard.edu} in one's \code{.Renviron}
 file (\code{usethis::edit_r_environ()}), with the appropriate domain as its value.}
+    \item{\code{return_url}}{Instead of downloading the file, return the URL for download.
+Defaults to \code{FALSE}.}
   }}
 
 \item{fileid}{A numeric ID internally used for \code{get_file_by_id}. Can be a vector for multiple files.}
@@ -140,15 +142,13 @@ if (requireNamespace("haven", quietly = TRUE)) {
 
 # 3. RData files are read in by `base::load()` but cannot be assigned to an
 # object name. The following shows two possible ways to read in such files.
+# First, the RData object can be loaded to the environment without object assignment.
 
-# First, without relying on `get_dataframe_*`, write as a binary file:
-as_binary <- get_file_by_doi(
- filedoi = "doi:10.70122/FK2/PPIAXE/5VPXKE",
- server = "demo.dataverse.org")
-
-temp <- tempdir()
-writeBin(as_binary, path(temp, "county.RData"))
-load(path(temp, "county.RData"))
+get_dataframe_by_doi(
+  filedoi = "10.70122/FK2/PPIAXE/X2FC5V",
+  server = "demo.dataverse.org",
+  original = TRUE,
+  .f = function(x) load(x, envir = .GlobalEnv))
 
 # If you are certain each RData contains only one object, one could define a
 # custom function used in https://stackoverflow.com/a/34926943
