@@ -42,12 +42,6 @@ library("tibble") # to see dataframes in tidyverse-form
 
 First, we retrieve a plain-text file like this dataset on electricity consumption by [Wakiyama et al. (2014)](https://doi.org/10.7910/DVN/ARKOTI/GN1MRT). Taking the file name and dataset DOI from this entry,
 
-```{r, echo=FALSE, message=FALSE,include=FALSE}
-energy <- get_dataframe_by_name(
-  filename = "comprehensiveJapanEnergy.tab",
-  dataset = "10.7910/DVN/ARKOTI", 
-  server = "dataverse.harvard.edu")
-```
 
 ```{r, eval=FALSE}
 energy <- get_dataframe_by_name(
@@ -56,14 +50,27 @@ energy <- get_dataframe_by_name(
   server = "dataverse.harvard.edu")
 ```
 
-```{r}
+```{r, eval=FALSE}
 head(energy)
 ```
+
+```{r}
+## # A tibble: 6 × 10
+##    time date  dummy  temp temp2      all    large    house    kepco    tepco
+##   <dbl> <chr> <dbl> <dbl> <dbl>    <dbl>    <dbl>    <dbl>    <dbl>    <dbl>
+## 1     1 8-Jan     0   5.9  34.8 95792389 35194957 26190714 13357735 26960899
+## 2     2 8-Feb     0   5.5  30.3 95156901 35322031 24224097 13315027 27189705
+## 3     3 8-Mar     0  10.7 114.  91034047 36474192 21391965 12805831 24495519
+## 4     4 8-Apr     0  14.7 216.  84087552 34949622 18494473 11494328 23540356
+## 5     5 8-May     0  18.5 342.  82742929 35417089 17923760 11589061 22848737
+## 6     6 8-Jun     0  21.3 454.  82180013 36692291 15205229 11360771 22487441
+```
+
 
 These `get_dataframe_*` functions, introduced in v0.3.0, directly read in the data into a R environment through whatever R function supplied by `.f`. The default of the  `get_dataframe_*` functions is to read in such data by `readr::read_tsv()`. The `.f` function can be modified to modify the read-in settings. For example, the following modification is a base-R equivalent to read in the ingested data.
 
 
-```{r}
+```{r, eval=FALSE}
 library(readr)
 energy <- get_dataframe_by_name(
   filename = "comprehensiveJapanEnergy.tab",
@@ -72,6 +79,16 @@ energy <- get_dataframe_by_name(
   .f = function(x) read.delim(x, sep = "\t"))
 
 head(energy)
+```
+
+```{r}
+##   time  date dummy temp temp2      all    large    house    kepco    tepco
+## 1    1 8-Jan     0  5.9  34.8 95792389 35194957 26190714 13357735 26960899
+## 2    2 8-Feb     0  5.5  30.3 95156901 35322031 24224097 13315027 27189705
+## 3    3 8-Mar     0 10.7 114.5 91034047 36474192 21391965 12805831 24495519
+## 4    4 8-Apr     0 14.7 216.1 84087552 34949622 18494473 11494328 23540356
+## 5    5 8-May     0 18.5 342.3 82742929 35417089 17923760 11589061 22848737
+## 6    6 8-Jun     0 21.3 453.7 82180013 36692291 15205229 11360771 22487441
 ```
 
 
@@ -83,7 +100,7 @@ The dataverse package can also download datasets that are _drafts_ (i.e. version
 
 If a file is displayed on dataverse as a `.tab` file like the survey data by [Alvarez et al. (2013)](https://doi.org/10.7910/DVN/ARKOTI/A8YRMP), it is likely that Dataverse [ingested](https://guides.dataverse.org/en/latest/user/tabulardataingest/index.html) the file to a plain-text, tab-delimited format.
 
-```{r,  message=FALSE}
+```{r,  message=FALSE,eval=FALSE}
 argentina_tab <- get_dataframe_by_name(
   filename = "alpl2013.tab",
   dataset = "10.7910/DVN/ARKOTI",
@@ -93,13 +110,17 @@ argentina_tab <- get_dataframe_by_name(
 
 However, ingested files may not retain important dataset attributes. For example, Stata and SPSS datasets encode value labels on to numeric values. Factor variables in R dataframes encode levels, not only labels. A plain-text ingested file will discard such information. For example,  the `polling_place` variable in this data is only given by numbers, although the original data labelled these numbers with informative values.
 
-```{r}
+```{r,eval=FALSE}
 str(argentina_tab$polling_place)
+```
+
+```{r}
+## num [1:1475] 31 31 31 31 31 31 31 31 31 31 ...
 ```
 
 When ingesting, Dataverse retains a `original` version that retains these attributes but may not be readable in some platforms. The `get_dataframe_*` functions have an argument that can be set to `original = TRUE`. In this case we know that `alpl2013.tab` was originally a Stata dta file, so we can run:
 
-```{r}
+```{r, eval=FALSE}
 argentina_dta <- get_dataframe_by_name(
   filename = "alpl2013.tab",
   dataset = "10.7910/DVN/ARKOTI",
@@ -110,10 +131,17 @@ argentina_dta <- get_dataframe_by_name(
 
 Now we see that labels are read in through `haven`'s labelled variables class:
 
-```{r}
+```{r, eval=FALSE}
 str(argentina_dta$polling_place)
 ```
 
+```{r}
+##  dbl+lbl [1:1475] 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 3...
+##  @ label       : chr "polling_place"
+##  @ format.stata: chr "%9.0g"
+##  @ labels      : Named num [1:37] 1 2 3 4 5 6 7 8 9 10 ...
+##   ..- attr(*, "names")= chr [1:37] "E.E.T." "Escuela Juan Bautista Alberdi" "Escuela Juan Carlos DÃ¡valos" "Escuela Bernardino de Rivadavia" ...
+```
 
 
 Users should pick `.f` and `original` based on their existing knowledge of the file. If the original file is a `.sav` SPSS file, `.f` can be `haven::read_sav`. If it is a `.Rds` file, use `readRDS` or `readr::read_rds`. In fact, because the raw data is read in as a binary, there is no limitation to the file types `get_dataframe_*` can read in, as far as the dataverse package is concerned.
@@ -138,10 +166,22 @@ This shows that there are indeed 32 files, a mix of .R code files and tab- and c
 
 You can also retrieve more extensive metadata using `dataset_metadata()`:
 
-```{r}
+```{r, eval=FALSE}
 str(dataset_metadata("10.7910/DVN/ARKOTI", server = "dataverse.harvard.edu"), 
     max.level = 2)
 ```
+
+```{r}
+## List of 3
+##  $ displayName: chr "Citation Metadata"
+##  $ name       : chr "citation"
+##  $ fields     :'data.frame': 7 obs. of  4 variables:
+##   ..$ typeName : chr [1:7] "title" "author" "datasetContact" "dsDescription" ...
+##   ..$ multiple : logi [1:7] FALSE TRUE TRUE TRUE TRUE FALSE ...
+##   ..$ typeClass: chr [1:7] "primitive" "compound" "compound" "compound" ...
+##   ..$ value    :List of 7
+```
+
 
 ## Retrieving Scripts and Other Files
 

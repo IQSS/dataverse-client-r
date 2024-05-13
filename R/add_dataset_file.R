@@ -59,17 +59,17 @@
 #' }
 #' @export
 add_dataset_file <-
-function(file,
-         dataset,
-         description = NULL,
-         key = Sys.getenv("DATAVERSE_KEY"),
-         server = Sys.getenv("DATAVERSE_SERVER"),
-         ...) {
+  function(file,
+           dataset,
+           description = NULL,
+           key = Sys.getenv("DATAVERSE_KEY"),
+           server = Sys.getenv("DATAVERSE_SERVER"),
+           ...) {
     dataset <- dataset_id(dataset, key = key, server = server, ...)
 
     bod2 <- list(forceReplace = force)
     if (!is.null(description)) {
-        bod2$description <- description
+      bod2$description <- description
     }
     jsondata <- as.character(jsonlite::toJSON(bod2, auto_unbox = TRUE))
 
@@ -81,44 +81,48 @@ function(file,
     httr::stop_for_status(r, task = httr::content(r)$message)
     out <- jsonlite::fromJSON(httr::content(r, "text", encoding = "UTF-8"))
     out$data$files$dataFile$id[1L]
-}
+  }
 
 #' @rdname add_dataset_file
 #' @export
 update_dataset_file <-
-function(file,
-         dataset = NULL,
-         id,
-         description = NULL,
-         force = TRUE,
-         key = Sys.getenv("DATAVERSE_KEY"),
-         server = Sys.getenv("DATAVERSE_SERVER"),
-         ...) {
+  function(file,
+           dataset = NULL,
+           id,
+           description = NULL,
+           force = TRUE,
+           key = Sys.getenv("DATAVERSE_KEY"),
+           server = Sys.getenv("DATAVERSE_SERVER"),
+           ...) {
     dataset <- dataset_id(dataset, key = key, server = server, ...)
 
     # get file ID from 'dataset'
     if (!is.numeric(id)) {
-        if (inherits(id, "dataverse_file")) {
-            id <- get_fileid(id, key = key, server = server)
-        } else if (is.null(dataset)) {
-            stop("When 'id' is a character string, dataset must be specified. Or, use a global fileid instead.")
-        } else {
-            id <- get_fileid(dataset, id, key = key, server = server, ...)
-        }
+      if (inherits(id, "dataverse_file")) {
+        id <- get_fileid(id, key = key, server = server)
+      } else if (is.null(dataset)) {
+        stop("When 'id' is a character string, dataset must be specified. Or, use a global fileid instead.")
+      } else {
+        id <- get_fileid(dataset, id, key = key, server = server, ...)
+      }
     }
 
     bod2 <- list(forceReplace = force)
     if (!is.null(description)) {
-        bod2$description <- description
+      bod2$description <- description
     }
     jsondata <- as.character(jsonlite::toJSON(bod2, auto_unbox = TRUE))
 
     u <- paste0(api_url(server), "files/", id, "/replace")
-    r <- httr::POST(u, httr::add_headers("X-Dataverse-key" = key), ...,
+    r <- httr::POST(u,
+                    httr::add_headers("X-Dataverse-key" = key), ...,
                     body = list(file = httr::upload_file(file),
                                 jsonData = jsondata
-                                ),
+                    ),
                     encode = "multipart")
     httr::stop_for_status(r, task = httr::content(r)$message)
-    structure(jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"), simplifyDataFrame = FALSE)$data$files[[1L]], class = "dataverse_file")
-}
+    structure(jsonlite::fromJSON(
+      httr::content(r, as = "text", encoding = "UTF-8"),
+      simplifyDataFrame = FALSE)$data$files[[1L]], class = "dataverse_file"
+    )
+  }

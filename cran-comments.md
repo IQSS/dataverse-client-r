@@ -1,7 +1,7 @@
 Description
 -----------------------------------------------
 
-This version fixes an outdated token error reported on March 2023. No other changes were made.
+This version (0.3.14) removes remote resources from vignette per CRAN policy, and makes several other usability improvements. 
 
 Shiro Kuriwaki
 
@@ -9,15 +9,14 @@ Shiro Kuriwaki
 Test environments
 -----------------------------------------------
 
-1. [win-builder](https://win-builder.r-project.org/QhQR4q21BLc1), development version (`devtools::check_win_devel()`)
-2. [R-hub](https://builder.r-hub.io/status/dataverse_0.3.13.tar.gz-a910246e058d4fdea677a3e29278dfbf).
-3. [GitHub Actions](https://github.com/IQSS/dataverse-client-r/actions)
+1. [win-builder](https://win-builder.r-project.org/FQhpeR7xF2O1), development version (`devtools::check_win_devel()`)
+2. [GitHub Actions](https://github.com/IQSS/dataverse-client-r/actions/runs/9054158346)
   * os: macOS-latest  , r: 'release'
   * os: windows-latest, r: 'devel'
   * os: windows-latest, r: 'release'
   * os: ubuntu-20.04  , r: 'devel'
   * os: ubuntu-20.04  , r: 'release'
-4. Local macOS, R 4.2.1
+3. Local macOS, R 4.3.3
 
 
 R CMD check results
