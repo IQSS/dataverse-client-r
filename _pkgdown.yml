@@ -39,6 +39,7 @@ reference:
   - '`get_facets`'
   - '`get_file_metadata`'
   - '`get_user_key`'
+  - '`get_url`'
 
 - title: "Create, Add, & Publish"
   contents:
