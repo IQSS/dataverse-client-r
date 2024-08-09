@@ -2,38 +2,38 @@ Package: dataverse
 Version: 0.3.14
 Title: Client for Dataverse 4+ Repositories
 Authors@R:
-   c(person(given = "Shiro", 
+   c(person(given = "Shiro",
             family = "Kuriwaki",
             role = c("aut", "cre"),
             email = "shirokuriwaki@gmail.com",
             comment = c(ORCID = "0000-0002-5687-2647")),
-     person(given = "Will", 
+     person(given = "Will",
             family = "Beasley",
             role=c("aut"),
             email="wibeasley@hotmail.com",
             comment = c(ORCID = "0000-0002-5613-5006")),
-     person(given = "Thomas J.", 
+     person(given = "Thomas J.",
             family = "Leeper",
             role = c("aut"),
             email = "thosjleeper@gmail.com",
             comment = c(ORCID = "0000-0003-4097-6326")),
-     person(given = "Philip", 
+     person(given = "Philip",
             family = "Durbin",
             role = c("aut"),
             email = "philipdurbin@gmail.com",
             comment = c(ORCID = "0000-0002-9528-9470")),
-     person(given = "Sebastian", 
+     person(given = "Sebastian",
             family = "Karcher",
             role = c("aut"),
             email = "karcher@u.northwestern.edu",
             comment = c(ORCID = "0000-0001-8249-7388")),
-     person(given = "Jan", 
-            family = "Kanis", 
+     person(given = "Jan",
+            family = "Kanis",
             role = "ctb"),
-     person(given = "Edward", 
-            family = "Jee", 
+     person(given = "Edward",
+            family = "Jee",
             role = "ctb"),
-     person(given = "Johannes", 
+     person(given = "Johannes",
             family = "Gruber",
             role = c("ctb"),
             email = "JohannesB.Gruber@gmail.com",
@@ -45,7 +45,9 @@ Imports:
     readr,
     stats,
     utils,
-    xml2
+    xml2,
+    memoise,
+    rappdirs
 Suggests:
     covr,
     haven,
@@ -64,6 +66,6 @@ URL: https://iqss.github.io/dataverse-client-r/, https://dataverse.org/, https:/
 BugReports: https://github.com/iqss/dataverse-client-r/issues
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3

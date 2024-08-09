@@ -31,18 +31,7 @@ get_file_by_name(
   ...
 )
 
-get_file_by_id(
-  fileid,
-  dataset = NULL,
-  format = c("original", "bundle"),
-  vars = NULL,
-  original = TRUE,
-  progress = NULL,
-  return_url = FALSE,
-  key = Sys.getenv("DATAVERSE_KEY"),
-  server = Sys.getenv("DATAVERSE_SERVER"),
-  ...
-)
+get_file_by_id(...)
 
 get_file_by_doi(
   filedoi,
@@ -107,15 +96,15 @@ no ingested version, is set to NA. Note in \verb{get_dataframe_*},
 (for example, if nlsw88.dta was the original but is displayed as the ingested
 nlsw88.tab, use the ingested version.)}
 
+\item{filedoi}{A DOI for a single file (not the entire dataset), of the form
+\code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}.
+Can be a vector for multiple files.}
+
 \item{fileid}{A numeric ID internally used for \code{get_file_by_id}. Can be a vector for multiple files.}
 
 \item{progress}{Whether to show a progress bar of the download.
 If not specified, will be set to \code{TRUE} for a file larger than 100MB. To fix
 a value, set \code{FALSE} or \code{TRUE}.}
-
-\item{filedoi}{A DOI for a single file (not the entire dataset), of the form
-\code{"10.70122/FK2/PPIAXE/MHDB0O"} or \code{"doi:10.70122/FK2/PPIAXE/MHDB0O"}.
-Can be a vector for multiple files.}
 }
 \value{
 \code{get_file} returns a raw vector (or list of raw vectors,
