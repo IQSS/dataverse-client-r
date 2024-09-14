@@ -85,9 +85,11 @@ available, download the original version instead of the ingested? If there was
 no ingested version, is set to NA. Note in \verb{get_dataframe_*},
 \code{original} is set to FALSE by default. Either can be changed.}
 
-\item{...}{Additional arguments passed to an HTTP request function, such as
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
-\code{\link[httr]{DELETE}}.}
+\item{...}{Additional arguments passed to an HTTP request function,
+such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
+\code{\link[httr]{DELETE}}. By default, HTTP requests use
+values cached from previous identical calls. Use
+\code{use_cache=FALSE} (or \code{Sys.setenv(DATAVERSE_USE_CACHE = FALSE)} if cached API calls are not desired.}
 
 \item{filename}{Filename of the dataset, with file extension as shown in Dataverse
 (for example, if nlsw88.dta was the original but is displayed as the ingested

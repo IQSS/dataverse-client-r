@@ -41,10 +41,13 @@ Authors@R:
 Imports:
     checkmate,
     httr,
+    memoise,
+    cachem,
     jsonlite,
     readr,
     stats,
     utils,
+    tools,
     xml2
 Suggests:
     covr,
