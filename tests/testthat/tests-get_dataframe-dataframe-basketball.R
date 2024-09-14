@@ -10,7 +10,9 @@ test_that("roster-by-name", {
   actual <-
     get_dataframe_by_name(
       filename = expected_ds$roster$label , # A value like "roster-bulls-1996.tab",
-      dataset  = dirname(expected_ds$roster$dataFile$persistentId)#, # A value like "doi:10.70122/FK2/HXJVJU",
+      dataset  = dirname(expected_ds$roster$dataFile$persistentId),#, # A value like "doi:10.70122/FK2/HXJVJU",
+      # quieten readr::read_tsv during test
+      .f = function(...) readr::read_tsv(..., show_col_types = FALSE)
     )
 
   expect_equal(actual, expected_file)
@@ -24,7 +26,9 @@ test_that("roster-by-doi", {
 
   actual <-
     get_dataframe_by_doi(
-      filedoi  = expected_ds$roster$dataFile$persistentId # A value like "doi:10.70122/FK2/HXJVJU/SA3Z2V",
+      filedoi  = expected_ds$roster$dataFile$persistentId, # A value like "doi:10.70122/FK2/HXJVJU/SA3Z2V",
+      # quieten readr::read_tsv during test
+      .f = function(...) readr::read_tsv(..., show_col_types = FALSE)
     )
 
   expect_equal(actual, expected_file)
@@ -38,7 +42,9 @@ test_that("roster-by-id", {
 
   actual <-
     get_dataframe_by_id(
-      fileid   = expected_ds$roster$dataFile$id # A value like 1734005
+      fileid   = expected_ds$roster$dataFile$id, # A value like 1734005
+      # quieten readr::read_tsv during test
+      .f = function(...) readr::read_tsv(..., show_col_types = FALSE)
     )
 
   expect_equal(actual, expected_file)

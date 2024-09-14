@@ -10,8 +10,15 @@ test_that("download tab from DOI and filename", {
   actual    <- get_dataset(contents[[ds_index]])
   files     <- actual$files
   expected_dv <- retrieve_info_dataverse("expected-dataverse.yml")
+  expected_names <- c(
+    "citationDate", "createTime", "datasetId",
+    "datasetPersistentId", "fileAccessRequest", "files", "id",
+    "lastUpdateTime", "latestVersionPublishingState", "license",
+    "metadataBlocks", "publicationDate", "releaseTime",
+    "storageIdentifier", "UNF", "versionMinorNumber",
+    "versionNumber", "versionState")
 
-  expect_length(actual                      , 17L)
+  expect_setequal(names(actual)             , expected_names)
   expect_equal(actual$id                    , 182158L)
   expect_equal(actual$datasetId             , 1734004L)
   expect_equal(actual$datasetPersistentId   , "doi:10.70122/FK2/HXJVJU")
