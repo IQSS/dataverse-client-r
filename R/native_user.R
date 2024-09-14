@@ -39,8 +39,7 @@ create_user <- function(password, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
 #' @export
 get_user_key <- function(user, password, server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     u <- paste0(api_url(server), "builtin-users/", user, "/api-token?password=", password)
-    r <- httr::GET(u, ...)
-    httr::stop_for_status(r, task = httr::content(r)$message)
-    j <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))
+    r <- api_get(u, ...)
+    j <- jsonlite::fromJSON(r)
     j$data$message
 }

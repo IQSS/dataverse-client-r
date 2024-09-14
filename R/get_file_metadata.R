@@ -48,8 +48,5 @@ get_file_metadata <-
       u <- paste0(api_url(server), "access/datafile/", file, "/metadata/", format)
     }
 
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r, task = httr::content(r)$message)
-    out <- httr::content(r, as = "text", encoding = "UTF-8")
-    return(out)
+    api_get(u, ..., key = key)
   }
