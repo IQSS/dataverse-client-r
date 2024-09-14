@@ -2,6 +2,7 @@
 % Please edit documentation in R/dataverse-package.R
 \docType{package}
 \name{dataverse}
+\alias{dataverse-package}
 \alias{dataverse}
 \title{Client for Dataverse Repositories}
 \description{
@@ -32,4 +33,33 @@ This package provides five main sets of functions to interact with Dataverse:
 \href{https://dataverse.org/}{Dataverse Homepage}
 
 \href{https://dataverse.harvard.edu/}{Harvard IQSS Dataverse}
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://iqss.github.io/dataverse-client-r/}
+  \item \url{https://dataverse.org/}
+  \item \url{https://github.com/iqss/dataverse-client-r}
+  \item Report bugs at \url{https://github.com/iqss/dataverse-client-r/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Shiro Kuriwaki \email{shirokuriwaki@gmail.com} (\href{https://orcid.org/0000-0002-5687-2647}{ORCID})
+
+Authors:
+\itemize{
+  \item Will Beasley \email{wibeasley@hotmail.com} (\href{https://orcid.org/0000-0002-5613-5006}{ORCID})
+  \item Thomas J. Leeper \email{thosjleeper@gmail.com} (\href{https://orcid.org/0000-0003-4097-6326}{ORCID})
+  \item Philip Durbin \email{philipdurbin@gmail.com} (\href{https://orcid.org/0000-0002-9528-9470}{ORCID})
+  \item Sebastian Karcher \email{karcher@u.northwestern.edu} (\href{https://orcid.org/0000-0001-8249-7388}{ORCID})
+}
+
+Other contributors:
+\itemize{
+  \item Jan Kanis [contributor]
+  \item Edward Jee [contributor]
+  \item Johannes Gruber \email{JohannesB.Gruber@gmail.com} (\href{https://orcid.org/0000-0001-9177-1772}{ORCID}) [contributor]
+}
+
 }
