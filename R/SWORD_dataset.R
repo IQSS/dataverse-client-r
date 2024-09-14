@@ -205,9 +205,8 @@ dataset_atom <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
         u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/edit/study/", dataset)
     }
 
-    r <- httr::GET(u, httr::authenticate(key, ""), ...)
-    httr::stop_for_status(r, task = httr::content(r)$message)
-    out <- parse_atom(rawToChar(r$content))
+    r <- api_get(u, httr::authenticate(key, ""), ..., as = "raw")
+    out <- parse_atom(rawToChar(r))
     out
 }
 
@@ -229,7 +228,6 @@ dataset_statement <- function(dataset, key = Sys.getenv("DATAVERSE_KEY"), server
         dataset <- prepend_doi(dataset)
         u <- paste0(api_url(server, prefix="dvn/api/"), "data-deposit/v1.1/swordv2/statement/study/", dataset)
     }
-    r <- httr::GET(u, httr::authenticate(key, ""), ...)
-    httr::stop_for_status(r, task = httr::content(r)$message)
-    parse_dataset_statement(rawToChar(r$content))
+    r <- api_get(u, httr::authenticate(key, ""), ..., as = "raw")
+    parse_dataset_statement(rawToChar(r))
 }
