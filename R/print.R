@@ -54,10 +54,10 @@ print.dataverse_dataset <- function(x, ...) {
             cat("Release Date: ", x$releaseTime, "\n", sep = "")
         }
         if ("license" %in% names(x)) {
-            cat("License: ", x$license, "\n", sep = "")
+            cat("License: ", x$license$name,"\n", sep = "")
         }
         if ("files" %in% names(x)) {
-            n <- length(x$files)
+            n <- NROW(x$files)
             cat(n, ngettext(n, " File:", " Files:"), "\n", sep = "")
             print(x$files[c("label", "version", "id", "contentType")])
         }
