@@ -2,6 +2,7 @@
 
 # CHANGES in dataverse 0.3.14
 
+* Implement a simple cache for API (including file download) calls, improving performance and reliability (#112, #135)
 * Improve recommendation for rdata loading (#107, #127)
 * `get_file_by_*()` can now return the download URL to be used in external functions or programs, useful for large files (#128, implemented in #129 @JBGruber and @kuriwaki)
 * Removes remote resource from vignette and move them to ghactions (#131)
