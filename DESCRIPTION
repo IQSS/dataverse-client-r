@@ -41,7 +41,7 @@ Authors@R:
      person(given = "Martin",
             family = "Morgan",
             role = "ctb",
-            email = "mtmorgan.xyz@gmail.com"
+            email = "mtmorgan.xyz@gmail.com",
             comment = c(ORCID = "0000-0002-5874-8148")))
 Imports:
     checkmate,
