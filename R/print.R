@@ -54,7 +54,14 @@ print.dataverse_dataset <- function(x, ...) {
             cat("Release Date: ", x$releaseTime, "\n", sep = "")
         }
         if ("license" %in% names(x)) {
-            cat("License: ", x$license$name,"\n", sep = "")
+            if (is.list(x$license)) {
+                ## Dataverse >= 5.10
+                license <- x$license$name
+            } else {
+                ## legacy
+                license <- x$name
+            }
+            cat("License: ", license,"\n", sep = "")
         }
         if ("files" %in% names(x)) {
             n <- NROW(x$files)
