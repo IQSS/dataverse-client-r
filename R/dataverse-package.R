@@ -1,4 +1,3 @@
-#' @docType package
 #' @name dataverse
 #' @title Client for Dataverse Repositories
 #' @description Provides access to Dataverse 4+ APIs, enabling data search, retrieval, and deposit.
@@ -27,4 +26,4 @@
 #'
 #'  \href{https://dataverse.harvard.edu/}{Harvard IQSS Dataverse}
 #'
-NULL
+"_PACKAGE"

@@ -29,7 +29,7 @@ update_dataset_file(
 \item{file}{A character string for the location path of the file to be uploaded.}
 
 \item{dataset}{A character specifying a persistent identification ID for a dataset,
-for example \code{"doi:10.70122/FK2/HXJVJU"}. Alternatively, an object of class
+for example \code{"10.70122/FK2/HXJVJU"}. Alternatively, an object of class
 \dQuote{dataverse_dataset} obtained by \code{dataverse_contents()}.}
 
 \item{description}{Optionally, a character string providing a description of the file.}
@@ -44,7 +44,7 @@ Multiple Dataverse installations exist, with \code{"dataverse.harvard.edu"} bein
 most major. The server can be defined each time within a function, or it can
 be set as a default via an environment variable. To set a default, run
 \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")}
-or add \verb{DATAVERSE_SERVER = "dataverse.harvard.edu} in one's \code{.Renviron}
+or add \code{DATAVERSE_SERVER = "dataverse.harvard.edu"} in one's \code{.Renviron}
 file (\code{usethis::edit_r_environ()}), with the appropriate domain as its value.}
 
 \item{...}{Additional arguments passed to an HTTP request function, such as

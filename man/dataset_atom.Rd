@@ -32,7 +32,7 @@ Multiple Dataverse installations exist, with \code{"dataverse.harvard.edu"} bein
 most major. The server can be defined each time within a function, or it can
 be set as a default via an environment variable. To set a default, run
 \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")}
-or add \verb{DATAVERSE_SERVER = "dataverse.harvard.edu} in one's \code{.Renviron}
+or add \code{DATAVERSE_SERVER = "dataverse.harvard.edu"} in one's \code{.Renviron}
 file (\code{usethis::edit_r_environ()}), with the appropriate domain as its value.}
 
 \item{...}{Additional arguments passed to an HTTP request function, such as

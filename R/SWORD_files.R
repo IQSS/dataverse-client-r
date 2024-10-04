@@ -1,6 +1,7 @@
 create_zip <- function(x, ...) {
     UseMethod("create_zip", x)
 }
+#' @export
 create_zip.character <- function(x, ...) {
     f <- file.exists(x)
     if (any(!f)) {
@@ -11,6 +12,7 @@ create_zip.character <- function(x, ...) {
         return(tmp)
     }
 }
+#' @export
 create_zip.data.frame <- function(x, ...) {
     tmpdf <- tempfile(fileext = ".zip")
     on.exit(file.remove(tmpdf), add = TRUE)
@@ -19,6 +21,7 @@ create_zip.data.frame <- function(x, ...) {
     stopifnot(!utils::zip(tmp, tmpdf))
     return(tmp)
 }
+#' @export
 create_zip.list <- function(x, ...) {
     tmpdf <- sapply(seq_along(x), tempfile(fileext = ".zip"))
     on.exit(file.remove(tmpdf), add = TRUE)
