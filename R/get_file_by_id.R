@@ -98,16 +98,10 @@ get_file_by_id <- function(
     if (return_url) {
       return(httr::modify_url(u, query = query))
     }
-    if (isFALSE(progress))
-      r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, ...)
-
-    if (isTRUE(progress))
-      r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query, httr::progress(type = "down"), ...)
-
-
-
-    httr::stop_for_status(r, task = httr::content(r)$message)
-    httr::content(r, as = "raw")
+    # add a progress bar; 'NULL' if progress is not TRUE. 'NULL' arguments
+    # are not seen by httr::GET()
+    progress_bar <- if (isTRUE(progress)) httr::progress(type = "down")
+    api_get(u, query = query, progress_bar, ..., key = key, as = "raw")
   }
 
 #' @rdname files

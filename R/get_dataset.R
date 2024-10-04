@@ -53,9 +53,8 @@ get_dataset <- function(
   } else {
     u <- paste0(api_url(server), "datasets/", dataset)
   }
-  r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-  httr::stop_for_status(r, task = httr::content(r)$message)
-  parse_dataset(httr::content(r, as = "text", encoding = "UTF-8"))
+  r <- api_get(u, ..., key = key)
+  parse_dataset(r)
 }
 
 #' @rdname get_dataset
@@ -79,10 +78,8 @@ dataset_metadata <- function(
     u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/metadata")
   }
 
-  r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-  httr::stop_for_status(r, task = httr::content(r)$message)
-  out <- httr::content(r, as = "text", encoding = "UTF-8")
-  jsonlite::fromJSON(out)[["data"]]
+  r <- api_get(u, ..., key = key)
+  jsonlite::fromJSON(r)[["data"]]
 }
 
 #' @rdname get_dataset
@@ -96,8 +93,7 @@ dataset_files <- function(
 ) {
   dataset <- dataset_id(dataset, key = key, server = server, ...)
   u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/files")
-  r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-  httr::stop_for_status(r, task = httr::content(r)$message)
-  out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"), simplifyDataFrame = FALSE)$data
+  r <- api_get(u, ..., key = key)
+  out <- jsonlite::fromJSON(r, simplifyDataFrame = FALSE)$data
   structure(lapply(out, `class<-`, "dataverse_file"))
 }

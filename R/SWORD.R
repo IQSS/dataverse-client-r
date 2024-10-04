@@ -17,9 +17,8 @@
 #' @export
 service_document <- function(key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     u <- paste0(api_url(server, prefix = "dvn/api/"), "data-deposit/v1.1/swordv2/service-document")
-    r <- httr::GET(u, httr::authenticate(key, ""), ...)
-    httr::stop_for_status(r)
-    x <- xml2::as_list(xml2::read_xml(httr::content(r, "text")))
+    r <- api_get(u, httr::authenticate(key, ""), ...)
+    x <- xml2::as_list(xml2::read_xml(r))
     w <- x$workspace
     out <- list()
     if ("title" %in% names(w)) {
@@ -74,11 +73,10 @@ list_datasets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server =
         dataverse <- get_dataverse(dataverse, key = key, server = server, ...)$alias
     }
     u <- paste0(api_url(server, prefix = "dvn/api/"), "data-deposit/v1.1/swordv2/collection/dataverse/", dataverse)
-    r <- httr::GET(u, httr::authenticate(key, ""), ...)
-    httr::stop_for_status(r)
+    r <- api_get(u, httr::authenticate(key, ""), ..., as = "raw")
 
     # clean up response structure
-    x <- xml2::as_list(xml2::read_xml(r$content))
+    x <- xml2::as_list(xml2::read_xml(r))
     feed <- x[["feed"]]
     out <- list(title = feed[["title"]][[1L]],
                 generator = feed[["generator"]],

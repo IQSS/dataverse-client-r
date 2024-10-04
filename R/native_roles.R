@@ -21,9 +21,8 @@
 # @export
 get_role <- function(role, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     u <- paste0(api_url(server), "roles/", role)
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r, task = httr::content(r)$message)
-    j <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))$data
+    r <- api_get(u, ..., key)
+    j <- jsonlite::fromJSON(r)$data
     j
 }
 
@@ -43,17 +42,12 @@ list_roles <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sy
     if (!missing(dataverse)) {
         dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
         u <- paste0(api_url(server), "dataverses/", dataverse, "/roles")
-        r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-        httr::stop_for_status(r, task = httr::content(r)$message)
-        out <- jsonlite::fromJSON(httr::content(r, "text", encoding = "UTF-8"))$data
-        structure(lapply(out, `class<-`, "dataverse_role"))
     } else {
         u <- paste0(api_url(server), "admin/roles")
-        r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-        httr::stop_for_status(r, task = httr::content(r)$message)
-        out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))$data
-        structure(lapply(out, `class<-`, "dataverse_role"))
     }
+    r <- api_get(u, ..., key = key)
+    out <- jsonlite::fromJSON(r)$data
+    structure(lapply(out, `class<-`, "dataverse_role"))
 }
 
 # @rdname roles

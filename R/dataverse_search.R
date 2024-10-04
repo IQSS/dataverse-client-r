@@ -103,9 +103,8 @@ function(...,
     u <- paste0(api_url(server), "search")
 
     # execute request
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), query = query)
-    httr::stop_for_status(r, task = httr::content(r)$message)
-    out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))
+    r <- api_get(u, query = query, key = key)
+    out <- jsonlite::fromJSON(r)
     if (isTRUE(verbose)) {
         n_total <- ngettext(out$data$total_count, "result", "results")
         message(sprintf(paste0("%s of %s ", n_total, " retrieved"), out$data$count_in_response, out$data$total_count))

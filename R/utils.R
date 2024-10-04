@@ -26,11 +26,12 @@ dataset_id.default <- function(x, ...) {
 dataset_id.character <- function(x, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
   x <- prepend_doi(x)
   u <- paste0(api_url(server), "datasets/:persistentId?persistentId=", x)
-  r <- tryCatch(httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...),
-                error = function(e) {
-                  stop("Could not retrieve Dataset ID from persistent identifier!")
-                })
-  jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))[["data"]][["id"]]
+  r <- tryCatch({
+      api_get(u, ..., key = key)
+  }, error = function(e) {
+      stop("Could not retrieve Dataset ID from persistent identifier!")
+  })
+  jsonlite::fromJSON(r)[["data"]][["id"]]
 }
 #' @export
 dataset_id.dataverse_dataset <- function(x, ...) {
@@ -203,6 +204,33 @@ api_url <- function(server = Sys.getenv("DATAVERSE_SERVER"), prefix = "api/") {
   }
   return(paste0("https://", domain, "/", prefix))
 }
+
+## common httr::GET() uses
+#' @importFrom checkmate assert_character assert_logical
+api_get <- function(url, ..., key = NULL, as = "text", use_cache = as.logical(Sys.getenv("DATAVERSE_USE_CACHE", TRUE))) {
+  assert_character(url, any.missing = FALSE, len = 1L, null.ok = TRUE)
+  assert_character(key, any.missing = FALSE, len = 1L, null.ok = TRUE)
+  assert_character(as, any.missing = FALSE, len = 1L, null.ok = TRUE)
+  assert_logical(use_cache, any.missing = FALSE, len = 1L)
+  if (use_cache) {
+    get <- api_get_memoized
+  } else {
+    get <- api_get_impl
+  }
+  get(url, ..., key = key, as = as)
+}
+
+## cache implemented via memoization; memoized function defined in
+## .onLoad()
+api_get_impl <- function(url, ..., key = NULL, as = "text") {
+  if (!is.null(key))
+    key <- httr::add_headers("X-Dataverse-key", key)
+  r <- httr::GET(url, ..., key)
+  httr::stop_for_status(r, task = httr::content(r)$message)
+  httr::content(r, as = as, encoding = "UTF-8")
+}
+
+api_get_memoized <- NULL
 
 # parse dataset response into list/dataframe
 parse_dataset <- function(out) {

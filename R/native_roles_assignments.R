@@ -19,9 +19,8 @@
 get_assignments <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     u <- paste0(api_url(server), "dataverses/", dataverse, "/assignments")
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r, task = httr::content(r)$message)
-    out <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"), simplifyDataFrame = FALSE)$data
+    r <- api_get(u, ..., key = key)
+    out <- jsonlite::fromJSON(r, simplifyDataFrame = FALSE)$data
     lapply(out, function(x) {
         x$dataverse <- dataverse
         class(x) <- "dataverse_role_assignment"

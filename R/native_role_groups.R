@@ -79,9 +79,8 @@ update_group <- function(group, name, description, dataverse, key = Sys.getenv("
 list_groups <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     u <- paste0(api_url(server), "dataverses/", dataverse, "/groups")
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r, task = httr::content(r)$message)
-    j <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"), simplifyDataFrame = FALSE)$data
+    r <- api_get(u, ..., key = key)
+    j <- jsonlite::fromJSON(r, simplifyDataFrame = FALSE)$data
     lapply(j, function(x) {
         x$dataverse <- dataverse
         class(x) <- "dataverse_group"
@@ -99,9 +98,8 @@ get_group <- function(group, dataverse, key = Sys.getenv("DATAVERSE_KEY"), serve
         dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
         u <- paste0(api_url(server), "dataverses/", dataverse, "/groups/", group)
     }
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r, task = httr::content(r)$message)
-    j <- jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))$data
+    r <- api_get(u, ..., key = key)
+    j <- jsonlite::fromJSON(r)$data
     j$dataverse <- dataverse
     structure(j, class = "dataverse_group")
 }

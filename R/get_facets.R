@@ -20,7 +20,6 @@
 get_facets <- function(dataverse, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
     dataverse <- dataverse_id(dataverse, key = key, server = server, ...)
     u <- paste0(api_url(server), "dataverses/", dataverse, "/facets")
-    r <- httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...)
-    httr::stop_for_status(r, task = httr::content(r)$message)
-    jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))$data
+    r <- api_get(u, ..., key = key)
+    jsonlite::fromJSON(r)$data
 }
