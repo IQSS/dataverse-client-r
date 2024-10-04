@@ -1,129 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/404.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/ISSUE_TEMPLATE.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/PULL_REQUEST_TEMPLATE.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/articles/A-introduction.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/articles/B-search.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/articles/C-download.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/index.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/URLs.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/add_dataset_file.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/add_file.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/create_dataset.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/create_dataverse.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/dataset_atom.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/dataset_versions.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/dataverse.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/dataverse_metadata.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/dataverse_search.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/delete_dataset.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/delete_dataverse.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/delete_file.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/delete_sword_dataset.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/files.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/get_dataframe.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/get_dataframe_internal.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/get_dataset.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/get_dataverse.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/get_facets.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/get_file_metadata.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/get_filesize.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/get_user_key.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/initiate_sword_dataset.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/is_ingested.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/list_datasets.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/publish_dataset.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/publish_dataverse.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/publish_sword_dataset.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/service_document.html</loc>
-  </url>
-  <url>
-    <loc>https://iqss.github.io/dataverse-client-r/reference/set_dataverse_metadata.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://iqss.github.io/dataverse-client-r/404.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/ISSUE_TEMPLATE.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/PULL_REQUEST_TEMPLATE.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/articles/A-introduction.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/articles/B-search.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/articles/C-download.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/articles/index.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/authors.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/index.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/news/index.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/URLs.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/add_dataset_file.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/add_file.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/create_dataset.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/create_dataverse.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/dataset_atom.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/dataset_versions.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/dataverse.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/dataverse_metadata.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/dataverse_search.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/delete_dataset.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/delete_dataverse.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/delete_file.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/delete_sword_dataset.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/files.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/get_dataframe.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/get_dataframe_internal.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/get_dataset.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/get_dataverse.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/get_facets.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/get_file_metadata.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/get_filesize.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/get_user_key.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/index.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/initiate_sword_dataset.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/is_ingested.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/list_datasets.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/publish_dataset.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/publish_dataverse.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/publish_sword_dataset.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/service_document.html</loc></url>
+<url><loc>https://iqss.github.io/dataverse-client-r/reference/set_dataverse_metadata.html</loc></url>
 </urlset>
+

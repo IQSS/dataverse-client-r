@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -28,7 +28,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
@@ -47,20 +47,20 @@
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/iqss/dataverse-client-r/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Delete dataset (SWORD)</h1>
-    <small class="dont-index">Source: <a href="https://github.com/iqss/dataverse-client-r/blob/HEAD/R/SWORD_dataset.R" class="external-link"><code>R/SWORD_dataset.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/iqss/dataverse-client-r/blob/main/R/SWORD_dataset.R" class="external-link"><code>R/SWORD_dataset.R</code></a></small>
     <div class="hidden name"><code>delete_sword_dataset.Rd</code></div>
     </div>
 
@@ -79,28 +79,30 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>dataset</dt>
+
+
+<dl><dt id="arg-dataset">dataset<a class="anchor" aria-label="anchor" href="#arg-dataset"></a></dt>
 <dd><p>A dataset DOI (or other persistent identifier).</p></dd>
 
 
-<dt>key</dt>
+<dt id="arg-key">key<a class="anchor" aria-label="anchor" href="#arg-key"></a></dt>
 <dd><p>A character string specifying a Dataverse server API key. If one
 is not specified, functions calling authenticated API endpoints will fail.
 Keys can be specified atomically or globally using
 <code>Sys.setenv("DATAVERSE_KEY" = "examplekey")</code>.</p></dd>
 
 
-<dt>server</dt>
+<dt id="arg-server">server<a class="anchor" aria-label="anchor" href="#arg-server"></a></dt>
 <dd><p>A character string specifying a Dataverse server.
 Multiple Dataverse installations exist, with <code>"dataverse.harvard.edu"</code> being the
 most major. The server can be defined each time within a function, or it can
 be set as a default via an environment variable. To set a default, run
 <code>Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")</code>
-or add <code>DATAVERSE_SERVER = "dataverse.harvard.edu</code> in one's <code>.Renviron</code>
+or add <code>DATAVERSE_SERVER = "dataverse.harvard.edu"</code> in one's <code>.Renviron</code>
 file (<code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>), with the appropriate domain as its value.</p></dd>
 
 
-<dt>...</dt>
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Additional arguments passed to an HTTP request function, such as
 <code><a href="https://httr.r-lib.org/reference/GET.html" class="external-link">GET</a></code>, <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">POST</a></code>, or
 <code><a href="https://httr.r-lib.org/reference/DELETE.html" class="external-link">DELETE</a></code>.</p></dd>
@@ -108,9 +110,7 @@ file (<code><a href="https://usethis.r-lib.org/reference/edit.html" class="exter
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>If successful, a logical <code>TRUE</code>, else possibly some information.</p>
+    <p>If successful, a logical <code>TRUE</code>, else possibly some information.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -123,7 +123,7 @@ file (<code><a href="https://usethis.r-lib.org/reference/edit.html" class="exter
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># retrieve your service document</span></span></span>
 <span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="service_document.html">service_document</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -137,7 +137,7 @@ file (<code><a href="https://usethis.r-lib.org/reference/edit.html" class="exter
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># delete a dataset</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="delete_dataset.html">delete_dataset</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -152,15 +152,15 @@ file (<code><a href="https://usethis.r-lib.org/reference/edit.html" class="exter
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 
