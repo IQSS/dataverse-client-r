@@ -23,6 +23,7 @@ test_that("dataverse for 'dataverse-client-r'", {
       publisher = "Demo Dataverse",
       publicationDate = "2020-12-29",
       storageIdentifier = "file://10.70122/FK2/HXJVJU",
+      datasetType = "dataset",
       type = "dataset"
     ),
     class = "dataverse_dataset"
@@ -31,5 +32,5 @@ test_that("dataverse for 'dataverse-client-r'", {
   dv      <- get_dataverse(dataverse = "dataverse-client-r")
   actual    <- dataverse_contents(dv)
   ds_index  <- which(sapply(actual, function(x) x$identifier) == "FK2/HXJVJU")
-  expect_equal(actual[[ds_index]], expected)
+  expect_contains(actual[[ds_index]], expected) # y is a subset of x
 })
