@@ -6,11 +6,10 @@ test_that("cache management works", {
 
   info <- cache_info()
   expect_s3_class(info, "data.frame")
-  expect_setequal(
-    names(info),
-    c("size", "isdir", "mode", "mtime", "ctime", "atime", "uid", 
-      "gid", "uname", "grname")
-  )
+  ## subset of column names common across platforms; see ?file.info
+  ## 'uname' not available in Windows <= R 4.4.1
+  colnames <- c("size", "isdir", "mode", "mtime", "ctime", "atime")
+  expect_true(all(colnames %in% names(info)))
 })
 
 test_that("'api_get' validates use_cache", {
