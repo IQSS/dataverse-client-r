@@ -17,7 +17,7 @@ if (!requireNamespace("yaml", quietly = TRUE)) {
     Sys.setenv(
       DATAVERSE_SERVER    = config$server,
       DATAVERSE_KEY       = config$api_token,
-      DATAVERSE_USE_CACHE = FALSE
+      DATAVERSE_USE_CACHE = "none"
     )
 
     # To better identify the source of problems, check if the token is expired.

@@ -27,9 +27,12 @@ dataset_id.character <- function(x, key = Sys.getenv("DATAVERSE_KEY"), server = 
   x <- prepend_doi(x)
   u <- paste0(api_url(server), "datasets/:persistentId?persistentId=", x)
   r <- tryCatch({
-      api_get(u, ..., key = key)
+    api_get(u, ..., key = key)
   }, error = function(e) {
-      stop("Could not retrieve Dataset ID from persistent identifier!")
+    stop(
+      "Could not retrieve Dataset ID from persistent identifier! ",
+      conditionMessage(e)
+    )
   })
   jsonlite::fromJSON(r)[["data"]][["id"]]
 }
@@ -206,21 +209,23 @@ api_url <- function(server = Sys.getenv("DATAVERSE_SERVER"), prefix = "api/") {
 }
 
 ## common httr::GET() uses
-#' @importFrom checkmate assert_character assert_logical
-api_get <- function(url, ..., key = NULL, as = "text", use_cache = as.logical(Sys.getenv("DATAVERSE_USE_CACHE", TRUE))) {
-  assert_character(url, any.missing = FALSE, len = 1L, null.ok = TRUE)
-  assert_character(key, any.missing = FALSE, len = 1L, null.ok = TRUE)
-  assert_character(as, any.missing = FALSE, len = 1L, null.ok = TRUE)
-  assert_logical(use_cache, any.missing = FALSE, len = 1L)
-  if (use_cache) {
-    get <- api_get_memoized
-  } else {
-    get <- api_get_impl
-  }
+#' @importFrom checkmate assert_string
+api_get <- function(url, ..., key = NULL, as = "text", use_cache = Sys.getenv("DATAVERSE_USE_CACHE", "session")) {
+  assert_string(url)
+  assert_string(key, null.ok = TRUE)
+  assert_string(as, null.ok = TRUE)
+  assert_use_cache(use_cache)
+  get <- switch(
+    use_cache,
+    "none" = api_get_impl,
+    "session" = api_get_session_cache,
+    "disk" = api_get_disk_cache,
+    stop("unknown value for 'use_cache'")
+  )
   get(url, ..., key = key, as = as)
 }
 
-## cache implemented via memoization; memoized function defined in
+## cache implemented via memoization; memoized functions defined in
 ## .onLoad()
 api_get_impl <- function(url, ..., key = NULL, as = "text") {
   if (!is.null(key))
@@ -230,7 +235,9 @@ api_get_impl <- function(url, ..., key = NULL, as = "text") {
   httr::content(r, as = as, encoding = "UTF-8")
 }
 
-api_get_memoized <- NULL
+api_get_session_cache <- NULL      # per-session memoisatoin
+
+api_get_disk_cache <- NULL # 'permanent' memoisation
 
 # parse dataset response into list/dataframe
 parse_dataset <- function(out) {

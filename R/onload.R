@@ -2,26 +2,19 @@
 #'
 #' @importFrom memoise memoise
 .onLoad <- function(libname, pkgname) {
-  # a <- Sys.getenv("DATAVERSE_SERVER")
-  # if(a == "") {
-  #     Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")
-  # }
+  ##
+  ## 'memoise' httr::GET calls
+  ##
 
-  ## implement API disk cache via 'memoise'
-  cache_directory <- file.path(
-    tools::R_user_dir(pkgname, "cache"),
-    "api_cache"
-  )
-  get <- api_get_impl
-  if (!dir.exists(cache_directory)) {
-    status <- dir.create(cache_directory, recursive = TRUE)
-    if (!status)
-      warning("'dataverse' failed to create API cache")
+  ## API session cache
+  api_get_session_cache <<- memoise(api_get_impl)
+
+  ## API disk cache
+  cache_path <- cache_path()
+  if (dir.exists(cache_path)) {
+    # disk cache, no age or size limits
+    cache <- cache_disk(cache_path)
+    get_disk <- memoise(api_get_impl, cache = cache)
   }
-  if (dir.exists(cache_directory)) {
-    # disk cache with max age 30 days
-    cache <- cache_disk(cache_directory, max_age = 60 * 60 * 24 * 30)
-    get <- memoise(get, cache = cache)
-  }
-  api_get_memoized <<- get
+  api_get_disk_cache <<- get_disk
 }

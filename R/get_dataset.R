@@ -20,6 +20,7 @@
 #' @template version
 #' @template envvars
 #' @template dots
+#' @param use_cache one of `"disk"`, `"session"`, or `"none"`, describing how datasets are cached to reduce network traffic. See \code{\link{cache_dataset}} for details.
 #' @return A list of class \dQuote{dataverse_dataset} or a list of a form dependent
 #'  on the specific metadata block retrieved. \code{dataset_files} returns a list of
 #'  objects of class \dQuote{dataverse_file}.
@@ -45,15 +46,16 @@ get_dataset <- function(
   version    = ":latest",
   key        = Sys.getenv("DATAVERSE_KEY"),
   server     = Sys.getenv("DATAVERSE_SERVER"),
-  ...
+  ...,
+  use_cache = Sys.getenv("DATAVERSE_USE_CACHE", cache_dataset(version))
 ) {
-  dataset <- dataset_id(dataset, key = key, server = server, ...)
+  dataset <- dataset_id(dataset, key = key, server = server, ..., use_cache = use_cache)
   if (!is.null(version)) {
     u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version)
   } else {
     u <- paste0(api_url(server), "datasets/", dataset)
   }
-  r <- api_get(u, ..., key = key)
+  r <- api_get(u, ..., key = key, use_cache = use_cache)
   parse_dataset(r)
 }
 
@@ -69,16 +71,17 @@ dataset_metadata <- function(
   block       = "citation",
   key         = Sys.getenv("DATAVERSE_KEY"),
   server      = Sys.getenv("DATAVERSE_SERVER"),
-  ...
+  ...,
+  use_cache = Sys.getenv("DATAVERSE_USE_CACHE", cache_dataset(version))
  ) {
-  dataset <- dataset_id(dataset, key = key, server = server, ...)
+  dataset <- dataset_id(dataset, key = key, server = server, ..., use_cache = use_cache)
   if (!is.null(block)) {
     u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/metadata/", block)
   } else {
     u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/metadata")
   }
 
-  r <- api_get(u, ..., key = key)
+  r <- api_get(u, ..., key = key, use_cache = use_cache)
   jsonlite::fromJSON(r)[["data"]]
 }
 
@@ -89,11 +92,12 @@ dataset_files <- function(
   version   = ":latest",
   key       = Sys.getenv("DATAVERSE_KEY"),
   server    = Sys.getenv("DATAVERSE_SERVER"),
-  ...
+  ...,
+  use_cache = Sys.getenv("DATAVERSE_USE_CACHE", cache_dataset(version))
 ) {
-  dataset <- dataset_id(dataset, key = key, server = server, ...)
+  dataset <- dataset_id(dataset, key = key, server = server, ..., use_cache = use_cache)
   u <- paste0(api_url(server), "datasets/", dataset, "/versions/", version, "/files")
-  r <- api_get(u, ..., key = key)
+  r <- api_get(u, ..., key = key, use_cache = use_cache)
   out <- jsonlite::fromJSON(r, simplifyDataFrame = FALSE)$data
   structure(lapply(out, `class<-`, "dataverse_file"))
 }

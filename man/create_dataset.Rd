@@ -41,9 +41,9 @@ file (\code{usethis::edit_r_environ()}), with the appropriate domain as its valu
 
 \item{...}{Additional arguments passed to an HTTP request function,
 such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
-\code{\link[httr]{DELETE}}. By default, HTTP requests use
-values cached from previous identical calls. Use
-\code{use_cache=FALSE} (or \code{Sys.setenv(DATAVERSE_USE_CACHE = FALSE)} if cached API calls are not desired.}
+\code{\link[httr]{DELETE}}. See \code{\link{use_cache}} for details
+on how the \emph{R} dataverse package uses disk and session caches to
+improve network performance.}
 
 \item{dataset}{A character specifying a persistent identification ID for a dataset,
 for example \code{"10.70122/FK2/HXJVJU"}. Alternatively, an object of class
