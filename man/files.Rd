@@ -16,6 +16,7 @@ get_file(
   key = Sys.getenv("DATAVERSE_KEY"),
   server = Sys.getenv("DATAVERSE_SERVER"),
   original = TRUE,
+  version = ":latest",
   ...
 )
 
@@ -99,9 +100,23 @@ available, download the original version instead of the ingested? If there was
 no ingested version, is set to NA. Note in \verb{get_dataframe_*},
 \code{original} is set to FALSE by default. Either can be changed.}
 
-\item{...}{Additional arguments passed to an HTTP request function, such as
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
-\code{\link[httr]{DELETE}}.}
+\item{version}{A character specifying a version of the dataset.
+This can be of the form \code{"1.1"} or \code{"1"} (where in \code{"x.y"}, x is a major
+version and y is an optional minor version), or
+\code{":latest"} (the default, the latest published version).
+We recommend using the number format so that
+the function stores a cache of the data (See \code{\link{cache_dataset}}).
+If the user specifies a \code{key} or \code{DATAVERSE_KEY} argument, they can access the
+draft version by \code{":draft"} (the current draft) or \code{":latest"} (which will
+prioritize the draft over the latest published version.
+Finally, set \code{use_cache = "none"} to not read from the cache and re-download
+afresh even when \code{version} is provided.}
+
+\item{...}{Additional arguments passed to an HTTP request function,
+such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
+\code{\link[httr]{DELETE}}. See \code{\link{use_cache}} for details
+on how the \emph{R} dataverse package uses disk and session caches to
+improve network performance.}
 
 \item{filename}{Filename of the dataset, with file extension as shown in Dataverse
 (for example, if nlsw88.dta was the original but is displayed as the ingested

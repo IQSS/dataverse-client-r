@@ -24,9 +24,11 @@ be set as a default via an environment variable. To set a default, run
 or add \code{DATAVERSE_SERVER = "dataverse.harvard.edu"} in one's \code{.Renviron}
 file (\code{usethis::edit_r_environ()}), with the appropriate domain as its value.}
 
-\item{...}{Additional arguments passed to an HTTP request function, such as
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
-\code{\link[httr]{DELETE}}.}
+\item{...}{Additional arguments passed to an HTTP request function,
+such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
+\code{\link[httr]{DELETE}}. See \code{\link{use_cache}} for details
+on how the \emph{R} dataverse package uses disk and session caches to
+improve network performance.}
 }
 \value{
 A list of class \dQuote{sword_service_document}, possibly with one or more \dQuote{sword_collection} entries. The latter are SWORD representations of a Dataverse. These can be passed to other SWORD API functions, e.g., for creating a new dataset.

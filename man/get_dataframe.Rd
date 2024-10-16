@@ -64,6 +64,17 @@ be set as a default via an environment variable. To set a default, run
 \code{Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")}
 or add \code{DATAVERSE_SERVER = "dataverse.harvard.edu"} in one's \code{.Renviron}
 file (\code{usethis::edit_r_environ()}), with the appropriate domain as its value.}
+    \item{\code{version}}{A character specifying a version of the dataset.
+This can be of the form \code{"1.1"} or \code{"1"} (where in \code{"x.y"}, x is a major
+version and y is an optional minor version), or
+\code{":latest"} (the default, the latest published version).
+We recommend using the number format so that
+the function stores a cache of the data (See \code{\link{cache_dataset}}).
+If the user specifies a \code{key} or \code{DATAVERSE_KEY} argument, they can access the
+draft version by \code{":draft"} (the current draft) or \code{":latest"} (which will
+prioritize the draft over the latest published version.
+Finally, set \code{use_cache = "none"} to not read from the cache and re-download
+afresh even when \code{version} is provided.}
     \item{\code{return_url}}{Instead of downloading the file, return the URL for download.
 Defaults to \code{FALSE}.}
   }}

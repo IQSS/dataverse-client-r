@@ -14,8 +14,11 @@ if (!requireNamespace("yaml", quietly = TRUE)) {
     config  <- yaml::read_yaml(system.file("constants.yml", package = "dataverse"))
     # config  <- yaml::read_yaml("inst/constants.yml")
 
-    Sys.setenv("DATAVERSE_SERVER" = config$server)
-    Sys.setenv("DATAVERSE_KEY"    = config$api_token)
+    Sys.setenv(
+      DATAVERSE_SERVER    = config$server,
+      DATAVERSE_KEY       = config$api_token,
+      DATAVERSE_USE_CACHE = "none"
+    )
 
     # To better identify the source of problems, check if the token is expired.
     #   This check *should* be unnecessary on CRAN, since not CRAN tests should

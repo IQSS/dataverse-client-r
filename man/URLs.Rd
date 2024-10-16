@@ -85,9 +85,11 @@ available, download the original version instead of the ingested? If there was
 no ingested version, is set to NA. Note in \verb{get_dataframe_*},
 \code{original} is set to FALSE by default. Either can be changed.}
 
-\item{...}{Additional arguments passed to an HTTP request function, such as
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
-\code{\link[httr]{DELETE}}.}
+\item{...}{Additional arguments passed to an HTTP request function,
+such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
+\code{\link[httr]{DELETE}}. See \code{\link{use_cache}} for details
+on how the \emph{R} dataverse package uses disk and session caches to
+improve network performance.}
 
 \item{filename}{Filename of the dataset, with file extension as shown in Dataverse
 (for example, if nlsw88.dta was the original but is displayed as the ingested

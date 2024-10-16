@@ -26,11 +26,15 @@ dataset_id.default <- function(x, ...) {
 dataset_id.character <- function(x, key = Sys.getenv("DATAVERSE_KEY"), server = Sys.getenv("DATAVERSE_SERVER"), ...) {
   x <- prepend_doi(x)
   u <- paste0(api_url(server), "datasets/:persistentId?persistentId=", x)
-  r <- tryCatch(httr::GET(u, httr::add_headers("X-Dataverse-key" = key), ...),
-                error = function(e) {
-                  stop("Could not retrieve Dataset ID from persistent identifier!")
-                })
-  jsonlite::fromJSON(httr::content(r, as = "text", encoding = "UTF-8"))[["data"]][["id"]]
+  r <- tryCatch({
+    api_get(u, ..., key = key)
+  }, error = function(e) {
+    stop(
+      "Could not retrieve Dataset ID from persistent identifier! ",
+      conditionMessage(e)
+    )
+  })
+  jsonlite::fromJSON(r)[["data"]][["id"]]
 }
 #' @export
 dataset_id.dataverse_dataset <- function(x, ...) {
@@ -203,6 +207,37 @@ api_url <- function(server = Sys.getenv("DATAVERSE_SERVER"), prefix = "api/") {
   }
   return(paste0("https://", domain, "/", prefix))
 }
+
+## common httr::GET() uses
+#' @importFrom checkmate assert_string
+api_get <- function(url, ..., key = NULL, as = "text", use_cache = Sys.getenv("DATAVERSE_USE_CACHE", "session")) {
+  assert_string(url)
+  assert_string(key, null.ok = TRUE)
+  assert_string(as, null.ok = TRUE)
+  assert_use_cache(use_cache)
+  get <- switch(
+    use_cache,
+    "none" = api_get_impl,
+    "session" = api_get_session_cache,
+    "disk" = api_get_disk_cache,
+    stop("unknown value for 'use_cache'")
+  )
+  get(url, ..., key = key, as = as)
+}
+
+## cache implemented via memoization; memoized functions defined in
+## .onLoad()
+api_get_impl <- function(url, ..., key = NULL, as = "text") {
+  if (!is.null(key))
+    key <- httr::add_headers("X-Dataverse-key", key)
+  r <- httr::GET(url, ..., key)
+  httr::stop_for_status(r, task = httr::content(r)$message)
+  httr::content(r, as = as, encoding = "UTF-8")
+}
+
+api_get_session_cache <- NULL      # per-session memoisatoin
+
+api_get_disk_cache <- NULL # 'permanent' memoisation
 
 # parse dataset response into list/dataframe
 parse_dataset <- function(out) {

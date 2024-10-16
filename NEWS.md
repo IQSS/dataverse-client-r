@@ -1,5 +1,9 @@
 # dataverse
 
+# CHANGES in dataverse 0.3.15
+
+* Implement a cache for API calls (including file download) when dataset version is specified. The functions will reload from the cache automatically the second time. (#112, #135, by @mtmorgan)
+
 # CHANGES in dataverse 0.3.14
 
 * Improve recommendation for rdata loading (#107, #127)

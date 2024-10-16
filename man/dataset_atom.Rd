@@ -35,9 +35,11 @@ be set as a default via an environment variable. To set a default, run
 or add \code{DATAVERSE_SERVER = "dataverse.harvard.edu"} in one's \code{.Renviron}
 file (\code{usethis::edit_r_environ()}), with the appropriate domain as its value.}
 
-\item{...}{Additional arguments passed to an HTTP request function, such as
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
-\code{\link[httr]{DELETE}}.}
+\item{...}{Additional arguments passed to an HTTP request function,
+such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
+\code{\link[httr]{DELETE}}. See \code{\link{use_cache}} for details
+on how the \emph{R} dataverse package uses disk and session caches to
+improve network performance.}
 }
 \value{
 A list. For \code{dataset_atom}, an object of class \dQuote{dataset_atom}.

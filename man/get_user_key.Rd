@@ -13,9 +13,11 @@ get_user_key(user, password, server = Sys.getenv("DATAVERSE_SERVER"), ...)
 
 \item{server}{The Dataverse instance. See \code{get_file}.}
 
-\item{...}{Additional arguments passed to an HTTP request function, such as
-\code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
-\code{\link[httr]{DELETE}}.}
+\item{...}{Additional arguments passed to an HTTP request function,
+such as \code{\link[httr]{GET}}, \code{\link[httr]{POST}}, or
+\code{\link[httr]{DELETE}}. See \code{\link{use_cache}} for details
+on how the \emph{R} dataverse package uses disk and session caches to
+improve network performance.}
 }
 \value{
 A list.
