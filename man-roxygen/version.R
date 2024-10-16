@@ -7,5 +7,5 @@
 #'  If the user specifies a `key` or `DATAVERSE_KEY` argument, they can access the
 #'  draft version by `":draft"` (the current draft) or `":latest"` (which will
 #'  prioritize the draft over the latest published version.
-#'  A dataset's version-specific identification number can be
-#'  used for the `dataset` argument as well to avoid the `version` argument.
+#'  Finally, set `use_cache = "none"` to not read from the cache and re-download
+#'  afresh even when `version` is provided.

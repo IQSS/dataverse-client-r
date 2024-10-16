@@ -73,8 +73,8 @@ the function stores a cache of the data (See \code{\link{cache_dataset}}).
 If the user specifies a \code{key} or \code{DATAVERSE_KEY} argument, they can access the
 draft version by \code{":draft"} (the current draft) or \code{":latest"} (which will
 prioritize the draft over the latest published version.
-A dataset's version-specific identification number can be
-used for the \code{dataset} argument as well to avoid the \code{version} argument.}
+Finally, set \code{use_cache = "none"} to not read from the cache and re-download
+afresh even when \code{version} is provided.}
     \item{\code{return_url}}{Instead of downloading the file, return the URL for download.
 Defaults to \code{FALSE}.}
   }}
