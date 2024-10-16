@@ -94,6 +94,10 @@ head(energy)
 
 The dataverse package can also download datasets that are _drafts_ (i.e. versions not released publicly), as long as the user of the dataset provides their appropriate DATAVERSE_KEY. Users may need to modify the metadata of a datafile, such as adding a descriptive label, for the data downloading to work properly in this case. This is because the the file identifier UNF, which the read function relies on, may only appear after metadata has been added.
 
+## Caching large datasets
+
+As of v0.3.15, datasets are _cached_ on your computer if the user specifies a version of the dataset. The next time the code is run, the function will read from the cache rather than re-downloading from the Dataverse. Version specification can be done, e.g., by setting `version = "3"` for V3, for instance. This is useful to avoid re-downloading the identical dataset every time, especially if they take some time to download. To turn off or view the settings of caching, see `cache_dataset()`.
+
 
 ## Retrieving Custom Data Formats (RDS, Stata, SPSS)
 
