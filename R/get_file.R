@@ -34,6 +34,7 @@
 #' @template envvars
 #' @template dots
 #' @template ds
+#' @template version
 #'
 #' @return \code{get_file} returns a raw vector (or list of raw vectors,
 #' if \code{length(file) > 1}), which can be saved locally with the `writeBin`
@@ -89,6 +90,7 @@ get_file <- function(
   key           = Sys.getenv("DATAVERSE_KEY"),
   server        = Sys.getenv("DATAVERSE_SERVER"),
   original      = TRUE,
+  version       = ":latest",
   ...
 ) {
 
