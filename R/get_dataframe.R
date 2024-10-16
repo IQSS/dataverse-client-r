@@ -28,6 +28,7 @@
 #' `.tab` files so if `original = FALSE`, `.f` is set to `readr::read_tsv`.
 #'
 #' @inheritDotParams get_file
+#' @template version
 #'
 #' @return A R object that is returned by the default or user-supplied function
 #'  `.f` argument. For example, if `.f = readr::read_tsv()`, the function will
