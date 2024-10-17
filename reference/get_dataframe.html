@@ -25,7 +25,7 @@ as long as the entry has a UNF. See the download vignette for details."><!-- mat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.15</span>
       </span>
     </div>
 
@@ -162,6 +162,19 @@ be set as a default via an environment variable. To set a default, run
 <code>Sys.setenv("DATAVERSE_SERVER" = "dataverse.harvard.edu")</code>
 or add <code>DATAVERSE_SERVER = "dataverse.harvard.edu"</code> in one's <code>.Renviron</code>
 file (<code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>), with the appropriate domain as its value.</p></dd>
+
+    <dt><code>version</code></dt>
+<dd><p>A character specifying a version of the dataset.
+This can be of the form <code>"1.1"</code> or <code>"1"</code> (where in <code>"x.y"</code>, x is a major
+version and y is an optional minor version), or
+<code>":latest"</code> (the default, the latest published version).
+We recommend using the number format so that
+the function stores a cache of the data (See <code><a href="cache.html">cache_dataset</a></code>).
+If the user specifies a <code>key</code> or <code>DATAVERSE_KEY</code> argument, they can access the
+draft version by <code>":draft"</code> (the current draft) or <code>":latest"</code> (which will
+prioritize the draft over the latest published version.
+Finally, set <code>use_cache = "none"</code> to not read from the cache and re-download
+afresh even when <code>version</code> is provided.</p></dd>
 
     <dt><code>return_url</code></dt>
 <dd><p>Instead of downloading the file, return the URL for download.

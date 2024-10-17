@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.15</span>
       </span>
     </div>
 
@@ -85,7 +85,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>3. Data Download</h1>
             
-            <h4 data-toc-skip class="date">2024-10-04</h4>
+            <h4 data-toc-skip class="date">2024-10-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/iqss/dataverse-client-r/blob/main/vignettes/C-download.Rmd" class="external-link"><code>vignettes/C-download.Rmd</code></a></small>
       <div class="hidden name"><code>C-download.Rmd</code></div>
@@ -145,6 +145,11 @@
 <span><span class="co">## 5    5 8-May     0 18.5 342.3 82742929 35417089 17923760 11589061 22848737</span></span>
 <span><span class="co">## 6    6 8-Jun     0 21.3 453.7 82180013 36692291 15205229 11360771 22487441</span></span></code></pre></div>
 <p>The dataverse package can also download datasets that are <em>drafts</em> (i.e. versions not released publicly), as long as the user of the dataset provides their appropriate DATAVERSE_KEY. Users may need to modify the metadata of a datafile, such as adding a descriptive label, for the data downloading to work properly in this case. This is because the the file identifier UNF, which the read function relies on, may only appear after metadata has been added.</p>
+</div>
+<div class="section level2">
+<h2 id="caching-large-datasets">Caching large datasets<a class="anchor" aria-label="anchor" href="#caching-large-datasets"></a>
+</h2>
+<p>As of v0.3.15, datasets are <em>cached</em> on your computer if the user specifies a version of the dataset. The next time the code is run, the function will read from the cache rather than re-downloading from the Dataverse. Version specification can be done, e.g., by setting <code>version = "3"</code> for V3, for instance. This is useful to avoid re-downloading the identical dataset every time, especially if they take some time to download. To turn off or view the settings of caching, see <code><a href="../reference/cache.html">cache_dataset()</a></code>.</p>
 </div>
 <div class="section level2">
 <h2 id="retrieving-custom-data-formats-rds-stata-spss">Retrieving Custom Data Formats (RDS, Stata, SPSS)<a class="anchor" aria-label="anchor" href="#retrieving-custom-data-formats-rds-stata-spss"></a>

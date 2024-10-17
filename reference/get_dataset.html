@@ -18,7 +18,7 @@ see get_file or get_dataframe_by_name."><!-- mathjax --><script src="https://cdn
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.15</span>
       </span>
     </div>
 
@@ -76,7 +76,8 @@ see <code><a href="files.html">get_file</a></code> or <code><a href="get_datafra
 <span>  version <span class="op">=</span> <span class="st">":latest"</span>,</span>
 <span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,</span>
 <span>  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  use_cache <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_USE_CACHE"</span>, <span class="fu"><a href="cache.html">cache_dataset</a></span><span class="op">(</span><span class="va">version</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">dataset_metadata</span><span class="op">(</span></span>
@@ -85,7 +86,8 @@ see <code><a href="files.html">get_file</a></code> or <code><a href="get_datafra
 <span>  block <span class="op">=</span> <span class="st">"citation"</span>,</span>
 <span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,</span>
 <span>  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  use_cache <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_USE_CACHE"</span>, <span class="fu"><a href="cache.html">cache_dataset</a></span><span class="op">(</span><span class="va">version</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">dataset_files</span><span class="op">(</span></span>
@@ -93,7 +95,8 @@ see <code><a href="files.html">get_file</a></code> or <code><a href="get_datafra
 <span>  version <span class="op">=</span> <span class="st">":latest"</span>,</span>
 <span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_KEY"</span><span class="op">)</span>,</span>
 <span>  server <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_SERVER"</span><span class="op">)</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  use_cache <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"DATAVERSE_USE_CACHE"</span>, <span class="fu"><a href="cache.html">cache_dataset</a></span><span class="op">(</span><span class="va">version</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -108,7 +111,17 @@ for example <code>"10.70122/FK2/HXJVJU"</code>. Alternatively, an object of clas
 
 
 <dt id="arg-version">version<a class="anchor" aria-label="anchor" href="#arg-version"></a></dt>
-<dd><p>A character string specifying a version of the dataset. This can be one of “:draft” (the current draft), “:latest” (the latest draft, if it exists, or the latest published version), “:latest-published” (the latest published version, ignoring any draft), or “x.y” (where <samp>x</samp> is a major version and <samp>y</samp> is a minor version; the <samp>.y</samp> can be omitted to obtain a major version). In lieu of this, a dataset's version-specific identification number can be used for the <code>dataset</code> argument.</p></dd>
+<dd><p>A character specifying a version of the dataset.
+This can be of the form <code>"1.1"</code> or <code>"1"</code> (where in <code>"x.y"</code>, x is a major
+version and y is an optional minor version), or
+<code>":latest"</code> (the default, the latest published version).
+We recommend using the number format so that
+the function stores a cache of the data (See <code><a href="cache.html">cache_dataset</a></code>).
+If the user specifies a <code>key</code> or <code>DATAVERSE_KEY</code> argument, they can access the
+draft version by <code>":draft"</code> (the current draft) or <code>":latest"</code> (which will
+prioritize the draft over the latest published version.
+Finally, set <code>use_cache = "none"</code> to not read from the cache and re-download
+afresh even when <code>version</code> is provided.</p></dd>
 
 
 <dt id="arg-key">key<a class="anchor" aria-label="anchor" href="#arg-key"></a></dt>
@@ -129,9 +142,15 @@ file (<code><a href="https://usethis.r-lib.org/reference/edit.html" class="exter
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed to an HTTP request function, such as
-<code><a href="https://httr.r-lib.org/reference/GET.html" class="external-link">GET</a></code>, <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">POST</a></code>, or
-<code><a href="https://httr.r-lib.org/reference/DELETE.html" class="external-link">DELETE</a></code>.</p></dd>
+<dd><p>Additional arguments passed to an HTTP request function,
+such as <code><a href="https://httr.r-lib.org/reference/GET.html" class="external-link">GET</a></code>, <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">POST</a></code>, or
+<code><a href="https://httr.r-lib.org/reference/DELETE.html" class="external-link">DELETE</a></code>. See <code><a href="cache.html">use_cache</a></code> for details
+on how the <em>R</em> dataverse package uses disk and session caches to
+improve network performance.</p></dd>
+
+
+<dt id="arg-use-cache">use_cache<a class="anchor" aria-label="anchor" href="#arg-use-cache"></a></dt>
+<dd><p>one of <code>"disk"</code>, <code>"session"</code>, or <code>"none"</code>, describing how datasets are cached to reduce network traffic. See <code><a href="cache.html">cache_dataset</a></code> for details.</p></dd>
 
 
 <dt id="arg-block">block<a class="anchor" aria-label="anchor" href="#arg-block"></a></dt>
