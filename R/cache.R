@@ -8,7 +8,7 @@
 #' - `"none"`: do not use the cache. This is the default for datasets that are versioned with `":draft"`, `":latest"`, and `":latest-published"`.
 #' - `"session"`: cache API requests for the duration of the *R* session. This is the default for API calls that do not involve file or dataset retrieval.
 #' - `"disk": use a permanent disk cache. This is the default for files and explicitly versioned datasets.
-#' 
+#'
 #' @template version
 #' @details
 #' `cache_dataset()` determines whether a dataset or file should be cached based on the version specification.
@@ -18,6 +18,18 @@
 #' @examples
 #' cache_dataset(":latest")  # "none"
 #' cache_dataset("1.2")      # "disk"
+#'
+#' \dontrun{
+#'  # specifying the version will by default store a cache. Add `use_cache = "none"` to turn off
+#'  df_tab <-
+#'   get_dataframe_by_name(
+#'    filename = "roster-bulls-1996.tab",
+#'    dataset  = "doi:10.70122/FK2/HXJVJU",
+#'    server   = "demo.dataverse.org",
+#'    version = "3"
+#'  )
+#' }
+#'
 #' @export
 cache_dataset <- function(version) {
   assert_string(version)
@@ -77,7 +89,7 @@ cache_info <- function() {
 #' @export
 cache_reset <- function() {
   cache_path <- cache_path()
-  if (dir.exists(cache_path))  
+  if (dir.exists(cache_path))
     cache_disk(cache_path)$reset()
   invisible(cache_path)
 }

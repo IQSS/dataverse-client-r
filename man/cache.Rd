@@ -60,6 +60,18 @@ Use of the cache is determined by the value of the \verb{use_cache =} argument t
 \examples{
 cache_dataset(":latest")  # "none"
 cache_dataset("1.2")      # "disk"
+
+\dontrun{
+ # specifying the version will by default store a cache. Add `use_cache = "none"` to turn off
+ df_tab <-
+  get_dataframe_by_name(
+   filename = "roster-bulls-1996.tab",
+   dataset  = "doi:10.70122/FK2/HXJVJU",
+   server   = "demo.dataverse.org",
+   version = "3"
+ )
+}
+
 cache_path()
 
 cache_info()
