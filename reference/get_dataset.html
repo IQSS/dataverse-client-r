@@ -18,7 +18,7 @@ see get_file or get_dataframe_by_name."><!-- mathjax --><script src="https://cdn
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.15</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.16</span>
       </span>
     </div>
 
@@ -113,15 +113,14 @@ for example <code>"10.70122/FK2/HXJVJU"</code>. Alternatively, an object of clas
 <dt id="arg-version">version<a class="anchor" aria-label="anchor" href="#arg-version"></a></dt>
 <dd><p>A character specifying a version of the dataset.
 This can be of the form <code>"1.1"</code> or <code>"1"</code> (where in <code>"x.y"</code>, x is a major
-version and y is an optional minor version), or
-<code>":latest"</code> (the default, the latest published version).
-We recommend using the number format so that
-the function stores a cache of the data (See <code><a href="cache.html">cache_dataset</a></code>).
+version and y is an optional minor version). As of v0.3.14, setting a version
+in this way will cache the dataset (See example in <code><a href="cache.html">cache_dataset</a></code>)
+so that it will not re-download the file the second time and read from the cache.
+Finally, set <code>use_cache = "none"</code> to not read from the cache and re-download
+afresh even when <code>version</code> is provided.
 If the user specifies a <code>key</code> or <code>DATAVERSE_KEY</code> argument, they can access the
 draft version by <code>":draft"</code> (the current draft) or <code>":latest"</code> (which will
-prioritize the draft over the latest published version.
-Finally, set <code>use_cache = "none"</code> to not read from the cache and re-download
-afresh even when <code>version</code> is provided.</p></dd>
+prioritize the draft over the latest published version).</p></dd>
 
 
 <dt id="arg-key">key<a class="anchor" aria-label="anchor" href="#arg-key"></a></dt>
@@ -211,7 +210,7 @@ metadata and a data.frame of files (rather than a list of file objects).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

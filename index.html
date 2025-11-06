@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">dataverse</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.15</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.16</span>
       </span>
     </div>
 
@@ -157,9 +157,8 @@
 <span>    dataset   <span class="op">=</span> <span class="st">"10.70122/FK2/PPIAXE"</span>,</span>
 <span>    server    <span class="op">=</span> <span class="st">"demo.dataverse.org"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p>Now, Dataverse often translates rectangular data into an ingested, or “archival” version, which is application-neutral and easily-readable. <code>read_dataframe_*()</code> defaults to taking this ingested version rather than using the original, through the argument <code>original = FALSE</code>.</p>
-<p>This default is safe because you may not have the proprietary software that was originally used. On the other hand, the data may have lost information in the process of the ingestation.</p>
-<p>Instead, to read the same file but its original version, specify <code>original = TRUE</code> and set an <code>.f</code> argument. In this case, we know that <code>nlsw88.tab</code> is a Stata <code>.dta</code> dataset, so we will use the <code><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">haven::read_dta</a></code> function.</p>
+<p><strong>The <code>original</code> argument:</strong> Dataverse often translates rectangular data into an ingested, or “archival” version, which is application-neutral and easily-readable. <code>read_dataframe_*()</code> defaults to taking this ingested version rather than using the original, through the argument <code>original = FALSE</code>. This default is safe because you may not have the proprietary software that was originally used.</p>
+<p>On the other hand, the data may have lost information in the process of the ingestion. Instead, to read the same file but its original version, specify <code>original = TRUE</code> and set an <code>.f</code> argument. In this case, we know that <code>nlsw88.tab</code> is a Stata <code>.dta</code> dataset, so we will use the <code><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">haven::read_dta</a></code> function.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nlsw_original</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="reference/get_dataframe.html">get_dataframe_by_name</a></span><span class="op">(</span></span>
@@ -179,6 +178,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">nlsw_original</span><span class="op">$</span><span class="va">race</span>, <span class="st">"labels"</span><span class="op">)</span> <span class="co"># original dta has value labels</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## white black other </span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co">##     1     2     3</span></span></code></pre></div>
+<p><strong>Caching</strong>: When the dataset to be downloaded is large, downloading the dataset from the internet can be time consuming, and users want to run the download only once in a script they run multiple times. As of version 0.3.15, our package will cache the download data if the user specifies which version of the Dataverse dataset they download from. See the <code>version</code> argument in the help page.</p>
 </div>
 </div>
 <div class="section level3">
@@ -244,7 +244,7 @@
 </h3>
 <p><strong>dataverse</strong> is the next-generation iteration of the now removed <strong>dvn</strong> package, which works with Dataverse 3 (“Dataverse Network”) applications.</p>
 <p>Dataverse clients in other programming languages include <a href="https://pydataverse.readthedocs.io/en/latest/" class="external-link">pyDataverse</a> for Python and the <a href="https://github.com/IQSS/dataverse-client-java" class="external-link">Java client</a>. For more information, see <a href="https://guides.dataverse.org/en/5.5/api/client-libraries.html#r" class="external-link">the Dataverse API page</a>.</p>
-<p>Users interested in downloading metadata from archives other than Dataverse may be interested in Kurt Hornik’s <a href="https://cran.r-project.org/package=OAIHarvester" class="external-link">OAIHarvester</a> and Scott Chamberlain’s <a href="https://cran.r-project.org/package=oai" class="external-link">oai</a>, which offer metadata download from any web repository that is compliant with the <a href="https://www.openarchives.org:443/" class="external-link">Open Archives Initiative</a> standards. Additionally, <a href="https://cran.r-project.org/package=rdryad" class="external-link">rdryad</a> uses OAIHarvester to interface with <a href="https://datadryad.org/stash" class="external-link">Dryad</a>. The <a href="https://cran.r-project.org/package=rfigshare" class="external-link">rfigshare</a> package works in a similar spirit to <strong>dataverse</strong> with <a href="https://figshare.com/" class="external-link uri">https://figshare.com/</a>.</p>
+<p>Users interested in downloading metadata from archives other than Dataverse may be interested in Kurt Hornik’s <a href="https://cran.r-project.org/package=OAIHarvester" class="external-link">OAIHarvester</a> and Scott Chamberlain’s <a href="https://cran.r-project.org/package=oai" class="external-link">oai</a>, which offer metadata download from any web repository that is compliant with the <a href="https://www.openarchives.org:443/" class="external-link">Open Archives Initiative</a> standards. Additionally, <a href="https://cran.r-project.org/package=rdryad" class="external-link">rdryad</a> uses OAIHarvester to interface with <a href="https://datadryad.org/" class="external-link">Dryad</a>. The <a href="https://cran.r-project.org/package=rfigshare" class="external-link">rfigshare</a> package works in a similar spirit to <strong>dataverse</strong> with <a href="https://figshare.com/" class="external-link uri">https://figshare.com/</a>.</p>
 </div>
 <div class="section level3">
 <h3 id="more-information">More Information<a class="anchor" aria-label="anchor" href="#more-information"></a>
@@ -282,11 +282,11 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Shiro Kuriwaki <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5687-2647" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Will Beasley <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5613-5006" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Thomas J. Leeper <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-4097-6326" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Philip Durbin <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-9528-9470" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Sebastian Karcher <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-8249-7388" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Shiro Kuriwaki <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5687-2647" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Will Beasley <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-5613-5006" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Thomas J. Leeper <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-4097-6326" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Philip Durbin <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-9528-9470" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Sebastian Karcher <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-8249-7388" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -304,7 +304,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer>
